@@ -1020,7 +1020,7 @@ footer{
         <div class="tool-name">WordPress</div>
       </div>
       <div class="tool-card reveal">
-        <img class="tool-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/120px-Notion-logo.svg.png" alt="ClickFunnels"/>
+        <img class="tool-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYL6XTAFY6Ce2PBU8IQF6cgOjiAYNDd3pZ6A&s" alt="ClickFunnels"/>
         <div class="tool-name">Click Funnels</div>
       </div>
       <div class="tool-card reveal">
