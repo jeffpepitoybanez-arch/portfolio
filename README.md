@@ -1464,7 +1464,7 @@ footer{
       <!-- Card 3 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://i.imgur.com/q8fsKjj.png" alt="Video 3"/>
+          <img src="https://i.imgur.com/9EQPp6C.png" alt="Video 3"/>
           <div class="project-thumb-overlay">
             <a href="https://drive.google.com/file/d/1iHPqJ2_61TDrNNqCE3yWb3_ZsNsRp-p_/view?usp=sharing" target="_blank" class="project-view-btn">
               Watch Video
