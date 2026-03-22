@@ -1464,7 +1464,7 @@ footer{
       <!-- Card 3 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://placehold.co/600x375/0d1017/82bcff?text=Video+Thumbnail" alt="Video 3"/>
+          <img src="https://drive.google.com/file/d/17Dp9wwUfDDvFPyUqfdx7TcMywSay9-Qi/view?usp=sharing" alt="Video 3"/>
           <div class="project-thumb-overlay">
             <a href="https://drive.google.com/file/d/1iHPqJ2_61TDrNNqCE3yWb3_ZsNsRp-p_/view?usp=sharing" target="_blank" class="project-view-btn">
               Watch Video
