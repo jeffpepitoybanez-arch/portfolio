@@ -1412,7 +1412,7 @@ footer{
           <!-- REPLACE src with a video thumbnail image URL -->
           <img src="https://placehold.co/600x375/0d1017/82bcff?text=Video+Thumbnail" alt="Video 1"/>
           <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
+            <a href="https://drive.google.com/file/d/1ZBFSHoBw-eEH_B7bRarixp1P4Loxes2e/view?usp=drive_link" target="_blank" class="project-view-btn">
               Watch Video
               <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </a>
@@ -1440,7 +1440,7 @@ footer{
         <div class="project-thumb">
           <img src="https://placehold.co/600x375/0d1017/82bcff?text=Video+Thumbnail" alt="Video 2"/>
           <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
+            <a href="https://drive.google.com/file/d/18G5pbA-Dsk12V3MBcGtuuEKs13p9uLz3/view?usp=sharing" target="_blank" class="project-view-btn">
               Watch Video
               <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </a>
@@ -1466,7 +1466,7 @@ footer{
         <div class="project-thumb">
           <img src="https://placehold.co/600x375/0d1017/82bcff?text=Video+Thumbnail" alt="Video 3"/>
           <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
+            <a href="https://drive.google.com/file/d/1iHPqJ2_61TDrNNqCE3yWb3_ZsNsRp-p_/view?usp=sharing" target="_blank" class="project-view-btn">
               Watch Video
               <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </a>
