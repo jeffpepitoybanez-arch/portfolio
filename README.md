@@ -1252,7 +1252,7 @@ footer{
       <div class="project-card reveal">
         <div class="project-thumb">
           <!-- REPLACE src with your graphic image URL -->
-          <img src="https://placehold.co/600x375/07090f/c9a96e?text=Graphic+Sample" alt="Graphic 1"/>
+          <img src="https://i.imgur.com/LXvJFDC.png" alt="Graphic 1"/>
           <div class="project-thumb-overlay">
             <a href="#" target="_blank" class="project-view-btn">
               View Full Size
