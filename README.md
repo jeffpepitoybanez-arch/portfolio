@@ -1020,15 +1020,15 @@ footer{
         <div class="tool-name">WordPress</div>
       </div>
       <div class="tool-card reveal">
-        <img class="tool-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYL6XTAFY6Ce2PBU8IQF6cgOjiAYNDd3pZ6A&s" alt="ClickFunnels"/>
+        <img class="tool-logo" src="https://s3-eu-west-1.amazonaws.com/tpd/logos/5a952f287871dc0001172096/0x0.png" alt="ClickFunnels"/>
         <div class="tool-name">Click Funnels</div>
       </div>
       <div class="tool-card reveal">
-        <img class="tool-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/120px-Amazon_logo.svg.png" alt="Adobe Premiere" style="filter:none"/>
+        <img class="tool-logo" src="https://static.vecteezy.com/system/resources/thumbnails/067/353/986/small_2x/adobe-premier-pro-logo-icon-free-vector.jpg" alt="Adobe Premiere" style="filter:none"/>
         <div class="tool-name">Adobe Premiere</div>
       </div>
       <div class="tool-card reveal">
-        <img class="tool-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/120px-Notion-logo.svg.png" alt="CapCut"/>
+        <img class="tool-logo" src="https://pngdownload.io/wp-content/uploads/2025/05/CapCut-Logo-Video-Editing-App-Icon-768x768.webp" alt="CapCut"/>
         <div class="tool-name">CapCut</div>
       </div>
       <div class="tool-card reveal">
@@ -1036,7 +1036,7 @@ footer{
         <div class="tool-name">Photoshop</div>
       </div>
       <div class="tool-card reveal">
-        <img class="tool-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Canva_icon_2021.svg/120px-Canva_icon_2021.svg.png" alt="Canva"/>
+        <img class="tool-logo" src="https://static.vecteezy.com/system/resources/previews/056/850/847/non_2x/canva-app-logo-on-a-transparent-background-free-png.png" alt="Canva"/>
         <div class="tool-name">Canva</div>
       </div>
       <div class="tool-card reveal">
@@ -1056,7 +1056,7 @@ footer{
         <div class="tool-name">ChatGPT</div>
       </div>
       <div class="tool-card reveal">
-        <img class="tool-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Google_analytics_logo_2014.svg/120px-Google_analytics_logo_2014.svg.png" alt="Google Analytics"/>
+        <img class="tool-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaPSP40VGSYbouOHrO0kEOAU6kXc1kdET0Ww&s" alt="Google Analytics"/>
         <div class="tool-name">Google Analytics</div>
       </div>
       <div class="tool-card reveal">
@@ -1068,7 +1068,27 @@ footer{
         <div class="tool-name">Google Ads</div>
       </div>
       <div class="tool-card reveal">
-        <img class="tool-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Notion-logo.svg/120px-Notion-logo.svg.png" alt="Make"/>
+        <img class="tool-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Slack_icon_2019.svg/500px-Slack_icon_2019.svg.png" alt="Google Ads"/>
+        <div class="tool-name">Slack</div>
+      </div>
+      <div class="tool-card reveal">
+        <img class="tool-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Claude_AI_symbol.svg/1280px-Claude_AI_symbol.svg.png" alt="Google Ads"/>
+        <div class="tool-name">Claude</div>
+      </div>
+      <div class="tool-card reveal">
+        <img class="tool-logo" src="https://images.seeklogo.com/logo-png/45/2/replit-icon-logo-png_seeklogo-453824.png" alt="Google Ads"/>
+        <div class="tool-name">Replit</div>
+      </div>
+      <div class="tool-card reveal">
+        <img class="tool-logo" src="https://images.seeklogo.com/logo-png/64/2/whop-logo-png_seeklogo-643501.png" alt="Google Ads"/>
+        <div class="tool-name">Whop</div>
+      </div>
+      <div class="tool-card reveal">
+        <img class="tool-logo" src="https://e7.pngegg.com/pngimages/301/1/png-clipart-google-sheets-logo-thumbnail.png" alt="Google Ads"/>
+        <div class="tool-name">Google Sheet</div>
+      </div>
+      <div class="tool-card reveal">
+        <img class="tool-logo" src="https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/dark/make-color.png" alt="Make"/>
         <div class="tool-name">Make (Integromat)</div>
       </div>
     </div>
@@ -1092,9 +1112,9 @@ footer{
       <div class="project-card reveal">
         <div class="project-thumb">
           <!-- REPLACE src with your screenshot URL -->
-          <img src="https://i.imgur.com/4nS7GSN.jpeg" alt="Project 1"/>
+          <img src="https://i.imgur.com/qMAqXWm.jpeg" alt="Project 1"/>
           <div class="project-thumb-overlay">
-            <a href="https://travel.johanknechtcpa.com/" target="_blank" class="project-view-btn">
+            <a href="https://app.gohighlevel.com/v2/preview/T7r63z5lkenUyB7ZqSSq?notrack=true#section-wnLxWS8ZyI" target="_blank" class="project-view-btn">
               View Live
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
@@ -1102,12 +1122,14 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag"><span class="project-cat-dot"></span>Website / Funnel</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Brief description of what you built and the result it achieved for the client. Keep it 1–2 sentences.</p>
+          <div class="project-title">Strategic Partnership Funnel System</div>
+          <p class="project-desc">A GoHighLevel-powered website and automation system designed to connect businesses with the right partners. Built to streamline collaboration, lead capture, and relationship management in one centralized platform.</p>
           <div class="project-tags">
             <span class="project-tag">GoHighLevel</span>
             <span class="project-tag">Funnel</span>
             <span class="project-tag">CRM</span>
+            <span class="project-tag">SEO</span>
+            <span class="project-tag">Automation</span>
           </div>
         </div>
       </div>
@@ -1125,11 +1147,13 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag"><span class="project-cat-dot"></span>Website / Funnel</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Brief description of what you built and the result it achieved for the client. Keep it 1–2 sentences.</p>
+          <div class="project-title">Automated Lead Generation Funnel</div>
+          <p class="project-desc">A high-converting GoHighLevel funnel built to capture, qualify, and nurture leads through automated workflows—streamlining the entire customer journey from inquiry to conversion.</p>
           <div class="project-tags">
-            <span class="project-tag">WordPress</span>
+            <span class="project-tag">Go High Level</span>
             <span class="project-tag">Landing Page</span>
+            <span class="project-tag">Automation</span>
+            <span class="project-tag">Pipeline</span>
             <span class="project-tag">SEO</span>
           </div>
         </div>
@@ -1148,11 +1172,14 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag"><span class="project-cat-dot"></span>Website / Funnel</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Brief description of what you built and the result it achieved for the client. Keep it 1–2 sentences.</p>
+          <div class="project-title">Dump Trucking Industry Network & Growth Platform</div>
+          <p class="project-desc">A comprehensive digital platform for the dump trucking industry, designed to provide training, job opportunities, business resources, and networking all in one ecosystem to support operators and companies in scaling their operations.</p>
           <div class="project-tags">
-            <span class="project-tag">ClickFunnels</span>
-            <span class="project-tag">Lead Gen</span>
+            <span class="project-tag">Go High Level</span>
+            <span class="project-tag">Google Ads</span>
+            <span class="project-tag">Automation</span>
+            <span class="project-tag">Pipeline</span>
+            <span class="project-tag">SEO</span>
           </div>
         </div>
       </div>
@@ -1170,11 +1197,12 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag"><span class="project-cat-dot"></span>Website / Funnel</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Brief description of what you built and the result it achieved for the client. Keep it 1–2 sentences.</p>
+          <div class="project-title">Full-Service Junk Removal Experience Platform</div>
+          <p class="project-desc">A high-converting service website designed to streamline junk removal bookings with real-time scheduling, transparent pricing, and automated customer communication delivering fast, reliable service for residential and commercial clients.</p>
           <div class="project-tags">
-            <span class="project-tag">GoHighLevel</span>
-            <span class="project-tag">Sales Funnel</span>
+            <span class="project-tag">Wordpress</span>
+            <span class="project-tag">Website</span>
+            <span class="project-tag">SEO</span>
           </div>
         </div>
       </div>
@@ -1192,11 +1220,15 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag"><span class="project-cat-dot"></span>Website / Funnel</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Brief description of what you built and the result it achieved for the client. Keep it 1–2 sentences.</p>
+          <div class="project-title">All-in-One Marketing & Automation Platform</div>
+          <p class="project-desc">A comprehensive digital platform designed to help businesses streamline lead generation, automate customer engagement, and manage operations through an integrated website, CRM, and content system.</p>
           <div class="project-tags">
-            <span class="project-tag">WordPress</span>
-            <span class="project-tag">E-Commerce</span>
+            <span class="project-tag">GoHighLevel</span>
+            <span class="project-tag">Website</span>
+            <span class="project-tag">CRM</span>
+            <span class="project-tag">SEO</span>
+            <span class="project-tag">Automation</span>
+            <span class="project-tag">SAAS</span>
           </div>
         </div>
       </div>
@@ -1214,11 +1246,15 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag"><span class="project-cat-dot"></span>Website / Funnel</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Brief description of what you built and the result it achieved for the client. Keep it 1–2 sentences.</p>
+          <div class="project-title">Healthcare Lead Generation & Consultation Funnel</div>
+          <p class="project-desc">A conversion-focused medical landing page designed to capture patient inquiries and streamline consultations through structured forms, trust-building elements, and automated follow-up systems.</p>
           <div class="project-tags">
             <span class="project-tag">GoHighLevel</span>
-            <span class="project-tag">Webinar Funnel</span>
+            <span class="project-tag">Sales Funnel</span>
+            <span class="project-tag">Google Ads</span>
+            <span class="project-tag">Automation</span>
+            <span class="project-tag">Pipeline</span>
+            <span class="project-tag">SEO</span>
           </div>
         </div>
       </div>
@@ -1252,7 +1288,7 @@ footer{
       <div class="project-card reveal">
         <div class="project-thumb">
           <!-- REPLACE src with your graphic image URL -->
-          <img src="https://i.imgur.com/LXvJFDC.png" alt="Graphic 1"/>
+          <img src="https://placehold.co/600x375/07090f/c9a96e?text=Graphic+Sample" alt="Graphic 1"/>
           <div class="project-thumb-overlay">
             <a href="#" target="_blank" class="project-view-btn">
               View Full Size
@@ -1412,7 +1448,7 @@ footer{
           <!-- REPLACE src with a video thumbnail image URL -->
           <img src="https://placehold.co/600x375/0d1017/82bcff?text=Video+Thumbnail" alt="Video 1"/>
           <div class="project-thumb-overlay">
-            <a href="https://drive.google.com/file/d/1ZBFSHoBw-eEH_B7bRarixp1P4Loxes2e/view?usp=drive_link" target="_blank" class="project-view-btn">
+            <a href="#" target="_blank" class="project-view-btn">
               Watch Video
               <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </a>
@@ -1440,7 +1476,7 @@ footer{
         <div class="project-thumb">
           <img src="https://placehold.co/600x375/0d1017/82bcff?text=Video+Thumbnail" alt="Video 2"/>
           <div class="project-thumb-overlay">
-            <a href="https://drive.google.com/file/d/18G5pbA-Dsk12V3MBcGtuuEKs13p9uLz3/view?usp=sharing" target="_blank" class="project-view-btn">
+            <a href="#" target="_blank" class="project-view-btn">
               Watch Video
               <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </a>
@@ -1464,9 +1500,9 @@ footer{
       <!-- Card 3 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://i.imgur.com/9EQPp6C.png" alt="Video 3"/>
+          <img src="https://placehold.co/600x375/0d1017/82bcff?text=Video+Thumbnail" alt="Video 3"/>
           <div class="project-thumb-overlay">
-            <a href="https://drive.google.com/file/d/1iHPqJ2_61TDrNNqCE3yWb3_ZsNsRp-p_/view?usp=sharing" target="_blank" class="project-view-btn">
+            <a href="#" target="_blank" class="project-view-btn">
               Watch Video
               <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </a>
@@ -1594,9 +1630,9 @@ footer{
       <div class="project-card reveal">
         <div class="project-thumb">
           <!-- REPLACE src with a workflow screenshot or diagram -->
-          <img src="https://placehold.co/600x375/07090f/4ade80?text=Automation+Screenshot" alt="Automation 1"/>
+          <img src="https://i.imgur.com/SMPPu1S.png" alt="Automation 1"/>
           <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
+            <a href="https://docs.google.com/document/d/1QnqVi8oM_a-k711nrSmKEeCQcri8s0uLiLv58bKSeLY/edit?usp=sharing" target="_blank" class="project-view-btn">
               View Details
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
@@ -1604,8 +1640,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:#4ade80"><span class="project-cat-dot" style="background:#4ade80"></span>Automation</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Describe what the automation does — the trigger, workflow steps, and the outcome it delivers for the client.</p>
+          <div class="project-title">Client Onboarding & Contract System</div>
+          <p class="project-desc">A fully automated client onboarding system that handles contract signing, document generation, and tracking eliminating manual work and ensuring a seamless client experience.</p>
           <div class="project-tags">
             <span class="project-tag">GoHighLevel</span>
             <span class="project-tag">Lead Nurture</span>
@@ -1617,9 +1653,9 @@ footer{
       <!-- Card 2 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://placehold.co/600x375/07090f/4ade80?text=Automation+Screenshot" alt="Automation 2"/>
+          <img src="https://i.imgur.com/hutpvA5.png" alt="Automation 2"/>
           <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
+            <a href="https://docs.google.com/document/d/19oERUrtXj1Bzx11OkmCXmyrg786kmf5FzrnGw8BX22k/edit?usp=sharing" target="_blank" class="project-view-btn">
               View Details
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
@@ -1627,8 +1663,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:#4ade80"><span class="project-cat-dot" style="background:#4ade80"></span>Automation</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Describe what the automation does — the trigger, workflow steps, and the outcome it delivers for the client.</p>
+          <div class="project-title">Payment Tracking & Sales Dashboard System</div>
+          <p class="project-desc">An integrated automation that captures transactions from GoHighLevel and Whop, logs them into a centralized spreadsheet, calculates real-time sales metrics (daily, weekly, and monthly), and instantly notifies the business owner for accurate tracking and decision-making.</p>
           <div class="project-tags">
             <span class="project-tag">Zapier</span>
             <span class="project-tag">CRM Sync</span>
@@ -1639,9 +1675,9 @@ footer{
       <!-- Card 3 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://placehold.co/600x375/07090f/4ade80?text=Automation+Screenshot" alt="Automation 3"/>
+          <img src="https://i.imgur.com/hutpvA5.png" alt="Automation 3"/>
           <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
+            <a href="https://docs.google.com/document/d/1nl2Hb2TIh2h0AfUozWMvif63Hbr9I-C3H-BbT34kEUE/edit?usp=sharing" target="_blank" class="project-view-btn">
               View Details
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
@@ -1649,8 +1685,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:#4ade80"><span class="project-cat-dot" style="background:#4ade80"></span>Automation</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Describe what the automation does — the trigger, workflow steps, and the outcome it delivers for the client.</p>
+          <div class="project-title">Deal Tracking & Notification System</div>
+          <p class="project-desc">An automated workflow that records deals from Whop & GoHighLevel, logs them into a centralized spreadsheet, calculates pipeline metrics (open deals, won/lost deals, and total value), and sends real-time notifications to the owner streamlining deal management and ensuring accurate performance tracking.</p>
           <div class="project-tags">
             <span class="project-tag">Make</span>
             <span class="project-tag">Chatbot</span>
@@ -1662,7 +1698,7 @@ footer{
       <!-- Card 4 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://placehold.co/600x375/07090f/4ade80?text=Automation+Screenshot" alt="Automation 4"/>
+          <img src="https://i.imgur.com/Ew7ukRH.png" alt="Automation 4"/>
           <div class="project-thumb-overlay">
             <a href="#" target="_blank" class="project-view-btn">
               View Details
@@ -1684,7 +1720,7 @@ footer{
       <!-- Card 5 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://placehold.co/600x375/07090f/4ade80?text=Automation+Screenshot" alt="Automation 5"/>
+          <img src="https://i.imgur.com/Ew7ukRH.png" alt="Automation 5"/>
           <div class="project-thumb-overlay">
             <a href="#" target="_blank" class="project-view-btn">
               View Details
@@ -1706,7 +1742,7 @@ footer{
       <!-- Card 6 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://placehold.co/600x375/07090f/4ade80?text=Automation+Screenshot" alt="Automation 6"/>
+          <img src="https://i.imgur.com/Ew7ukRH.png" alt="Automation 6"/>
           <div class="project-thumb-overlay">
             <a href="#" target="_blank" class="project-view-btn">
               View Details
