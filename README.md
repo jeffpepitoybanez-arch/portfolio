@@ -1644,8 +1644,11 @@ footer{
           <p class="project-desc">A fully automated client onboarding system that handles contract signing, document generation, and tracking eliminating manual work and ensuring a seamless client experience.</p>
           <div class="project-tags">
             <span class="project-tag">GoHighLevel</span>
-            <span class="project-tag">Lead Nurture</span>
-            <span class="project-tag">Email Sequence</span>
+            <span class="project-tag">Tracking Sheet</span>
+            <span class="project-tag">Team Notification</span>
+            <span class="project-tag">PDF Creation</span>
+            <span class="project-tag">Zappier</span>
+            <span class="project-tag">Contract Signing</span>
           </div>
         </div>
       </div>
@@ -1667,7 +1670,10 @@ footer{
           <p class="project-desc">An integrated automation that captures transactions from GoHighLevel and Whop, logs them into a centralized spreadsheet, calculates real-time sales metrics (daily, weekly, and monthly), and instantly notifies the business owner for accurate tracking and decision-making.</p>
           <div class="project-tags">
             <span class="project-tag">Zapier</span>
-            <span class="project-tag">CRM Sync</span>
+            <span class="project-tag">CRM</span>
+            <span class="project-tag">GoHighLevel</span>
+            <span class="project-tag">Tracking Sheet</span>
+            <span class="project-tag">Team Notification</span>
           </div>
         </div>
       </div>
@@ -1688,9 +1694,10 @@ footer{
           <div class="project-title">Deal Tracking & Notification System</div>
           <p class="project-desc">An automated workflow that records deals from Whop & GoHighLevel, logs them into a centralized spreadsheet, calculates pipeline metrics (open deals, won/lost deals, and total value), and sends real-time notifications to the owner streamlining deal management and ensuring accurate performance tracking.</p>
           <div class="project-tags">
-            <span class="project-tag">Make</span>
-            <span class="project-tag">Chatbot</span>
-            <span class="project-tag">AI</span>
+            <span class="project-tag">Zapier</span>
+            <span class="project-tag">GoHighLevel</span>
+            <span class="project-tag">Tracking Sheet</span>
+            <span class="project-tag">Team Notification</span>
           </div>
         </div>
       </div>
