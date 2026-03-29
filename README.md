@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Jeff P. Ybanez – Digital Marketing Specialist</title>
+<title>Jeff P. Ybanez – Full-Stack & Automation Specialist</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
 /* ─────────────────────────────────────
@@ -832,7 +832,7 @@ footer{
       <div class="photo-fade"></div>
       <div class="photo-glow"></div>
     </div>
-    <div class="name-badge">Digital Marketing Specialist<strong>Jeff P. Ybanez</strong></div>
+    <div class="name-badge">Full-Stack & Automation Specialist<strong>Jeff P. Ybanez</strong></div>
   </div>
 
   <div class="hero-right">
