@@ -1263,7 +1263,7 @@ footer{
 
     <!-- More Projects Link -->
     <div class="portfolio-more reveal">
-      <a href="#" target="_blank" class="more-link">
+      <a href="https://drive.google.com/drive/folders/1lIpdeA0Ltaouf8paHGuLC8SeZ1UCudVF?usp=sharing" target="_blank" class="more-link">
         View More Web &amp; Funnel Projects
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
@@ -1421,7 +1421,7 @@ footer{
     </div>
 
     <div class="portfolio-more reveal">
-      <a href="#" target="_blank" class="more-link">
+      <a href="https://drive.google.com/drive/folders/1Q4OaoAWIT73MiYj_AhUabgIgQklyeinA?usp=sharing" target="_blank" class="more-link">
         View More Graphics Projects
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
@@ -1446,9 +1446,9 @@ footer{
       <div class="project-card reveal">
         <div class="project-thumb">
           <!-- REPLACE src with a video thumbnail image URL -->
-          <img src="https://placehold.co/600x375/0d1017/82bcff?text=Video+Thumbnail" alt="Video 1"/>
+          <img src="https://i.imgur.com/doyDQlZ.png" alt="Video 1"/>
           <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
+            <a href="https://drive.google.com/file/d/1Yckgx_jF9VF7fBWS4RoJS2Qvf99ipR2d/view?usp=sharing" target="_blank" class="project-view-btn">
               Watch Video
               <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </a>
@@ -1461,8 +1461,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:#82bcff"><span class="project-cat-dot" style="background:#82bcff"></span>Video Edit</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Short description of the video — type of content, platform, and what made it effective.</p>
+          <div class="project-title">Build Your First Home for Profit</div>
+          <p class="project-desc">A step-by-step system to create six-figure equity and profits through new construction—no license or experience required, just proven strategies that work.</p>
           <div class="project-tags">
             <span class="project-tag">CapCut</span>
             <span class="project-tag">Reels</span>
@@ -1474,9 +1474,9 @@ footer{
       <!-- Card 2 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://placehold.co/600x375/0d1017/82bcff?text=Video+Thumbnail" alt="Video 2"/>
+          <img src="https://i.imgur.com/Nb3qo2O.png" alt="Video 2"/>
           <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
+            <a href="https://drive.google.com/file/d/1iHPqJ2_61TDrNNqCE3yWb3_ZsNsRp-p_/view?usp=sharing" target="_blank" class="project-view-btn">
               Watch Video
               <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </a>
@@ -1488,8 +1488,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:#82bcff"><span class="project-cat-dot" style="background:#82bcff"></span>Video Edit</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Short description of the video — type of content, platform, and what made it effective.</p>
+          <div class="project-title">From Raw Land to Real Profits</div>
+          <p class="project-desc">A proven system for turning land into cash-flowing rentals and high-profit developments—backed by real results, real students, and over $80M in real estate deals.</p>
           <div class="project-tags">
             <span class="project-tag">Adobe Premiere</span>
             <span class="project-tag">YouTube</span>
@@ -1500,9 +1500,9 @@ footer{
       <!-- Card 3 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://placehold.co/600x375/0d1017/82bcff?text=Video+Thumbnail" alt="Video 3"/>
+          <img src="https://i.imgur.com/3rqMVkm.png" alt="Video 3"/>
           <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
+            <a href="https://drive.google.com/file/d/1a9LTMRySK7EAtYy_LUkewGsxiBmdcHfY/view?usp=sharing" target="_blank" class="project-view-btn">
               Watch Video
               <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </a>
@@ -1514,8 +1514,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:#82bcff"><span class="project-cat-dot" style="background:#82bcff"></span>Video Edit</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Short description of the video — type of content, platform, and what made it effective.</p>
+          <div class="project-title">You Don’t Need Cash to Start Building</div>
+          <p class="project-desc">Learn how to secure land and construction with as little as 5% down using a proven 7-step system designed to create real equity and profit.</p>
           <div class="project-tags">
             <span class="project-tag">CapCut</span>
             <span class="project-tag">TikTok</span>
@@ -1527,9 +1527,9 @@ footer{
       <!-- Card 4 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://placehold.co/600x375/0d1017/82bcff?text=Video+Thumbnail" alt="Video 4"/>
+          <img src="https://i.imgur.com/rGhzZ44.png" alt="Video 4"/>
           <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
+            <a href="https://drive.google.com/file/d/1ZvRj_q4ntulHLte_GIminKUT_t1oa96s/view?usp=sharing" target="_blank" class="project-view-btn">
               Watch Video
               <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </a>
@@ -1541,8 +1541,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:#82bcff"><span class="project-cat-dot" style="background:#82bcff"></span>Video Edit</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Short description of the video — type of content, platform, and what made it effective.</p>
+          <div class="project-title">If There’s No Trust, There’s No Relationship</div>
+          <p class="project-desc">Whether it’s friendship or business, trust is the foundation—without it, nothing real can be built.</p>
           <div class="project-tags">
             <span class="project-tag">Adobe Premiere</span>
             <span class="project-tag">Ad Video</span>
@@ -1553,9 +1553,9 @@ footer{
       <!-- Card 5 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://placehold.co/600x375/0d1017/82bcff?text=Video+Thumbnail" alt="Video 5"/>
+          <img src="https://i.imgur.com/K124M9e.png" alt="Video 5"/>
           <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
+            <a href="https://drive.google.com/file/d/1yvD5GUejqAmC_KeVaa0ld-GFbvUkI9JJ/view?usp=sharing" target="_blank" class="project-view-btn">
               Watch Video
               <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </a>
@@ -1567,8 +1567,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:#82bcff"><span class="project-cat-dot" style="background:#82bcff"></span>Video Edit</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Short description of the video — type of content, platform, and what made it effective.</p>
+          <div class="project-title">Clarity Creates Progress</div>
+          <p class="project-desc">Success isn’t random—define your vision, map your steps, and execute daily with intention instead of guessing your way forward.</p>
           <div class="project-tags">
             <span class="project-tag">CapCut</span>
             <span class="project-tag">Instagram Reel</span>
@@ -1579,9 +1579,9 @@ footer{
       <!-- Card 6 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://placehold.co/600x375/0d1017/82bcff?text=Video+Thumbnail" alt="Video 6"/>
+          <img src="https://i.imgur.com/N6txRZS.png" alt="Video 6"/>
           <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
+            <a href="https://drive.google.com/file/d/18G5pbA-Dsk12V3MBcGtuuEKs13p9uLz3/view?usp=sharing" target="_blank" class="project-view-btn">
               Watch Video
               <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </a>
@@ -1593,8 +1593,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:#82bcff"><span class="project-cat-dot" style="background:#82bcff"></span>Video Edit</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Short description of the video — type of content, platform, and what made it effective.</p>
+          <div class="project-title">Why Are You Really Scrolling?</div>
+          <p class="project-desc">Are you consuming to grow or just to pass time? Shift your focus from entertainment to learning—and watch your mindset transform.</p>
           <div class="project-tags">
             <span class="project-tag">Adobe Premiere</span>
             <span class="project-tag">Promotional</span>
@@ -1605,7 +1605,7 @@ footer{
     </div>
 
     <div class="portfolio-more reveal">
-      <a href="#" target="_blank" class="more-link">
+      <a href="https://drive.google.com/drive/folders/1xklKeDh_cO0jP0lSY4unqvAiB4Xw3xF8?usp=sharing" target="_blank" class="more-link">
         View More Video Projects
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
@@ -1644,11 +1644,8 @@ footer{
           <p class="project-desc">A fully automated client onboarding system that handles contract signing, document generation, and tracking eliminating manual work and ensuring a seamless client experience.</p>
           <div class="project-tags">
             <span class="project-tag">GoHighLevel</span>
-            <span class="project-tag">Tracking Sheet</span>
-            <span class="project-tag">Team Notification</span>
-            <span class="project-tag">PDF Creation</span>
-            <span class="project-tag">Zappier</span>
-            <span class="project-tag">Contract Signing</span>
+            <span class="project-tag">Lead Nurture</span>
+            <span class="project-tag">Email Sequence</span>
           </div>
         </div>
       </div>
@@ -1670,10 +1667,7 @@ footer{
           <p class="project-desc">An integrated automation that captures transactions from GoHighLevel and Whop, logs them into a centralized spreadsheet, calculates real-time sales metrics (daily, weekly, and monthly), and instantly notifies the business owner for accurate tracking and decision-making.</p>
           <div class="project-tags">
             <span class="project-tag">Zapier</span>
-            <span class="project-tag">CRM</span>
-            <span class="project-tag">GoHighLevel</span>
-            <span class="project-tag">Tracking Sheet</span>
-            <span class="project-tag">Team Notification</span>
+            <span class="project-tag">CRM Sync</span>
           </div>
         </div>
       </div>
@@ -1694,10 +1688,9 @@ footer{
           <div class="project-title">Deal Tracking & Notification System</div>
           <p class="project-desc">An automated workflow that records deals from Whop & GoHighLevel, logs them into a centralized spreadsheet, calculates pipeline metrics (open deals, won/lost deals, and total value), and sends real-time notifications to the owner streamlining deal management and ensuring accurate performance tracking.</p>
           <div class="project-tags">
-            <span class="project-tag">Zapier</span>
-            <span class="project-tag">GoHighLevel</span>
-            <span class="project-tag">Tracking Sheet</span>
-            <span class="project-tag">Team Notification</span>
+            <span class="project-tag">Make</span>
+            <span class="project-tag">Chatbot</span>
+            <span class="project-tag">AI</span>
           </div>
         </div>
       </div>
@@ -1771,7 +1764,7 @@ footer{
     </div>
 
     <div class="portfolio-more reveal">
-      <a href="#" target="_blank" class="more-link">
+      <a href="https://drive.google.com/drive/folders/1CNyQc1l64iKctbwsMGAH9vM4QT0HDV5i?usp=sharing" target="_blank" class="more-link">
         View More Automation Projects
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
