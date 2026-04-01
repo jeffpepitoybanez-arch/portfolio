@@ -1448,7 +1448,7 @@ footer{
           <!-- REPLACE src with a video thumbnail image URL -->
           <img src="https://i.imgur.com/doyDQlZ.png" alt="Video 1"/>
           <div class="project-thumb-overlay">
-            <a href="https://drive.google.com/file/d/1Yckgx_jF9VF7fBWS4RoJS2Qvf99ipR2d/view?usp=sharing" target="_blank" class="project-view-btn">
+            <a href="https://drive.google.com/file/d/1LVSKmaTGJ4ydxAKNV_Blfjzjr0QKk8qB/view?usp=sharing" target="_blank" class="project-view-btn">
               Watch Video
               <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </a>
@@ -1476,7 +1476,7 @@ footer{
         <div class="project-thumb">
           <img src="https://i.imgur.com/Nb3qo2O.png" alt="Video 2"/>
           <div class="project-thumb-overlay">
-            <a href="https://drive.google.com/file/d/1iHPqJ2_61TDrNNqCE3yWb3_ZsNsRp-p_/view?usp=sharing" target="_blank" class="project-view-btn">
+            <a href="https://drive.google.com/file/d/1lKFWPBNNV8ZirqTmrllYmfA-oy-gwmmo/view?usp=sharing" target="_blank" class="project-view-btn">
               Watch Video
               <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </a>
@@ -1502,7 +1502,7 @@ footer{
         <div class="project-thumb">
           <img src="https://i.imgur.com/3rqMVkm.png" alt="Video 3"/>
           <div class="project-thumb-overlay">
-            <a href="https://drive.google.com/file/d/1a9LTMRySK7EAtYy_LUkewGsxiBmdcHfY/view?usp=sharing" target="_blank" class="project-view-btn">
+            <a href="https://drive.google.com/file/d/1uHGIDnrSYTJGo74suRHF-QI8b51PgZf5/view?usp=sharing" target="_blank" class="project-view-btn">
               Watch Video
               <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </a>
