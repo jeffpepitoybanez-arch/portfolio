@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Jeff P. Ybanez – Full-Stack & Automation Specialist</title>
+<title>Jeff P. Ybanez – Fullstack & Automation Specialist</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
 /* ─────────────────────────────────────
@@ -832,7 +832,7 @@ footer{
       <div class="photo-fade"></div>
       <div class="photo-glow"></div>
     </div>
-    <div class="name-badge">Full-Stack & Automation Specialist<strong>Jeff P. Ybanez</strong></div>
+    <div class="name-badge">Fullstack & Automation Specialist<strong>Jeff P. Ybanez</strong></div>
   </div>
 
   <div class="hero-right">
@@ -907,7 +907,7 @@ footer{
       </div>
       <div class="about-text-col reveal-right">
         <div class="section-label">I'm Jeff</div>
-        <h2 class="about-heading">A Digital Marketing Specialist Who <em>Gets Results.</em></h2>
+        <h2 class="about-heading">A Fullstack & Automation Specialist Who <em>Gets Results.</em></h2>
         <p class="about-body">I help businesses thrive in the digital world by turning complex marketing challenges into clear, results-driven strategies. From building high-converting funnels and automating workflows to managing social media and running targeted ads — I bring the full stack of digital marketing to your brand.</p>
         <p class="about-body">I work with a diverse range of industries and tailor every project to the client's specific goals and audience. My approach is data-driven, creative, and always focused on measurable growth.</p>
         <div>
@@ -1288,9 +1288,9 @@ footer{
       <div class="project-card reveal">
         <div class="project-thumb">
           <!-- REPLACE src with your graphic image URL -->
-          <img src="https://placehold.co/600x375/07090f/c9a96e?text=Graphic+Sample" alt="Graphic 1"/>
+          <img src="https://i.imgur.com/DUU3XZQ.png" alt="Graphic 1"/>
           <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
+            <a href="https://drive.google.com/file/d/1R-KLFLT_Z7tKMukOTCzm-9xxTKGUNEea/view?usp=sharing" target="_blank" class="project-view-btn">
               View Full Size
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
@@ -1298,8 +1298,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:var(--gold)"><span class="project-cat-dot" style="background:var(--gold)"></span>Graphics Design</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Brief description of the graphic — brand, purpose, and platform it was created for.</p>
+          <div class="project-title">High-Converting Finance Ad Creatives</div>
+          <p class="project-desc">Designed scroll-stopping visuals for financial services, focusing on trust, clarity, and strong call-to-actions to boost lead generation and client conversions.</p>
           <div class="project-tags">
             <span class="project-tag">Canva</span>
             <span class="project-tag">Social Media</span>
@@ -1311,9 +1311,9 @@ footer{
       <!-- Card 2 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://placehold.co/600x375/07090f/c9a96e?text=Graphic+Sample" alt="Graphic 2"/>
+          <img src="https://i.imgur.com/CtQ1NMa.png" alt="Graphic 2"/>
           <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
+            <a href="https://drive.google.com/file/d/1SZoBjgZC99SFlYYyJbImPGQDgbUaaiM6/view?usp=sharing" target="_blank" class="project-view-btn">
               View Full Size
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
@@ -1321,8 +1321,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:var(--gold)"><span class="project-cat-dot" style="background:var(--gold)"></span>Graphics Design</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Brief description of the graphic — brand, purpose, and platform it was created for.</p>
+          <div class="project-title">Watch Visual Campaigns</div>
+          <p class="project-desc">Produced high-end, detail-focused creatives that emphasize craftsmanship, elegance, and exclusivity to elevate brand perception and desirability.</p>
           <div class="project-tags">
             <span class="project-tag">Photoshop</span>
             <span class="project-tag">Ad Creative</span>
@@ -1333,9 +1333,9 @@ footer{
       <!-- Card 3 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://placehold.co/600x375/07090f/c9a96e?text=Graphic+Sample" alt="Graphic 3"/>
+          <img src="https://i.imgur.com/ouiNTpg.png" alt="Graphic 3"/>
           <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
+            <a href="https://drive.google.com/file/d/1OJ1-GTQdPVn6WNTxDEsbpy4OvLFcLNLD/view?usp=sharing" target="_blank" class="project-view-btn">
               View Full Size
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
@@ -1343,8 +1343,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:var(--gold)"><span class="project-cat-dot" style="background:var(--gold)"></span>Graphics Design</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Brief description of the graphic — brand, purpose, and platform it was created for.</p>
+          <div class="project-title">Engaging Health & Wellness Campaign Designs</div>
+          <p class="project-desc">Developed clean, informative, and visually appealing creatives that communicate health benefits effectively while building credibility and audience trust.</p>
           <div class="project-tags">
             <span class="project-tag">Canva</span>
             <span class="project-tag">Logo Design</span>
@@ -1355,9 +1355,9 @@ footer{
       <!-- Card 4 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://placehold.co/600x375/07090f/c9a96e?text=Graphic+Sample" alt="Graphic 4"/>
+          <img src="https://i.imgur.com/jmwnwxW.png" alt="Graphic 4"/>
           <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
+            <a href="https://drive.google.com/file/d/1NgsukyU-Mg8VFpJW2_FI0MzNN4G71LKn/view?usp=sharing" target="_blank" class="project-view-btn">
               View Full Size
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
@@ -1365,8 +1365,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:var(--gold)"><span class="project-cat-dot" style="background:var(--gold)"></span>Graphics Design</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Brief description of the graphic — brand, purpose, and platform it was created for.</p>
+          <div class="project-title">Futuristic AI Branding & Ad Creatives</div>
+          <p class="project-desc">Crafted sleek and innovative designs that reflect cutting-edge technology, making complex AI solutions visually appealing and easy to understand.</p>
           <div class="project-tags">
             <span class="project-tag">Photoshop</span>
             <span class="project-tag">Thumbnail</span>
@@ -1377,9 +1377,9 @@ footer{
       <!-- Card 5 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://placehold.co/600x375/07090f/c9a96e?text=Graphic+Sample" alt="Graphic 5"/>
+          <img src="https://i.imgur.com/VuJsq2U.png" alt="Graphic 5"/>
           <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
+            <a href="https://drive.google.com/drive/folders/1j4EhVJwV8xzFkMkTXmRyrry62XePZds9?usp=sharing" target="_blank" class="project-view-btn">
               View Full Size
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
@@ -1387,8 +1387,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:var(--gold)"><span class="project-cat-dot" style="background:var(--gold)"></span>Graphics Design</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Brief description of the graphic — brand, purpose, and platform it was created for.</p>
+          <div class="project-title">Premium Real Estate Marketing Visuals</div>
+          <p class="project-desc">Created modern and elegant property graphics that highlight key selling points, helping listings stand out and attract qualified buyers.</p>
           <div class="project-tags">
             <span class="project-tag">Canva</span>
             <span class="project-tag">Email Banner</span>
