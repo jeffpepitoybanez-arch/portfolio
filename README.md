@@ -1,9 +1,9 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Jeff P. Ybanez – Fullstack & Automation Specialist</title>
+<title>Jeff P. Ybanez – Digital Marketing Specialist</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
 /* ─────────────────────────────────────
@@ -745,6 +745,68 @@ footer{
   .tools-grid{grid-template-columns:repeat(2,1fr)}
   .about-img-wrap{max-width:100%}
 }
+
+/* ─── NEW: JOURNEY TIMELINE ─── */
+#journey{background:var(--bg2)}
+.timeline{
+  position:relative;margin-top:64px;
+  padding-left:40px;
+}
+.timeline::before{
+  content:'';position:absolute;left:9px;top:6px;bottom:6px;width:1px;
+  background:linear-gradient(to bottom,var(--accent),var(--border2) 85%,transparent);
+}
+.timeline-item{position:relative;padding-bottom:52px}
+.timeline-item:last-child{padding-bottom:0}
+.timeline-dot{
+  position:absolute;left:-40px;top:2px;width:20px;height:20px;border-radius:50%;
+  background:var(--bg2);border:1px solid var(--accent);
+  display:flex;align-items:center;justify-content:center;
+}
+.timeline-dot::after{content:'';width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.timeline-year{
+  font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;
+}
+.timeline-title{
+  font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;margin-bottom:8px;
+}
+.timeline-desc{font-size:.86rem;line-height:1.85;color:var(--muted);font-weight:300;max-width:640px}
+.timeline-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+
+/* ─── NEW: RESULTS / PROOF ─── */
+#results{background:var(--bg)}
+.results-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:60px;
+}
+.result-card{
+  background:var(--card);border:1px solid var(--border2);border-radius:var(--r);
+  padding:30px 24px;text-align:center;transition:border-color .3s,background .3s,transform .3s;
+}
+.result-card:hover{border-color:var(--border);background:var(--card-h);transform:translateY(-4px)}
+.result-num{
+  font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;color:var(--accent);line-height:1;
+}
+.result-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:10px}
+.value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px}
+.value-card{
+  background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:30px 26px;
+  transition:border-color .3s,background .3s,transform .3s;
+}
+.value-card:hover{border-color:var(--border);background:var(--card-h);transform:translateY(-4px)}
+.value-icon{
+  width:46px;height:46px;border-radius:10px;background:rgba(74,222,128,.08);
+  border:1px solid rgba(74,222,128,.25);display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+}
+.value-icon svg{width:22px;height:22px;color:#4ade80}
+.value-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;margin-bottom:8px}
+.value-desc{font-size:.82rem;line-height:1.75;color:var(--muted);font-weight:300}
+
+@media(max-width:900px){
+  .results-grid{grid-template-columns:repeat(2,1fr)}
+  .value-grid{grid-template-columns:1fr}
+  .timeline{padding-left:30px}
+  .timeline-dot{left:-30px}
+}
 </style>
 </head>
 <body>
@@ -762,6 +824,7 @@ footer{
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" onclick="closeMobile()">✕</button>
   <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#journey" onclick="closeMobile()">Journey</a>
   <a href="#services" onclick="closeMobile()">Services</a>
   <a href="#tools" onclick="closeMobile()">Tools</a>
   <a href="#portfolio-web" onclick="closeMobile()">Projects</a>
@@ -774,6 +837,7 @@ footer{
   <a href="#hero" class="nav-logo">Jeff<span>.</span>Ybanez</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
+    <li><a href="#journey">Journey</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#tools">Tools</a></li>
     <li><a href="#portfolio-web">Projects</a></li>
@@ -789,29 +853,29 @@ footer{
 <!-- ═══════════ HERO ═══════════ -->
 <section id="hero">
   <div class="hero-left">
-    <div class="hero-tag"><span class="tag-dot"></span>Open to New Projects</div>
+    <div class="hero-tag"><span class="tag-dot"></span>🇵🇭 Philippines-Based · Open to New Projects</div>
     <h1 class="hero-title">
-      I Help Businesses<br/>
-      <em>Thrive</em> in the<br/>
-      <strong>Digital World.</strong>
+      The <em>Full-Stack</em><br/>
+      Virtual Assistant Who<br/>
+      <strong>Builds &amp; Automates.</strong>
     </h1>
-    <p class="hero-bio">Transforming your online goals into strategies that drive growth, success, and lasting results — through smart automation, compelling content, and high-converting funnels.</p>
+    <p class="hero-bio">I don't just execute tasks — I build the systems that run your business. GoHighLevel funnels, API integrations, and end-to-end automation across Make, Zapier, and Pabbly, backed by a background in Information Systems and 4+ years turning operations into revenue.</p>
     <div class="ticker-wrap">
       <div class="ticker">
-        <span>Email Marketing</span><span class="sep">·</span>
-        <span>Website Builder</span><span class="sep">·</span>
-        <span>Graphics Design</span><span class="sep">·</span>
-        <span>Video Editing</span><span class="sep">·</span>
-        <span>Social Media Mgmt</span><span class="sep">·</span>
-        <span>Lead Generation</span><span class="sep">·</span>
-        <span>Chatbot & Automation</span><span class="sep">·</span>
-        <span>Email Marketing</span><span class="sep">·</span>
-        <span>Website Builder</span><span class="sep">·</span>
-        <span>Graphics Design</span><span class="sep">·</span>
-        <span>Video Editing</span><span class="sep">·</span>
-        <span>Social Media Mgmt</span><span class="sep">·</span>
-        <span>Lead Generation</span><span class="sep">·</span>
-        <span>Chatbot & Automation</span><span class="sep">·</span>
+        <span>GoHighLevel Expert</span><span class="sep">·</span>
+        <span>API Integrations</span><span class="sep">·</span>
+        <span>Make &amp; Zapier Automation</span><span class="sep">·</span>
+        <span>Pabbly Connect</span><span class="sep">·</span>
+        <span>Full-Stack Web Dev</span><span class="sep">·</span>
+        <span>Funnel &amp; Web Design</span><span class="sep">·</span>
+        <span>Business Process Mapping</span><span class="sep">·</span>
+        <span>GoHighLevel Expert</span><span class="sep">·</span>
+        <span>API Integrations</span><span class="sep">·</span>
+        <span>Make &amp; Zapier Automation</span><span class="sep">·</span>
+        <span>Pabbly Connect</span><span class="sep">·</span>
+        <span>Full-Stack Web Dev</span><span class="sep">·</span>
+        <span>Funnel &amp; Web Design</span><span class="sep">·</span>
+        <span>Business Process Mapping</span><span class="sep">·</span>
       </div>
     </div>
     <div class="hero-cta">
@@ -832,16 +896,17 @@ footer{
       <div class="photo-fade"></div>
       <div class="photo-glow"></div>
     </div>
-    <div class="name-badge">Fullstack & Automation Specialist<strong>Jeff P. Ybanez</strong></div>
+    <div class="name-badge">Full-Stack Virtual Assistant &amp; GHL Automation Expert<strong>Jeff P. Ybanez</strong></div>
   </div>
 
   <div class="hero-right">
     <div class="chip-stack">
+      <span class="chip">🇵🇭 Based in the Philippines</span>
       <span class="chip">GoHighLevel Expert</span>
-      <span class="chip">Funnel &amp; Web Design</span>
-      <span class="chip">CRM Automation</span>
-      <span class="chip">FB · Google · LinkedIn Ads</span>
-      <span class="chip">SEO Optimization</span>
+      <span class="chip">Full-Stack Developer</span>
+      <span class="chip">API Integration Specialist</span>
+      <span class="chip">Make · Zapier · Pabbly</span>
+      <span class="chip">BS Information Systems</span>
     </div>
     <div class="social-stack">
       <a href="https://www.facebook.com/jeffybanez2" target="_blank" rel="noopener" class="soc-icon" title="Facebook">
@@ -870,7 +935,7 @@ footer{
 
   <div class="hero-bottom">
     <div class="scroll-hint"><div class="scroll-line"></div>Explore Portfolio</div>
-    <div class="avail"><div class="avail-dot"></div>Available for new projects</div>
+    <div class="avail"><div class="avail-dot"></div>Available for new projects · GMT+8 Philippines</div>
   </div>
 </section>
 
@@ -906,10 +971,10 @@ footer{
         </div>
       </div>
       <div class="about-text-col reveal-right">
-        <div class="section-label">I'm Jeff</div>
-        <h2 class="about-heading">A Fullstack & Automation Specialist Who <em>Gets Results.</em></h2>
-        <p class="about-body">I help businesses thrive in the digital world by turning complex marketing challenges into clear, results-driven strategies. From building high-converting funnels and automating workflows to managing social media and running targeted ads — I bring the full stack of digital marketing to your brand.</p>
-        <p class="about-body">I work with a diverse range of industries and tailor every project to the client's specific goals and audience. My approach is data-driven, creative, and always focused on measurable growth.</p>
+        <div class="section-label">I'm Jeff, from the Philippines 🇵🇭</div>
+        <h2 class="about-heading">A Full-Stack Virtual Assistant Who <em>Gets Results.</em></h2>
+        <p class="about-body">I hold a Bachelor's Degree in Information Systems, and that technical foundation is exactly what sets me apart from a typical VA. I don't just follow instructions — I understand how systems, data, and workflows connect across a business, so I can spot the bottleneck, build the fix, and automate it so it never happens again.</p>
+        <p class="about-body">Today I work as a full-stack virtual assistant: building GoHighLevel funnels and CRMs, connecting tools through APIs, and wiring automations across Make, Zapier, and Pabbly Connect so your team spends less time on repetitive work and more time closing deals. I work with a diverse range of industries and tailor every project to the client's specific goals, tech stack, and growth stage.</p>
         <div>
           <div class="section-label" style="margin-bottom:12px">Industries I've Worked With</div>
           <div class="industries">
@@ -936,13 +1001,122 @@ footer{
   </div>
 </section>
 
+<!-- ═══════════ MY JOURNEY ═══════════ -->
+<section id="journey">
+  <div class="divider"></div>
+  <div class="section-inner">
+    <div class="section-label reveal">My Journey</div>
+    <h2 class="section-title reveal">From <em>Information Systems</em> to Full-Stack VA</h2>
+    <p class="section-sub reveal">Every stop on this path built a skill I use for clients today — this is why I think in systems, not just tasks.</p>
+
+    <div class="timeline reveal">
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">College · Philippines</div>
+        <div class="timeline-title">Bachelor's Degree in Information Systems</div>
+        <p class="timeline-desc">Studied how data, software, and business processes connect — databases, systems analysis, and project workflows. This is the foundation that lets me understand a client's entire operation, not just the task in front of me.</p>
+        <div class="timeline-tags">
+          <span class="project-tag">Systems Analysis</span>
+          <span class="project-tag">Databases</span>
+          <span class="project-tag">Process Design</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">Early Career</div>
+        <div class="timeline-title">Started as a General Virtual Assistant</div>
+        <p class="timeline-desc">Began supporting business owners with admin, content, and CRM tasks — and quickly noticed how much time was lost to manual, repeatable work. That observation became the direction for everything that followed.</p>
+        <div class="timeline-tags">
+          <span class="project-tag">Admin Support</span>
+          <span class="project-tag">CRM Management</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">Specialization</div>
+        <div class="timeline-title">Became a GoHighLevel &amp; Automation Specialist</div>
+        <p class="timeline-desc">Went deep into GoHighLevel — funnels, pipelines, workflows — then extended that into API integrations and automation platforms like Make, Zapier, and Pabbly Connect to connect GHL with the rest of a client's tech stack.</p>
+        <div class="timeline-tags">
+          <span class="project-tag">GoHighLevel</span>
+          <span class="project-tag">Make</span>
+          <span class="project-tag">Zapier</span>
+          <span class="project-tag">Pabbly Connect</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">Today</div>
+        <div class="timeline-title">Full-Stack Virtual Assistant &amp; Business Systems Builder</div>
+        <p class="timeline-desc">Now I combine my Information Systems background with hands-on execution — building websites and funnels, integrating APIs, and automating entire workflows end-to-end so clients get a VA who thinks like a developer and operates like an operations partner.</p>
+        <div class="timeline-tags">
+          <span class="project-tag">Full-Stack Development</span>
+          <span class="project-tag">API Integration</span>
+          <span class="project-tag">Business Automation</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ RESULTS / WHY HIRE ME ═══════════ -->
+<section id="results">
+  <div class="divider"></div>
+  <div class="section-inner">
+    <div class="section-label reveal">Proof, Not Promises</div>
+    <h2 class="section-title reveal">Why Businesses Choose <em>Me</em></h2>
+    <p class="section-sub reveal">A snapshot of the track record — and the value I bring that a typical task-based VA can't.</p>
+
+    <div class="results-grid">
+      <div class="result-card reveal">
+        <div class="result-num">40+</div>
+        <div class="result-label">Funnels &amp; Sites Delivered</div>
+      </div>
+      <div class="result-card reveal">
+        <div class="result-num">10+</div>
+        <div class="result-label">Long-Term Clients</div>
+      </div>
+      <div class="result-card reveal">
+        <div class="result-num">4+</div>
+        <div class="result-label">Years in GHL &amp; Automation</div>
+      </div>
+      <div class="result-card reveal">
+        <div class="result-num">3</div>
+        <div class="result-label">Automation Platforms Mastered</div>
+      </div>
+    </div>
+
+    <div class="value-grid">
+      <div class="value-card reveal">
+        <div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg></div>
+        <div class="value-title">Full-Stack, Not Task-Based</div>
+        <p class="value-desc">A BS in Information Systems plus hands-on GoHighLevel and web development means I can design, build, and maintain systems — not just check off tasks on a list.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+        <div class="value-title">Automation-First Mindset</div>
+        <p class="value-desc">Every recurring task is a candidate for automation. I connect GoHighLevel to your entire stack via Make, Zapier, and Pabbly Connect so leads, data, and follow-ups move without manual work.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <div class="value-title">I See the Whole Business</div>
+        <p class="value-desc">My systems background means I map how leads, sales, fulfillment, and reporting connect — so the automation I build actually fits how your business runs, not just one isolated task.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════ SERVICES ═══════════ -->
 <section id="services">
   <div class="divider"></div>
   <div class="section-inner">
     <div class="section-label reveal">My Services</div>
     <h2 class="section-title reveal">What I Can Do <em>For You</em></h2>
-    <p class="section-sub reveal">A comprehensive range of digital marketing services designed to help businesses grow and succeed online.</p>
+    <p class="section-sub reveal">A comprehensive range of digital marketing, development, and automation services designed to help businesses grow and run themselves.</p>
     <div class="services-grid">
 
       <div class="service-card reveal">
@@ -997,6 +1171,24 @@ footer{
         </div>
         <div class="service-name">SEO for Websites</div>
         <p class="service-desc">Improving your website's search engine ranking through on-page SEO, keyword optimization, and content strategies designed to drive sustained organic traffic growth.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-num">07</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <div class="service-name">API Integrations &amp; Custom Automation</div>
+        <p class="service-desc">Connecting GoHighLevel and third-party platforms via REST APIs, webhooks, and custom code so your data flows automatically between every tool in your stack.</p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-num">08</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </div>
+        <div class="service-name">Workflow Automation (Make, Zapier, Pabbly)</div>
+        <p class="service-desc">Designing multi-step automations that trigger across your CRM, forms, email, and apps — eliminating manual data entry and reducing errors so nothing falls through the cracks.</p>
       </div>
 
     </div>
@@ -1090,6 +1282,10 @@ footer{
       <div class="tool-card reveal">
         <img class="tool-logo" src="https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/dark/make-color.png" alt="Make"/>
         <div class="tool-name">Make (Integromat)</div>
+      </div>
+      <div class="tool-card reveal">
+        <img class="tool-logo" src="https://assets-global.website-files.com/5f0f5f6b3f078d1f7e1fbe89/Pabbly-icon.png" alt="Pabbly Connect" onerror="this.src='https://placehold.co/44x44/111520/4f9cf9?text=P'"/>
+        <div class="tool-name">Pabbly Connect</div>
       </div>
     </div>
   </div>
@@ -1263,7 +1459,7 @@ footer{
 
     <!-- More Projects Link -->
     <div class="portfolio-more reveal">
-      <a href="https://drive.google.com/drive/folders/1lIpdeA0Ltaouf8paHGuLC8SeZ1UCudVF?usp=sharing" target="_blank" class="more-link">
+      <a href="#" target="_blank" class="more-link">
         View More Web &amp; Funnel Projects
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
@@ -1288,9 +1484,9 @@ footer{
       <div class="project-card reveal">
         <div class="project-thumb">
           <!-- REPLACE src with your graphic image URL -->
-          <img src="https://i.imgur.com/DUU3XZQ.png" alt="Graphic 1"/>
+          <img src="https://placehold.co/600x375/07090f/c9a96e?text=Graphic+Sample" alt="Graphic 1"/>
           <div class="project-thumb-overlay">
-            <a href="https://drive.google.com/file/d/1R-KLFLT_Z7tKMukOTCzm-9xxTKGUNEea/view?usp=sharing" target="_blank" class="project-view-btn">
+            <a href="#" target="_blank" class="project-view-btn">
               View Full Size
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
@@ -1298,8 +1494,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:var(--gold)"><span class="project-cat-dot" style="background:var(--gold)"></span>Graphics Design</div>
-          <div class="project-title">High-Converting Finance Ad Creatives</div>
-          <p class="project-desc">Designed scroll-stopping visuals for financial services, focusing on trust, clarity, and strong call-to-actions to boost lead generation and client conversions.</p>
+          <div class="project-title">Project Title Here</div>
+          <p class="project-desc">Brief description of the graphic — brand, purpose, and platform it was created for.</p>
           <div class="project-tags">
             <span class="project-tag">Canva</span>
             <span class="project-tag">Social Media</span>
@@ -1311,9 +1507,9 @@ footer{
       <!-- Card 2 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://i.imgur.com/CtQ1NMa.png" alt="Graphic 2"/>
+          <img src="https://placehold.co/600x375/07090f/c9a96e?text=Graphic+Sample" alt="Graphic 2"/>
           <div class="project-thumb-overlay">
-            <a href="https://drive.google.com/file/d/1SZoBjgZC99SFlYYyJbImPGQDgbUaaiM6/view?usp=sharing" target="_blank" class="project-view-btn">
+            <a href="#" target="_blank" class="project-view-btn">
               View Full Size
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
@@ -1321,8 +1517,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:var(--gold)"><span class="project-cat-dot" style="background:var(--gold)"></span>Graphics Design</div>
-          <div class="project-title">Watch Visual Campaigns</div>
-          <p class="project-desc">Produced high-end, detail-focused creatives that emphasize craftsmanship, elegance, and exclusivity to elevate brand perception and desirability.</p>
+          <div class="project-title">Project Title Here</div>
+          <p class="project-desc">Brief description of the graphic — brand, purpose, and platform it was created for.</p>
           <div class="project-tags">
             <span class="project-tag">Photoshop</span>
             <span class="project-tag">Ad Creative</span>
@@ -1333,9 +1529,9 @@ footer{
       <!-- Card 3 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://i.imgur.com/ouiNTpg.png" alt="Graphic 3"/>
+          <img src="https://placehold.co/600x375/07090f/c9a96e?text=Graphic+Sample" alt="Graphic 3"/>
           <div class="project-thumb-overlay">
-            <a href="https://drive.google.com/file/d/1OJ1-GTQdPVn6WNTxDEsbpy4OvLFcLNLD/view?usp=sharing" target="_blank" class="project-view-btn">
+            <a href="#" target="_blank" class="project-view-btn">
               View Full Size
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
@@ -1343,8 +1539,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:var(--gold)"><span class="project-cat-dot" style="background:var(--gold)"></span>Graphics Design</div>
-          <div class="project-title">Engaging Health & Wellness Campaign Designs</div>
-          <p class="project-desc">Developed clean, informative, and visually appealing creatives that communicate health benefits effectively while building credibility and audience trust.</p>
+          <div class="project-title">Project Title Here</div>
+          <p class="project-desc">Brief description of the graphic — brand, purpose, and platform it was created for.</p>
           <div class="project-tags">
             <span class="project-tag">Canva</span>
             <span class="project-tag">Logo Design</span>
@@ -1355,9 +1551,9 @@ footer{
       <!-- Card 4 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://i.imgur.com/jmwnwxW.png" alt="Graphic 4"/>
+          <img src="https://placehold.co/600x375/07090f/c9a96e?text=Graphic+Sample" alt="Graphic 4"/>
           <div class="project-thumb-overlay">
-            <a href="https://drive.google.com/file/d/1NgsukyU-Mg8VFpJW2_FI0MzNN4G71LKn/view?usp=sharing" target="_blank" class="project-view-btn">
+            <a href="#" target="_blank" class="project-view-btn">
               View Full Size
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
@@ -1365,8 +1561,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:var(--gold)"><span class="project-cat-dot" style="background:var(--gold)"></span>Graphics Design</div>
-          <div class="project-title">Futuristic AI Branding & Ad Creatives</div>
-          <p class="project-desc">Crafted sleek and innovative designs that reflect cutting-edge technology, making complex AI solutions visually appealing and easy to understand.</p>
+          <div class="project-title">Project Title Here</div>
+          <p class="project-desc">Brief description of the graphic — brand, purpose, and platform it was created for.</p>
           <div class="project-tags">
             <span class="project-tag">Photoshop</span>
             <span class="project-tag">Thumbnail</span>
@@ -1377,9 +1573,9 @@ footer{
       <!-- Card 5 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://i.imgur.com/VuJsq2U.png" alt="Graphic 5"/>
+          <img src="https://placehold.co/600x375/07090f/c9a96e?text=Graphic+Sample" alt="Graphic 5"/>
           <div class="project-thumb-overlay">
-            <a href="https://drive.google.com/drive/folders/1j4EhVJwV8xzFkMkTXmRyrry62XePZds9?usp=sharing" target="_blank" class="project-view-btn">
+            <a href="#" target="_blank" class="project-view-btn">
               View Full Size
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
@@ -1387,8 +1583,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:var(--gold)"><span class="project-cat-dot" style="background:var(--gold)"></span>Graphics Design</div>
-          <div class="project-title">Premium Real Estate Marketing Visuals</div>
-          <p class="project-desc">Created modern and elegant property graphics that highlight key selling points, helping listings stand out and attract qualified buyers.</p>
+          <div class="project-title">Project Title Here</div>
+          <p class="project-desc">Brief description of the graphic — brand, purpose, and platform it was created for.</p>
           <div class="project-tags">
             <span class="project-tag">Canva</span>
             <span class="project-tag">Email Banner</span>
@@ -1421,7 +1617,7 @@ footer{
     </div>
 
     <div class="portfolio-more reveal">
-      <a href="https://drive.google.com/drive/folders/1Q4OaoAWIT73MiYj_AhUabgIgQklyeinA?usp=sharing" target="_blank" class="more-link">
+      <a href="#" target="_blank" class="more-link">
         View More Graphics Projects
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
@@ -1446,9 +1642,9 @@ footer{
       <div class="project-card reveal">
         <div class="project-thumb">
           <!-- REPLACE src with a video thumbnail image URL -->
-          <img src="https://i.imgur.com/doyDQlZ.png" alt="Video 1"/>
+          <img src="https://placehold.co/600x375/0d1017/82bcff?text=Video+Thumbnail" alt="Video 1"/>
           <div class="project-thumb-overlay">
-            <a href="https://drive.google.com/file/d/1LVSKmaTGJ4ydxAKNV_Blfjzjr0QKk8qB/view?usp=sharing" target="_blank" class="project-view-btn">
+            <a href="#" target="_blank" class="project-view-btn">
               Watch Video
               <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </a>
@@ -1461,8 +1657,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:#82bcff"><span class="project-cat-dot" style="background:#82bcff"></span>Video Edit</div>
-          <div class="project-title">Build Your First Home for Profit</div>
-          <p class="project-desc">A step-by-step system to create six-figure equity and profits through new construction—no license or experience required, just proven strategies that work.</p>
+          <div class="project-title">Project Title Here</div>
+          <p class="project-desc">Short description of the video — type of content, platform, and what made it effective.</p>
           <div class="project-tags">
             <span class="project-tag">CapCut</span>
             <span class="project-tag">Reels</span>
@@ -1474,9 +1670,9 @@ footer{
       <!-- Card 2 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://i.imgur.com/Nb3qo2O.png" alt="Video 2"/>
+          <img src="https://placehold.co/600x375/0d1017/82bcff?text=Video+Thumbnail" alt="Video 2"/>
           <div class="project-thumb-overlay">
-            <a href="https://drive.google.com/file/d/1lKFWPBNNV8ZirqTmrllYmfA-oy-gwmmo/view?usp=sharing" target="_blank" class="project-view-btn">
+            <a href="#" target="_blank" class="project-view-btn">
               Watch Video
               <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </a>
@@ -1488,8 +1684,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:#82bcff"><span class="project-cat-dot" style="background:#82bcff"></span>Video Edit</div>
-          <div class="project-title">From Raw Land to Real Profits</div>
-          <p class="project-desc">A proven system for turning land into cash-flowing rentals and high-profit developments—backed by real results, real students, and over $80M in real estate deals.</p>
+          <div class="project-title">Project Title Here</div>
+          <p class="project-desc">Short description of the video — type of content, platform, and what made it effective.</p>
           <div class="project-tags">
             <span class="project-tag">Adobe Premiere</span>
             <span class="project-tag">YouTube</span>
@@ -1500,9 +1696,9 @@ footer{
       <!-- Card 3 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://i.imgur.com/3rqMVkm.png" alt="Video 3"/>
+          <img src="https://placehold.co/600x375/0d1017/82bcff?text=Video+Thumbnail" alt="Video 3"/>
           <div class="project-thumb-overlay">
-            <a href="https://drive.google.com/file/d/1uHGIDnrSYTJGo74suRHF-QI8b51PgZf5/view?usp=sharing" target="_blank" class="project-view-btn">
+            <a href="#" target="_blank" class="project-view-btn">
               Watch Video
               <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </a>
@@ -1514,8 +1710,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:#82bcff"><span class="project-cat-dot" style="background:#82bcff"></span>Video Edit</div>
-          <div class="project-title">You Don’t Need Cash to Start Building</div>
-          <p class="project-desc">Learn how to secure land and construction with as little as 5% down using a proven 7-step system designed to create real equity and profit.</p>
+          <div class="project-title">Project Title Here</div>
+          <p class="project-desc">Short description of the video — type of content, platform, and what made it effective.</p>
           <div class="project-tags">
             <span class="project-tag">CapCut</span>
             <span class="project-tag">TikTok</span>
@@ -1527,9 +1723,9 @@ footer{
       <!-- Card 4 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://i.imgur.com/rGhzZ44.png" alt="Video 4"/>
+          <img src="https://placehold.co/600x375/0d1017/82bcff?text=Video+Thumbnail" alt="Video 4"/>
           <div class="project-thumb-overlay">
-            <a href="https://drive.google.com/file/d/1ZvRj_q4ntulHLte_GIminKUT_t1oa96s/view?usp=sharing" target="_blank" class="project-view-btn">
+            <a href="#" target="_blank" class="project-view-btn">
               Watch Video
               <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </a>
@@ -1541,8 +1737,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:#82bcff"><span class="project-cat-dot" style="background:#82bcff"></span>Video Edit</div>
-          <div class="project-title">If There’s No Trust, There’s No Relationship</div>
-          <p class="project-desc">Whether it’s friendship or business, trust is the foundation—without it, nothing real can be built.</p>
+          <div class="project-title">Project Title Here</div>
+          <p class="project-desc">Short description of the video — type of content, platform, and what made it effective.</p>
           <div class="project-tags">
             <span class="project-tag">Adobe Premiere</span>
             <span class="project-tag">Ad Video</span>
@@ -1553,9 +1749,9 @@ footer{
       <!-- Card 5 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://i.imgur.com/K124M9e.png" alt="Video 5"/>
+          <img src="https://placehold.co/600x375/0d1017/82bcff?text=Video+Thumbnail" alt="Video 5"/>
           <div class="project-thumb-overlay">
-            <a href="https://drive.google.com/file/d/1yvD5GUejqAmC_KeVaa0ld-GFbvUkI9JJ/view?usp=sharing" target="_blank" class="project-view-btn">
+            <a href="#" target="_blank" class="project-view-btn">
               Watch Video
               <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </a>
@@ -1567,8 +1763,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:#82bcff"><span class="project-cat-dot" style="background:#82bcff"></span>Video Edit</div>
-          <div class="project-title">Clarity Creates Progress</div>
-          <p class="project-desc">Success isn’t random—define your vision, map your steps, and execute daily with intention instead of guessing your way forward.</p>
+          <div class="project-title">Project Title Here</div>
+          <p class="project-desc">Short description of the video — type of content, platform, and what made it effective.</p>
           <div class="project-tags">
             <span class="project-tag">CapCut</span>
             <span class="project-tag">Instagram Reel</span>
@@ -1579,9 +1775,9 @@ footer{
       <!-- Card 6 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://i.imgur.com/N6txRZS.png" alt="Video 6"/>
+          <img src="https://placehold.co/600x375/0d1017/82bcff?text=Video+Thumbnail" alt="Video 6"/>
           <div class="project-thumb-overlay">
-            <a href="https://drive.google.com/file/d/18G5pbA-Dsk12V3MBcGtuuEKs13p9uLz3/view?usp=sharing" target="_blank" class="project-view-btn">
+            <a href="#" target="_blank" class="project-view-btn">
               Watch Video
               <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </a>
@@ -1593,8 +1789,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:#82bcff"><span class="project-cat-dot" style="background:#82bcff"></span>Video Edit</div>
-          <div class="project-title">Why Are You Really Scrolling?</div>
-          <p class="project-desc">Are you consuming to grow or just to pass time? Shift your focus from entertainment to learning—and watch your mindset transform.</p>
+          <div class="project-title">Project Title Here</div>
+          <p class="project-desc">Short description of the video — type of content, platform, and what made it effective.</p>
           <div class="project-tags">
             <span class="project-tag">Adobe Premiere</span>
             <span class="project-tag">Promotional</span>
@@ -1605,7 +1801,7 @@ footer{
     </div>
 
     <div class="portfolio-more reveal">
-      <a href="https://drive.google.com/drive/folders/1xklKeDh_cO0jP0lSY4unqvAiB4Xw3xF8?usp=sharing" target="_blank" class="more-link">
+      <a href="#" target="_blank" class="more-link">
         View More Video Projects
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
@@ -1630,9 +1826,9 @@ footer{
       <div class="project-card reveal">
         <div class="project-thumb">
           <!-- REPLACE src with a workflow screenshot or diagram -->
-          <img src="https://i.imgur.com/SMPPu1S.png" alt="Automation 1"/>
+          <img src="https://placehold.co/600x375/07090f/4ade80?text=Automation+Screenshot" alt="Automation 1"/>
           <div class="project-thumb-overlay">
-            <a href="https://docs.google.com/document/d/1QnqVi8oM_a-k711nrSmKEeCQcri8s0uLiLv58bKSeLY/edit?usp=sharing" target="_blank" class="project-view-btn">
+            <a href="#" target="_blank" class="project-view-btn">
               View Details
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
@@ -1640,8 +1836,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:#4ade80"><span class="project-cat-dot" style="background:#4ade80"></span>Automation</div>
-          <div class="project-title">Client Onboarding & Contract System</div>
-          <p class="project-desc">A fully automated client onboarding system that handles contract signing, document generation, and tracking eliminating manual work and ensuring a seamless client experience.</p>
+          <div class="project-title">Project Title Here</div>
+          <p class="project-desc">Describe what the automation does — the trigger, workflow steps, and the outcome it delivers for the client.</p>
           <div class="project-tags">
             <span class="project-tag">GoHighLevel</span>
             <span class="project-tag">Lead Nurture</span>
@@ -1653,9 +1849,9 @@ footer{
       <!-- Card 2 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://i.imgur.com/hutpvA5.png" alt="Automation 2"/>
+          <img src="https://placehold.co/600x375/07090f/4ade80?text=Automation+Screenshot" alt="Automation 2"/>
           <div class="project-thumb-overlay">
-            <a href="https://docs.google.com/document/d/19oERUrtXj1Bzx11OkmCXmyrg786kmf5FzrnGw8BX22k/edit?usp=sharing" target="_blank" class="project-view-btn">
+            <a href="#" target="_blank" class="project-view-btn">
               View Details
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
@@ -1663,8 +1859,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:#4ade80"><span class="project-cat-dot" style="background:#4ade80"></span>Automation</div>
-          <div class="project-title">Payment Tracking & Sales Dashboard System</div>
-          <p class="project-desc">An integrated automation that captures transactions from GoHighLevel and Whop, logs them into a centralized spreadsheet, calculates real-time sales metrics (daily, weekly, and monthly), and instantly notifies the business owner for accurate tracking and decision-making.</p>
+          <div class="project-title">Project Title Here</div>
+          <p class="project-desc">Describe what the automation does — the trigger, workflow steps, and the outcome it delivers for the client.</p>
           <div class="project-tags">
             <span class="project-tag">Zapier</span>
             <span class="project-tag">CRM Sync</span>
@@ -1675,9 +1871,9 @@ footer{
       <!-- Card 3 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://i.imgur.com/hutpvA5.png" alt="Automation 3"/>
+          <img src="https://placehold.co/600x375/07090f/4ade80?text=Automation+Screenshot" alt="Automation 3"/>
           <div class="project-thumb-overlay">
-            <a href="https://docs.google.com/document/d/1nl2Hb2TIh2h0AfUozWMvif63Hbr9I-C3H-BbT34kEUE/edit?usp=sharing" target="_blank" class="project-view-btn">
+            <a href="#" target="_blank" class="project-view-btn">
               View Details
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
@@ -1685,8 +1881,8 @@ footer{
         </div>
         <div class="project-body">
           <div class="project-cat-tag" style="color:#4ade80"><span class="project-cat-dot" style="background:#4ade80"></span>Automation</div>
-          <div class="project-title">Deal Tracking & Notification System</div>
-          <p class="project-desc">An automated workflow that records deals from Whop & GoHighLevel, logs them into a centralized spreadsheet, calculates pipeline metrics (open deals, won/lost deals, and total value), and sends real-time notifications to the owner streamlining deal management and ensuring accurate performance tracking.</p>
+          <div class="project-title">Project Title Here</div>
+          <p class="project-desc">Describe what the automation does — the trigger, workflow steps, and the outcome it delivers for the client.</p>
           <div class="project-tags">
             <span class="project-tag">Make</span>
             <span class="project-tag">Chatbot</span>
@@ -1698,7 +1894,7 @@ footer{
       <!-- Card 4 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://i.imgur.com/Ew7ukRH.png" alt="Automation 4"/>
+          <img src="https://placehold.co/600x375/07090f/4ade80?text=Automation+Screenshot" alt="Automation 4"/>
           <div class="project-thumb-overlay">
             <a href="#" target="_blank" class="project-view-btn">
               View Details
@@ -1720,7 +1916,7 @@ footer{
       <!-- Card 5 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://i.imgur.com/Ew7ukRH.png" alt="Automation 5"/>
+          <img src="https://placehold.co/600x375/07090f/4ade80?text=Automation+Screenshot" alt="Automation 5"/>
           <div class="project-thumb-overlay">
             <a href="#" target="_blank" class="project-view-btn">
               View Details
@@ -1742,7 +1938,7 @@ footer{
       <!-- Card 6 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <img src="https://i.imgur.com/Ew7ukRH.png" alt="Automation 6"/>
+          <img src="https://placehold.co/600x375/07090f/4ade80?text=Automation+Screenshot" alt="Automation 6"/>
           <div class="project-thumb-overlay">
             <a href="#" target="_blank" class="project-view-btn">
               View Details
@@ -1764,7 +1960,7 @@ footer{
     </div>
 
     <div class="portfolio-more reveal">
-      <a href="https://drive.google.com/drive/folders/1CNyQc1l64iKctbwsMGAH9vM4QT0HDV5i?usp=sharing" target="_blank" class="more-link">
+      <a href="#" target="_blank" class="more-link">
         View More Automation Projects
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
@@ -1846,6 +2042,22 @@ footer{
         <div class="faq-a"><div class="faq-a-inner">Yes, I build high-converting sales funnels tailored to your product or service. This includes lead magnets, opt-in pages, upsell/downsell strategies, thank you pages, and automation workflows to nurture leads effectively.</div></div>
       </div>
 
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">You're based in the Philippines — how does time zone and communication work?</span>
+          <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><path d="M12 5v14M5 12h14"/></svg></span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">Yes, I'm based in the Philippines (GMT+8) and work with clients across the US, UK, Australia, and beyond. I structure my schedule around overlap hours with your team and stay reachable via WhatsApp, email, or Slack so communication never becomes a bottleneck.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Can you build custom API integrations, not just use pre-built connectors?</span>
+          <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><path d="M12 5v14M5 12h14"/></svg></span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">Yes. With a Bachelor's degree in Information Systems and hands-on development experience, I can work directly with REST APIs and webhooks when a pre-built connector in Make, Zapier, or Pabbly doesn't cover what you need — so your systems talk to each other exactly the way your business requires.</div></div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1858,7 +2070,7 @@ footer{
     <div class="contact-grid">
       <div class="contact-info reveal-left">
         <h2 class="contact-heading">Let's Build Something <em>Great Together.</em></h2>
-        <p class="contact-body">Ready to transform your digital presence? Whether you need a full marketing strategy or just one specific service — I'm here to help you grow.</p>
+        <p class="contact-body">Ready to transform your digital presence? Whether you need a full marketing strategy, a GoHighLevel build, or an automation that connects your entire stack — I'm here to help you grow, from the Philippines to wherever your business operates.</p>
         <div class="contact-items">
           <a href="tel:+639272303838" class="contact-item">
             <div class="contact-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.18 6.18l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
@@ -1874,6 +2086,13 @@ footer{
               <div class="contact-item-val">+63 927 230 3838</div>
             </div>
           </a>
+          <div class="contact-item" style="cursor:default">
+            <div class="contact-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div>
+              <div class="contact-item-label">Location</div>
+              <div class="contact-item-val">🇵🇭 Philippines · GMT+8 · Remote Worldwide</div>
+            </div>
+          </div>
           <a href="https://www.facebook.com/jeffybanez2" target="_blank" class="contact-item">
             <div class="contact-item-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div>
             <div>
@@ -1892,7 +2111,7 @@ footer{
       </div>
       <div class="big-cta-card reveal-right">
         <div class="cta-card-title">Ready to <em>get started?</em><br/>Let's talk strategy.</div>
-        <p class="cta-card-sub">Book a free discovery call and let's map out how I can help you grow. No pressure, just a conversation about your goals and how digital marketing can get you there.</p>
+        <p class="cta-card-sub">Book a free discovery call and let's map out how a full-stack VA — armed with an Information Systems background, GoHighLevel expertise, and automation across Make, Zapier, and Pabbly — can help you grow. No pressure, just a conversation about your goals and how the right systems can get you there.</p>
         <div class="cta-card-btns">
           <a href="https://calendar.app.google/K3TY9nAVZfSbxWXv6" target="_blank" class="btn btn-primary">
             Book A Free Call
@@ -1910,9 +2129,10 @@ footer{
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">Jeff<span>.</span>Ybanez</div>
-  <div class="footer-copy">© 2025 Jeff P. Ybanez. All rights reserved.</div>
+  <div class="footer-copy">© 2025 Jeff P. Ybanez · Philippines 🇵🇭 · All rights reserved.</div>
   <div class="footer-links">
     <a href="#about">About</a>
+    <a href="#journey">Journey</a>
     <a href="#services">Services</a>
     <a href="#portfolio-web">Projects</a>
     <a href="#contact">Contact</a>
