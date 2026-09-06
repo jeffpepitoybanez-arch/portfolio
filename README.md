@@ -617,15 +617,23 @@
       <div class="float-card">
         <span class="dot"></span>
         <div>
-          <strong>Available for new projects</strong>
-          <small>GMT+8 Philippines</small>
+          <strong>Flexible Availability</strong>
+          <small>I work around your preferred timezone</small>
         </div>
       </div>
       <div class="social-rail">
-        <a href="https://www.facebook.com/jeffybanez2" target="_blank" rel="noopener" aria-label="Facebook">f</a>
-        <a href="https://www.instagram.com/jeff_ybanez/" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
-        <a href="https://www.linkedin.com/in/jeff-ybanez-b08044346/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
-        <a href="https://wa.me/639272303838?text=Hello%2C%20I%20would%20like%20to%20connect%20with%20you!" target="_blank" rel="noopener" aria-label="WhatsApp">wa</a>
+        <a href="https://www.facebook.com/jeffybanez2" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.51 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.91h-2.34V22c4.78-.76 8.44-4.92 8.44-9.94z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/jeff_ybanez/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/jeff-ybanez-b08044346/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.94 8.5H3.56V20.5H6.94V8.5ZM5.25 3.5C4.07 3.5 3.13 4.45 3.13 5.63C3.13 6.79 4.07 7.75 5.25 7.75C6.42 7.75 7.38 6.79 7.38 5.63C7.38 4.45 6.42 3.5 5.25 3.5ZM9.02 8.5V20.5H12.4V14.6C12.4 13 12.7 11.44 14.68 11.44C16.63 11.44 16.66 13.28 16.66 14.7V20.5H20.03V14.03C20.03 11.1 19.4 8.85 15.98 8.85C14.34 8.85 13.24 9.75 12.79 10.6H12.75V8.5H9.02Z"/></svg>
+        </a>
+        <a href="https://wa.me/639272303838?text=Hello%2C%20I%20would%20like%20to%20connect%20with%20you!" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.28-1.38a9.9 9.9 0 0 0 4.71 1.2h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Zm5.79 14.15c-.24.68-1.4 1.32-1.93 1.4-.51.08-1.13.11-1.83-.12-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.8-4.17-4.94-4.36-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.13 1.01-2.42.27-.29.58-.36.78-.36.19 0 .39 0 .55.01.18.01.42-.07.65.5.24.58.82 2.01.89 2.16.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.16-.29.36-.42.49-.14.14-.28.29-.12.57.16.28.72 1.19 1.55 1.93 1.06.95 1.96 1.24 2.24 1.38.28.14.44.12.6-.07.16-.19.68-.79.87-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.27.14.45.2.51.32.07.13.07.71-.17 1.4Z"/></svg>
+        </a>
       </div>
     </div>
   </div>
