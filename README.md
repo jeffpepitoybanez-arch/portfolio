@@ -171,6 +171,7 @@
     display:flex;align-items:center;
   }
   .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;width:100%;}
+  .hero-grid > *{min-width:0;}
   @media(max-width:1024px){
     .hero{padding:126px 0 64px;}
     .hero-grid{grid-template-columns:1fr;gap:44px;}
@@ -195,6 +196,7 @@
   }
   @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
   .marquee-wrap{
+    width:100%;max-width:100%;
     margin-top:30px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
     padding:14px 0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
     mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
@@ -254,6 +256,7 @@
 
   /* ================= ABOUT ================= */
   .about-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:start;}
+  .about-grid > *{min-width:0;}
   @media(max-width:1024px){.about-grid{grid-template-columns:1fr;gap:40px;}
     .about-photo{max-width:360px;margin:0 auto;}
     .stat-strip{max-width:360px;margin-inline:auto;}
@@ -431,88 +434,71 @@
     .bento-tile.b-tall{grid-column:span 1;grid-row:span 2;}
   }
 
-  /* -------- Video: realistic phone-frame reels row -------- */
-  .phone-row-wrap{position:relative;}
+  /* -------- Video: realistic phone-frame reels row (full-bleed) -------- */
+  .phone-row-wrap{
+    position:relative;
+    width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);
+    padding:0 clamp(18px,4vw,28px);
+  }
   .phone-row{
-    display:flex;gap:20px;overflow-x:auto;padding:10px 4px 22px;scroll-snap-type:x proximity;
-    scrollbar-width:none;-ms-overflow-style:none;
+    display:flex;gap:18px;overflow-x:auto;padding:10px 4px 22px;scroll-snap-type:x proximity;
+    scrollbar-width:none;-ms-overflow-style:none;justify-content:center;flex-wrap:nowrap;
   }
   .phone-row::-webkit-scrollbar{display:none;}
-  .phone-row-fade{position:absolute;top:0;bottom:22px;width:56px;pointer-events:none;z-index:2;}
+  .phone-row-fade{position:absolute;top:0;bottom:22px;width:64px;pointer-events:none;z-index:2;}
   .phone-row-fade.left{left:0;background:linear-gradient(90deg,var(--bg),transparent);}
   .phone-row-fade.right{right:0;background:linear-gradient(-90deg,var(--bg),transparent);}
   .phone-mock{
-    flex:0 0 auto;width:208px;scroll-snap-align:start;
+    flex:0 0 auto;width:184px;scroll-snap-align:start;
   }
   .phone-shell{
-    position:relative;width:208px;height:424px;border-radius:34px;background:#0a0c10;
+    position:relative;width:184px;height:376px;border-radius:30px;background:#0a0c10;
     border:2px solid rgba(245,243,238,.14);
     box-shadow:0 24px 60px -20px rgba(0,0,0,.7), inset 0 0 0 6px #050608;
     padding:6px;
   }
   .phone-shell::before{ /* side button */
-    content:"";position:absolute;left:-3px;top:96px;width:3px;height:32px;background:rgba(245,243,238,.18);border-radius:2px 0 0 2px;
+    content:"";position:absolute;left:-3px;top:84px;width:3px;height:28px;background:rgba(245,243,238,.18);border-radius:2px 0 0 2px;
   }
   .phone-shell::after{ /* side button 2 */
-    content:"";position:absolute;left:-3px;top:136px;width:3px;height:52px;background:rgba(245,243,238,.18);border-radius:2px 0 0 2px;
+    content:"";position:absolute;left:-3px;top:120px;width:3px;height:46px;background:rgba(245,243,238,.18);border-radius:2px 0 0 2px;
   }
   .phone-screen{
-    position:relative;width:100%;height:100%;border-radius:28px;overflow:hidden;background:#000;
+    position:relative;width:100%;height:100%;border-radius:24px;overflow:hidden;background:#000;
   }
   .phone-notch{
-    position:absolute;top:10px;left:50%;transform:translateX(-50%);width:70px;height:18px;background:#050608;
-    border-radius:12px;z-index:4;
+    position:absolute;top:9px;left:50%;transform:translateX(-50%);width:62px;height:16px;background:#050608;
+    border-radius:10px;z-index:4;
   }
   .phone-status{
-    position:absolute;top:14px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center;
-    font-size:10.5px;font-family:'Space Grotesk';color:#fff;z-index:3;font-weight:600;
+    position:absolute;top:13px;left:18px;right:18px;display:flex;justify-content:space-between;align-items:center;
+    font-size:10px;font-family:'Space Grotesk';color:#fff;z-index:3;font-weight:600;
   }
-  .phone-status .batt{width:16px;height:8px;border:1px solid #fff;border-radius:2px;position:relative;display:inline-block;}
+  .phone-status .batt{width:15px;height:7px;border:1px solid #fff;border-radius:2px;position:relative;display:inline-block;}
   .phone-status .batt::after{content:"";position:absolute;inset:1.5px;right:4px;background:#fff;border-radius:1px;}
   .phone-video-bg{position:absolute;inset:0;overflow:hidden;background:#000;}
   .phone-video-bg iframe{
-    position:absolute;top:50%;left:50%;width:208px;height:424px;min-width:100%;min-height:100%;
+    position:absolute;top:50%;left:50%;width:184px;height:376px;min-width:100%;min-height:100%;
     transform:translate(-50%,-50%);pointer-events:none;border:0;
   }
   .phone-reel-ui{
-    position:absolute;right:8px;bottom:56px;display:flex;flex-direction:column;gap:14px;z-index:3;
+    position:absolute;right:7px;bottom:50px;display:flex;flex-direction:column;gap:12px;z-index:3;
     align-items:center;color:#fff;
   }
-  .phone-reel-ui .ric{font-size:17px;}
-  .phone-reel-ui .rin{font-size:9px;color:rgba(255,255,255,.85);margin-top:2px;}
+  .phone-reel-ui .ric{font-size:15px;}
+  .phone-reel-ui .rin{font-size:8.5px;color:rgba(255,255,255,.85);margin-top:2px;}
   .phone-caption{
-    position:absolute;left:14px;right:56px;bottom:16px;z-index:3;color:#fff;
+    position:absolute;left:12px;right:50px;bottom:14px;z-index:3;color:#fff;
   }
-  .phone-caption .pc-title{font-size:12px;font-weight:600;font-family:'Space Grotesk';margin-bottom:3px;}
-  .phone-caption .pc-sub{font-size:10.5px;color:rgba(255,255,255,.7);}
+  .phone-caption .pc-title{font-size:11.5px;font-weight:600;font-family:'Space Grotesk';margin-bottom:3px;}
+  .phone-caption .pc-sub{font-size:10px;color:rgba(255,255,255,.7);}
   .phone-fade-bottom{position:absolute;left:0;right:0;bottom:0;height:46%;z-index:2;
     background:linear-gradient(0deg,rgba(0,0,0,.75),transparent);}
   .phone-fade-top{position:absolute;left:0;right:0;top:0;height:24%;z-index:2;
     background:linear-gradient(180deg,rgba(0,0,0,.5),transparent);}
-  .phone-row-nav{display:flex;justify-content:flex-end;gap:10px;margin-top:14px;}
+  .phone-row-nav{display:flex;justify-content:center;gap:10px;margin-top:6px;}
+  @media(max-width:1280px){.phone-row{justify-content:flex-start;}}
   @media(max-width:560px){.phone-row-nav{display:none;}}
-
-  /* -------- Automation: peek/coverflow carousel -------- */
-  .peek-wrap{position:relative;padding:0 0 8px;}
-  .peek-track-wrap{overflow:hidden;}
-  .peek-track{display:flex;align-items:stretch;will-change:transform;transition:transform .55s var(--ease);}
-  .peek-track.dragging{transition:none;}
-  .peek-card{
-    flex:0 0 auto;width:min(680px,74%);margin:0 12px;border:1px solid var(--line);border-radius:var(--radius);
-    background:var(--surface);overflow:hidden;display:grid;grid-template-columns:1fr;min-height:340px;
-    opacity:.35;transform:scale(.86);transition:opacity .5s var(--ease),transform .5s var(--ease);cursor:pointer;
-  }
-  .peek-card.active{opacity:1;transform:scale(1);cursor:default;}
-  @media(max-width:820px){.peek-card{width:82%;}}
-  @media(max-width:560px){.peek-card{width:88%;margin:0 8px;}}
-  .peek-media{position:relative;height:220px;overflow:hidden;background:#000;}
-  .peek-media img{width:100%;height:100%;object-fit:cover;}
-  .peek-body{padding:26px 30px 30px;}
-  @media(max-width:560px){.peek-body{padding:20px 22px 24px;}}
-  .peek-body .proj-cat{color:var(--green);}
-  .peek-body h3{font-size:20px;color:var(--ink);margin-bottom:10px;}
-  .peek-body p{color:var(--ink-dim);font-size:14px;margin:0 0 16px;}
-  .peek-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:20px;}
 
   /* ================= FAQ ================= */
   .faq-list{max-width:820px;}
@@ -976,7 +962,7 @@
       </div>
     </div>
 
-    <!-- ============ AUTOMATION — peek / coverflow carousel ============ -->
+    <!-- ============ AUTOMATION — same carousel format as Website ============ -->
     <div class="proj-category">
       <div class="cat-head">
         <div>
@@ -984,11 +970,11 @@
           <h3>Workflows Running Behind the Scenes</h3>
         </div>
       </div>
-      <div class="peek-wrap" id="carAutomation">
-        <div class="peek-track-wrap"><div class="peek-track">
-          <div class="peek-card" style="--accent:var(--green)">
-            <div class="peek-media"><span class="proj-tag">Automation</span><img src="https://placehold.co/700x440/07090f/4ade80?text=Automation+Screenshot" alt="Automation sample 1"></div>
-            <div class="peek-body">
+      <div class="carousel" id="carAutomation">
+        <div class="carousel-track-wrap"><div class="carousel-track">
+          <div class="proj-card" style="--accent:var(--green)">
+            <div class="proj-media"><span class="proj-tag">Automation</span><img src="https://placehold.co/700x440/07090f/4ade80?text=Automation+Screenshot" alt="Automation sample 1"></div>
+            <div class="proj-body">
               <div class="proj-cat">Automation</div>
               <h3>Project Title Here</h3>
               <p>Describe what the automation does — the trigger, workflow steps, and the outcome it delivers for the client.</p>
@@ -996,9 +982,9 @@
               <a href="#" class="proj-link" style="color:var(--green)">View Details</a>
             </div>
           </div>
-          <div class="peek-card" style="--accent:var(--green)">
-            <div class="peek-media"><span class="proj-tag">Automation</span><img src="https://placehold.co/700x440/07090f/4ade80?text=Automation+Screenshot" alt="Automation sample 2"></div>
-            <div class="peek-body">
+          <div class="proj-card" style="--accent:var(--green)">
+            <div class="proj-media"><span class="proj-tag">Automation</span><img src="https://placehold.co/700x440/07090f/4ade80?text=Automation+Screenshot" alt="Automation sample 2"></div>
+            <div class="proj-body">
               <div class="proj-cat">Automation</div>
               <h3>Project Title Here</h3>
               <p>Describe what the automation does — the trigger, workflow steps, and the outcome it delivers for the client.</p>
@@ -1006,9 +992,9 @@
               <a href="#" class="proj-link" style="color:var(--green)">View Details</a>
             </div>
           </div>
-          <div class="peek-card" style="--accent:var(--green)">
-            <div class="peek-media"><span class="proj-tag">Automation</span><img src="https://placehold.co/700x440/07090f/4ade80?text=Automation+Screenshot" alt="Automation sample 3"></div>
-            <div class="peek-body">
+          <div class="proj-card" style="--accent:var(--green)">
+            <div class="proj-media"><span class="proj-tag">Automation</span><img src="https://placehold.co/700x440/07090f/4ade80?text=Automation+Screenshot" alt="Automation sample 3"></div>
+            <div class="proj-body">
               <div class="proj-cat">Automation</div>
               <h3>Project Title Here</h3>
               <p>Describe what the automation does — the trigger, workflow steps, and the outcome it delivers for the client.</p>
@@ -1016,9 +1002,9 @@
               <a href="#" class="proj-link" style="color:var(--green)">View Details</a>
             </div>
           </div>
-          <div class="peek-card" style="--accent:var(--green)">
-            <div class="peek-media"><span class="proj-tag">Automation</span><img src="https://placehold.co/700x440/07090f/4ade80?text=Automation+Screenshot" alt="Automation sample 4"></div>
-            <div class="peek-body">
+          <div class="proj-card" style="--accent:var(--green)">
+            <div class="proj-media"><span class="proj-tag">Automation</span><img src="https://placehold.co/700x440/07090f/4ade80?text=Automation+Screenshot" alt="Automation sample 4"></div>
+            <div class="proj-body">
               <div class="proj-cat">Automation</div>
               <h3>Project Title Here</h3>
               <p>Describe what the automation does — the trigger, workflow steps, and the outcome it delivers for the client.</p>
@@ -1027,10 +1013,15 @@
             </div>
           </div>
         </div></div>
-        <div class="peek-nav">
-          <button class="car-btn" data-dir="-1" aria-label="Previous automation">‹</button>
+        <div class="carousel-nav">
           <div class="car-dots"></div>
-          <button class="car-btn" data-dir="1" aria-label="Next automation">›</button>
+          <div style="display:flex;align-items:center;gap:16px;">
+            <span class="car-count">1 / 4</span>
+            <div class="car-arrows">
+              <button class="car-btn" data-dir="-1" aria-label="Previous automation">‹</button>
+              <button class="car-btn" data-dir="1" aria-label="Next automation">›</button>
+            </div>
+          </div>
         </div>
       </div>
       <a href="#" class="more-link">View More Automation Projects</a>
@@ -1369,82 +1360,9 @@
     });
   }
 
-  // ---------- Automation: peek / coverflow carousel ----------
-  function initPeekCarousel(root){
-    const wrap = root.querySelector('.peek-track-wrap');
-    const track = root.querySelector('.peek-track');
-    const cards = [...track.children];
-    const dotsWrap = root.querySelector('.car-dots');
-    const prevBtn = root.querySelector('.car-btn[data-dir="-1"]');
-    const nextBtn = root.querySelector('.car-btn[data-dir="1"]');
-    let index = 0;
-
-    cards.forEach((card,i)=>{
-      const d = document.createElement('button');
-      d.className = 'car-dot' + (i===0?' active':'');
-      d.setAttribute('aria-label','Go to slide '+(i+1));
-      d.addEventListener('click', ()=>go(i));
-      dotsWrap.appendChild(d);
-      card.addEventListener('click', ()=>{ if(i!==index) go(i); });
-    });
-    const dots = [...dotsWrap.children];
-
-    function layout(animate=true){
-      const wrapW = wrap.getBoundingClientRect().width;
-      let offset = 0;
-      for(let i=0;i<index;i++) offset += cards[i].getBoundingClientRect().width + 24;
-      const activeW = cards[index].getBoundingClientRect().width;
-      const translate = (wrapW/2) - offset - (activeW/2);
-      track.style.transition = animate ? '' : 'none';
-      track.style.transform = 'translateX(' + translate + 'px)';
-      cards.forEach((c,i)=>c.classList.toggle('active', i===index));
-      dots.forEach((d,i)=>d.classList.toggle('active', i===index));
-      if(!animate) requestAnimationFrame(()=>{ track.style.transition=''; });
-    }
-    function go(i){
-      index = Math.max(0, Math.min(cards.length-1, i));
-      layout();
-    }
-    prevBtn.addEventListener('click', ()=>go(index-1));
-    nextBtn.addEventListener('click', ()=>go(index+1));
-
-    root.setAttribute('tabindex','0');
-    root.addEventListener('keydown', e=>{
-      if(e.key==='ArrowLeft') go(index-1);
-      if(e.key==='ArrowRight') go(index+1);
-    });
-
-    let startX=0, currentX=0, dragging=false;
-    function pointerDown(e){
-      dragging = true; startX = (e.touches ? e.touches[0].clientX : e.clientX);
-      track.classList.add('dragging');
-    }
-    function pointerMove(e){
-      if(!dragging) return;
-      currentX = (e.touches ? e.touches[0].clientX : e.clientX);
-    }
-    function pointerUp(){
-      if(!dragging) return;
-      dragging = false;
-      track.classList.remove('dragging');
-      const delta = currentX - startX;
-      if(Math.abs(delta) > 60){ go(delta < 0 ? index+1 : index-1); }
-      else { layout(); }
-      startX=0; currentX=0;
-    }
-    track.addEventListener('mousedown', pointerDown);
-    window.addEventListener('mousemove', pointerMove);
-    window.addEventListener('mouseup', pointerUp);
-    track.addEventListener('touchstart', pointerDown, {passive:true});
-    track.addEventListener('touchmove', pointerMove, {passive:true});
-    track.addEventListener('touchend', pointerUp);
-    track.addEventListener('dragstart', e=>e.preventDefault());
-
-    window.addEventListener('resize', ()=>layout(false));
-    layout(false);
-  }
+  // ---------- Automation: same carousel logic as Website ----------
   const carAutomation = document.getElementById('carAutomation');
-  if(carAutomation) initPeekCarousel(carAutomation);
+  if(carAutomation) initCarousel(carAutomation);
 
 })();
 </script>
