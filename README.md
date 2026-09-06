@@ -1,1899 +1,1452 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Jeff P. Ybanez – Digital Marketing Specialist</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jeff P. Ybanez — Full-Stack Virtual Assistant</title>
+<meta name="description" content="Jeff P. Ybanez — Full-Stack Virtual Assistant & GoHighLevel Automation Expert.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ─────────────────────────────────────
-   RESET & VARIABLES
-───────────────────────────────────── */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#07090f;
-  --bg2:#0d1017;
-  --bg3:#111520;
-  --accent:#4f9cf9;
-  --accent2:#82bcff;
-  --gold:#c9a96e;
-  --gold2:#e8c98a;
-  --text:#eef2f8;
-  --muted:#7a8599;
-  --dimmed:#4a5568;
-  --card:rgba(255,255,255,0.035);
-  --card-h:rgba(255,255,255,0.06);
-  --border:rgba(79,156,249,0.15);
-  --border2:rgba(79,156,249,0.08);
-  --shadow:0 24px 60px rgba(0,0,0,0.5);
-  --r:8px;
-}
-html{scroll-behavior:smooth}
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:'DM Sans',sans-serif;
-  overflow-x:hidden;
-  cursor:none;
-}
-
-/* ─── CUSTOM CURSOR ─── */
-.cursor{
-  position:fixed;width:10px;height:10px;
-  background:var(--accent);border-radius:50%;
-  pointer-events:none;z-index:9999;
-  transform:translate(-50%,-50%);
-  transition:transform .1s,width .2s,height .2s,background .2s;
-  mix-blend-mode:screen;
-}
-.cursor-ring{
-  position:fixed;width:36px;height:36px;
-  border:1px solid rgba(79,156,249,0.5);border-radius:50%;
-  pointer-events:none;z-index:9998;
-  transform:translate(-50%,-50%);
-  transition:transform .18s ease,width .25s,height .25s;
-}
-body:hover .cursor{opacity:1}
-
-/* ─── NOISE OVERLAY ─── */
-body::before{
-  content:'';position:fixed;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events:none;z-index:0;opacity:.55;
-}
-
-/* ─── BLOBS ─── */
-.blob{position:fixed;border-radius:50%;filter:blur(140px);pointer-events:none;z-index:0;animation:drift 16s ease-in-out infinite alternate}
-.b1{width:700px;height:700px;background:radial-gradient(circle,rgba(79,156,249,.11) 0%,transparent 70%);top:-250px;right:-150px}
-.b2{width:550px;height:550px;background:radial-gradient(circle,rgba(80,50,200,.08) 0%,transparent 70%);bottom:-180px;left:-130px;animation-delay:-8s}
-.b3{width:350px;height:350px;background:radial-gradient(circle,rgba(201,169,110,.06) 0%,transparent 70%);top:40%;left:40%;animation-delay:-4s}
-@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(40px,28px) scale(1.08)}}
-
-/* ─── SCROLL REVEAL ─── */
-.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-left{opacity:0;transform:translateX(-30px);transition:opacity .7s ease,transform .7s ease}
-.reveal-left.visible{opacity:1;transform:translateX(0)}
-.reveal-right{opacity:0;transform:translateX(30px);transition:opacity .7s ease,transform .7s ease}
-.reveal-right.visible{opacity:1;transform:translateX(0)}
-
-/* ─── NAVBAR ─── */
-#navbar{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:22px 60px;
-  border-bottom:1px solid transparent;
-  transition:background .4s,border-color .4s,padding .3s;
-}
-#navbar.scrolled{
-  background:rgba(7,9,15,0.92);
-  border-color:var(--border);
-  padding:16px 60px;
-  backdrop-filter:blur(20px);
-}
-.nav-logo{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.4rem;font-weight:600;
-  color:var(--text);letter-spacing:.06em;text-decoration:none;
-}
-.nav-logo span{color:var(--accent)}
-.nav-links{display:flex;gap:32px;list-style:none}
-.nav-links a{
-  font-size:.78rem;font-weight:400;color:var(--muted);
-  text-decoration:none;letter-spacing:.14em;text-transform:uppercase;
-  transition:color .3s;position:relative;
-}
-.nav-links a::after{
-  content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;
-  background:var(--accent);transform:scaleX(0);transform-origin:left;
-  transition:transform .3s;
-}
-.nav-links a:hover{color:var(--accent)}
-.nav-links a:hover::after{transform:scaleX(1)}
-.nav-cta{
-  display:flex;align-items:center;gap:8px;
-  background:var(--accent);color:#06080f;
-  font-size:.76rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
-  padding:10px 22px;border-radius:4px;text-decoration:none;
-  transition:background .3s,transform .2s;
-}
-.nav-cta:hover{background:var(--accent2);transform:translateY(-1px)}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
-.hamburger span{display:block;width:24px;height:1.5px;background:var(--text);transition:.3s}
-
-/* ─── HERO ─── */
-#hero{
-  position:relative;z-index:1;
-  min-height:100vh;
-  display:grid;
-  grid-template-columns:1fr 420px 1fr;
-  padding-top:80px
-}
-.hero-left{
-  padding:0 36px 0 60px;
-  display:flex;flex-direction:column;gap:28px;
-  justify-content:center;
-  animation:fadeLeft 1s ease .2s both;
-}
-.hero-tag{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--accent);border:1px solid var(--border);
-  padding:6px 14px;border-radius:100px;width:fit-content;
-}
-.tag-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 2.2s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.65)}}
-.hero-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(2.6rem,3.6vw,4rem);
-  font-weight:300;line-height:1.08;
-}
-.hero-title em{font-style:italic;color:var(--accent)}
-.hero-title strong{font-weight:700}
-.hero-bio{
-  font-size:.9rem;line-height:1.85;color:var(--muted);
-  max-width:310px;font-weight:300;
-}
-.ticker-wrap{
-  overflow:hidden;white-space:nowrap;
-  border-top:1px solid var(--border2);
-  border-bottom:1px solid var(--border2);
-  padding:9px 0;max-width:340px;
-}
-.ticker{display:inline-block;animation:tickerAnim 22s linear infinite}
-.ticker span{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dimmed);margin-right:26px}
-.ticker span.sep{color:var(--accent);margin-right:26px}
-@keyframes tickerAnim{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
-.btn{
-  display:inline-flex;align-items:center;gap:9px;
-  font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
-  padding:13px 26px;border-radius:4px;text-decoration:none;
-  transition:all .25s;
-}
-.btn-primary{background:var(--accent);color:#06080f}
-.btn-primary:hover{background:var(--accent2);transform:translateY(-2px)}
-.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
-.btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
-.btn svg{width:15px;height:15px}
-
-.hero-center{
-  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
-  padding-top:20px;
-  animation:fadeUp 1s ease .4s both;
-}
-.photo-wrap{position:relative;width:330px;height:460px;flex-shrink:0}
-.photo-wrap::before{
-  content:'';position:absolute;inset:-14px;
-  border-radius:50% 50% 42% 42%;
-  border:1px solid rgba(79,156,249,.18);
-  animation:spinRing 24s linear infinite;
-}
-.photo-wrap::after{
-  content:'';position:absolute;inset:-28px;
-  border-radius:50% 50% 44% 44%;
-  border:1px dashed rgba(201,169,110,.1);
-  animation:spinRing 38s linear infinite reverse;
-}
-@keyframes spinRing{to{transform:rotate(360deg)}}
-.photo-img{
-  width:100%;height:100%;
-  object-fit:cover;object-position:top center;
-  border-radius:50% 50% 0 0;display:block;
-}
-.photo-fade{
-  position:absolute;bottom:0;left:0;right:0;height:62%;
-  background:linear-gradient(to top,var(--bg) 22%,transparent 100%);
-  pointer-events:none;
-}
-.photo-glow{
-  position:absolute;bottom:-26px;left:50%;transform:translateX(-50%);
-  width:210px;height:50px;
-  background:radial-gradient(ellipse,rgba(79,156,249,.28) 0%,transparent 70%);
-  filter:blur(14px);pointer-events:none;
-}
-.name-badge{
-  margin-top:-18px;z-index:2;position:relative;
-  text-align:center;
-  font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
-}
-.name-badge strong{
-  display:block;
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.45rem;font-weight:600;color:var(--text);
-  letter-spacing:.08em;margin-top:4px;
-}
-.hero-right{
-  padding:0 60px 0 36px;
-  display:flex;flex-direction:column;
-  align-items:flex-end;gap:26px;justify-content:center;
-  animation:fadeRight 1s ease .2s both;
-}
-.social-stack{display:flex;flex-direction:column;align-items:center;gap:13px}
-.social-stack::before,.social-stack::after{content:'';display:block;width:1px;height:52px}
-.social-stack::before{background:linear-gradient(to bottom,transparent,var(--border))}
-.social-stack::after{background:linear-gradient(to top,transparent,var(--border))}
-.soc-label{font-size:.66rem;text-transform:uppercase;letter-spacing:.22em;color:var(--muted);writing-mode:vertical-rl;transform:rotate(180deg)}
-.soc-icon{
-  width:46px;height:46px;border-radius:50%;
-  border:1px solid var(--border);background:var(--card);
-  display:flex;align-items:center;justify-content:center;
-  text-decoration:none;color:var(--muted);
-  transition:border-color .3s,color .3s,background .3s,transform .25s;
-  backdrop-filter:blur(8px);
-}
-.soc-icon:hover{
-  border-color:var(--accent);color:var(--accent);
-  background:rgba(79,156,249,.08);
-  transform:scale(1.13) translateY(-2px);
-}
-.soc-icon svg{width:19px;height:19px}
-.chip-stack{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
-.chip{
-  font-size:.7rem;padding:6px 14px;
-  border-radius:100px;border:1px solid var(--border);
-  background:var(--card);color:var(--muted);
-  letter-spacing:.06em;white-space:nowrap;
-  backdrop-filter:blur(8px);
-  transition:color .3s,border-color .3s;
-}
-.chip:hover{color:var(--accent);border-color:var(--accent)}
-.contact-pill{
-  display:flex;align-items:center;gap:8px;
-  font-size:.73rem;color:var(--muted);
-  border:1px solid var(--border);padding:8px 14px;
-  border-radius:100px;backdrop-filter:blur(8px);
-  text-decoration:none;
-  transition:color .3s,border-color .3s;
-}
-.contact-pill:hover{color:var(--accent);border-color:var(--accent)}
-.contact-pill svg{width:13px;height:13px;flex-shrink:0}
-.hero-bottom{
-  grid-column:1/-1;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:20px 60px;
-  border-top:1px solid var(--border2);
-  animation:fadeUp .8s ease .7s both;
-}
-.scroll-hint{display:flex;align-items:center;gap:10px;font-size:.7rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase}
-.scroll-line{width:38px;height:1px;background:var(--border);position:relative;overflow:hidden}
-.scroll-line::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--accent);animation:glide 2.4s ease-in-out infinite}
-@keyframes glide{0%{left:-100%}60%{left:100%}100%{left:100%}}
-.avail{display:flex;align-items:center;gap:8px;font-size:.7rem;color:var(--muted)}
-.avail-dot{width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 10px rgba(74,222,128,.7);animation:blink 2.5s ease-in-out infinite}
-
-/* ─── SECTION WRAPPER ─── */
-section{position:relative;z-index:1}
-.section-inner{max-width:1200px;margin:0 auto;padding:100px 60px}
-.section-label{
-  display:inline-flex;align-items:center;gap:10px;
-  font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:20px;
-}
-.section-label::before{content:'';display:block;width:28px;height:1px;background:var(--accent)}
-.section-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(2.2rem,4vw,3.4rem);
-  font-weight:300;line-height:1.1;
-  margin-bottom:16px;
-}
-.section-title em{font-style:italic;color:var(--accent)}
-.section-sub{
-  font-size:.9rem;line-height:1.8;color:var(--muted);
-  max-width:560px;font-weight:300;
-}
-.divider{
-  width:100%;height:1px;
-  background:linear-gradient(to right,transparent,var(--border),transparent);
-}
-
-/* ─── ABOUT ─── */
-#about{background:var(--bg)}
-.about-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:80px;
-  align-items:center;margin-top:64px;
-}
-.about-photo-col{position:relative}
-.about-img-wrap{
-  position:relative;width:100%;max-width:420px;
-  border-radius:12px;overflow:hidden;
-}
-.about-img-wrap img{
-  width:100%;display:block;
-  border-radius:12px;
-  filter:grayscale(20%) contrast(1.05);
-}
-.about-img-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(79,156,249,.12) 0%,transparent 60%);
-  border-radius:12px;
-}
-.about-img-border{
-  position:absolute;inset:-8px;
-  border:1px solid var(--border);border-radius:16px;
-  pointer-events:none;
-}
-.about-corner{
-  position:absolute;
-  width:20px;height:20px;
-  border-color:var(--accent);border-style:solid;
-}
-.about-corner.tl{top:-8px;left:-8px;border-width:2px 0 0 2px;border-radius:3px 0 0 0}
-.about-corner.tr{top:-8px;right:-8px;border-width:2px 2px 0 0;border-radius:0 3px 0 0}
-.about-corner.bl{bottom:-8px;left:-8px;border-width:0 0 2px 2px;border-radius:0 0 0 3px}
-.about-corner.br{bottom:-8px;right:-8px;border-width:0 2px 2px 0;border-radius:0 0 3px 0}
-.stat-badges{
-  position:absolute;right:-30px;bottom:40px;
-  display:flex;flex-direction:column;gap:12px;
-}
-.stat-badge{
-  background:rgba(7,9,15,.9);
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:14px 18px;
-  backdrop-filter:blur(12px);
-  min-width:120px;
-}
-.stat-badge-num{
-  font-family:'Cormorant Garamond',serif;
-  font-size:2rem;font-weight:600;color:var(--accent);line-height:1;
-}
-.stat-badge-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-top:2px}
-.about-text-col{display:flex;flex-direction:column;gap:28px}
-.about-heading{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(1.8rem,2.8vw,2.6rem);
-  font-weight:300;line-height:1.2;
-}
-.about-heading em{font-style:italic;color:var(--accent)}
-.about-body{font-size:.9rem;line-height:1.9;color:var(--muted);font-weight:300}
-.industries{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-.ind-tag{
-  font-size:.68rem;padding:5px 12px;
-  border-radius:100px;border:1px solid var(--border2);
-  background:var(--card);color:var(--dimmed);
-  letter-spacing:.08em;
-  transition:color .3s,border-color .3s;
-}
-.ind-tag:hover{color:var(--accent);border-color:var(--border)}
-
-/* ─── SERVICES ─── */
-#services{background:var(--bg2)}
-.services-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:20px;margin-top:64px;
-}
-.service-card{
-  background:var(--card);border:1px solid var(--border2);
-  border-radius:var(--r);padding:36px 28px;
-  transition:border-color .35s,background .35s,transform .3s;
-  position:relative;overflow:hidden;
-}
-.service-card::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(79,156,249,.05) 0%,transparent 60%);
-  opacity:0;transition:opacity .35s;
-}
-.service-card:hover{
-  border-color:var(--border);
-  background:var(--card-h);
-  transform:translateY(-6px);
-}
-.service-card:hover::before{opacity:1}
-.service-icon{
-  width:52px;height:52px;border-radius:12px;
-  background:rgba(79,156,249,.1);border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:22px;
-}
-.service-icon svg{width:24px;height:24px;color:var(--accent)}
-.service-name{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.3rem;font-weight:600;margin-bottom:12px;
-}
-.service-desc{font-size:.84rem;line-height:1.8;color:var(--muted);font-weight:300}
-.service-num{
-  position:absolute;top:28px;right:28px;
-  font-family:'Cormorant Garamond',serif;
-  font-size:3rem;font-weight:700;
-  color:rgba(79,156,249,.06);line-height:1;
-}
-
-/* ─── TOOLS ─── */
-#tools{background:var(--bg)}
-.tools-grid{
-  display:grid;grid-template-columns:repeat(5,1fr);
-  gap:14px;margin-top:64px;
-}
-.tool-card{
-  background:var(--card);border:1px solid var(--border2);
-  border-radius:var(--r);padding:24px 16px;
-  display:flex;flex-direction:column;align-items:center;gap:12px;
-  transition:border-color .3s,background .3s,transform .3s;
-}
-.tool-card:hover{
-  border-color:var(--border);
-  background:var(--card-h);
-  transform:translateY(-4px);
-}
-.tool-logo{
-  width:44px;height:44px;
-  object-fit:contain;filter:grayscale(20%);
-  transition:filter .3s;
-}
-.tool-card:hover .tool-logo{filter:grayscale(0%)}
-.tool-name{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:center}
-
-/* ─── PORTFOLIO SECTIONS ─── */
-.portfolio-section{position:relative;z-index:1}
-.portfolio-section:nth-child(odd){background:var(--bg)}
-.portfolio-section:nth-child(even){background:var(--bg2)}
-
-.portfolio-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-  margin-top:52px;
-}
-
-/* Project Card */
-.project-card{
-  background:var(--card);
-  border:1px solid var(--border2);
-  border-radius:12px;
-  overflow:hidden;
-  position:relative;
-  transition:border-color .35s,transform .35s,background .35s;
-  group:true;
-}
-.project-card:hover{
-  border-color:var(--border);
-  background:var(--card-h);
-  transform:translateY(-6px);
-}
-
-/* Thumbnail area */
-.project-thumb{
-  position:relative;
-  width:100%;
-  aspect-ratio:16/10;
-  background:var(--bg3);
-  overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
-}
-.project-thumb img{
-  width:100%;height:100%;
-  object-fit:cover;
-  transition:transform .5s ease,filter .4s;
-  filter:grayscale(15%);
-}
-.project-card:hover .project-thumb img{
-  transform:scale(1.05);
-  filter:grayscale(0%);
-}
-
-/* Placeholder thumb when no image */
-.project-thumb-placeholder{
-  width:100%;height:100%;
-  display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,var(--bg3) 0%,rgba(79,156,249,.04) 100%);
-}
-.project-thumb-placeholder svg{
-  width:44px;height:44px;color:rgba(79,156,249,.18);
-}
-
-/* Overlay on hover */
-.project-thumb-overlay{
-  position:absolute;inset:0;
-  background:rgba(7,9,15,.72);
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;
-  transition:opacity .35s;
-  backdrop-filter:blur(2px);
-}
-.project-card:hover .project-thumb-overlay{opacity:1}
-.project-view-btn{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--text);border:1px solid rgba(255,255,255,.25);
-  padding:9px 20px;border-radius:4px;text-decoration:none;
-  transition:border-color .2s,color .2s,background .2s;
-}
-.project-view-btn:hover{
-  border-color:var(--accent);color:var(--accent);
-  background:rgba(79,156,249,.08);
-}
-.project-view-btn svg{width:13px;height:13px}
-
-/* Card body */
-.project-body{padding:20px 22px 22px}
-.project-cat-tag{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:10px;
-}
-.project-cat-dot{
-  width:5px;height:5px;border-radius:50%;
-  background:var(--accent);flex-shrink:0;
-}
-.project-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.15rem;font-weight:600;
-  line-height:1.3;margin-bottom:8px;
-}
-.project-desc{
-  font-size:.8rem;line-height:1.75;
-  color:var(--muted);font-weight:300;
-}
-.project-tags{
-  display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;
-}
-.project-tag{
-  font-size:.62rem;padding:3px 10px;
-  border-radius:100px;border:1px solid var(--border2);
-  background:rgba(255,255,255,.02);color:var(--dimmed);
-  letter-spacing:.07em;
-}
-
-/* "More Projects" link row */
-.portfolio-more{
-  display:flex;justify-content:center;
-  margin-top:40px;
-}
-.more-link{
-  display:inline-flex;align-items:center;gap:10px;
-  font-size:.78rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--muted);text-decoration:none;
-  border:1px solid var(--border2);
-  padding:12px 28px;border-radius:4px;
-  transition:color .3s,border-color .3s,background .3s;
-  position:relative;overflow:hidden;
-}
-.more-link::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(90deg,transparent,rgba(79,156,249,.06),transparent);
-  transform:translateX(-100%);
-  transition:transform .5s;
-}
-.more-link:hover::before{transform:translateX(100%)}
-.more-link:hover{color:var(--accent);border-color:var(--accent);background:rgba(79,156,249,.04)}
-.more-link svg{width:15px;height:15px;transition:transform .3s}
-.more-link:hover svg{transform:translateX(4px)}
-
-/* ─── FAQ ─── */
-#faq{background:var(--bg2)}
-.faq-wrap{margin-top:64px;display:flex;flex-direction:column;gap:0}
-.faq-item{
-  border-bottom:1px solid var(--border2);
-  overflow:hidden;
-}
-.faq-q{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:22px 0;cursor:pointer;gap:20px;
-  transition:color .3s;
-}
-.faq-q:hover{color:var(--accent)}
-.faq-q-text{font-size:.92rem;font-weight:400;line-height:1.5;flex:1}
-.faq-icon{
-  width:30px;height:30px;flex-shrink:0;
-  border:1px solid var(--border);border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--accent);transition:transform .3s,background .3s;
-}
-.faq-item.open .faq-icon{transform:rotate(45deg);background:rgba(79,156,249,.1)}
-.faq-a{
-  max-height:0;overflow:hidden;
-  transition:max-height .4s ease,padding .3s;
-}
-.faq-a-inner{padding:0 0 20px;font-size:.86rem;line-height:1.9;color:var(--muted);font-weight:300;max-width:760px}
-.faq-item.open .faq-a{max-height:300px}
-
-/* ─── CONTACT / CTA ─── */
-#contact{background:var(--bg)}
-.contact-grid{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:80px;align-items:center;margin-top:64px;
-}
-.contact-info{display:flex;flex-direction:column;gap:28px}
-.contact-heading{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(2rem,3.2vw,3rem);
-  font-weight:300;line-height:1.15;
-}
-.contact-heading em{font-style:italic;color:var(--accent)}
-.contact-body{font-size:.9rem;line-height:1.85;color:var(--muted);font-weight:300}
-.contact-items{display:flex;flex-direction:column;gap:16px;margin-top:8px}
-.contact-item{
-  display:flex;align-items:center;gap:14px;
-  text-decoration:none;color:var(--muted);
-  transition:color .3s;
-}
-.contact-item:hover{color:var(--accent)}
-.contact-item-icon{
-  width:42px;height:42px;border-radius:10px;
-  border:1px solid var(--border);background:var(--card);
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;transition:border-color .3s,background .3s;
-}
-.contact-item:hover .contact-item-icon{border-color:var(--accent);background:rgba(79,156,249,.08)}
-.contact-item-icon svg{width:18px;height:18px;color:var(--accent)}
-.contact-item-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--dimmed);margin-bottom:2px}
-.contact-item-val{font-size:.86rem;font-weight:400}
-.contact-socials{display:flex;gap:10px;margin-top:8px}
-.big-cta-card{
-  background:var(--bg3);
-  border:1px solid var(--border);
-  border-radius:16px;padding:52px 44px;
-  display:flex;flex-direction:column;gap:28px;
-  position:relative;overflow:hidden;
-}
-.big-cta-card::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(79,156,249,.07) 0%,transparent 55%);
-}
-.cta-card-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:2rem;font-weight:300;line-height:1.2;
-  position:relative;
-}
-.cta-card-title em{font-style:italic;color:var(--accent)}
-.cta-card-sub{font-size:.86rem;line-height:1.8;color:var(--muted);font-weight:300;position:relative}
-.cta-card-btns{display:flex;gap:12px;flex-wrap:wrap;position:relative}
-
-/* ─── FOOTER ─── */
-footer{
-  position:relative;z-index:1;
-  border-top:1px solid var(--border2);
-  padding:36px 60px;
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:16px;
-}
-.footer-logo{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.2rem;font-weight:600;color:var(--text);letter-spacing:.06em;
-}
-.footer-logo span{color:var(--accent)}
-.footer-copy{font-size:.74rem;color:var(--dimmed);letter-spacing:.06em}
-.footer-links{display:flex;gap:24px}
-.footer-links a{font-size:.74rem;color:var(--dimmed);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .3s}
-.footer-links a:hover{color:var(--accent)}
-
-/* ─── KEYFRAMES ─── */
-@keyframes fadeLeft{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:translateX(0)}}
-@keyframes fadeRight{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:translateX(0)}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-
-/* ─── MOBILE NAV ─── */
-.mobile-menu{
-  display:none;position:fixed;inset:0;z-index:99;
-  background:rgba(7,9,15,.97);backdrop-filter:blur(20px);
-  flex-direction:column;align-items:center;justify-content:center;gap:32px;
-}
-.mobile-menu.open{display:flex}
-.mobile-menu a{
-  font-family:'Cormorant Garamond',serif;
-  font-size:2.2rem;font-weight:300;color:var(--muted);
-  text-decoration:none;letter-spacing:.06em;
-  transition:color .3s;
-}
-.mobile-menu a:hover{color:var(--accent)}
-.mobile-close{
-  position:absolute;top:24px;right:24px;
-  background:none;border:none;cursor:pointer;
-  font-size:1.8rem;color:var(--muted);
-}
-
-/* ─── RESPONSIVE ─── */
-@media(max-width:1100px){
-  .services-grid{grid-template-columns:repeat(2,1fr)}
-  .tools-grid{grid-template-columns:repeat(4,1fr)}
-  .portfolio-grid{grid-template-columns:repeat(2,1fr)}
-  .stat-badges{right:-10px}
-}
-@media(max-width:900px){
-  #hero{grid-template-columns:1fr;grid-template-rows:auto}
-  .hero-left{padding:32px 22px 0;align-items:center;text-align:center;order:2}
-  .hero-bio{max-width:100%}
-  .ticker-wrap{max-width:90vw}
-  .hero-cta{justify-content:center}
-  .hero-center{order:1;padding-top:90px}
-  .photo-wrap{width:230px;height:320px}
-  .hero-right{
-    order:3;flex-direction:row;flex-wrap:wrap;
-    padding:20px 22px;justify-content:center;gap:12px;
+  :root{
+    --bg:#07090b;
+    --bg-alt:#0b0e13;
+    --surface:#10141b;
+    --surface-2:#141a22;
+    --line:rgba(245,243,238,.09);
+    --line-strong:rgba(245,243,238,.18);
+    --ink:#f5f3ee;
+    --ink-dim:rgba(245,243,238,.62);
+    --ink-faint:rgba(245,243,238,.4);
+    --gold:#c9a96e;
+    --gold-soft:rgba(201,169,110,.14);
+    --blue:#82bcff;
+    --blue-soft:rgba(130,188,255,.14);
+    --green:#4ade80;
+    --green-soft:rgba(74,222,128,.14);
+    --radius:14px;
+    --maxw:1180px;
+    --ease:cubic-bezier(.22,1,.36,1);
   }
-  .social-stack{flex-direction:row}
-  .social-stack::before,.social-stack::after{display:none}
-  .soc-label{display:none}
-  .chip-stack{display:none}
-  .hero-bottom{padding:18px 22px}
-  .about-grid{grid-template-columns:1fr;gap:48px}
-  .stat-badges{right:0;bottom:-20px;flex-direction:row}
-  .stat-badge{min-width:100px}
-  .services-grid{grid-template-columns:1fr}
-  .tools-grid{grid-template-columns:repeat(3,1fr)}
-  .portfolio-grid{grid-template-columns:1fr}
-  .contact-grid{grid-template-columns:1fr;gap:48px}
-  .section-inner{padding:80px 22px}
-  footer{padding:28px 22px}
-  #navbar{padding:18px 22px}
-  #navbar.scrolled{padding:14px 22px}
-  .nav-links,.nav-cta{display:none}
-  .hamburger{display:flex}
-}
-@media(max-width:520px){
-  .tools-grid{grid-template-columns:repeat(2,1fr)}
-  .about-img-wrap{max-width:100%}
-}
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4,.disp{
+    font-family:'Space Grotesk',system-ui,sans-serif;
+    font-weight:600;
+    line-height:1.12;
+    letter-spacing:-.01em;
+    margin:0;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  ul{margin:0;padding:0;list-style:none;}
+  button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(18px,4vw,28px);}
+  h1,h2,h3{overflow-wrap:break-word;word-break:break-word;}
+  p{overflow-wrap:break-word;}
 
-/* ─── NEW: JOURNEY TIMELINE ─── */
-#journey{background:var(--bg2)}
-.timeline{
-  position:relative;margin-top:64px;
-  padding-left:40px;
-}
-.timeline::before{
-  content:'';position:absolute;left:9px;top:6px;bottom:6px;width:1px;
-  background:linear-gradient(to bottom,var(--accent),var(--border2) 85%,transparent);
-}
-.timeline-item{position:relative;padding-bottom:52px}
-.timeline-item:last-child{padding-bottom:0}
-.timeline-dot{
-  position:absolute;left:-40px;top:2px;width:20px;height:20px;border-radius:50%;
-  background:var(--bg2);border:1px solid var(--accent);
-  display:flex;align-items:center;justify-content:center;
-}
-.timeline-dot::after{content:'';width:8px;height:8px;border-radius:50%;background:var(--accent)}
-.timeline-year{
-  font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;
-}
-.timeline-title{
-  font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;margin-bottom:8px;
-}
-.timeline-desc{font-size:.86rem;line-height:1.85;color:var(--muted);font-weight:300;max-width:640px}
-.timeline-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  ::selection{background:var(--gold);color:#0b0d10;}
 
-/* ─── NEW: RESULTS / PROOF ─── */
-#results{background:var(--bg)}
-.results-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:60px;
-}
-.result-card{
-  background:var(--card);border:1px solid var(--border2);border-radius:var(--r);
-  padding:30px 24px;text-align:center;transition:border-color .3s,background .3s,transform .3s;
-}
-.result-card:hover{border-color:var(--border);background:var(--card-h);transform:translateY(-4px)}
-.result-num{
-  font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;color:var(--accent);line-height:1;
-}
-.result-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:10px}
-.value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px}
-.value-card{
-  background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:30px 26px;
-  transition:border-color .3s,background .3s,transform .3s;
-}
-.value-card:hover{border-color:var(--border);background:var(--card-h);transform:translateY(-4px)}
-.value-icon{
-  width:46px;height:46px;border-radius:10px;background:rgba(74,222,128,.08);
-  border:1px solid rgba(74,222,128,.25);display:flex;align-items:center;justify-content:center;margin-bottom:16px;
-}
-.value-icon svg{width:22px;height:22px;color:#4ade80}
-.value-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;margin-bottom:8px}
-.value-desc{font-size:.82rem;line-height:1.75;color:var(--muted);font-weight:300}
+  /* focus */
+  a:focus-visible,button:focus-visible,summary:focus-visible{
+    outline:2px solid var(--gold);outline-offset:3px;border-radius:4px;
+  }
 
-@media(max-width:900px){
-  .results-grid{grid-template-columns:repeat(2,1fr)}
-  .value-grid{grid-template-columns:1fr}
-  .timeline{padding-left:30px}
-  .timeline-dot{left:-30px}
-}
+  /* -------- background system: faint blueprint grid + drifting glow -------- */
+  .bg-field{
+    position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+  }
+  .bg-grid{
+    position:absolute;inset:-2px;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:56px 56px;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 85%);
+    opacity:.55;
+  }
+  .bg-orb{
+    position:absolute;width:640px;height:640px;border-radius:50%;
+    filter:blur(110px);opacity:.16;
+    animation:drift 26s ease-in-out infinite alternate;
+  }
+  .bg-orb.gold{background:var(--gold);top:-220px;left:-160px;}
+  .bg-orb.blue{background:var(--blue);top:30%;right:-260px;animation-delay:-8s;}
+  .bg-orb.green{background:var(--green);bottom:-260px;left:20%;animation-delay:-16s;}
+  @keyframes drift{
+    0%{transform:translate(0,0) scale(1);}
+    100%{transform:translate(60px,40px) scale(1.12);}
+  }
+
+  section, header, footer{position:relative;z-index:1;}
+
+  /* -------- kicker / section head -------- */
+  .kicker{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;color:var(--gold);font-weight:500;
+    margin-bottom:14px;
+  }
+  .kicker::before{content:"";width:16px;height:1px;background:var(--gold);}
+  .sec-head{max-width:640px;margin-bottom:52px;}
+  .sec-head h2{font-size:clamp(28px,4vw,40px);color:var(--ink);}
+  .sec-head p{margin-top:14px;color:var(--ink-dim);font-size:16px;max-width:52ch;}
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  section{padding:104px 0;border-bottom:1px solid var(--line);}
+  @media(max-width:1024px){section{padding:84px 0;}}
+  @media(max-width:640px){section{padding:60px 0;}}
+
+  /* ================= NAV ================= */
+  header.site-nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    padding:20px 0;transition:background .35s var(--ease),padding .35s var(--ease),border-color .35s var(--ease);
+    border-bottom:1px solid transparent;
+  }
+  header.site-nav.solid{
+    background:rgba(7,9,11,.82);backdrop-filter:blur(14px);
+    padding:14px 0;border-bottom-color:var(--line);
+  }
+  .nav-row{display:flex;align-items:center;justify-content:space-between;}
+  .brand{font-family:'Space Grotesk';font-weight:600;font-size:18px;letter-spacing:.01em;}
+  .brand span{color:var(--gold);}
+  .nav-links{display:flex;gap:2px;align-items:center;}
+  .nav-links a{
+    position:relative;padding:9px 14px;font-size:14.5px;color:var(--ink-dim);
+    transition:color .25s;
+  }
+  .nav-links a::after{
+    content:"";position:absolute;left:14px;right:14px;bottom:5px;height:1px;
+    background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease);
+  }
+  .nav-links a:hover,.nav-links a.active{color:var(--ink);}
+  .nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+  .nav-cta{
+    display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;
+    background:var(--gold);color:#0b0d10;font-weight:600;font-size:14px;
+    transition:transform .25s var(--ease),box-shadow .25s var(--ease);
+  }
+  .nav-cta:hover{transform:translateY(-2px);box-shadow:0 10px 30px -8px rgba(201,169,110,.55);}
+  .burger{display:none;width:38px;height:38px;position:relative;}
+  .burger span{
+    position:absolute;left:8px;right:8px;height:1.5px;background:var(--ink);transition:.3s var(--ease);
+  }
+  .burger span:nth-child(1){top:14px;}
+  .burger span:nth-child(2){top:19px;}
+  .burger span:nth-child(3){top:24px;}
+  .burger.open span:nth-child(1){top:19px;transform:rotate(45deg);}
+  .burger.open span:nth-child(2){opacity:0;}
+  .burger.open span:nth-child(3){top:19px;transform:rotate(-45deg);}
+  .mobile-panel{
+    display:none;position:fixed;inset:0 0 auto 0;top:0;z-index:45;
+    background:var(--bg-alt);padding:96px 28px 40px;
+    transform:translateY(-100%);transition:transform .4s var(--ease);
+    border-bottom:1px solid var(--line);
+  }
+  .mobile-panel.open{transform:translateY(0);}
+  .mobile-panel a{display:block;padding:14px 0;font-size:20px;border-bottom:1px solid var(--line);font-family:'Space Grotesk';}
+  @media(max-width:1180px){
+    .nav-links a{padding:9px 10px;font-size:13.5px;}
+  }
+  @media(max-width:1024px){
+    .nav-links,.nav-cta.desktop{display:none;}
+    .burger{display:block;}
+    .mobile-panel{display:block;}
+  }
+  .mobile-panel{max-height:100vh;overflow-y:auto;}
+
+  /* ================= HERO ================= */
+  .hero{
+    padding:150px 0 80px;border-bottom:1px solid var(--line);
+    display:flex;align-items:center;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;width:100%;}
+  @media(max-width:1024px){
+    .hero{padding:126px 0 64px;}
+    .hero-grid{grid-template-columns:1fr;gap:44px;}
+    .hero-photo{max-width:420px;}
+  }
+  @media(max-width:600px){
+    .hero{padding:112px 0 48px;}
+  }
+  .badge-pill{
+    display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;
+    border:1px solid var(--line-strong);font-size:13px;color:var(--ink-dim);margin-bottom:26px;
+  }
+  .badge-pill .dot{width:6px;height:6px;border-radius:50%;background:var(--green);
+    box-shadow:0 0 0 3px var(--green-soft);}
+  .hero h1{font-size:clamp(38px,5.2vw,64px);color:var(--ink);}
+  .hero h1 em{font-style:normal;color:var(--gold);}
+  .hero-word{display:inline-block;opacity:0;transform:translateY(18px);animation:wordIn .7s var(--ease) forwards;}
+  @keyframes wordIn{to{opacity:1;transform:translateY(0);}}
+  .hero p.lead{
+    margin-top:22px;color:var(--ink-dim);font-size:17px;max-width:56ch;
+    opacity:0;animation:fadeUp .8s var(--ease) forwards;animation-delay:.5s;
+  }
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+  .marquee-wrap{
+    margin-top:30px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    padding:14px 0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+    opacity:0;animation:fadeUp .8s var(--ease) forwards;animation-delay:.7s;
+  }
+  .marquee-track{display:flex;gap:34px;white-space:nowrap;width:max-content;animation:scrollX 32s linear infinite;}
+  .marquee-track span{font-size:13.5px;color:var(--ink-faint);font-family:'Space Grotesk';}
+  .marquee-track span::after{content:"•";margin-left:34px;color:var(--gold);}
+  @keyframes scrollX{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  .hero-cta-row{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;
+    opacity:0;animation:fadeUp .8s var(--ease) forwards;animation-delay:.85s;}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border-radius:10px;
+    font-weight:600;font-size:14.5px;transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s;
+  }
+  .btn-gold{background:var(--gold);color:#0b0d10;}
+  .btn-gold:hover{transform:translateY(-3px);box-shadow:0 14px 34px -10px rgba(201,169,110,.55);}
+  .btn-ghost{border:1px solid var(--line-strong);color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px);}
+
+  .hero-photo{position:relative;}
+  .hero-photo-frame{
+    position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line-strong);
+    background:var(--surface);aspect-ratio:4/5;
+    opacity:0;animation:photoIn 1s var(--ease) forwards;animation-delay:.3s;
+  }
+  @keyframes photoIn{from{opacity:0;transform:scale(.94) translateY(20px);}to{opacity:1;transform:scale(1) translateY(0);}}
+  .hero-photo-frame img{width:100%;height:100%;object-fit:cover;object-position:top;}
+  .hero-photo-frame::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,transparent 55%, rgba(7,9,11,.85) 100%);
+  }
+  .float-card{
+    position:absolute;left:-18px;bottom:22px;background:var(--surface);border:1px solid var(--line-strong);
+    border-radius:12px;padding:14px 18px;display:flex;gap:12px;align-items:center;
+    box-shadow:0 20px 50px -20px rgba(0,0,0,.6);
+    opacity:0;animation:floatIn .8s var(--ease) forwards;animation-delay:1s;
+  }
+  @keyframes floatIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+  .float-card .dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px var(--green-soft);}
+  .float-card strong{display:block;font-size:13.5px;font-family:'Space Grotesk';}
+  .float-card small{color:var(--ink-dim);font-size:12px;}
+  .social-rail{
+    position:absolute;right:-14px;top:22px;display:flex;flex-direction:column;gap:10px;
+    opacity:0;animation:floatIn .8s var(--ease) forwards;animation-delay:1.15s;
+  }
+  .social-rail a{
+    width:38px;height:38px;border-radius:50%;background:var(--surface);border:1px solid var(--line-strong);
+    display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--ink-dim);
+    transition:.25s var(--ease);
+  }
+  .social-rail a:hover{color:var(--gold);border-color:var(--gold);transform:translateX(-3px);}
+  @media(max-width:1024px){
+    .social-rail,.float-card{display:none;}
+    .hero-photo{margin:0 auto;}
+  }
+
+  /* ================= ABOUT ================= */
+  .about-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:start;}
+  @media(max-width:1024px){.about-grid{grid-template-columns:1fr;gap:40px;}
+    .about-photo{max-width:360px;margin:0 auto;}
+    .stat-strip{max-width:360px;margin-inline:auto;}
+  }
+  .about-photo{border-radius:18px;overflow:hidden;border:1px solid var(--line-strong);position:relative;}
+  .about-photo img{aspect-ratio:1/1;object-fit:cover;object-position:top;}
+  .stat-strip{display:flex;border-top:1px solid var(--line);margin-top:0;}
+  .stat-strip .stat{flex:1;padding:18px 6px 0;text-align:center;border-right:1px solid var(--line);min-width:0;}
+  .stat-strip .stat:last-child{border-right:none;}
+  .stat-num{font-family:'Space Grotesk';font-size:clamp(19px,5vw,26px);color:var(--gold);font-weight:700;}
+  .stat-label{font-size:clamp(10.5px,2.6vw,12px);color:var(--ink-dim);margin-top:2px;}
+  .about-body p{color:var(--ink-dim);font-size:16px;margin:0 0 18px;}
+  .about-body strong{color:var(--ink);font-weight:600;}
+  .tag-row{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px;}
+  .tag{
+    padding:7px 13px;border-radius:999px;border:1px solid var(--line-strong);font-size:13px;color:var(--ink-dim);
+    transition:.25s;
+  }
+  .tag:hover{border-color:var(--gold);color:var(--gold);}
+  .about-body .btn{margin-top:28px;}
+
+  /* ================= JOURNEY (timeline) ================= */
+  .timeline{position:relative;max-width:820px;margin-left:6px;}
+  .timeline::before{
+    content:"";position:absolute;left:9px;top:6px;bottom:6px;width:1px;background:var(--line-strong);
+  }
+  .timeline::after{
+    content:"";position:absolute;left:9px;top:6px;width:1px;background:var(--gold);
+    height:0;transition:height 1.2s var(--ease);
+  }
+  .timeline.in::after{height:calc(100% - 12px);}
+  .tl-item{position:relative;padding:0 0 52px 42px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-dot{
+    position:absolute;left:0;top:2px;width:19px;height:19px;border-radius:50%;
+    background:var(--bg);border:1px solid var(--line-strong);display:flex;align-items:center;justify-content:center;
+  }
+  .tl-dot::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ink-faint);transition:.4s;}
+  .tl-item.in .tl-dot::before{background:var(--gold);box-shadow:0 0 0 5px var(--gold-soft);}
+  .tl-eyebrow{font-size:12.5px;color:var(--gold);font-family:'Space Grotesk';margin-bottom:6px;}
+  .tl-item h3{font-size:20px;color:var(--ink);margin-bottom:10px;}
+  .tl-item p{color:var(--ink-dim);font-size:15px;max-width:60ch;margin:0 0 14px;}
+
+  /* ================= WHY (proof) ================= */
+  .proof-stats{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:44px;
+  }
+  .proof-stat{background:var(--bg);padding:26px 18px;text-align:left;min-width:0;}
+  .proof-stat .stat-num{font-size:clamp(24px,4vw,34px);}
+  .proof-stat .stat-label{margin-top:6px;}
+  @media(max-width:640px){.proof-stats{grid-template-columns:repeat(2,1fr);}}
+  .value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  @media(max-width:1024px){.value-grid{grid-template-columns:1fr 1fr;gap:16px;}}
+  @media(max-width:640px){.value-grid{grid-template-columns:1fr;}}
+  .value-card{
+    padding:26px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);
+    transition:border-color .3s,transform .3s var(--ease);min-width:0;
+  }
+  @media(max-width:640px){.value-card{padding:22px;}}
+  .value-card:hover{border-color:var(--gold);transform:translateY(-4px);}
+  .value-card h3{font-size:18px;margin-bottom:10px;color:var(--ink);}
+  .value-card p{color:var(--ink-dim);font-size:14.5px;margin:0;}
+
+  /* ================= SERVICES ================= */
+  .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
+  @media(max-width:820px){.services-grid{grid-template-columns:1fr;}}
+  .service{background:var(--bg);padding:32px;transition:background .3s;min-width:0;}
+  @media(max-width:640px){.service{padding:24px;}}
+  .service:hover{background:var(--surface);}
+  .service-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;}
+  .service-index{font-family:'Space Grotesk';color:var(--ink-faint);font-size:14px;}
+  .service h3{font-size:18px;margin-bottom:10px;color:var(--ink);}
+  .service p{color:var(--ink-dim);font-size:14.5px;margin:0;}
+
+  /* ================= TOOLS marquee ================= */
+  .tools-marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);}
+  .tools-track{display:flex;gap:14px;width:max-content;animation:scrollX 48s linear infinite;}
+  .tools-track:hover{animation-play-state:paused;}
+  .tool-chip{
+    display:flex;align-items:center;gap:10px;padding:12px 18px;border:1px solid var(--line);border-radius:11px;
+    background:var(--surface);white-space:nowrap;
+  }
+  .tool-chip img{width:22px;height:22px;object-fit:contain;}
+  .tool-chip span{font-size:13.5px;color:var(--ink-dim);}
+
+  /* ================= PORTFOLIO — shared ================= */
+  .proj-category{margin-bottom:96px;}
+  .proj-category:last-child{margin-bottom:0;}
+  .cat-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:30px;flex-wrap:wrap;}
+  .cat-head h3{font-size:clamp(20px,2.6vw,26px);color:var(--ink);}
+  .cat-eyebrow{font-size:12.5px;font-family:'Space Grotesk';font-weight:600;margin-bottom:8px;letter-spacing:.02em;}
+  .cat-eyebrow.c-gold{color:var(--gold);}
+  .cat-eyebrow.c-blue{color:var(--blue);}
+  .cat-eyebrow.c-green{color:var(--green);}
+  .cat-desc{color:var(--ink-dim);font-size:14.5px;max-width:52ch;margin-top:6px;}
+
+  /* -------- Website carousel (unchanged format) -------- */
+  .carousel{position:relative;}
+  .carousel-track-wrap{overflow:hidden;border-radius:var(--radius);}
+  .carousel-track{
+    display:flex;gap:22px;will-change:transform;
+    transition:transform .55s var(--ease);
+    cursor:grab;
+  }
+  .carousel-track.dragging{transition:none;cursor:grabbing;}
+  .proj-card{
+    flex:0 0 100%;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);
+    display:grid;grid-template-columns:1.1fr 1fr;overflow:hidden;min-height:380px;
+  }
+  @media(max-width:900px){.proj-card{grid-template-columns:1fr;min-height:auto;}
+    .proj-media img{min-height:200px;}
+  }
+  .proj-media{position:relative;overflow:hidden;background:#000;min-width:0;}
+  .proj-media img{width:100%;height:100%;object-fit:cover;min-height:240px;transition:transform .6s var(--ease);}
+  .proj-card:hover .proj-media img{transform:scale(1.05);}
+  .proj-tag{
+    position:absolute;top:16px;left:16px;padding:6px 13px;border-radius:999px;font-size:12px;font-weight:600;
+    background:rgba(7,9,11,.7);backdrop-filter:blur(6px);border:1px solid var(--line-strong);
+  }
+  .proj-body{padding:36px;display:flex;flex-direction:column;min-width:0;}
+  @media(max-width:640px){.proj-body{padding:26px 22px;}}
+  .proj-cat{font-size:12.5px;color:var(--accent,var(--gold));font-family:'Space Grotesk';margin-bottom:10px;}
+  .proj-body h3{font-size:22px;color:var(--ink);margin-bottom:14px;}
+  .proj-body p{color:var(--ink-dim);font-size:14.5px;margin:0 0 20px;flex:1;}
+  .proj-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
+  .proj-tags span{font-size:12px;padding:5px 11px;border-radius:999px;border:1px solid var(--line);color:var(--ink-faint);}
+  .proj-link{
+    display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--accent,var(--gold));
+    width:fit-content;padding-bottom:2px;border-bottom:1px solid currentColor;
+  }
+  .carousel-nav{display:flex;align-items:center;justify-content:space-between;margin-top:24px;flex-wrap:wrap;gap:14px;}
+  .car-arrows{display:flex;gap:10px;}
+  .car-btn{
+    width:42px;height:42px;border-radius:50%;border:1px solid var(--line-strong);display:flex;align-items:center;
+    justify-content:center;transition:.25s var(--ease);flex:0 0 auto;
+  }
+  .car-btn:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);}
+  .car-dots{display:flex;gap:8px;flex-wrap:wrap;}
+  .car-dot{width:7px;height:7px;border-radius:50%;background:var(--line-strong);transition:.3s;}
+  .car-dot.active{background:var(--gold);width:22px;border-radius:5px;}
+  .car-count{font-size:13px;color:var(--ink-faint);font-family:'Space Grotesk';}
+  .more-link{display:block;text-align:center;margin-top:34px;color:var(--ink-dim);font-size:14.5px;border-bottom:1px solid var(--line-strong);width:fit-content;margin-inline:auto;padding-bottom:2px;transition:.25s;}
+  .more-link:hover{color:var(--gold);border-color:var(--gold);}
+
+  /* -------- Graphics: aesthetic bento grid, 10 mixed-size tiles -------- */
+  .bento-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;gap:14px;grid-auto-flow:dense;
+  }
+  .bento-tile{
+    position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--surface);
+    opacity:0;transform:translateY(16px) scale(.97);transition:opacity .6s var(--ease),transform .6s var(--ease);
+  }
+  .bento-tile.in{opacity:1;transform:translateY(0) scale(1);}
+  .bento-tile img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease);}
+  .bento-tile:hover img{transform:scale(1.06);}
+  .bento-tile .bento-cap{
+    position:absolute;left:0;right:0;bottom:0;padding:14px 16px 12px;
+    background:linear-gradient(0deg,rgba(7,9,11,.88),transparent);
+    font-size:12.5px;color:var(--ink);opacity:0;transform:translateY(6px);transition:.3s var(--ease);
+  }
+  .bento-tile:hover .bento-cap{opacity:1;transform:translateY(0);}
+  .bento-tile.b-xl{grid-column:span 2;grid-row:span 2;}
+  .bento-tile.b-wide{grid-column:span 2;grid-row:span 1;}
+  .bento-tile.b-tall{grid-column:span 1;grid-row:span 2;}
+  .bento-tile.b-sq{grid-column:span 1;grid-row:span 1;}
+  @media(max-width:820px){
+    .bento-grid{grid-template-columns:repeat(3,1fr);grid-auto-rows:120px;gap:10px;}
+    .bento-tile.b-xl{grid-column:span 2;grid-row:span 2;}
+  }
+  @media(max-width:560px){
+    .bento-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:110px;}
+    .bento-tile.b-xl{grid-column:span 2;grid-row:span 2;}
+    .bento-tile.b-wide{grid-column:span 2;grid-row:span 1;}
+    .bento-tile.b-tall{grid-column:span 1;grid-row:span 2;}
+  }
+
+  /* -------- Video: realistic phone-frame reels row -------- */
+  .phone-row-wrap{position:relative;}
+  .phone-row{
+    display:flex;gap:20px;overflow-x:auto;padding:10px 4px 22px;scroll-snap-type:x proximity;
+    scrollbar-width:none;-ms-overflow-style:none;
+  }
+  .phone-row::-webkit-scrollbar{display:none;}
+  .phone-row-fade{position:absolute;top:0;bottom:22px;width:56px;pointer-events:none;z-index:2;}
+  .phone-row-fade.left{left:0;background:linear-gradient(90deg,var(--bg),transparent);}
+  .phone-row-fade.right{right:0;background:linear-gradient(-90deg,var(--bg),transparent);}
+  .phone-mock{
+    flex:0 0 auto;width:208px;scroll-snap-align:start;
+  }
+  .phone-shell{
+    position:relative;width:208px;height:424px;border-radius:34px;background:#0a0c10;
+    border:2px solid rgba(245,243,238,.14);
+    box-shadow:0 24px 60px -20px rgba(0,0,0,.7), inset 0 0 0 6px #050608;
+    padding:6px;
+  }
+  .phone-shell::before{ /* side button */
+    content:"";position:absolute;left:-3px;top:96px;width:3px;height:32px;background:rgba(245,243,238,.18);border-radius:2px 0 0 2px;
+  }
+  .phone-shell::after{ /* side button 2 */
+    content:"";position:absolute;left:-3px;top:136px;width:3px;height:52px;background:rgba(245,243,238,.18);border-radius:2px 0 0 2px;
+  }
+  .phone-screen{
+    position:relative;width:100%;height:100%;border-radius:28px;overflow:hidden;background:#000;
+  }
+  .phone-notch{
+    position:absolute;top:10px;left:50%;transform:translateX(-50%);width:70px;height:18px;background:#050608;
+    border-radius:12px;z-index:4;
+  }
+  .phone-status{
+    position:absolute;top:14px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center;
+    font-size:10.5px;font-family:'Space Grotesk';color:#fff;z-index:3;font-weight:600;
+  }
+  .phone-status .batt{width:16px;height:8px;border:1px solid #fff;border-radius:2px;position:relative;display:inline-block;}
+  .phone-status .batt::after{content:"";position:absolute;inset:1.5px;right:4px;background:#fff;border-radius:1px;}
+  .phone-video-bg{position:absolute;inset:0;overflow:hidden;background:#000;}
+  .phone-video-bg iframe{
+    position:absolute;top:50%;left:50%;width:208px;height:424px;min-width:100%;min-height:100%;
+    transform:translate(-50%,-50%);pointer-events:none;border:0;
+  }
+  .phone-reel-ui{
+    position:absolute;right:8px;bottom:56px;display:flex;flex-direction:column;gap:14px;z-index:3;
+    align-items:center;color:#fff;
+  }
+  .phone-reel-ui .ric{font-size:17px;}
+  .phone-reel-ui .rin{font-size:9px;color:rgba(255,255,255,.85);margin-top:2px;}
+  .phone-caption{
+    position:absolute;left:14px;right:56px;bottom:16px;z-index:3;color:#fff;
+  }
+  .phone-caption .pc-title{font-size:12px;font-weight:600;font-family:'Space Grotesk';margin-bottom:3px;}
+  .phone-caption .pc-sub{font-size:10.5px;color:rgba(255,255,255,.7);}
+  .phone-fade-bottom{position:absolute;left:0;right:0;bottom:0;height:46%;z-index:2;
+    background:linear-gradient(0deg,rgba(0,0,0,.75),transparent);}
+  .phone-fade-top{position:absolute;left:0;right:0;top:0;height:24%;z-index:2;
+    background:linear-gradient(180deg,rgba(0,0,0,.5),transparent);}
+  .phone-row-nav{display:flex;justify-content:flex-end;gap:10px;margin-top:14px;}
+  @media(max-width:560px){.phone-row-nav{display:none;}}
+
+  /* -------- Automation: peek/coverflow carousel -------- */
+  .peek-wrap{position:relative;padding:0 0 8px;}
+  .peek-track-wrap{overflow:hidden;}
+  .peek-track{display:flex;align-items:stretch;will-change:transform;transition:transform .55s var(--ease);}
+  .peek-track.dragging{transition:none;}
+  .peek-card{
+    flex:0 0 auto;width:min(680px,74%);margin:0 12px;border:1px solid var(--line);border-radius:var(--radius);
+    background:var(--surface);overflow:hidden;display:grid;grid-template-columns:1fr;min-height:340px;
+    opacity:.35;transform:scale(.86);transition:opacity .5s var(--ease),transform .5s var(--ease);cursor:pointer;
+  }
+  .peek-card.active{opacity:1;transform:scale(1);cursor:default;}
+  @media(max-width:820px){.peek-card{width:82%;}}
+  @media(max-width:560px){.peek-card{width:88%;margin:0 8px;}}
+  .peek-media{position:relative;height:220px;overflow:hidden;background:#000;}
+  .peek-media img{width:100%;height:100%;object-fit:cover;}
+  .peek-body{padding:26px 30px 30px;}
+  @media(max-width:560px){.peek-body{padding:20px 22px 24px;}}
+  .peek-body .proj-cat{color:var(--green);}
+  .peek-body h3{font-size:20px;color:var(--ink);margin-bottom:10px;}
+  .peek-body p{color:var(--ink-dim);font-size:14px;margin:0 0 16px;}
+  .peek-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:20px;}
+
+  /* ================= FAQ ================= */
+  .faq-list{max-width:820px;}
+  details.faq-item{
+    border-bottom:1px solid var(--line);padding:22px 0;
+  }
+  details.faq-item summary{
+    list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
+    font-family:'Space Grotesk';font-size:16.5px;color:var(--ink);
+  }
+  @media(max-width:600px){details.faq-item summary{font-size:15px;}}
+  details.faq-item summary::-webkit-details-marker{display:none;}
+  .faq-plus{
+    width:26px;height:26px;flex:0 0 26px;border-radius:50%;border:1px solid var(--line-strong);position:relative;
+    transition:.3s var(--ease);
+  }
+  .faq-plus::before,.faq-plus::after{content:"";position:absolute;background:var(--ink-dim);transition:.3s;}
+  .faq-plus::before{left:7px;right:7px;top:12px;height:1px;}
+  .faq-plus::after{top:7px;bottom:7px;left:12px;width:1px;}
+  details.faq-item[open] .faq-plus{border-color:var(--gold);transform:rotate(180deg);}
+  details.faq-item[open] .faq-plus::after{opacity:0;}
+  .faq-a{color:var(--ink-dim);font-size:14.5px;margin-top:14px;max-width:70ch;}
+
+  /* ================= CONTACT ================= */
+  .contact-panel{
+    border:1px solid var(--line-strong);border-radius:20px;padding:clamp(24px,5vw,56px);background:
+      radial-gradient(600px 260px at 15% 0%, var(--gold-soft), transparent 60%),var(--surface);
+    text-align:left;
+  }
+  .contact-panel h2{font-size:clamp(24px,4vw,38px);max-width:16ch;}
+  .contact-panel p{color:var(--ink-dim);margin-top:16px;max-width:64ch;font-size:15.5px;}
+  .contact-cta-row{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap;}
+  .contact-cta-row .btn{flex:1 1 auto;justify-content:center;text-align:center;}
+  .contact-meta{display:flex;gap:28px 36px;margin-top:44px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:28px;}
+  .cm-block{min-width:180px;}
+  .cm-block h4{font-size:12.5px;color:var(--gold);font-family:'Space Grotesk';margin-bottom:8px;font-weight:600;}
+  .cm-block a,.cm-block span{display:block;font-size:14.5px;color:var(--ink-dim);margin-bottom:4px;}
+  .cm-block a:hover{color:var(--gold);}
+
+  footer{padding:44px 0;}
+  .foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  .foot-links{display:flex;gap:20px;flex-wrap:wrap;}
+  .foot-links a{font-size:13.5px;color:var(--ink-faint);}
+  .foot-links a:hover{color:var(--gold);}
+  .foot-copy{font-size:13px;color:var(--ink-faint);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important;}
+  }
 </style>
 </head>
 <body>
 
-<!-- Custom Cursor -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
-<!-- Ambient -->
-<div class="blob b1"></div>
-<div class="blob b2"></div>
-<div class="blob b3"></div>
-
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-close" onclick="closeMobile()">✕</button>
-  <a href="#about" onclick="closeMobile()">About</a>
-  <a href="#journey" onclick="closeMobile()">Journey</a>
-  <a href="#services" onclick="closeMobile()">Services</a>
-  <a href="#tools" onclick="closeMobile()">Tools</a>
-  <a href="#portfolio-web" onclick="closeMobile()">Projects</a>
-  <a href="#faq" onclick="closeMobile()">FAQ</a>
-  <a href="#contact" onclick="closeMobile()">Contact</a>
+<div class="bg-field" aria-hidden="true">
+  <div class="bg-grid"></div>
+  <div class="bg-orb gold"></div>
+  <div class="bg-orb blue"></div>
+  <div class="bg-orb green"></div>
 </div>
 
-<!-- NAVBAR -->
-<nav id="navbar">
-  <a href="#hero" class="nav-logo">Jeff<span>.</span>Ybanez</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#journey">Journey</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#tools">Tools</a></li>
-    <li><a href="#portfolio-web">Projects</a></li>
-    <li><a href="#faq">FAQ</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  
-  <div class="hamburger" onclick="openMobile()">
-    <span></span><span></span><span></span>
+<header class="site-nav" id="siteNav">
+  <div class="wrap nav-row">
+    <a href="#hero" class="brand">Jeff<span>.Ybanez</span></a>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#journey">Journey</a>
+      <a href="#services">Services</a>
+      <a href="#tools">Tools</a>
+      <a href="#portfolio-web">Projects</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="https://calendar.app.google/K3TY9nAVZfSbxWXv6" class="nav-cta desktop">Book a Call</a>
+    <button class="burger" id="burgerBtn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-</nav>
+</header>
 
-<!-- ═══════════ HERO ═══════════ -->
-<section id="hero">
-  <div class="hero-left">
-    <div class="hero-tag"><span class="tag-dot"></span>🇵🇭 Philippines-Based · Open to New Projects</div>
-    <h1 class="hero-title">
-      The <em>Full-Stack</em><br/>
-      Virtual Assistant Who<br/>
-      <strong>Builds &amp; Automates.</strong>
-    </h1>
-    <p class="hero-bio">I don't just execute tasks — I build the systems that run your business. GoHighLevel funnels, API integrations, and end-to-end automation across Make, Zapier, and Pabbly, backed by a background in Information Systems and 4+ years turning operations into revenue.</p>
-    <div class="ticker-wrap">
-      <div class="ticker">
-        <span>GoHighLevel Expert</span><span class="sep">·</span>
-        <span>API Integrations</span><span class="sep">·</span>
-        <span>Make &amp; Zapier Automation</span><span class="sep">·</span>
-        <span>Pabbly Connect</span><span class="sep">·</span>
-        <span>Full-Stack Web Dev</span><span class="sep">·</span>
-        <span>Funnel &amp; Web Design</span><span class="sep">·</span>
-        <span>Business Process Mapping</span><span class="sep">·</span>
-        <span>GoHighLevel Expert</span><span class="sep">·</span>
-        <span>API Integrations</span><span class="sep">·</span>
-        <span>Make &amp; Zapier Automation</span><span class="sep">·</span>
-        <span>Pabbly Connect</span><span class="sep">·</span>
-        <span>Full-Stack Web Dev</span><span class="sep">·</span>
-        <span>Funnel &amp; Web Design</span><span class="sep">·</span>
-        <span>Business Process Mapping</span><span class="sep">·</span>
-      </div>
-    </div>
-    <div class="hero-cta">
-      <a href="https://calendar.app.google/K3TY9nAVZfSbxWXv6" target="_blank" class="btn btn-primary">
-        Book A Call
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-      <a href="tel:+639272303838" class="btn btn-ghost">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.18 6.18l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        Call Me
-      </a>
-    </div>
-  </div>
+<div class="mobile-panel" id="mobilePanel">
+  <a href="#about">About</a>
+  <a href="#journey">Journey</a>
+  <a href="#services">Services</a>
+  <a href="#tools">Tools</a>
+  <a href="#portfolio-web">Projects</a>
+  <a href="#faq">FAQ</a>
+  <a href="#contact">Contact</a>
+  <a href="https://calendar.app.google/K3TY9nAVZfSbxWXv6" style="color:var(--gold);border:none;">Book a Call →</a>
+</div>
 
-  <div class="hero-center">
-    <div class="photo-wrap">
-      <img class="photo-img" src="https://i.imgur.com/LB8Dejt.png" alt="Jeff P. Ybanez"/>
-      <div class="photo-fade"></div>
-      <div class="photo-glow"></div>
-    </div>
-    <div class="name-badge">Full-Stack Virtual Assistant &amp; GHL Automation Expert<strong>Jeff P. Ybanez</strong></div>
-  </div>
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="badge-pill"><span class="dot"></span> Philippines-Based · Open to New Projects</div>
+      <h1 id="heroHeadline">The <em>Full-Stack</em> Virtual Assistant Who Builds &amp; Automates.</h1>
+      <p class="lead">I don't just execute tasks — I build the systems that run your business. GoHighLevel funnels, API integrations, and end-to-end automation across Make, Zapier, and Pabbly, backed by a background in Information Systems and 4+ years turning operations into revenue.</p>
 
-  <div class="hero-right">
-    <div class="chip-stack">
-      <span class="chip">🇵🇭 Based in the Philippines</span>
-      <span class="chip">GoHighLevel Expert</span>
-      <span class="chip">Full-Stack Developer</span>
-      <span class="chip">API Integration Specialist</span>
-      <span class="chip">Make · Zapier · Pabbly</span>
-      <span class="chip">BS Information Systems</span>
-    </div>
-    <div class="social-stack">
-      <a href="https://www.facebook.com/jeffybanez2" target="_blank" rel="noopener" class="soc-icon" title="Facebook">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-      </a>
-      <a href="https://www.instagram.com/jeff_ybanez/" target="_blank" rel="noopener" class="soc-icon" title="Instagram">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-          <circle cx="12" cy="12" r="4"/>
-          <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
-        </svg>
-      </a>
-      <a href="https://www.linkedin.com/in/jeff-ybanez-b08044346/" target="_blank" rel="noopener" class="soc-icon" title="LinkedIn">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-      </a>
-      <a href="https://wa.me/639272303838?text=Hello%2C%20I%20would%20like%20to%20connect%20with%20you!" target="_blank" rel="noopener" class="soc-icon" title="WhatsApp">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-      </a>
-    </div>
-    <span class="soc-label">Connect</span>
-    <a href="tel:+639272303838" class="contact-pill">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.18 6.18l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      +63 927 230 3838
-    </a>
-  </div>
-
-  <div class="hero-bottom">
-    <div class="scroll-hint"><div class="scroll-line"></div>Explore Portfolio</div>
-    <div class="avail"><div class="avail-dot"></div>Available for new projects · GMT+8 Philippines</div>
-  </div>
-</section>
-
-<!-- ═══════════ ABOUT ═══════════ -->
-<section id="about">
-  <div class="divider"></div>
-  <div class="section-inner">
-    <div class="section-label">About Me</div>
-    <div class="about-grid">
-      <div class="about-photo-col reveal-left">
-        <div class="about-img-wrap">
-          <img src="https://i.imgur.com/LB8Dejt.png" alt="Jeff P. Ybanez"/>
-          <div class="about-img-overlay"></div>
-          <div class="about-img-border"></div>
-          <div class="about-corner tl"></div>
-          <div class="about-corner tr"></div>
-          <div class="about-corner bl"></div>
-          <div class="about-corner br"></div>
-        </div>
-        <div class="stat-badges">
-          <div class="stat-badge">
-            <div class="stat-badge-num">4+</div>
-            <div class="stat-badge-label">Years Exp.</div>
-          </div>
-          <div class="stat-badge">
-            <div class="stat-badge-num">40+</div>
-            <div class="stat-badge-label">Projects</div>
-          </div>
-          <div class="stat-badge">
-            <div class="stat-badge-num">10+</div>
-            <div class="stat-badge-label">Clients</div>
-          </div>
+      <div class="marquee-wrap">
+        <div class="marquee-track">
+          <span>GoHighLevel Expert</span><span>API Integrations</span><span>Make &amp; Zapier Automation</span><span>Pabbly Connect</span><span>Full-Stack Web Dev</span><span>Funnel &amp; Web Design</span><span>Business Process Mapping</span>
+          <span>GoHighLevel Expert</span><span>API Integrations</span><span>Make &amp; Zapier Automation</span><span>Pabbly Connect</span><span>Full-Stack Web Dev</span><span>Funnel &amp; Web Design</span><span>Business Process Mapping</span>
         </div>
       </div>
-      <div class="about-text-col reveal-right">
-        <div class="section-label">I'm Jeff, from the Philippines 🇵🇭</div>
-        <h2 class="about-heading">A Full-Stack Virtual Assistant Who <em>Gets Results.</em></h2>
-        <p class="about-body">I hold a Bachelor's Degree in Information Systems, and that technical foundation is exactly what sets me apart from a typical VA. I don't just follow instructions — I understand how systems, data, and workflows connect across a business, so I can spot the bottleneck, build the fix, and automate it so it never happens again.</p>
-        <p class="about-body">Today I work as a full-stack virtual assistant: building GoHighLevel funnels and CRMs, connecting tools through APIs, and wiring automations across Make, Zapier, and Pabbly Connect so your team spends less time on repetitive work and more time closing deals. I work with a diverse range of industries and tailor every project to the client's specific goals, tech stack, and growth stage.</p>
+
+      <div class="hero-cta-row">
+        <a href="https://calendar.app.google/K3TY9nAVZfSbxWXv6" class="btn btn-gold">Book A Call</a>
+        <a href="tel:+639272303838" class="btn btn-ghost">Call Me</a>
+      </div>
+    </div>
+
+    <div class="hero-photo">
+      <div class="hero-photo-frame">
+        <img src="https://i.imgur.com/LB8Dejt.png" alt="Jeff P. Ybanez">
+      </div>
+      <div class="float-card">
+        <span class="dot"></span>
         <div>
-          <div class="section-label" style="margin-bottom:12px">Industries I've Worked With</div>
-          <div class="industries">
-            <span class="ind-tag">Coaching</span>
-            <span class="ind-tag">Real Estate</span>
-            <span class="ind-tag">Construction</span>
-            <span class="ind-tag">Education</span>
-            <span class="ind-tag">Finance</span>
-            <span class="ind-tag">HVAC</span>
-            <span class="ind-tag">Health & Wellness</span>
-            <span class="ind-tag">Chiropractic</span>
-            <span class="ind-tag">Aesthetics</span>
-            <span class="ind-tag">SaaS Agencies</span>
-          </div>
+          <strong>Available for new projects</strong>
+          <small>GMT+8 Philippines</small>
         </div>
-        <div class="hero-cta">
-          <a href="https://calendar.app.google/K3TY9nAVZfSbxWXv6" target="_blank" class="btn btn-primary">
-            Book A Call
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-        </div>
+      </div>
+      <div class="social-rail">
+        <a href="https://www.facebook.com/jeffybanez2" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+        <a href="https://www.instagram.com/jeff_ybanez/" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
+        <a href="https://www.linkedin.com/in/jeff-ybanez-b08044346/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+        <a href="https://wa.me/639272303838?text=Hello%2C%20I%20would%20like%20to%20connect%20with%20you!" target="_blank" rel="noopener" aria-label="WhatsApp">wa</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════ MY JOURNEY ═══════════ -->
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <div class="about-photo">
+        <img src="https://i.imgur.com/LB8Dejt.png" alt="Jeff P. Ybanez portrait">
+      </div>
+      <div class="stat-strip">
+        <div class="stat"><div class="stat-num" data-count="4" data-suffix="+">0</div><div class="stat-label">Years Exp.</div></div>
+        <div class="stat"><div class="stat-num" data-count="40" data-suffix="+">0</div><div class="stat-label">Projects</div></div>
+        <div class="stat"><div class="stat-num" data-count="10" data-suffix="+">0</div><div class="stat-label">Clients</div></div>
+      </div>
+    </div>
+    <div class="about-body reveal">
+      <div class="kicker">About Me</div>
+      <h2 style="font-size:clamp(26px,3.6vw,36px);margin-bottom:20px;">I'm Jeff, from the Philippines 🇵🇭 — a full-stack virtual assistant who gets results.</h2>
+      <p>I hold a <strong>Bachelor's Degree in Information Systems</strong>, and that technical foundation is exactly what sets me apart from a typical VA. I don't just follow instructions — I understand how systems, data, and workflows connect across a business, so I can spot the bottleneck, build the fix, and automate it so it never happens again.</p>
+      <p>Today I work as a full-stack virtual assistant: building GoHighLevel funnels and CRMs, connecting tools through APIs, and wiring automations across Make, Zapier, and Pabbly Connect so your team spends less time on repetitive work and more time closing deals. I work with a diverse range of industries and tailor every project to the client's specific goals, tech stack, and growth stage.</p>
+      <p style="color:var(--ink);font-weight:600;margin-bottom:10px;">Industries I've Worked With</p>
+      <div class="tag-row">
+        <span class="tag">Coaching</span><span class="tag">Real Estate</span><span class="tag">Construction</span>
+        <span class="tag">Education</span><span class="tag">Finance</span><span class="tag">HVAC</span>
+        <span class="tag">Health &amp; Wellness</span><span class="tag">Chiropractic</span><span class="tag">Aesthetics</span>
+        <span class="tag">SaaS</span><span class="tag">Agencies</span>
+      </div>
+      <a href="https://calendar.app.google/K3TY9nAVZfSbxWXv6" class="btn btn-gold">Book A Call</a>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
 <section id="journey">
-  <div class="divider"></div>
-  <div class="section-inner">
-    <div class="section-label reveal">My Journey</div>
-    <h2 class="section-title reveal">From <em>Information Systems</em> to Full-Stack VA</h2>
-    <p class="section-sub reveal">Every stop on this path built a skill I use for clients today — this is why I think in systems, not just tasks.</p>
-
-    <div class="timeline reveal">
-
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-year">College · Philippines</div>
-        <div class="timeline-title">Bachelor's Degree in Information Systems</div>
-        <p class="timeline-desc">Studied how data, software, and business processes connect — databases, systems analysis, and project workflows. This is the foundation that lets me understand a client's entire operation, not just the task in front of me.</p>
-        <div class="timeline-tags">
-          <span class="project-tag">Systems Analysis</span>
-          <span class="project-tag">Databases</span>
-          <span class="project-tag">Process Design</span>
-        </div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">My Journey</div>
+      <h2>From Information Systems to Full-Stack VA</h2>
+      <p>Every stop on this path built a skill I use for clients today — this is why I think in systems, not just tasks.</p>
+    </div>
+    <div class="timeline" id="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-eyebrow">College · Philippines</div>
+        <h3>Bachelor's Degree in Information Systems</h3>
+        <p>Studied how data, software, and business processes connect — databases, systems analysis, and project workflows. This is the foundation that lets me understand a client's entire operation, not just the task in front of me.</p>
+        <div class="tag-row"><span class="tag">Systems Analysis</span><span class="tag">Databases</span><span class="tag">Process Design</span></div>
       </div>
-
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-year">Early Career</div>
-        <div class="timeline-title">Started as a General Virtual Assistant</div>
-        <p class="timeline-desc">Began supporting business owners with admin, content, and CRM tasks — and quickly noticed how much time was lost to manual, repeatable work. That observation became the direction for everything that followed.</p>
-        <div class="timeline-tags">
-          <span class="project-tag">Admin Support</span>
-          <span class="project-tag">CRM Management</span>
-        </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-eyebrow">Early Career</div>
+        <h3>Started as a General Virtual Assistant</h3>
+        <p>Began supporting business owners with admin, content, and CRM tasks — and quickly noticed how much time was lost to manual, repeatable work. That observation became the direction for everything that followed.</p>
+        <div class="tag-row"><span class="tag">Admin Support</span><span class="tag">CRM Management</span></div>
       </div>
-
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-year">Specialization</div>
-        <div class="timeline-title">Became a GoHighLevel &amp; Automation Specialist</div>
-        <p class="timeline-desc">Went deep into GoHighLevel — funnels, pipelines, workflows — then extended that into API integrations and automation platforms like Make, Zapier, and Pabbly Connect to connect GHL with the rest of a client's tech stack.</p>
-        <div class="timeline-tags">
-          <span class="project-tag">GoHighLevel</span>
-          <span class="project-tag">Make</span>
-          <span class="project-tag">Zapier</span>
-          <span class="project-tag">Pabbly Connect</span>
-        </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-eyebrow">Specialization</div>
+        <h3>Became a GoHighLevel &amp; Automation Specialist</h3>
+        <p>Went deep into GoHighLevel — funnels, pipelines, workflows — then extended that into API integrations and automation platforms like Make, Zapier, and Pabbly Connect to connect GHL with the rest of a client's tech stack.</p>
+        <div class="tag-row"><span class="tag">GoHighLevel</span><span class="tag">Make</span><span class="tag">Zapier</span><span class="tag">Pabbly Connect</span></div>
       </div>
-
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-year">Today</div>
-        <div class="timeline-title">Full-Stack Virtual Assistant &amp; Business Systems Builder</div>
-        <p class="timeline-desc">Now I combine my Information Systems background with hands-on execution — building websites and funnels, integrating APIs, and automating entire workflows end-to-end so clients get a VA who thinks like a developer and operates like an operations partner.</p>
-        <div class="timeline-tags">
-          <span class="project-tag">Full-Stack Development</span>
-          <span class="project-tag">API Integration</span>
-          <span class="project-tag">Business Automation</span>
-        </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-eyebrow">Today</div>
+        <h3>Full-Stack Virtual Assistant &amp; Business Systems Builder</h3>
+        <p>Now I combine my Information Systems background with hands-on execution — building websites and funnels, integrating APIs, and automating entire workflows end-to-end so clients get a VA who thinks like a developer and operates like an operations partner.</p>
+        <div class="tag-row"><span class="tag">Full-Stack Development</span><span class="tag">API Integration</span><span class="tag">Business Automation</span></div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ═══════════ RESULTS / WHY HIRE ME ═══════════ -->
-<section id="results">
-  <div class="divider"></div>
-  <div class="section-inner">
-    <div class="section-label reveal">Proof, Not Promises</div>
-    <h2 class="section-title reveal">Why Businesses Choose <em>Me</em></h2>
-    <p class="section-sub reveal">A snapshot of the track record — and the value I bring that a typical task-based VA can't.</p>
-
-    <div class="results-grid">
-      <div class="result-card reveal">
-        <div class="result-num">40+</div>
-        <div class="result-label">Funnels &amp; Sites Delivered</div>
-      </div>
-      <div class="result-card reveal">
-        <div class="result-num">10+</div>
-        <div class="result-label">Long-Term Clients</div>
-      </div>
-      <div class="result-card reveal">
-        <div class="result-num">4+</div>
-        <div class="result-label">Years in GHL &amp; Automation</div>
-      </div>
-      <div class="result-card reveal">
-        <div class="result-num">3</div>
-        <div class="result-label">Automation Platforms Mastered</div>
-      </div>
+<!-- WHY / PROOF -->
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Proof, Not Promises</div>
+      <h2>Why Businesses Choose Me</h2>
+      <p>A snapshot of the track record — and the value I bring that a typical task-based VA can't.</p>
     </div>
-
+    <div class="proof-stats reveal">
+      <div class="proof-stat"><div class="stat-num" data-count="40" data-suffix="+">0</div><div class="stat-label">Funnels &amp; Sites Delivered</div></div>
+      <div class="proof-stat"><div class="stat-num" data-count="10" data-suffix="+">0</div><div class="stat-label">Long-Term Clients</div></div>
+      <div class="proof-stat"><div class="stat-num" data-count="4" data-suffix="+">0</div><div class="stat-label">Years in GHL &amp; Automation</div></div>
+      <div class="proof-stat"><div class="stat-num" data-count="3" data-suffix="">0</div><div class="stat-label">Automation Platforms Mastered</div></div>
+    </div>
     <div class="value-grid">
-      <div class="value-card reveal">
-        <div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg></div>
-        <div class="value-title">Full-Stack, Not Task-Based</div>
-        <p class="value-desc">A BS in Information Systems plus hands-on GoHighLevel and web development means I can design, build, and maintain systems — not just check off tasks on a list.</p>
+      <div class="value-card">
+        <h3>Full-Stack, Not Task-Based</h3>
+        <p>A BS in Information Systems plus hands-on GoHighLevel and web development means I can design, build, and maintain systems — not just check off tasks on a list.</p>
       </div>
-      <div class="value-card reveal">
-        <div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
-        <div class="value-title">Automation-First Mindset</div>
-        <p class="value-desc">Every recurring task is a candidate for automation. I connect GoHighLevel to your entire stack via Make, Zapier, and Pabbly Connect so leads, data, and follow-ups move without manual work.</p>
+      <div class="value-card">
+        <h3>Automation-First Mindset</h3>
+        <p>Every recurring task is a candidate for automation. I connect GoHighLevel to your entire stack via Make, Zapier, and Pabbly Connect so leads, data, and follow-ups move without manual work.</p>
       </div>
-      <div class="value-card reveal">
-        <div class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-        <div class="value-title">I See the Whole Business</div>
-        <p class="value-desc">My systems background means I map how leads, sales, fulfillment, and reporting connect — so the automation I build actually fits how your business runs, not just one isolated task.</p>
+      <div class="value-card">
+        <h3>I See the Whole Business</h3>
+        <p>My systems background means I map how leads, sales, fulfillment, and reporting connect — so the automation I build actually fits how your business runs, not just one isolated task.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════ SERVICES ═══════════ -->
+<!-- SERVICES -->
 <section id="services">
-  <div class="divider"></div>
-  <div class="section-inner">
-    <div class="section-label reveal">My Services</div>
-    <h2 class="section-title reveal">What I Can Do <em>For You</em></h2>
-    <p class="section-sub reveal">A comprehensive range of digital marketing, development, and automation services designed to help businesses grow and run themselves.</p>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">My Services</div>
+      <h2>What I Can Do For You</h2>
+      <p>A comprehensive range of digital marketing, development, and automation services designed to help businesses grow and run themselves.</p>
+    </div>
     <div class="services-grid">
-
-      <div class="service-card reveal">
-        <div class="service-num">01</div>
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-        </div>
-        <div class="service-name">GoHighLevel Setup &amp; Automation</div>
-        <p class="service-desc">Building high-converting funnels and automating workflows. I set up and manage GoHighLevel systems that streamline your sales and marketing processes end-to-end.</p>
-      </div>
-
-      <div class="service-card reveal">
-        <div class="service-num">02</div>
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <div class="service-name">CRM Management &amp; Lead Nurturing</div>
-        <p class="service-desc">Setting up and optimizing CRM systems to track leads, manage client relationships, and automate follow-ups to increase sales opportunities and retention.</p>
-      </div>
-
-      <div class="service-card reveal">
-        <div class="service-num">03</div>
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        </div>
-        <div class="service-name">Website &amp; Funnel Design</div>
-        <p class="service-desc">Custom, responsive websites and high-converting funnels that drive conversions and enhance user experience, ensuring your brand stands out from the competition.</p>
-      </div>
-
-      <div class="service-card reveal">
-        <div class="service-num">04</div>
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-        </div>
-        <div class="service-name">Content Creation &amp; Scheduling</div>
-        <p class="service-desc">Designing engaging graphics using Canva and creating videos using CapCut for social media, alongside scheduling posts to maintain a consistent and impactful online presence.</p>
-      </div>
-
-      <div class="service-card reveal">
-        <div class="service-num">05</div>
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-        </div>
-        <div class="service-name">Facebook, Google &amp; LinkedIn Ads</div>
-        <p class="service-desc">Designing and managing targeted ads to maximize reach and conversions. I optimize campaigns across all major platforms for the best possible ROI for your budget.</p>
-      </div>
-
-      <div class="service-card reveal">
-        <div class="service-num">06</div>
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        </div>
-        <div class="service-name">SEO for Websites</div>
-        <p class="service-desc">Improving your website's search engine ranking through on-page SEO, keyword optimization, and content strategies designed to drive sustained organic traffic growth.</p>
-      </div>
-
-      <div class="service-card reveal">
-        <div class="service-num">07</div>
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        </div>
-        <div class="service-name">API Integrations &amp; Custom Automation</div>
-        <p class="service-desc">Connecting GoHighLevel and third-party platforms via REST APIs, webhooks, and custom code so your data flows automatically between every tool in your stack.</p>
-      </div>
-
-      <div class="service-card reveal">
-        <div class="service-num">08</div>
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-        </div>
-        <div class="service-name">Workflow Automation (Make, Zapier, Pabbly)</div>
-        <p class="service-desc">Designing multi-step automations that trigger across your CRM, forms, email, and apps — eliminating manual data entry and reducing errors so nothing falls through the cracks.</p>
-      </div>
-
+      <div class="service"><div class="service-top"><h3>GoHighLevel Setup &amp; Automation</h3><span class="service-index">01</span></div><p>Building high-converting funnels and automating workflows. I set up and manage GoHighLevel systems that streamline your sales and marketing processes end-to-end.</p></div>
+      <div class="service"><div class="service-top"><h3>CRM Management &amp; Lead Nurturing</h3><span class="service-index">02</span></div><p>Setting up and optimizing CRM systems to track leads, manage client relationships, and automate follow-ups to increase sales opportunities and retention.</p></div>
+      <div class="service"><div class="service-top"><h3>Website &amp; Funnel Design</h3><span class="service-index">03</span></div><p>Custom, responsive websites and high-converting funnels that drive conversions and enhance user experience, ensuring your brand stands out from the competition.</p></div>
+      <div class="service"><div class="service-top"><h3>Content Creation &amp; Scheduling</h3><span class="service-index">04</span></div><p>Designing engaging graphics using Canva and creating videos using CapCut for social media, alongside scheduling posts to maintain a consistent and impactful online presence.</p></div>
+      <div class="service"><div class="service-top"><h3>Facebook, Google &amp; LinkedIn Ads</h3><span class="service-index">05</span></div><p>Designing and managing targeted ads to maximize reach and conversions. I optimize campaigns across all major platforms for the best possible ROI for your budget.</p></div>
+      <div class="service"><div class="service-top"><h3>SEO for Websites</h3><span class="service-index">06</span></div><p>Improving your website's search engine ranking through on-page SEO, keyword optimization, and content strategies designed to drive sustained organic traffic growth.</p></div>
+      <div class="service"><div class="service-top"><h3>API Integrations &amp; Custom Automation</h3><span class="service-index">07</span></div><p>Connecting GoHighLevel and third-party platforms via REST APIs, webhooks, and custom code so your data flows automatically between every tool in your stack.</p></div>
+      <div class="service"><div class="service-top"><h3>Workflow Automation (Make, Zapier, Pabbly)</h3><span class="service-index">08</span></div><p>Designing multi-step automations that trigger across your CRM, forms, email, and apps — eliminating manual data entry and reducing errors so nothing falls through the cracks.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════ TOOLS ═══════════ -->
+<!-- TOOLS -->
 <section id="tools">
-  <div class="divider"></div>
-  <div class="section-inner">
-    <div class="section-label reveal">Digital Tools</div>
-    <h2 class="section-title reveal">My <em>Tech Stack</em></h2>
-    <p class="section-sub reveal">I leverage cutting-edge tools to simplify processes, enhance campaigns, and achieve outstanding results for your business.</p>
-    <div class="tools-grid">
-      <div class="tool-card reveal">
-        <img class="tool-logo" src="https://cdn.prod.website-files.com/5f15081919fdf673994ab5fd/6697e68b90253f000eed3a7c_HighLevel-Logo-(PNG).png" alt="GoHighLevel"/>
-        <div class="tool-name">GoHighLevel</div>
-      </div>
-      <div class="tool-card reveal">
-        <img class="tool-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/WordPress_blue_logo.svg/120px-WordPress_blue_logo.svg.png" alt="WordPress"/>
-        <div class="tool-name">WordPress</div>
-      </div>
-      <div class="tool-card reveal">
-        <img class="tool-logo" src="https://s3-eu-west-1.amazonaws.com/tpd/logos/5a952f287871dc0001172096/0x0.png" alt="ClickFunnels"/>
-        <div class="tool-name">Click Funnels</div>
-      </div>
-      <div class="tool-card reveal">
-        <img class="tool-logo" src="https://static.vecteezy.com/system/resources/thumbnails/067/353/986/small_2x/adobe-premier-pro-logo-icon-free-vector.jpg" alt="Adobe Premiere" style="filter:none"/>
-        <div class="tool-name">Adobe Premiere</div>
-      </div>
-      <div class="tool-card reveal">
-        <img class="tool-logo" src="https://pngdownload.io/wp-content/uploads/2025/05/CapCut-Logo-Video-Editing-App-Icon-768x768.webp" alt="CapCut"/>
-        <div class="tool-name">CapCut</div>
-      </div>
-      <div class="tool-card reveal">
-        <img class="tool-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/120px-Adobe_Photoshop_CC_icon.svg.png" alt="Photoshop"/>
-        <div class="tool-name">Photoshop</div>
-      </div>
-      <div class="tool-card reveal">
-        <img class="tool-logo" src="https://static.vecteezy.com/system/resources/previews/056/850/847/non_2x/canva-app-logo-on-a-transparent-background-free-png.png" alt="Canva"/>
-        <div class="tool-name">Canva</div>
-      </div>
-      <div class="tool-card reveal">
-        <img class="tool-logo" src="https://www.sixandflow.com/hs-fs/hubfs/HubSpot%20Logo.png?width=306&height=306&name=HubSpot%20Logo.png" alt="HubSpot"/>
-        <div class="tool-name">HubSpot</div>
-      </div>
-      <div class="tool-card reveal">
-        <img class="tool-logo" src="https://cdn-icons-png.flaticon.com/512/5968/5968928.png" alt="Mailchimp"/>
-        <div class="tool-name">Mailchimp</div>
-      </div>
-      <div class="tool-card reveal">
-        <img class="tool-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Zapier_logo.svg/120px-Zapier_logo.svg.png" alt="Zapier"/>
-        <div class="tool-name">Zapier</div>
-      </div>
-      <div class="tool-card reveal">
-        <img class="tool-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/120px-ChatGPT_logo.svg.png" alt="ChatGPT"/>
-        <div class="tool-name">ChatGPT</div>
-      </div>
-      <div class="tool-card reveal">
-        <img class="tool-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaPSP40VGSYbouOHrO0kEOAU6kXc1kdET0Ww&s" alt="Google Analytics"/>
-        <div class="tool-name">Google Analytics</div>
-      </div>
-      <div class="tool-card reveal">
-        <img class="tool-logo" src="https://pngimg.com/d/meta_PNG1.png" alt="Meta Ads Manager"/>
-        <div class="tool-name">Ads Manager</div>
-      </div>
-      <div class="tool-card reveal">
-        <img class="tool-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Google_Ads_logo.svg/120px-Google_Ads_logo.svg.png" alt="Google Ads"/>
-        <div class="tool-name">Google Ads</div>
-      </div>
-      <div class="tool-card reveal">
-        <img class="tool-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Slack_icon_2019.svg/500px-Slack_icon_2019.svg.png" alt="Google Ads"/>
-        <div class="tool-name">Slack</div>
-      </div>
-      <div class="tool-card reveal">
-        <img class="tool-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Claude_AI_symbol.svg/1280px-Claude_AI_symbol.svg.png" alt="Google Ads"/>
-        <div class="tool-name">Claude</div>
-      </div>
-      <div class="tool-card reveal">
-        <img class="tool-logo" src="https://images.seeklogo.com/logo-png/45/2/replit-icon-logo-png_seeklogo-453824.png" alt="Google Ads"/>
-        <div class="tool-name">Replit</div>
-      </div>
-      <div class="tool-card reveal">
-        <img class="tool-logo" src="https://images.seeklogo.com/logo-png/64/2/whop-logo-png_seeklogo-643501.png" alt="Google Ads"/>
-        <div class="tool-name">Whop</div>
-      </div>
-      <div class="tool-card reveal">
-        <img class="tool-logo" src="https://e7.pngegg.com/pngimages/301/1/png-clipart-google-sheets-logo-thumbnail.png" alt="Google Ads"/>
-        <div class="tool-name">Google Sheet</div>
-      </div>
-      <div class="tool-card reveal">
-        <img class="tool-logo" src="https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/dark/make-color.png" alt="Make"/>
-        <div class="tool-name">Make (Integromat)</div>
-      </div>
-      <div class="tool-card reveal">
-        <img class="tool-logo" src="https://assets-global.website-files.com/5f0f5f6b3f078d1f7e1fbe89/Pabbly-icon.png" alt="Pabbly Connect" onerror="this.src='https://placehold.co/44x44/111520/4f9cf9?text=P'"/>
-        <div class="tool-name">Pabbly Connect</div>
-      </div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Digital Tools</div>
+      <h2>My Tech Stack</h2>
+      <p>I leverage cutting-edge tools to simplify processes, enhance campaigns, and achieve outstanding results for your business.</p>
+    </div>
+  </div>
+  <div class="tools-marquee">
+    <div class="tools-track" id="toolsTrack">
+      <!-- populated + duplicated by JS -->
     </div>
   </div>
 </section>
 
-
-<!-- ═══════════════════════════════════════
-     PORTFOLIO — WEBSITE & FUNNEL PROJECTS
-════════════════════════════════════════ -->
-<section id="portfolio-web" class="portfolio-section" style="background:var(--bg2)">
-  <div class="divider"></div>
-  <div class="section-inner">
-    <div class="section-label reveal">Portfolio</div>
-    <h2 class="section-title reveal">Website &amp; Funnel <em>Projects</em></h2>
-    <p class="section-sub reveal">High-converting websites and sales funnels built on GoHighLevel, WordPress, and ClickFunnels — designed to turn visitors into clients.</p>
-
-    <div class="portfolio-grid">
-
-      <!-- Card 1 -->
-      <div class="project-card reveal">
-        <div class="project-thumb">
-          <!-- REPLACE src with your screenshot URL -->
-          <img src="https://i.imgur.com/qMAqXWm.jpeg" alt="Project 1"/>
-          <div class="project-thumb-overlay">
-            <a href="https://app.gohighlevel.com/v2/preview/T7r63z5lkenUyB7ZqSSq?notrack=true#section-wnLxWS8ZyI" target="_blank" class="project-view-btn">
-              View Live
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-          </div>
-        </div>
-        <div class="project-body">
-          <div class="project-cat-tag"><span class="project-cat-dot"></span>Website / Funnel</div>
-          <div class="project-title">Strategic Partnership Funnel System</div>
-          <p class="project-desc">A GoHighLevel-powered website and automation system designed to connect businesses with the right partners. Built to streamline collaboration, lead capture, and relationship management in one centralized platform.</p>
-          <div class="project-tags">
-            <span class="project-tag">GoHighLevel</span>
-            <span class="project-tag">Funnel</span>
-            <span class="project-tag">CRM</span>
-            <span class="project-tag">SEO</span>
-            <span class="project-tag">Automation</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="project-card reveal">
-        <div class="project-thumb">
-          <img src="https://i.imgur.com/LXvJFDC.png" alt="Project 2"/>
-          <div class="project-thumb-overlay">
-            <a href="https://app.gohighlevel.com/v2/preview/4Kldl6gfh04SWEOXoLm8?notrack=true" target="_blank" class="project-view-btn">
-              View Live
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-          </div>
-        </div>
-        <div class="project-body">
-          <div class="project-cat-tag"><span class="project-cat-dot"></span>Website / Funnel</div>
-          <div class="project-title">Automated Lead Generation Funnel</div>
-          <p class="project-desc">A high-converting GoHighLevel funnel built to capture, qualify, and nurture leads through automated workflows—streamlining the entire customer journey from inquiry to conversion.</p>
-          <div class="project-tags">
-            <span class="project-tag">Go High Level</span>
-            <span class="project-tag">Landing Page</span>
-            <span class="project-tag">Automation</span>
-            <span class="project-tag">Pipeline</span>
-            <span class="project-tag">SEO</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="project-card reveal">
-        <div class="project-thumb">
-          <img src="https://i.imgur.com/6692waz.jpeg" alt="Project 3"/>
-          <div class="project-thumb-overlay">
-            <a href="https://thendta.org" target="_blank" class="project-view-btn">
-              View Live
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-          </div>
-        </div>
-        <div class="project-body">
-          <div class="project-cat-tag"><span class="project-cat-dot"></span>Website / Funnel</div>
-          <div class="project-title">Dump Trucking Industry Network & Growth Platform</div>
-          <p class="project-desc">A comprehensive digital platform for the dump trucking industry, designed to provide training, job opportunities, business resources, and networking all in one ecosystem to support operators and companies in scaling their operations.</p>
-          <div class="project-tags">
-            <span class="project-tag">Go High Level</span>
-            <span class="project-tag">Google Ads</span>
-            <span class="project-tag">Automation</span>
-            <span class="project-tag">Pipeline</span>
-            <span class="project-tag">SEO</span>
-          </div>
-        </div>
-      </div>
-
+<!-- PORTFOLIO -->
+<section id="portfolio-web">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">Portfolio</div>
+      <h2>Work Across Web, Design, Video &amp; Automation</h2>
+      <p>Four categories, four different ways to browse them — high-converting builds, brand visuals, reels, and the automations running quietly behind them.</p>
     </div>
 
-    <!-- More Projects Link -->
-    <div class="portfolio-more reveal">
-      <a href="#" target="_blank" class="more-link">
-        View More Web &amp; Funnel Projects
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
+    <!-- ============ WEBSITE / FUNNEL (unchanged carousel) ============ -->
+    <div class="proj-category">
+      <div class="cat-head">
+        <div>
+          <div class="cat-eyebrow c-gold">01 · Website / Funnel</div>
+          <h3>Funnels &amp; Websites</h3>
+        </div>
+      </div>
+      <div class="carousel" id="carWeb">
+        <div class="carousel-track-wrap"><div class="carousel-track">
+          <div class="proj-card" style="--accent:var(--gold)">
+            <div class="proj-media"><span class="proj-tag">Website / Funnel</span><img src="https://i.imgur.com/qMAqXWm.jpeg" alt="Strategic Partnership Funnel System"></div>
+            <div class="proj-body">
+              <div class="proj-cat">Website / Funnel</div>
+              <h3>Strategic Partnership Funnel System</h3>
+              <p>A GoHighLevel-powered website and automation system designed to connect businesses with the right partners. Built to streamline collaboration, lead capture, and relationship management in one centralized platform.</p>
+              <div class="proj-tags"><span>GoHighLevel</span><span>Funnel</span><span>CRM</span><span>SEO</span><span>Automation</span></div>
+              <a href="https://app.gohighlevel.com/v2/preview/T7r63z5lkenUyB7ZqSSq?notrack=true#section-wnLxWS8ZyI" target="_blank" rel="noopener" class="proj-link">View Live</a>
+            </div>
+          </div>
+          <div class="proj-card" style="--accent:var(--gold)">
+            <div class="proj-media"><span class="proj-tag">Website / Funnel</span><img src="https://i.imgur.com/LXvJFDC.png" alt="Automated Lead Generation Funnel"></div>
+            <div class="proj-body">
+              <div class="proj-cat">Website / Funnel</div>
+              <h3>Automated Lead Generation Funnel</h3>
+              <p>A high-converting GoHighLevel funnel built to capture, qualify, and nurture leads through automated workflows — streamlining the entire customer journey from inquiry to conversion.</p>
+              <div class="proj-tags"><span>Go High Level</span><span>Landing Page</span><span>Automation</span><span>Pipeline</span><span>SEO</span></div>
+              <a href="https://app.gohighlevel.com/v2/preview/4Kldl6gfh04SWEOXoLm8?notrack=true" target="_blank" rel="noopener" class="proj-link">View Live</a>
+            </div>
+          </div>
+          <div class="proj-card" style="--accent:var(--gold)">
+            <div class="proj-media"><span class="proj-tag">Website / Funnel</span><img src="https://i.imgur.com/6692waz.jpeg" alt="Dump Trucking Industry Network & Growth Platform"></div>
+            <div class="proj-body">
+              <div class="proj-cat">Website / Funnel</div>
+              <h3>Dump Trucking Industry Network &amp; Growth Platform</h3>
+              <p>A comprehensive digital platform for the dump trucking industry, designed to provide training, job opportunities, business resources, and networking all in one ecosystem to support operators and companies in scaling their operations.</p>
+              <div class="proj-tags"><span>Go High Level</span><span>Google Ads</span><span>Automation</span><span>Pipeline</span><span>SEO</span></div>
+              <a href="https://thendta.org" target="_blank" rel="noopener" class="proj-link">View Live</a>
+            </div>
+          </div>
+        </div></div>
+        <div class="carousel-nav">
+          <div class="car-dots"></div>
+          <div style="display:flex;align-items:center;gap:16px;">
+            <span class="car-count">1 / 3</span>
+            <div class="car-arrows">
+              <button class="car-btn" data-dir="-1" aria-label="Previous project">‹</button>
+              <button class="car-btn" data-dir="1" aria-label="Next project">›</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="more-link">View More Web &amp; Funnel Projects</a>
     </div>
+
+    <!-- ============ GRAPHICS — aesthetic bento grid ============ -->
+    <div class="proj-category">
+      <div class="cat-head">
+        <div>
+          <div class="cat-eyebrow c-gold">02 · Graphics &amp; Design</div>
+          <h3>Brand Visuals &amp; Social Creatives</h3>
+        </div>
+      </div>
+      <div class="bento-grid" id="bentoGrid">
+        <div class="bento-tile b-xl"><img src="https://i.imgur.com/CtQ1NMa.png" alt="Graphic sample 1"><div class="bento-cap">Brand Launch Post</div></div>
+        <div class="bento-tile b-sq"><img src="https://i.imgur.com/CtQ1NMa.png" alt="Graphic sample 2"><div class="bento-cap">Ad Creative</div></div>
+        <div class="bento-tile b-tall"><img src="https://i.imgur.com/CtQ1NMa.png" alt="Graphic sample 3"><div class="bento-cap">Story Template</div></div>
+        <div class="bento-tile b-sq"><img src="https://i.imgur.com/CtQ1NMa.png" alt="Graphic sample 4"><div class="bento-cap">Logo Concept</div></div>
+        <div class="bento-tile b-wide"><img src="https://i.imgur.com/CtQ1NMa.png" alt="Graphic sample 5"><div class="bento-cap">Facebook Cover</div></div>
+        <div class="bento-tile b-sq"><img src="https://i.imgur.com/CtQ1NMa.png" alt="Graphic sample 6"><div class="bento-cap">Carousel Slide</div></div>
+        <div class="bento-tile b-tall"><img src="https://i.imgur.com/CtQ1NMa.png" alt="Graphic sample 7"><div class="bento-cap">Pinterest Pin</div></div>
+        <div class="bento-tile b-sq"><img src="https://i.imgur.com/CtQ1NMa.png" alt="Graphic sample 8"><div class="bento-cap">Promo Badge</div></div>
+        <div class="bento-tile b-sq"><img src="https://i.imgur.com/CtQ1NMa.png" alt="Graphic sample 9"><div class="bento-cap">Email Banner</div></div>
+        <div class="bento-tile b-wide"><img src="https://i.imgur.com/CtQ1NMa.png" alt="Graphic sample 10"><div class="bento-cap">Testimonial Card</div></div>
+      </div>
+      <a href="#" class="more-link">View More Graphics Projects</a>
+    </div>
+
+    <!-- ============ VIDEO — realistic phone-frame reels ============ -->
+    <div class="proj-category">
+      <div class="cat-head">
+        <div>
+          <div class="cat-eyebrow c-blue">03 · Video Edits</div>
+          <h3>Reels &amp; Short-Form Cuts</h3>
+        </div>
+      </div>
+      <div class="phone-row-wrap">
+        <div class="phone-row-fade left"></div>
+        <div class="phone-row-fade right"></div>
+        <div class="phone-row" id="phoneRow">
+          <!-- 6 phone mockups -->
+          <div class="phone-mock">
+            <div class="phone-shell"><div class="phone-screen">
+              <div class="phone-video-bg"><iframe src="https://player.vimeo.com/video/1223823674?h=51b0474761&background=1&autoplay=1&loop=1&muted=1&controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Reel preview"></iframe></div>
+              <div class="phone-fade-top"></div><div class="phone-fade-bottom"></div>
+              <div class="phone-notch"></div>
+              <div class="phone-status"><span>9:41</span><span class="batt"></span></div>
+              <div class="phone-reel-ui">
+                <div><div class="ric">♥</div><div class="rin">2.4k</div></div>
+                <div><div class="ric">💬</div><div class="rin">86</div></div>
+                <div><div class="ric">↗</div><div class="rin">Share</div></div>
+              </div>
+              <div class="phone-caption"><div class="pc-title">Reel Edit 01</div><div class="pc-sub">CapCut · Short-form</div></div>
+            </div></div>
+          </div>
+          <div class="phone-mock">
+            <div class="phone-shell"><div class="phone-screen">
+              <div class="phone-video-bg"><iframe src="https://player.vimeo.com/video/1223823674?h=51b0474761&background=1&autoplay=1&loop=1&muted=1&controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Reel preview"></iframe></div>
+              <div class="phone-fade-top"></div><div class="phone-fade-bottom"></div>
+              <div class="phone-notch"></div>
+              <div class="phone-status"><span>9:41</span><span class="batt"></span></div>
+              <div class="phone-reel-ui">
+                <div><div class="ric">♥</div><div class="rin">1.8k</div></div>
+                <div><div class="ric">💬</div><div class="rin">54</div></div>
+                <div><div class="ric">↗</div><div class="rin">Share</div></div>
+              </div>
+              <div class="phone-caption"><div class="pc-title">Reel Edit 02</div><div class="pc-sub">Adobe Premiere · YouTube</div></div>
+            </div></div>
+          </div>
+          <div class="phone-mock">
+            <div class="phone-shell"><div class="phone-screen">
+              <div class="phone-video-bg"><iframe src="https://player.vimeo.com/video/1223823674?h=51b0474761&background=1&autoplay=1&loop=1&muted=1&controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Reel preview"></iframe></div>
+              <div class="phone-fade-top"></div><div class="phone-fade-bottom"></div>
+              <div class="phone-notch"></div>
+              <div class="phone-status"><span>9:41</span><span class="batt"></span></div>
+              <div class="phone-reel-ui">
+                <div><div class="ric">♥</div><div class="rin">3.1k</div></div>
+                <div><div class="ric">💬</div><div class="rin">120</div></div>
+                <div><div class="ric">↗</div><div class="rin">Share</div></div>
+              </div>
+              <div class="phone-caption"><div class="pc-title">Reel Edit 03</div><div class="pc-sub">CapCut · TikTok</div></div>
+            </div></div>
+          </div>
+          <div class="phone-mock">
+            <div class="phone-shell"><div class="phone-screen">
+              <div class="phone-video-bg"><iframe src="https://player.vimeo.com/video/1223823674?h=51b0474761&background=1&autoplay=1&loop=1&muted=1&controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Reel preview"></iframe></div>
+              <div class="phone-fade-top"></div><div class="phone-fade-bottom"></div>
+              <div class="phone-notch"></div>
+              <div class="phone-status"><span>9:41</span><span class="batt"></span></div>
+              <div class="phone-reel-ui">
+                <div><div class="ric">♥</div><div class="rin">960</div></div>
+                <div><div class="ric">💬</div><div class="rin">31</div></div>
+                <div><div class="ric">↗</div><div class="rin">Share</div></div>
+              </div>
+              <div class="phone-caption"><div class="pc-title">Reel Edit 04</div><div class="pc-sub">CapCut · UGC</div></div>
+            </div></div>
+          </div>
+          <div class="phone-mock">
+            <div class="phone-shell"><div class="phone-screen">
+              <div class="phone-video-bg"><iframe src="https://player.vimeo.com/video/1223823674?h=51b0474761&background=1&autoplay=1&loop=1&muted=1&controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Reel preview"></iframe></div>
+              <div class="phone-fade-top"></div><div class="phone-fade-bottom"></div>
+              <div class="phone-notch"></div>
+              <div class="phone-status"><span>9:41</span><span class="batt"></span></div>
+              <div class="phone-reel-ui">
+                <div><div class="ric">♥</div><div class="rin">4.6k</div></div>
+                <div><div class="ric">💬</div><div class="rin">210</div></div>
+                <div><div class="ric">↗</div><div class="rin">Share</div></div>
+              </div>
+              <div class="phone-caption"><div class="pc-title">Reel Edit 05</div><div class="pc-sub">Premiere · Reels</div></div>
+            </div></div>
+          </div>
+          <div class="phone-mock">
+            <div class="phone-shell"><div class="phone-screen">
+              <div class="phone-video-bg"><iframe src="https://player.vimeo.com/video/1223823674?h=51b0474761&background=1&autoplay=1&loop=1&muted=1&controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Reel preview"></iframe></div>
+              <div class="phone-fade-top"></div><div class="phone-fade-bottom"></div>
+              <div class="phone-notch"></div>
+              <div class="phone-status"><span>9:41</span><span class="batt"></span></div>
+              <div class="phone-reel-ui">
+                <div><div class="ric">♥</div><div class="rin">1.2k</div></div>
+                <div><div class="ric">💬</div><div class="rin">47</div></div>
+                <div><div class="ric">↗</div><div class="rin">Share</div></div>
+              </div>
+              <div class="phone-caption"><div class="pc-title">Reel Edit 06</div><div class="pc-sub">CapCut · Short-form</div></div>
+            </div></div>
+          </div>
+        </div>
+        <div class="phone-row-nav">
+          <button class="car-btn" data-scroll="-1" aria-label="Scroll left">‹</button>
+          <button class="car-btn" data-scroll="1" aria-label="Scroll right">›</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ AUTOMATION — peek / coverflow carousel ============ -->
+    <div class="proj-category">
+      <div class="cat-head">
+        <div>
+          <div class="cat-eyebrow c-green">04 · Automation</div>
+          <h3>Workflows Running Behind the Scenes</h3>
+        </div>
+      </div>
+      <div class="peek-wrap" id="carAutomation">
+        <div class="peek-track-wrap"><div class="peek-track">
+          <div class="peek-card" style="--accent:var(--green)">
+            <div class="peek-media"><span class="proj-tag">Automation</span><img src="https://placehold.co/700x440/07090f/4ade80?text=Automation+Screenshot" alt="Automation sample 1"></div>
+            <div class="peek-body">
+              <div class="proj-cat">Automation</div>
+              <h3>Project Title Here</h3>
+              <p>Describe what the automation does — the trigger, workflow steps, and the outcome it delivers for the client.</p>
+              <div class="proj-tags"><span>GoHighLevel</span><span>Lead Nurture</span><span>Email Sequence</span></div>
+              <a href="#" class="proj-link" style="color:var(--green)">View Details</a>
+            </div>
+          </div>
+          <div class="peek-card" style="--accent:var(--green)">
+            <div class="peek-media"><span class="proj-tag">Automation</span><img src="https://placehold.co/700x440/07090f/4ade80?text=Automation+Screenshot" alt="Automation sample 2"></div>
+            <div class="peek-body">
+              <div class="proj-cat">Automation</div>
+              <h3>Project Title Here</h3>
+              <p>Describe what the automation does — the trigger, workflow steps, and the outcome it delivers for the client.</p>
+              <div class="proj-tags"><span>Zapier</span><span>CRM Sync</span></div>
+              <a href="#" class="proj-link" style="color:var(--green)">View Details</a>
+            </div>
+          </div>
+          <div class="peek-card" style="--accent:var(--green)">
+            <div class="peek-media"><span class="proj-tag">Automation</span><img src="https://placehold.co/700x440/07090f/4ade80?text=Automation+Screenshot" alt="Automation sample 3"></div>
+            <div class="peek-body">
+              <div class="proj-cat">Automation</div>
+              <h3>Project Title Here</h3>
+              <p>Describe what the automation does — the trigger, workflow steps, and the outcome it delivers for the client.</p>
+              <div class="proj-tags"><span>Make</span><span>Chatbot</span><span>AI</span></div>
+              <a href="#" class="proj-link" style="color:var(--green)">View Details</a>
+            </div>
+          </div>
+          <div class="peek-card" style="--accent:var(--green)">
+            <div class="peek-media"><span class="proj-tag">Automation</span><img src="https://placehold.co/700x440/07090f/4ade80?text=Automation+Screenshot" alt="Automation sample 4"></div>
+            <div class="peek-body">
+              <div class="proj-cat">Automation</div>
+              <h3>Project Title Here</h3>
+              <p>Describe what the automation does — the trigger, workflow steps, and the outcome it delivers for the client.</p>
+              <div class="proj-tags"><span>Pabbly Connect</span><span>Webhook</span></div>
+              <a href="#" class="proj-link" style="color:var(--green)">View Details</a>
+            </div>
+          </div>
+        </div></div>
+        <div class="peek-nav">
+          <button class="car-btn" data-dir="-1" aria-label="Previous automation">‹</button>
+          <div class="car-dots"></div>
+          <button class="car-btn" data-dir="1" aria-label="Next automation">›</button>
+        </div>
+      </div>
+      <a href="#" class="more-link">View More Automation Projects</a>
+    </div>
+
   </div>
 </section>
 
 
-<!-- ═══════════════════════════════════
-     PORTFOLIO — GRAPHICS DESIGN
-═══════════════════════════════════ -->
-<section id="portfolio-graphics" class="portfolio-section" style="background:var(--bg)">
-  <div class="divider"></div>
-  <div class="section-inner">
-    <div class="section-label reveal">Portfolio</div>
-    <h2 class="section-title reveal">Graphics &amp; <em>Design Work</em></h2>
-    <p class="section-sub reveal">Brand assets, social media graphics, ad creatives, and visual content crafted in Canva and Photoshop to make brands stand out.</p>
-
-    <div class="portfolio-grid">
-
-      <!-- Card 1 -->
-      <div class="project-card reveal">
-        <div class="project-thumb">
-          <!-- REPLACE src with your graphic image URL -->
-          <img src="https://placehold.co/600x375/07090f/c9a96e?text=Graphic+Sample" alt="Graphic 1"/>
-          <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
-              View Full Size
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-          </div>
-        </div>
-        <div class="project-body">
-          <div class="project-cat-tag" style="color:var(--gold)"><span class="project-cat-dot" style="background:var(--gold)"></span>Graphics Design</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Brief description of the graphic — brand, purpose, and platform it was created for.</p>
-          <div class="project-tags">
-            <span class="project-tag">Canva</span>
-            <span class="project-tag">Social Media</span>
-            <span class="project-tag">Branding</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="project-card reveal">
-        <div class="project-thumb">
-          <img src="https://placehold.co/600x375/07090f/c9a96e?text=Graphic+Sample" alt="Graphic 2"/>
-          <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
-              View Full Size
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-          </div>
-        </div>
-        <div class="project-body">
-          <div class="project-cat-tag" style="color:var(--gold)"><span class="project-cat-dot" style="background:var(--gold)"></span>Graphics Design</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Brief description of the graphic — brand, purpose, and platform it was created for.</p>
-          <div class="project-tags">
-            <span class="project-tag">Photoshop</span>
-            <span class="project-tag">Ad Creative</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="project-card reveal">
-        <div class="project-thumb">
-          <img src="https://placehold.co/600x375/07090f/c9a96e?text=Graphic+Sample" alt="Graphic 3"/>
-          <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
-              View Full Size
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-          </div>
-        </div>
-        <div class="project-body">
-          <div class="project-cat-tag" style="color:var(--gold)"><span class="project-cat-dot" style="background:var(--gold)"></span>Graphics Design</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Brief description of the graphic — brand, purpose, and platform it was created for.</p>
-          <div class="project-tags">
-            <span class="project-tag">Canva</span>
-            <span class="project-tag">Logo Design</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="portfolio-more reveal">
-      <a href="#" target="_blank" class="more-link">
-        View More Graphics Projects
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════
-     PORTFOLIO — VIDEO EDITS
-═══════════════════════════════════ -->
-<section id="portfolio-video" class="portfolio-section" style="background:var(--bg2)">
-  <div class="divider"></div>
-  <div class="section-inner">
-    <div class="section-label reveal">Portfolio</div>
-    <h2 class="section-title reveal">Video <em>Edits</em></h2>
-    <p class="section-sub reveal">Reels, YouTube videos, and short-form content produced with CapCut and Adobe Premiere — edited to grab attention and drive engagement.</p>
-
-    <div class="portfolio-grid">
-
-      <!-- Card 1 — Video cards show a play button overlay -->
-      <div class="project-card reveal">
-        <div class="project-thumb">
-          <!-- REPLACE src with a video thumbnail image URL -->
-          <img src="https://placehold.co/600x375/0d1017/82bcff?text=Video+Thumbnail" alt="Video 1"/>
-          <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
-              Watch Video
-              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            </a>
-          </div>
-          <!-- Play icon badge -->
-          <div style="position:absolute;bottom:10px;right:12px;background:rgba(7,9,15,.8);border:1px solid rgba(79,156,249,.3);border-radius:6px;padding:4px 10px;display:flex;align-items:center;gap:5px;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="10" height="10"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            Video
-          </div>
-        </div>
-        <div class="project-body">
-          <div class="project-cat-tag" style="color:#82bcff"><span class="project-cat-dot" style="background:#82bcff"></span>Video Edit</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Short description of the video — type of content, platform, and what made it effective.</p>
-          <div class="project-tags">
-            <span class="project-tag">CapCut</span>
-            <span class="project-tag">Reels</span>
-            <span class="project-tag">Short-form</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="project-card reveal">
-        <div class="project-thumb">
-          <img src="https://placehold.co/600x375/0d1017/82bcff?text=Video+Thumbnail" alt="Video 2"/>
-          <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
-              Watch Video
-              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            </a>
-          </div>
-          <div style="position:absolute;bottom:10px;right:12px;background:rgba(7,9,15,.8);border:1px solid rgba(79,156,249,.3);border-radius:6px;padding:4px 10px;display:flex;align-items:center;gap:5px;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="10" height="10"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            Video
-          </div>
-        </div>
-        <div class="project-body">
-          <div class="project-cat-tag" style="color:#82bcff"><span class="project-cat-dot" style="background:#82bcff"></span>Video Edit</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Short description of the video — type of content, platform, and what made it effective.</p>
-          <div class="project-tags">
-            <span class="project-tag">Adobe Premiere</span>
-            <span class="project-tag">YouTube</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="project-card reveal">
-        <div class="project-thumb">
-          <img src="https://placehold.co/600x375/0d1017/82bcff?text=Video+Thumbnail" alt="Video 3"/>
-          <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
-              Watch Video
-              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            </a>
-          </div>
-          <div style="position:absolute;bottom:10px;right:12px;background:rgba(7,9,15,.8);border:1px solid rgba(79,156,249,.3);border-radius:6px;padding:4px 10px;display:flex;align-items:center;gap:5px;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="10" height="10"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            Video
-          </div>
-        </div>
-        <div class="project-body">
-          <div class="project-cat-tag" style="color:#82bcff"><span class="project-cat-dot" style="background:#82bcff"></span>Video Edit</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Short description of the video — type of content, platform, and what made it effective.</p>
-          <div class="project-tags">
-            <span class="project-tag">CapCut</span>
-            <span class="project-tag">TikTok</span>
-            <span class="project-tag">UGC</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="portfolio-more reveal">
-      <a href="#" target="_blank" class="more-link">
-        View More Video Projects
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════
-     PORTFOLIO — AUTOMATIONS
-═══════════════════════════════════ -->
-<section id="portfolio-automations" class="portfolio-section" style="background:var(--bg)">
-  <div class="divider"></div>
-  <div class="section-inner">
-    <div class="section-label reveal">Portfolio</div>
-    <h2 class="section-title reveal">Automation <em>Workflows</em></h2>
-    <p class="section-sub reveal">CRM automations, email sequences, chatbot flows, and integration pipelines built in GoHighLevel, Zapier, and Make — saving hours and closing more deals on autopilot.</p>
-
-    <div class="portfolio-grid">
-
-      <!-- Card 1 -->
-      <div class="project-card reveal">
-        <div class="project-thumb">
-          <!-- REPLACE src with a workflow screenshot or diagram -->
-          <img src="https://placehold.co/600x375/07090f/4ade80?text=Automation+Screenshot" alt="Automation 1"/>
-          <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
-              View Details
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-          </div>
-        </div>
-        <div class="project-body">
-          <div class="project-cat-tag" style="color:#4ade80"><span class="project-cat-dot" style="background:#4ade80"></span>Automation</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Describe what the automation does — the trigger, workflow steps, and the outcome it delivers for the client.</p>
-          <div class="project-tags">
-            <span class="project-tag">GoHighLevel</span>
-            <span class="project-tag">Lead Nurture</span>
-            <span class="project-tag">Email Sequence</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="project-card reveal">
-        <div class="project-thumb">
-          <img src="https://placehold.co/600x375/07090f/4ade80?text=Automation+Screenshot" alt="Automation 2"/>
-          <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
-              View Details
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-          </div>
-        </div>
-        <div class="project-body">
-          <div class="project-cat-tag" style="color:#4ade80"><span class="project-cat-dot" style="background:#4ade80"></span>Automation</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Describe what the automation does — the trigger, workflow steps, and the outcome it delivers for the client.</p>
-          <div class="project-tags">
-            <span class="project-tag">Zapier</span>
-            <span class="project-tag">CRM Sync</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="project-card reveal">
-        <div class="project-thumb">
-          <img src="https://placehold.co/600x375/07090f/4ade80?text=Automation+Screenshot" alt="Automation 3"/>
-          <div class="project-thumb-overlay">
-            <a href="#" target="_blank" class="project-view-btn">
-              View Details
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-          </div>
-        </div>
-        <div class="project-body">
-          <div class="project-cat-tag" style="color:#4ade80"><span class="project-cat-dot" style="background:#4ade80"></span>Automation</div>
-          <div class="project-title">Project Title Here</div>
-          <p class="project-desc">Describe what the automation does — the trigger, workflow steps, and the outcome it delivers for the client.</p>
-          <div class="project-tags">
-            <span class="project-tag">Make</span>
-            <span class="project-tag">Chatbot</span>
-            <span class="project-tag">AI</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="portfolio-more reveal">
-      <a href="#" target="_blank" class="more-link">
-        View More Automation Projects
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════ FAQ ═══════════ -->
+<!-- FAQ -->
 <section id="faq">
-  <div class="divider"></div>
-  <div class="section-inner">
-    <div class="section-label reveal">FAQ</div>
-    <h2 class="section-title reveal">Common <em>Questions</em></h2>
-    <p class="section-sub reveal">Everything you need to know before we start working together.</p>
-    <div class="faq-wrap reveal" style="margin-top:52px">
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">What digital marketing services do you offer?</span>
-          <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><path d="M12 5v14M5 12h14"/></svg></span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">I provide a comprehensive range of digital marketing services, including website development, social media marketing, marketing automation, social media advertising, and funnel building. My goal is to enhance your brand's online presence and drive measurable results.</div></div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">How do you approach website development?</span>
-          <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><path d="M12 5v14M5 12h14"/></svg></span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">I design responsive, user-friendly websites tailored to your brand's identity. The focus is on delivering an exceptional user experience that drives conversions and effectively communicates your brand's story.</div></div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Can you explain your process for social media marketing?</span>
-          <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><path d="M12 5v14M5 12h14"/></svg></span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">I develop strategies to build and engage your audience on platforms like Facebook, Instagram, and LinkedIn. This involves creating compelling content, managing your social media presence, and running targeted advertising campaigns to increase brand visibility and engagement.</div></div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">What is marketing automation, and how can it benefit my business?</span>
-          <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><path d="M12 5v14M5 12h14"/></svg></span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">Marketing automation involves using software to automate repetitive marketing tasks such as email campaigns, lead nurturing, and social media posting. This saves time, increases efficiency, and ensures consistent communication with your audience, leading to stronger relationships and higher conversion rates.</div></div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">How do you measure the success of your campaigns?</span>
-          <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><path d="M12 5v14M5 12h14"/></svg></span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">I utilize data-driven insights to assess campaign performance. Key performance indicators (KPIs) like engagement rates, lead generation, conversion rates, and return on investment (ROI) are analyzed to ensure strategies contribute to measurable business growth.</div></div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Do you work with GoHighLevel (GHL)?</span>
-          <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><path d="M12 5v14M5 12h14"/></svg></span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">Yes, I specialize in GoHighLevel. I offer services such as GHL website and funnel building, CRM automation, workflow setup, and dashboard customization to help streamline your marketing and sales processes.</div></div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Can you help with graphics and video editing?</span>
-          <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><path d="M12 5v14M5 12h14"/></svg></span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">Absolutely! I provide graphic design services (social media posts, branding, logos, etc.) and video editing for reels, YouTube, and other platforms. I create visually engaging content that aligns with your brand and captures audience attention.</div></div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Can you create and manage sales funnels?</span>
-          <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><path d="M12 5v14M5 12h14"/></svg></span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">Yes, I build high-converting sales funnels tailored to your product or service. This includes lead magnets, opt-in pages, upsell/downsell strategies, thank you pages, and automation workflows to nurture leads effectively.</div></div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">You're based in the Philippines — how does time zone and communication work?</span>
-          <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><path d="M12 5v14M5 12h14"/></svg></span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">Yes, I'm based in the Philippines (GMT+8) and work with clients across the US, UK, Australia, and beyond. I structure my schedule around overlap hours with your team and stay reachable via WhatsApp, email, or Slack so communication never becomes a bottleneck.</div></div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span class="faq-q-text">Can you build custom API integrations, not just use pre-built connectors?</span>
-          <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"><path d="M12 5v14M5 12h14"/></svg></span>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">Yes. With a Bachelor's degree in Information Systems and hands-on development experience, I can work directly with REST APIs and webhooks when a pre-built connector in Make, Zapier, or Pabbly doesn't cover what you need — so your systems talk to each other exactly the way your business requires.</div></div>
-      </div>
-
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="kicker">FAQ</div>
+      <h2>Common Questions</h2>
+      <p>Everything you need to know before we start working together.</p>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary>What digital marketing services do you offer?<span class="faq-plus"></span></summary>
+        <p class="faq-a">I provide a comprehensive range of digital marketing services, including website development, social media marketing, marketing automation, social media advertising, and funnel building. My goal is to enhance your brand's online presence and drive measurable results.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How do you approach website development?<span class="faq-plus"></span></summary>
+        <p class="faq-a">I design responsive, user-friendly websites tailored to your brand's identity. The focus is on delivering an exceptional user experience that drives conversions and effectively communicates your brand's story.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can you explain your process for social media marketing?<span class="faq-plus"></span></summary>
+        <p class="faq-a">I develop strategies to build and engage your audience on platforms like Facebook, Instagram, and LinkedIn. This involves creating compelling content, managing your social media presence, and running targeted advertising campaigns to increase brand visibility and engagement.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What is marketing automation, and how can it benefit my business?<span class="faq-plus"></span></summary>
+        <p class="faq-a">Marketing automation involves using software to automate repetitive marketing tasks such as email campaigns, lead nurturing, and social media posting. This saves time, increases efficiency, and ensures consistent communication with your audience, leading to stronger relationships and higher conversion rates.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How do you measure the success of your campaigns?<span class="faq-plus"></span></summary>
+        <p class="faq-a">I utilize data-driven insights to assess campaign performance. Key performance indicators (KPIs) like engagement rates, lead generation, conversion rates, and return on investment (ROI) are analyzed to ensure strategies contribute to measurable business growth.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do you work with GoHighLevel (GHL)?<span class="faq-plus"></span></summary>
+        <p class="faq-a">Yes, I specialize in GoHighLevel. I offer services such as GHL website and funnel building, CRM automation, workflow setup, and dashboard customization to help streamline your marketing and sales processes.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can you help with graphics and video editing?<span class="faq-plus"></span></summary>
+        <p class="faq-a">Absolutely! I provide graphic design services (social media posts, branding, logos, etc.) and video editing for reels, YouTube, and other platforms. I create visually engaging content that aligns with your brand and captures audience attention.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can you create and manage sales funnels?<span class="faq-plus"></span></summary>
+        <p class="faq-a">Yes, I build high-converting sales funnels tailored to your product or service. This includes lead magnets, opt-in pages, upsell/downsell strategies, thank you pages, and automation workflows to nurture leads effectively.</p>
+      </details>
+      <details class="faq-item">
+        <summary>You're based in the Philippines — how does time zone and communication work?<span class="faq-plus"></span></summary>
+        <p class="faq-a">Yes, I'm based in the Philippines (GMT+8) and work with clients across the US, UK, Australia, and beyond. I structure my schedule around overlap hours with your team and stay reachable via WhatsApp, email, or Slack so communication never becomes a bottleneck.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can you build custom API integrations, not just use pre-built connectors?<span class="faq-plus"></span></summary>
+        <p class="faq-a">Yes. With a Bachelor's degree in Information Systems and hands-on development experience, I can work directly with REST APIs and webhooks when a pre-built connector in Make, Zapier, or Pabbly doesn't cover what you need — so your systems talk to each other exactly the way your business requires.</p>
+      </details>
     </div>
   </div>
 </section>
 
-<!-- ═══════════ CONTACT ═══════════ -->
+<!-- CONTACT -->
 <section id="contact">
-  <div class="divider"></div>
-  <div class="section-inner">
-    <div class="section-label reveal">Get In Touch</div>
-    <div class="contact-grid">
-      <div class="contact-info reveal-left">
-        <h2 class="contact-heading">Let's Build Something <em>Great Together.</em></h2>
-        <p class="contact-body">Ready to transform your digital presence? Whether you need a full marketing strategy, a GoHighLevel build, or an automation that connects your entire stack — I'm here to help you grow, from the Philippines to wherever your business operates.</p>
-        <div class="contact-items">
-          <a href="tel:+639272303838" class="contact-item">
-            <div class="contact-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.18 6.18l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-            <div>
-              <div class="contact-item-label">Phone</div>
-              <div class="contact-item-val">+63 927 230 3838</div>
-            </div>
-          </a>
-          <a href="https://wa.me/639272303838" target="_blank" class="contact-item">
-            <div class="contact-item-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></div>
-            <div>
-              <div class="contact-item-label">WhatsApp</div>
-              <div class="contact-item-val">+63 927 230 3838</div>
-            </div>
-          </a>
-          <div class="contact-item" style="cursor:default">
-            <div class="contact-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-            <div>
-              <div class="contact-item-label">Location</div>
-              <div class="contact-item-val">🇵🇭 Philippines · GMT+8 · Remote Worldwide</div>
-            </div>
-          </div>
-          <a href="https://www.facebook.com/jeffybanez2" target="_blank" class="contact-item">
-            <div class="contact-item-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div>
-            <div>
-              <div class="contact-item-label">Facebook</div>
-              <div class="contact-item-val">facebook.com/jeffybanez2</div>
-            </div>
-          </a>
-          <a href="https://www.linkedin.com/in/jeff-ybanez-b08044346/" target="_blank" class="contact-item">
-            <div class="contact-item-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
-            <div>
-              <div class="contact-item-label">LinkedIn</div>
-              <div class="contact-item-val">jeff-ybanez-b08044346</div>
-            </div>
-          </a>
+  <div class="wrap">
+    <div class="contact-panel reveal">
+      <div class="kicker">Get In Touch</div>
+      <h2>Let's Build Something Great Together.</h2>
+      <p>Ready to transform your digital presence? Whether you need a full marketing strategy, a GoHighLevel build, or an automation that connects your entire stack — I'm here to help you grow, from the Philippines to wherever your business operates.</p>
+      <div class="contact-cta-row">
+        <a href="tel:+639272303838" class="btn btn-gold">Phone · +63 927 230 3838</a>
+        <a href="https://wa.me/639272303838?text=Hello%2C%20I%20would%20like%20to%20connect%20with%20you!" class="btn btn-ghost" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+      <div class="contact-meta">
+        <div class="cm-block">
+          <h4>Location</h4>
+          <span>🇵🇭 Philippines · GMT+8 · Remote Worldwide</span>
+        </div>
+        <div class="cm-block">
+          <h4>Social</h4>
+          <a href="https://www.facebook.com/jeffybanez2" target="_blank" rel="noopener">facebook.com/jeffybanez2</a>
+          <a href="https://www.linkedin.com/in/jeff-ybanez-b08044346/" target="_blank" rel="noopener">linkedin.com/in/jeff-ybanez-b08044346</a>
         </div>
       </div>
-      <div class="big-cta-card reveal-right">
-        <div class="cta-card-title">Ready to <em>get started?</em><br/>Let's talk strategy.</div>
-        <p class="cta-card-sub">Book a free discovery call and let's map out how a full-stack VA — armed with an Information Systems background, GoHighLevel expertise, and automation across Make, Zapier, and Pabbly — can help you grow. No pressure, just a conversation about your goals and how the right systems can get you there.</p>
-        <div class="cta-card-btns">
-          <a href="https://calendar.app.google/K3TY9nAVZfSbxWXv6" target="_blank" class="btn btn-primary">
-            Book A Free Call
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-          <a href="https://wa.me/639272303838?text=Hello%2C%20I%20would%20like%20to%20connect%20with%20you!" target="_blank" class="btn btn-ghost">
-            Message on WhatsApp
-          </a>
-        </div>
+    </div>
+
+    <div style="text-align:center;margin-top:64px;" class="reveal">
+      <h3 style="font-size:clamp(22px,3.4vw,30px);max-width:20ch;margin:0 auto 16px;">Ready to get started? Let's talk strategy.</h3>
+      <p style="color:var(--ink-dim);max-width:64ch;margin:0 auto 28px;font-size:15px;">Book a free discovery call and let's map out how a full-stack VA — armed with an Information Systems background, GoHighLevel expertise, and automation across Make, Zapier, and Pabbly — can help you grow. No pressure, just a conversation about your goals and how the right systems can get you there.</p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+        <a href="https://calendar.app.google/K3TY9nAVZfSbxWXv6" class="btn btn-gold">Book A Free Call</a>
+        <a href="https://wa.me/639272303838?text=Hello%2C%20I%20would%20like%20to%20connect%20with%20you!" class="btn btn-ghost" target="_blank" rel="noopener">Message on WhatsApp</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Jeff<span>.</span>Ybanez</div>
-  <div class="footer-copy">© 2025 Jeff P. Ybanez · Philippines 🇵🇭 · All rights reserved.</div>
-  <div class="footer-links">
-    <a href="#about">About</a>
-    <a href="#journey">Journey</a>
-    <a href="#services">Services</a>
-    <a href="#portfolio-web">Projects</a>
-    <a href="#contact">Contact</a>
+  <div class="wrap foot-row">
+    <a href="#hero" class="brand">Jeff<span>.Ybanez</span></a>
+    <div class="foot-links">
+      <a href="#about">About</a><a href="#journey">Journey</a><a href="#services">Services</a>
+      <a href="#portfolio-web">Projects</a><a href="#contact">Contact</a>
+    </div>
+    <div class="foot-copy">© 2025 Jeff P. Ybanez · Philippines 🇵🇭 · All rights reserved.</div>
   </div>
 </footer>
 
 <script>
-// ── Cursor
-const cursor = document.getElementById('cursor');
-const ring   = document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px'});
-(function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing)})();
-document.querySelectorAll('a,button,.faq-q,.service-card,.tool-card,.project-card').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{cursor.style.width='18px';cursor.style.height='18px';ring.style.width='52px';ring.style.height='52px'});
-  el.addEventListener('mouseleave',()=>{cursor.style.width='10px';cursor.style.height='10px';ring.style.width='36px';ring.style.height='36px'});
-});
+(function(){
+  // ---------- Nav solid on scroll + active link (scrollspy) ----------
+  const nav = document.getElementById('siteNav');
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a, .mobile-panel a');
+  function onScroll(){
+    nav.classList.toggle('solid', window.scrollY > 40);
+    let current = '';
+    sections.forEach(sec=>{
+      const top = sec.offsetTop - 140;
+      if(window.scrollY >= top) current = sec.id;
+    });
+    navLinks.forEach(a=>{
+      a.classList.toggle('active', a.getAttribute('href') === '#'+current);
+    });
+  }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
 
-// ── Navbar scroll
-window.addEventListener('scroll',()=>{
-  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>40)
-});
+  // ---------- Mobile menu ----------
+  const burger = document.getElementById('burgerBtn');
+  const panel = document.getElementById('mobilePanel');
+  burger.addEventListener('click', ()=>{
+    const open = panel.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+  });
+  panel.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    panel.classList.remove('open'); burger.classList.remove('open');
+  }));
 
-// ── Mobile menu
-function openMobile(){document.getElementById('mobileMenu').classList.add('open')}
-function closeMobile(){document.getElementById('mobileMenu').classList.remove('open')}
+  // ---------- Hero headline word-by-word entrance ----------
+  const headline = document.getElementById('heroHeadline');
+  const raw = headline.innerHTML;
+  const parts = raw.split(/(<em>.*?<\/em>|\s+)/).filter(Boolean);
+  let delay = 0;
+  headline.innerHTML = parts.map(p=>{
+    if(/^\s+$/.test(p)) return p;
+    delay += 0.05;
+    return '<span class="hero-word" style="animation-delay:'+delay.toFixed(2)+'s">'+p+'</span>';
+  }).join('');
 
-// ── Scroll reveal
-const obs = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})
-},{threshold:.12});
-document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>{
-  const parent=el.parentElement;
-  const siblings=[...parent.children].filter(c=>c.classList.contains(el.className.split(' ')[0]));
-  const idx=siblings.indexOf(el);
-  el.style.transitionDelay=(idx*.08)+'s';
-  obs.observe(el);
-});
+  // ---------- Reveal on scroll (section headers + a few blocks) ----------
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  },{threshold:.2});
+  revealEls.forEach(el=>io.observe(el));
 
-// ── FAQ accordion
-function toggleFaq(btn){
-  const item=btn.parentElement;
-  const wasOpen=item.classList.contains('open');
-  document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
-  if(!wasOpen)item.classList.add('open');
-}
+  // ---------- Timeline draw + dot activation ----------
+  const timeline = document.getElementById('timeline');
+  const tlItems = timeline.querySelectorAll('.tl-item');
+  const tlIo = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting) e.target.classList.add('in');
+    });
+  },{threshold:.4});
+  tlItems.forEach(it=>tlIo.observe(it));
+  const tlWrapIo = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ timeline.classList.add('in'); tlWrapIo.disconnect(); } });
+  },{threshold:.1});
+  tlWrapIo.observe(timeline);
+
+  // ---------- Count-up stats ----------
+  const counters = document.querySelectorAll('.stat-num');
+  const cIo = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting) return;
+      const el = e.target;
+      const target = parseInt(el.dataset.count,10);
+      const suffix = el.dataset.suffix || '';
+      const dur = 1200;
+      const start = performance.now();
+      function tick(now){
+        const p = Math.min(1, (now-start)/dur);
+        const eased = 1 - Math.pow(1-p,3);
+        el.textContent = Math.round(eased*target) + suffix;
+        if(p<1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      cIo.unobserve(el);
+    });
+  },{threshold:.6});
+  counters.forEach(c=>cIo.observe(c));
+
+  // ---------- Tools marquee: build chips from tech list + duplicate ----------
+  const tools = [
+    ["GoHighLevel","https://cdn.prod.website-files.com/5f15081919fdf673994ab5fd/6697e68b90253f000eed3a7c_HighLevel-Logo-(PNG).png"],
+    ["WordPress","https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/WordPress_blue_logo.svg/120px-WordPress_blue_logo.svg.png"],
+    ["Click Funnels","https://s3-eu-west-1.amazonaws.com/tpd/logos/5a952f287871dc0001172096/0x0.png"],
+    ["Adobe Premiere","https://static.vecteezy.com/system/resources/thumbnails/067/353/986/small_2x/adobe-premier-pro-logo-icon-free-vector.jpg"],
+    ["CapCut","https://pngdownload.io/wp-content/uploads/2025/05/CapCut-Logo-Video-Editing-App-Icon-768x768.webp"],
+    ["Photoshop","https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/120px-Adobe_Photoshop_CC_icon.svg.png"],
+    ["Canva","https://static.vecteezy.com/system/resources/previews/056/850/847/non_2x/canva-app-logo-on-a-transparent-background-free-png.png"],
+    ["HubSpot","https://www.sixandflow.com/hs-fs/hubfs/HubSpot%20Logo.png?width=306&height=306&name=HubSpot%20Logo.png"],
+    ["Mailchimp","https://cdn-icons-png.flaticon.com/512/5968/5968928.png"],
+    ["Zapier","https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Zapier_logo.svg/120px-Zapier_logo.svg.png"],
+    ["ChatGPT","https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/120px-ChatGPT_logo.svg.png"],
+    ["Google Analytics","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaPSP40VGSYbouOHrO0kEOAU6kXc1kdET0Ww&s"],
+    ["Ads Manager","https://pngimg.com/d/meta_PNG1.png"],
+    ["Google Ads","https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Google_Ads_logo.svg/120px-Google_Ads_logo.svg.png"],
+    ["Slack","https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Slack_icon_2019.svg/500px-Slack_icon_2019.svg.png"],
+    ["Claude","https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Claude_AI_symbol.svg/1280px-Claude_AI_symbol.svg.png"],
+    ["Replit","https://images.seeklogo.com/logo-png/45/2/replit-icon-logo-png_seeklogo-453824.png"],
+    ["Whop","https://images.seeklogo.com/logo-png/64/2/whop-logo-png_seeklogo-643501.png"],
+    ["Google Sheet","https://e7.pngegg.com/pngimages/301/1/png-clipart-google-sheets-logo-thumbnail.png"],
+    ["Make (Integromat)","https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/dark/make-color.png"],
+    ["Pabbly Connect","https://assets-global.website-files.com/5f0f5f6b3f078d1f7e1fbe89/Pabbly-icon.png"]
+  ];
+  const track = document.getElementById('toolsTrack');
+  function chip(name,src){
+    const d = document.createElement('div');
+    d.className='tool-chip';
+    d.innerHTML = '<img src="'+src+'" alt="'+name+'" loading="lazy"><span>'+name+'</span>';
+    return d;
+  }
+  [...tools,...tools].forEach(([n,s])=>track.appendChild(chip(n,s)));
+
+  // ---------- Website carousel (unchanged full-slide format) ----------
+  function initCarousel(root){
+    const wrap = root.querySelector('.carousel-track-wrap');
+    const track = root.querySelector('.carousel-track');
+    const cards = [...track.children];
+    const dotsWrap = root.querySelector('.car-dots');
+    const countEl = root.querySelector('.car-count');
+    const prevBtn = root.querySelector('.car-btn[data-dir="-1"]');
+    const nextBtn = root.querySelector('.car-btn[data-dir="1"]');
+    let index = 0;
+    let cardWidth = 0;
+
+    cards.forEach((_,i)=>{
+      const d = document.createElement('button');
+      d.className = 'car-dot' + (i===0?' active':'');
+      d.setAttribute('aria-label','Go to slide '+(i+1));
+      d.addEventListener('click', ()=>go(i));
+      dotsWrap.appendChild(d);
+    });
+    const dots = [...dotsWrap.children];
+
+    function measure(){
+      cardWidth = wrap.getBoundingClientRect().width;
+    }
+    function update(animate=true){
+      track.style.transition = animate ? '' : 'none';
+      track.style.transform = 'translateX(-' + (index*cardWidth) + 'px)';
+      dots.forEach((d,i)=>d.classList.toggle('active', i===index));
+      countEl.textContent = (index+1) + ' / ' + cards.length;
+      if(!animate) requestAnimationFrame(()=>{ track.style.transition=''; });
+    }
+    function go(i){
+      index = Math.max(0, Math.min(cards.length-1, i));
+      update();
+    }
+    prevBtn.addEventListener('click', ()=>go(index-1));
+    nextBtn.addEventListener('click', ()=>go(index+1));
+
+    root.setAttribute('tabindex','0');
+    root.addEventListener('keydown', e=>{
+      if(e.key==='ArrowLeft') go(index-1);
+      if(e.key==='ArrowRight') go(index+1);
+    });
+
+    let startX=0, currentX=0, dragging=false, startTranslate=0;
+    function pointerDown(e){
+      dragging = true;
+      startX = (e.touches ? e.touches[0].clientX : e.clientX);
+      startTranslate = -index*cardWidth;
+      track.classList.add('dragging');
+    }
+    function pointerMove(e){
+      if(!dragging) return;
+      currentX = (e.touches ? e.touches[0].clientX : e.clientX);
+      const delta = currentX - startX;
+      track.style.transform = 'translateX(' + (startTranslate+delta) + 'px)';
+    }
+    function pointerUp(){
+      if(!dragging) return;
+      dragging = false;
+      track.classList.remove('dragging');
+      const delta = currentX - startX;
+      if(Math.abs(delta) > cardWidth*0.18){
+        go(delta < 0 ? index+1 : index-1);
+      } else {
+        update();
+      }
+      startX=0; currentX=0;
+    }
+    track.addEventListener('mousedown', pointerDown);
+    window.addEventListener('mousemove', pointerMove);
+    window.addEventListener('mouseup', pointerUp);
+    track.addEventListener('touchstart', pointerDown, {passive:true});
+    track.addEventListener('touchmove', pointerMove, {passive:true});
+    track.addEventListener('touchend', pointerUp);
+    track.addEventListener('dragstart', e=>e.preventDefault());
+
+    function resize(){ measure(); update(false); }
+    window.addEventListener('resize', resize);
+    resize();
+  }
+  const carWeb = document.getElementById('carWeb');
+  if(carWeb) initCarousel(carWeb);
+
+  // ---------- Graphics bento grid: staggered reveal on scroll ----------
+  const bentoTiles = document.querySelectorAll('.bento-tile');
+  const bentoIo = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const i = [...bentoTiles].indexOf(e.target);
+        e.target.style.transitionDelay = (Math.min(i,9)*0.06)+'s';
+        e.target.classList.add('in');
+        bentoIo.unobserve(e.target);
+      }
+    });
+  },{threshold:.15});
+  bentoTiles.forEach(t=>bentoIo.observe(t));
+
+  // ---------- Video phone row: arrow-button scrolling ----------
+  const phoneRow = document.getElementById('phoneRow');
+  if(phoneRow){
+    document.querySelectorAll('.phone-row-nav .car-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const dir = parseInt(btn.dataset.scroll,10);
+        phoneRow.scrollBy({left: dir*236, behavior:'smooth'});
+      });
+    });
+  }
+
+  // ---------- Automation: peek / coverflow carousel ----------
+  function initPeekCarousel(root){
+    const wrap = root.querySelector('.peek-track-wrap');
+    const track = root.querySelector('.peek-track');
+    const cards = [...track.children];
+    const dotsWrap = root.querySelector('.car-dots');
+    const prevBtn = root.querySelector('.car-btn[data-dir="-1"]');
+    const nextBtn = root.querySelector('.car-btn[data-dir="1"]');
+    let index = 0;
+
+    cards.forEach((card,i)=>{
+      const d = document.createElement('button');
+      d.className = 'car-dot' + (i===0?' active':'');
+      d.setAttribute('aria-label','Go to slide '+(i+1));
+      d.addEventListener('click', ()=>go(i));
+      dotsWrap.appendChild(d);
+      card.addEventListener('click', ()=>{ if(i!==index) go(i); });
+    });
+    const dots = [...dotsWrap.children];
+
+    function layout(animate=true){
+      const wrapW = wrap.getBoundingClientRect().width;
+      let offset = 0;
+      for(let i=0;i<index;i++) offset += cards[i].getBoundingClientRect().width + 24;
+      const activeW = cards[index].getBoundingClientRect().width;
+      const translate = (wrapW/2) - offset - (activeW/2);
+      track.style.transition = animate ? '' : 'none';
+      track.style.transform = 'translateX(' + translate + 'px)';
+      cards.forEach((c,i)=>c.classList.toggle('active', i===index));
+      dots.forEach((d,i)=>d.classList.toggle('active', i===index));
+      if(!animate) requestAnimationFrame(()=>{ track.style.transition=''; });
+    }
+    function go(i){
+      index = Math.max(0, Math.min(cards.length-1, i));
+      layout();
+    }
+    prevBtn.addEventListener('click', ()=>go(index-1));
+    nextBtn.addEventListener('click', ()=>go(index+1));
+
+    root.setAttribute('tabindex','0');
+    root.addEventListener('keydown', e=>{
+      if(e.key==='ArrowLeft') go(index-1);
+      if(e.key==='ArrowRight') go(index+1);
+    });
+
+    let startX=0, currentX=0, dragging=false;
+    function pointerDown(e){
+      dragging = true; startX = (e.touches ? e.touches[0].clientX : e.clientX);
+      track.classList.add('dragging');
+    }
+    function pointerMove(e){
+      if(!dragging) return;
+      currentX = (e.touches ? e.touches[0].clientX : e.clientX);
+    }
+    function pointerUp(){
+      if(!dragging) return;
+      dragging = false;
+      track.classList.remove('dragging');
+      const delta = currentX - startX;
+      if(Math.abs(delta) > 60){ go(delta < 0 ? index+1 : index-1); }
+      else { layout(); }
+      startX=0; currentX=0;
+    }
+    track.addEventListener('mousedown', pointerDown);
+    window.addEventListener('mousemove', pointerMove);
+    window.addEventListener('mouseup', pointerUp);
+    track.addEventListener('touchstart', pointerDown, {passive:true});
+    track.addEventListener('touchmove', pointerMove, {passive:true});
+    track.addEventListener('touchend', pointerUp);
+    track.addEventListener('dragstart', e=>e.preventDefault());
+
+    window.addEventListener('resize', ()=>layout(false));
+    layout(false);
+  }
+  const carAutomation = document.getElementById('carAutomation');
+  if(carAutomation) initPeekCarousel(carAutomation);
+
+})();
 </script>
 </body>
 </html>
