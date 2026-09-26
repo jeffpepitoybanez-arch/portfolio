@@ -343,6 +343,68 @@
   .tool-chip img{width:22px;height:22px;object-fit:contain;}
   .tool-chip span{font-size:13.5px;color:var(--ink-dim);}
 
+  /* ================= SETUP ================= */
+  .setup-head{text-align:center;max-width:620px;margin:0 auto 44px;}
+  .setup-head p{color:var(--ink-dim);font-size:16px;margin:0 auto;max-width:52ch;}
+  .setup-stage{
+    position:relative;display:grid;grid-template-columns:190px minmax(0,1fr) 190px;gap:44px;
+    max-width:1100px;margin:0 auto;
+  }
+  .setup-photo{
+    position:relative;aspect-ratio:1800/1065;
+    filter:drop-shadow(0 30px 40px rgba(0,0,0,.55));
+  }
+  .setup-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+  .setup-col{position:relative;}
+  .setup-label{
+    position:absolute;left:0;right:0;transform:translateY(-50%);
+    display:flex;align-items:center;gap:12px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;
+    background:rgba(16,20,27,.85);transition:border-color .25s,background .25s;
+  }
+  .setup-col.left .setup-label{flex-direction:row-reverse;text-align:right;}
+  .setup-label .gear-icon{width:36px;height:36px;border-radius:9px;}
+  .setup-label .gear-icon svg{width:18px;height:18px;}
+  .setup-label .gear-name{font-size:14.5px;}
+  .setup-label .gear-spec{font-size:12px;}
+  .setup-label.on{border-color:var(--gold);background:rgba(201,169,110,.08);}
+  .setup-lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:2;}
+  .setup-lines path{fill:none;stroke:var(--gold);stroke-width:1.2;opacity:.6;transition:opacity .25s,stroke-width .25s;}
+  .setup-lines circle{fill:var(--gold);}
+  .setup-lines path.on{opacity:1;stroke-width:2;}
+  .hotspot{
+    position:absolute;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;z-index:3;
+    background:var(--gold);border:2px solid #0b0d10;box-shadow:0 0 0 4px rgba(201,169,110,.3);
+  }
+  .hotspot::after{
+    content:"";position:absolute;inset:-6px;border-radius:50%;border:1px solid var(--gold);
+    animation:hotPulse 2.4s var(--ease) infinite;
+  }
+  .hotspot span{display:none;}
+  @keyframes hotPulse{0%{transform:scale(.6);opacity:.9}100%{transform:scale(1.8);opacity:0}}
+  @media (prefers-reduced-motion:reduce){.hotspot::after{animation:none;}}
+  .setup-extra{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:36px;}
+  .setup-extra .gear-icon{width:auto;height:auto;border:none;border-radius:0;}
+  .setup-list{display:none;}
+  @media(max-width:900px){
+    .setup-stage{grid-template-columns:1fr;gap:0;}
+    .setup-col,.setup-lines{display:none;}
+    .hotspot{width:22px;height:22px;margin:-11px 0 0 -11px;display:flex;align-items:center;justify-content:center;}
+    .hotspot span{display:block;font:700 11px/1 'Space Grotesk',sans-serif;color:#0b0d10;}
+    .setup-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:22px;counter-reset:gear;}
+    .setup-list .setup-label{position:static;transform:none;}
+    .setup-list .setup-label::before{
+      counter-increment:gear;content:counter(gear);flex:0 0 auto;width:22px;height:22px;border-radius:50%;
+      background:var(--gold);color:#0b0d10;font:700 11px/22px 'Space Grotesk',sans-serif;text-align:center;
+    }
+  }
+  .gear-icon{
+    width:42px;height:42px;flex:0 0 auto;border-radius:10px;border:1px solid var(--line-strong);
+    display:flex;align-items:center;justify-content:center;color:var(--gold);
+  }
+  .gear-icon svg{width:20px;height:20px;}
+  .gear-name{font-size:16px;color:var(--ink);font-weight:600;}
+  .gear-spec{font-size:13px;color:var(--ink-dim);margin-top:2px;}
+
   /* ================= PORTFOLIO — shared ================= */
   .proj-category{margin-bottom:96px;}
   .proj-category:last-child{margin-bottom:0;}
@@ -778,6 +840,64 @@
   </div>
 </section>
 
+<!-- SETUP -->
+<section id="setup">
+  <div class="wrap">
+    <div class="setup-head reveal">
+      <div class="kicker">Behind The Scenes</div>
+      <h2 style="font-size:clamp(26px,3.6vw,36px);margin-bottom:14px;">My Working Setup</h2>
+      <p>The gear I use every day to build, edit, and run client calls.</p>
+    </div>
+    <div class="setup-stage reveal" id="setupStage">
+      <svg class="setup-lines" aria-hidden="true"></svg>
+      <div class="setup-col left">
+        <div class="setup-label" data-gear="macbook" style="top:38%">
+          <div class="gear-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="11" rx="1"/><path d="M2 19h20l-1.5-3h-17z"/></svg></div>
+          <div><div class="gear-name">MacBook Air M2</div><div class="gear-spec">Main workstation</div></div>
+        </div>
+        <div class="setup-label" data-gear="keyboard" style="top:83%">
+          <div class="gear-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="1.5"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M6 14h12"/></svg></div>
+          <div><div class="gear-name">Keyboard</div><div class="gear-spec">Input device</div></div>
+        </div>
+      </div>
+      <div class="setup-photo">
+        <img src="https://i.imgur.com/45BcyAc.png" width="1800" height="1065" alt="Desk setup: MacBook Air on a stand beside an NVISION monitor, with speakers, keyboard and mouse">
+        <div class="hotspot" data-gear="macbook" style="left:17%;top:38%"><span>1</span></div>
+        <div class="hotspot" data-gear="keyboard" style="left:44%;top:83%"><span>2</span></div>
+        <div class="hotspot" data-gear="monitor" style="left:72%;top:19%"><span>3</span></div>
+        <div class="hotspot" data-gear="speaker" style="left:69%;top:54%"><span>4</span></div>
+        <div class="hotspot" data-gear="mouse" style="left:96.5%;top:82%"><span>5</span></div>
+      </div>
+      <div class="setup-col right">
+        <div class="setup-label" data-gear="monitor" style="top:19%">
+          <div class="gear-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M9 20h6M12 16v4"/></svg></div>
+          <div><div class="gear-name">NVISION 100Hz Monitor</div><div class="gear-spec">External display</div></div>
+        </div>
+        <div class="setup-label" data-gear="speaker" style="top:54%">
+          <div class="gear-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><circle cx="12" cy="8" r="2"/><circle cx="12" cy="15" r="3.2"/></svg></div>
+          <div><div class="gear-name">Speaker</div><div class="gear-spec">Audio output</div></div>
+        </div>
+        <div class="setup-label" data-gear="mouse" style="top:84%">
+          <div class="gear-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="5"/><path d="M12 3v6"/></svg></div>
+          <div><div class="gear-name">Mouse</div><div class="gear-spec">Input device</div></div>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile: numbered list matching the hotspots -->
+    <div class="setup-list">
+      <div class="setup-label"><div><div class="gear-name">MacBook Air M2</div><div class="gear-spec">Main workstation</div></div></div>
+      <div class="setup-label"><div><div class="gear-name">Keyboard</div><div class="gear-spec">Input device</div></div></div>
+      <div class="setup-label"><div><div class="gear-name">NVISION 100Hz Monitor</div><div class="gear-spec">External display</div></div></div>
+      <div class="setup-label"><div><div class="gear-name">Speaker</div><div class="gear-spec">Audio output</div></div></div>
+      <div class="setup-label"><div><div class="gear-name">Mouse</div><div class="gear-spec">Input device</div></div></div>
+    </div>
+    <div class="setup-extra reveal">
+      <div class="tool-chip"><div class="gear-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="5"/><circle cx="12" cy="10" r="1.6"/><path d="M7 19h10M9 19l-1-3M15 19l1-3"/></svg></div><span>Webcam · Video calls</span></div>
+      <div class="tool-chip"><div class="gear-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.45 1 1.15 1 1.9V17h5v-1.2c0-.75.4-1.45 1-1.9A6 6 0 0 0 12 3z"/></svg></div><span>Light · Lighting setup</span></div>
+    </div>
+  </div>
+</section>
+
 <!-- PORTFOLIO -->
 <section id="portfolio-web">
   <div class="wrap">
@@ -839,7 +959,7 @@
           </div>
         </div>
       </div>
-      <a href="https://drive.google.com/drive/folders/1lIpdeA0Ltaouf8paHGuLC8SeZ1UCudVF?usp=drive_link" class="more-link">View More Web &amp; Funnel Projects</a>
+      <a href="https://drive.google.com/drive/folders/1lIpdeA0Ltaouf8paHGuLC8SeZ1UCudVF?usp=drive_link" class="more-link" target="_blank" rel="noopener noreferrer">View More Web &amp; Funnel Projects</a>
     </div>
 
     <!-- ============ GRAPHICS — aesthetic bento grid ============ -->
@@ -862,7 +982,7 @@
         <div class="bento-tile b-sq"><img src="https://i.imgur.com/jmwnwxW.png" alt="Graphic sample 9"><div class="bento-cap">Email Banner</div></div>
         <div class="bento-tile b-wide"><img src="https://i.imgur.com/VuJsq2U.png" alt="Graphic sample 10"><div class="bento-cap">Testimonial Card</div></div>
       </div>
-      <a href="https://drive.google.com/drive/folders/1Q4OaoAWIT73MiYj_AhUabgIgQklyeinA?usp=drive_link" class="more-link">View More Graphics Projects</a>
+      <a href="https://drive.google.com/drive/folders/1Q4OaoAWIT73MiYj_AhUabgIgQklyeinA?usp=drive_link" class="more-link" target="_blank" rel="noopener noreferrer">View More Graphics Projects</a>
     </div>
 
     <!-- ============ VIDEO — realistic phone-frame reels ============ -->
@@ -968,6 +1088,7 @@
           <button class="car-btn" data-scroll="1" aria-label="Scroll right">›</button>
         </div>
       </div>
+      <a href="https://drive.google.com/drive/folders/1xklKeDh_cO0jP0lSY4unqvAiB4Xw3xF8?usp=drive_link" class="more-link" target="_blank" rel="noopener noreferrer">View More Video Samples</a>
     </div>
 
     <!-- ============ AUTOMATION — same carousel format as Website ============ -->
@@ -1032,7 +1153,7 @@
           </div>
         </div>
       </div>
-      <a href="https://drive.google.com/drive/folders/1CNyQc1l64iKctbwsMGAH9vM4QT0HDV5i?usp=drive_link" class="more-link">View More Automation Projects</a>
+      <a href="https://drive.google.com/drive/folders/1CNyQc1l64iKctbwsMGAH9vM4QT0HDV5i?usp=drive_link" class="more-link" target="_blank" rel="noopener noreferrer">View More Automation Projects</a>
     </div>
 
   </div>
@@ -1371,6 +1492,45 @@
   // ---------- Automation: same carousel logic as Website ----------
   const carAutomation = document.getElementById('carAutomation');
   if(carAutomation) initCarousel(carAutomation);
+
+  // ---------- Setup: draw callout lines from labels to hotspots ----------
+  const setupStage = document.getElementById('setupStage');
+  if(setupStage){
+    const svgEl = setupStage.querySelector('.setup-lines');
+    const NS = 'http://www.w3.org/2000/svg';
+    const drawSetup = ()=>{
+      svgEl.innerHTML = '';
+      if(getComputedStyle(svgEl).display === 'none') return;
+      const box = setupStage.getBoundingClientRect();
+      setupStage.querySelectorAll('.setup-col .setup-label').forEach(lab=>{
+        const dot = setupStage.querySelector('.hotspot[data-gear="'+lab.dataset.gear+'"]');
+        if(!dot) return;
+        const l = lab.getBoundingClientRect(), d = dot.getBoundingClientRect();
+        const isLeft = lab.parentElement.classList.contains('left');
+        const x1 = (isLeft ? l.right : l.left) - box.left, y1 = l.top + l.height/2 - box.top;
+        const x2 = d.left + d.width/2 - box.left, y2 = d.top + d.height/2 - box.top;
+        const bend = x1 + (isLeft ? 22 : -22);
+        const path = document.createElementNS(NS,'path');
+        path.setAttribute('d', `M${x1},${y1} H${bend} L${x2},${y2}`);
+        path.dataset.gear = lab.dataset.gear;
+        const cap = document.createElementNS(NS,'circle');
+        cap.setAttribute('cx', x1); cap.setAttribute('cy', y1); cap.setAttribute('r', 2.5);
+        svgEl.append(path, cap);
+      });
+    };
+    const highlight = (gear, on)=>{
+      setupStage.querySelectorAll('[data-gear="'+gear+'"]').forEach(el=>el.classList.toggle('on', on));
+    };
+    setupStage.querySelectorAll('.setup-label, .hotspot').forEach(el=>{
+      el.addEventListener('mouseenter', ()=>highlight(el.dataset.gear, true));
+      el.addEventListener('mouseleave', ()=>highlight(el.dataset.gear, false));
+    });
+    new ResizeObserver(drawSetup).observe(setupStage);
+    setupStage.addEventListener('transitionend', e=>{ if(e.target === setupStage) drawSetup(); });
+    const setupImg = setupStage.querySelector('img');
+    if(setupImg && !setupImg.complete) setupImg.addEventListener('load', drawSetup);
+    drawSetup();
+  }
 
 })();
 </script>
