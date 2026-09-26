@@ -307,6 +307,12 @@
   @media(max-width:1024px){
     .social-rail,.float-card{display:none;}
     .hero-photo{margin:0 auto;}
+    /* Stacked layout: badge, headline, subheadline, photo, then marquee + buttons */
+    .hero-grid{gap:0;}
+    .hero-copy{display:contents;}
+    .hero-copy .badge-pill{justify-self:start;}
+    .hero-photo{order:1;width:100%;margin-top:32px;}
+    .hero-copy .marquee-wrap,.hero-copy .hero-cta-row{order:2;}
   }
 
   /* ================= ABOUT ================= */
@@ -648,7 +654,24 @@
     background:linear-gradient(180deg,rgba(0,0,0,.5),transparent);}
   .phone-row-nav{display:flex;justify-content:center;gap:10px;margin-top:6px;}
   @media(max-width:1280px){.phone-row{justify-content:flex-start;}}
-  @media(max-width:560px){.phone-row-nav{display:none;}}
+  .phone-dots{display:none;}
+  /* Mobile: one reel per slide, swipe with snap, side arrows + dots */
+  @media(max-width:560px){
+    .phone-row{scroll-snap-type:x mandatory;gap:0;padding:10px 0 22px;overscroll-behavior-x:contain;}
+    .phone-mock{flex:0 0 100%;width:100%;display:flex;justify-content:center;scroll-snap-align:center;scroll-snap-stop:always;}
+    .phone-shell{width:216px;height:440px;}
+    .phone-row-fade{display:none;}
+    .phone-row-nav{
+      position:absolute;left:clamp(18px,4vw,28px);right:clamp(18px,4vw,28px);top:10px;bottom:33px;margin:0;
+      display:flex;justify-content:space-between;align-items:center;pointer-events:none;z-index:3;
+    }
+    .phone-row-nav .car-btn{
+      pointer-events:auto;background:rgba(7,9,11,.78);color:var(--ink);border-color:var(--line-strong);
+      font-size:20px;
+    }
+    .phone-row-nav .car-btn:hover{transform:none;}
+    .phone-dots{display:flex;justify-content:center;gap:8px;margin-top:2px;}
+  }
 
   /* ================= FAQ ================= */
   .faq-list{max-width:820px;}
@@ -742,7 +765,7 @@
 <!-- HERO -->
 <section class="hero" id="hero">
   <div class="wrap hero-grid">
-    <div>
+    <div class="hero-copy">
       <div class="badge-pill"><span class="dot"></span> Philippines-Based · Open to New Projects</div>
       <h1 id="heroHeadline">The <em>Full-Stack</em> Virtual Assistant Who Builds &amp; Automates.</h1>
       <p class="lead">I don't just execute tasks — I build the systems that run your business. GoHighLevel funnels, API integrations, and end-to-end automation across Make, Zapier, and Pabbly, backed by a background in Information Systems and 4+ years turning operations into revenue.</p>
@@ -1199,6 +1222,7 @@
           <button class="car-btn" data-scroll="-1" aria-label="Scroll left">‹</button>
           <button class="car-btn" data-scroll="1" aria-label="Scroll right">›</button>
         </div>
+        <div class="phone-dots car-dots" id="phoneDots"></div>
       </div>
       <a href="https://drive.google.com/drive/folders/1xklKeDh_cO0jP0lSY4unqvAiB4Xw3xF8?usp=drive_link" class="more-link" target="_blank" rel="noopener noreferrer">View More Video Samples</a>
     </div>
@@ -1590,13 +1614,40 @@
   },{threshold:.15});
   bentoTiles.forEach(t=>bentoIo.observe(t));
 
-  // ---------- Video phone row: arrow-button scrolling ----------
+  // ---------- Video phone row: arrows, swipe (native scroll-snap) + dots ----------
   const phoneRow = document.getElementById('phoneRow');
   if(phoneRow){
+    const mocks = phoneRow.querySelectorAll('.phone-mock');
+    const phoneDots = document.getElementById('phoneDots');
+    const isMobileRow = ()=> window.matchMedia('(max-width:560px)').matches;
+    const step = ()=> mocks[0].getBoundingClientRect().width + (parseFloat(getComputedStyle(phoneRow).columnGap) || 0);
+    const current = ()=> Math.round(phoneRow.scrollLeft / step());
+    const goTo = i=> phoneRow.scrollTo({left: i*step(), behavior:'smooth'});
+
+    mocks.forEach((_, i)=>{
+      const d = document.createElement('button');
+      d.className = 'car-dot';
+      d.setAttribute('aria-label', 'Go to reel '+(i+1));
+      d.addEventListener('click', ()=>goTo(i));
+      phoneDots.appendChild(d);
+    });
+    const syncDots = ()=>{
+      const idx = Math.min(current(), mocks.length-1);
+      phoneDots.querySelectorAll('.car-dot').forEach((d,i)=>d.classList.toggle('active', i===idx));
+    };
+    let dotRaf;
+    phoneRow.addEventListener('scroll', ()=>{ cancelAnimationFrame(dotRaf); dotRaf = requestAnimationFrame(syncDots); }, {passive:true});
+    syncDots();
+
     document.querySelectorAll('.phone-row-nav .car-btn').forEach(btn=>{
       btn.addEventListener('click', ()=>{
         const dir = parseInt(btn.dataset.scroll,10);
-        phoneRow.scrollBy({left: dir*236, behavior:'smooth'});
+        if(isMobileRow()){
+          // one reel per tap, wrapping around at either end
+          goTo((current() + dir + mocks.length) % mocks.length);
+        } else {
+          phoneRow.scrollBy({left: dir*236, behavior:'smooth'});
+        }
       });
     });
   }
