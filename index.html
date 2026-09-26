@@ -652,6 +652,18 @@
     background:linear-gradient(0deg,rgba(0,0,0,.75),transparent);}
   .phone-fade-top{position:absolute;left:0;right:0;top:0;height:24%;z-index:2;
     background:linear-gradient(180deg,rgba(0,0,0,.5),transparent);}
+  .phone-sound{
+    position:absolute;top:34px;right:10px;z-index:5;width:32px;height:32px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;color:#fff;
+    background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.25);
+    transition:background .2s,border-color .2s,transform .2s;
+  }
+  .phone-sound:hover{transform:scale(1.08);}
+  .phone-sound svg{width:16px;height:16px;}
+  .phone-sound .ico-on{display:none;}
+  .phone-sound.on{background:var(--gold);border-color:var(--gold);color:#0b0d10;}
+  .phone-sound.on .ico-on{display:block;}
+  .phone-sound.on .ico-off{display:none;}
   .phone-row-nav{display:flex;justify-content:center;gap:10px;margin-top:6px;}
   @media(max-width:1280px){.phone-row{justify-content:flex-start;}}
   .phone-dots{display:none;}
@@ -1395,6 +1407,7 @@
   </div>
 </footer>
 
+<script src="https://player.vimeo.com/api/player.js"></script>
 <script>
 (function(){
   // ---------- Nav solid on scroll + active link (scrollspy) ----------
@@ -1650,6 +1663,54 @@
         }
       });
     });
+
+    // Sound toggle: one reel with sound at a time; muted again when scrolled away
+    if(window.Vimeo){
+      const ICON_OFF = '<svg class="ico-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="m23 9-6 6M17 9l6 6"/></svg>';
+      const ICON_ON = '<svg class="ico-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>';
+      const reels = [];
+      const setSound = (reel, on)=>{
+        reel.on = on;
+        reel.btn.classList.toggle('on', on);
+        reel.btn.setAttribute('aria-pressed', on);
+        reel.btn.setAttribute('aria-label', on ? 'Mute video' : 'Unmute video');
+        reel.player = reel.player || new Vimeo.Player(reel.iframe);
+        if(on){
+          reel.player.setMuted(false).catch(()=>{});
+          reel.player.setVolume(1).catch(()=>{});
+          reel.player.play().catch(()=>{});
+        } else {
+          reel.player.setVolume(0).catch(()=>{});
+          reel.player.setMuted(true).catch(()=>{});
+        }
+      };
+      mocks.forEach(mock=>{
+        const iframe = mock.querySelector('iframe');
+        const screen = mock.querySelector('.phone-screen');
+        if(!iframe || !screen) return;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'phone-sound';
+        btn.innerHTML = ICON_OFF + ICON_ON;
+        screen.appendChild(btn);
+        const reel = {mock, iframe, btn, player:null, on:false};
+        btn.setAttribute('aria-pressed', 'false');
+        btn.setAttribute('aria-label', 'Unmute video');
+        btn.addEventListener('click', ()=>{
+          const turnOn = !reel.on;
+          if(turnOn) reels.forEach(r=>{ if(r !== reel && r.on) setSound(r, false); });
+          setSound(reel, turnOn);
+        });
+        reels.push(reel);
+      });
+      const soundIo = new IntersectionObserver(entries=>{
+        entries.forEach(e=>{
+          const reel = reels.find(r=>r.mock === e.target);
+          if(reel && reel.on && e.intersectionRatio < .5) setSound(reel, false);
+        });
+      },{threshold:[0,.5]});
+      reels.forEach(r=>soundIo.observe(r.mock));
+    }
   }
 
   // ---------- Automation: same carousel logic as Website ----------
