@@ -1573,13 +1573,26 @@
     ["Whop","https://images.seeklogo.com/logo-png/64/2/whop-logo-png_seeklogo-643501.png"],
     ["Google Sheet","https://e7.pngegg.com/pngimages/301/1/png-clipart-google-sheets-logo-thumbnail.png"],
     ["Make (Integromat)","https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/dark/make-color.png"],
-    ["Pabbly Connect","https://assets-global.website-files.com/5f0f5f6b3f078d1f7e1fbe89/Pabbly-icon.png"]
+    ["Pabbly Connect","https://assets-global.website-files.com/5f0f5f6b3f078d1f7e1fbe89/Pabbly-icon.png"],
+    ["n8n","assets/logos/n8n.svg"],
+    ["ManyChat","assets/logos/manychat.png"],
+    ["Gemini","assets/logos/gemini.svg"],
+    ["Sendblue","assets/logos/sendblue.png"],
+    ["Linq","assets/logos/linq.png"],
+    ["WhatsApp","assets/logos/whatsapp.svg"],
+    ["Google Chat","assets/logos/google-chat.svg"],
+    ["Trello","assets/logos/trello.svg"],
+    ["Monday.com","assets/logos/monday.png"],
+    ["Squarespace","assets/logos/squarespace.svg"],
+    ["VS Code","assets/logos/vscode.svg"],
+    ["Antigravity","assets/logos/antigravity.png"]
   ];
   const toolLogo = Object.fromEntries(tools);
+  toolLogo["GHL Automation"] = toolLogo["GoHighLevel"]; // GHL feature, uses the GoHighLevel logo
   const toolGroups = {
-    crm:           ["GoHighLevel","HubSpot","Click Funnels","WordPress","Whop"],
-    automation:    ["Zapier","Make (Integromat)","Pabbly Connect","Google Sheet","ChatGPT","Claude","Replit"],
-    communication: ["Slack","Mailchimp","Google Analytics","Ads Manager","Google Ads"],
+    crm:           ["GoHighLevel","HubSpot","Click Funnels","WordPress","Whop","Squarespace","Replit","VS Code","Antigravity"],
+    automation:    ["GHL Automation","Zapier","Make (Integromat)","Pabbly Connect","n8n","ManyChat","Sendblue","Google Sheet","ChatGPT","Claude","Gemini"],
+    communication: ["Slack","Google Chat","WhatsApp","Linq","Sendblue","Trello","Monday.com","Mailchimp","Google Analytics","Ads Manager","Google Ads"],
     creative:      ["Photoshop","Canva","Adobe Premiere","CapCut"]
   };
   function chip(name,src){
