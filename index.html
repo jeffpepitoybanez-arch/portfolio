@@ -273,7 +273,7 @@
   .btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px);}
 
   .hero-photo{position:relative;}
-  /* Cut-out portrait with a gold glow behind it */
+  /* Cut-out portrait with a white glow behind it */
   .hero-photo-frame{
     position:relative;aspect-ratio:864/1224;isolation:isolate;
     opacity:0;animation:photoIn 1s var(--ease) forwards;animation-delay:.3s;
@@ -282,14 +282,14 @@
   .hero-photo-frame::before{ /* glow behind the shoulders/head */
     content:"";position:absolute;left:50%;top:40%;width:92%;aspect-ratio:1;transform:translate(-50%,-50%);
     border-radius:50%;z-index:-1;filter:blur(46px);
-    background:radial-gradient(circle, rgba(201,169,110,.55) 0%, rgba(201,169,110,.22) 42%, rgba(130,188,255,.08) 62%, transparent 72%);
+    background:radial-gradient(circle, rgba(255,255,255,.42) 0%, rgba(255,255,255,.16) 42%, rgba(255,255,255,.05) 62%, transparent 72%);
     animation:glowPulse 6s ease-in-out infinite;
   }
   @keyframes glowPulse{0%,100%{opacity:.85;transform:translate(-50%,-50%) scale(1);}50%{opacity:1;transform:translate(-50%,-50%) scale(1.06);}}
   @media (prefers-reduced-motion:reduce){.hero-photo-frame::before{animation:none;}}
   .hero-photo-frame img{
     position:relative;width:100%;height:100%;object-fit:contain;object-position:bottom;
-    filter:drop-shadow(0 0 22px rgba(201,169,110,.35)) drop-shadow(0 24px 40px rgba(0,0,0,.55));
+    filter:drop-shadow(0 0 22px rgba(255,255,255,.28)) drop-shadow(0 24px 40px rgba(0,0,0,.55));
     /* fade the waist cut into the page */
     -webkit-mask-image:linear-gradient(180deg,#000 78%,transparent 100%);
     mask-image:linear-gradient(180deg,#000 78%,transparent 100%);
@@ -392,6 +392,9 @@
   }
   .tl-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
   .tl-media:has(img){border-style:solid;border-color:var(--line);}
+  /* Show the whole photo, uncropped, at its own proportions */
+  .tl-media.tl-full{aspect-ratio:auto;display:block;}
+  .tl-media.tl-full img{position:static;display:block;width:100%;height:auto;object-fit:contain;}
   .tl-media:has(img) .tl-ph{display:none;}
   .tl-ph{display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--ink-faint);font-size:13px;text-align:center;padding:20px;}
   .tl-ph svg{width:28px;height:28px;}
@@ -885,8 +888,8 @@
           <p>Studied how data, software, and business processes connect — databases, systems analysis, and project workflows. This is the foundation that lets me understand a client's entire operation, not just the task in front of me.</p>
           <div class="tag-row"><span class="tag">Systems Analysis</span><span class="tag">Databases</span><span class="tag">Process Design</span></div>
         </div>
-        <div class="tl-media">
-          <img src="assets/journey-graduation.jpg" width="720" height="730" alt="Jeff P. Ybanez in graduation toga, Bachelor of Science in Information Systems" loading="lazy" style="object-position:50% 22%">
+        <div class="tl-media tl-full">
+          <img src="assets/journey-graduation.jpg" width="720" height="730" alt="Jeff P. Ybanez in graduation toga, Bachelor of Science in Information Systems" loading="lazy">
         </div>
       </div>
       <div class="tl-item">
