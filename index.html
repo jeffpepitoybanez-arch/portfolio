@@ -457,6 +457,12 @@
   }
   .tool-chip img{width:22px;height:22px;object-fit:contain;}
   .tool-chip span{font-size:13.5px;color:var(--ink-dim);}
+  .tools-group + .tools-group{margin-top:28px;}
+  .tools-label{
+    display:flex;align-items:center;gap:10px;margin-bottom:12px;
+    font-family:'Space Grotesk';font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--gold);
+  }
+  .tools-label::after{content:"";flex:1;height:1px;background:var(--line);}
 
   /* ================= SETUP ================= */
   .setup-head{text-align:center;max-width:620px;margin:0 auto 44px;}
@@ -1008,10 +1014,22 @@
       <p>I leverage cutting-edge tools to simplify processes, enhance campaigns, and achieve outstanding results for your business.</p>
     </div>
   </div>
-  <div class="tools-marquee">
-    <div class="tools-track" id="toolsTrack">
-      <!-- populated + duplicated by JS -->
-    </div>
+  <!-- One scrolling row per category; chips are built by JS from toolGroups -->
+  <div class="tools-group">
+    <div class="wrap"><div class="tools-label">CRM &amp; Funnels</div></div>
+    <div class="tools-marquee"><div class="tools-track" data-group="crm"></div></div>
+  </div>
+  <div class="tools-group">
+    <div class="wrap"><div class="tools-label">Automation &amp; AI</div></div>
+    <div class="tools-marquee"><div class="tools-track" data-group="automation"></div></div>
+  </div>
+  <div class="tools-group">
+    <div class="wrap"><div class="tools-label">Communication &amp; Marketing</div></div>
+    <div class="tools-marquee"><div class="tools-track" data-group="communication"></div></div>
+  </div>
+  <div class="tools-group">
+    <div class="wrap"><div class="tools-label">Graphic &amp; Video Editing</div></div>
+    <div class="tools-marquee"><div class="tools-track" data-group="creative"></div></div>
   </div>
 </section>
 
@@ -1548,14 +1566,27 @@
     ["Make (Integromat)","https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/dark/make-color.png"],
     ["Pabbly Connect","https://assets-global.website-files.com/5f0f5f6b3f078d1f7e1fbe89/Pabbly-icon.png"]
   ];
-  const track = document.getElementById('toolsTrack');
+  const toolLogo = Object.fromEntries(tools);
+  const toolGroups = {
+    crm:           ["GoHighLevel","HubSpot","Click Funnels","WordPress","Whop"],
+    automation:    ["Zapier","Make (Integromat)","Pabbly Connect","Google Sheet","ChatGPT","Claude","Replit"],
+    communication: ["Slack","Mailchimp","Google Analytics","Ads Manager","Google Ads"],
+    creative:      ["Photoshop","Canva","Adobe Premiere","CapCut"]
+  };
   function chip(name,src){
     const d = document.createElement('div');
     d.className='tool-chip';
     d.innerHTML = '<img src="'+src+'" alt="'+name+'" loading="lazy"><span>'+name+'</span>';
     return d;
   }
-  [...tools,...tools].forEach(([n,s])=>track.appendChild(chip(n,s)));
+  document.querySelectorAll('.tools-track[data-group]').forEach(track=>{
+    const names = toolGroups[track.dataset.group] || [];
+    if(!names.length) return;
+    // Short lists are repeated so each half of the loop is wider than big screens (no gaps mid-scroll)
+    const half = [];
+    while(half.length < 18) half.push(...names);
+    [...half,...half].forEach(n=>track.appendChild(chip(n, toolLogo[n])));
+  });
 
   // ---------- Website carousel (unchanged full-slide format) ----------
   function initCarousel(root){
