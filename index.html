@@ -39,6 +39,7 @@
       "image": "https://i.imgur.com/LB8Dejt.png",
       "address": { "@type": "PostalAddress", "addressCountry": "PH" },
       "alumniOf": "Bachelor's Degree in Information Systems",
+      "award": ["Cum Laude (Latin Honors), Bachelor's Degree in Information Systems", "Civil Service Eligible"],
       "knowsAbout": ["GoHighLevel", "CRM Automation", "Sales Funnels", "API Integration", "Make", "Zapier", "Pabbly Connect", "Web Development", "Business Process Automation", "Virtual Assistance"],
       "sameAs": [
         "https://www.linkedin.com/in/jeff-ybanez-b08044346/",
@@ -347,6 +348,13 @@
     transition:.25s;
   }
   .tag:hover{border-color:var(--gold);color:var(--gold);}
+  .honor-row{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 14px;}
+  .honor{
+    display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;
+    background:var(--gold-soft);border:1px solid rgba(201,169,110,.45);color:var(--gold);
+    font-family:'Space Grotesk';font-size:12.5px;font-weight:600;line-height:1.2;
+  }
+  .honor svg{width:14px;height:14px;flex:0 0 14px;}
   .about-body .btn{margin-top:28px;}
 
   /* ================= JOURNEY (timeline) ================= */
@@ -857,7 +865,7 @@
     <div class="about-body reveal">
       <div class="kicker">About Me</div>
       <h2 style="font-size:clamp(26px,3.6vw,36px);margin-bottom:20px;">I'm Jeff, from the Philippines 🇵🇭, a full-stack virtual assistant who gets results.</h2>
-      <p>I hold a <strong>Bachelor's Degree in Information Systems</strong>, and that technical foundation is exactly what sets me apart from a typical VA. I don't just follow instructions. I understand how systems, data, and workflows connect across a business, so I can spot the bottleneck, build the fix, and automate it so it never happens again.</p>
+      <p>I graduated <strong>Cum Laude</strong> with a <strong>Bachelor's Degree in Information Systems</strong>, and I'm <strong>Civil Service Eligible</strong>. That technical foundation is exactly what sets me apart from a typical VA. I don't just follow instructions. I understand how systems, data, and workflows connect across a business, so I can spot the bottleneck, build the fix, and automate it so it never happens again.</p>
       <p>Today I work as a full-stack virtual assistant: building GoHighLevel funnels and CRMs, connecting tools through APIs, and wiring automations across Make, Zapier, and Pabbly Connect so your team spends less time on repetitive work and more time closing deals. I work with a diverse range of industries and tailor every project to the client's specific goals, tech stack, and growth stage.</p>
       <p style="color:var(--ink);font-weight:600;margin-bottom:10px;">Industries I've Worked With</p>
       <div class="tag-row">
@@ -885,6 +893,10 @@
         <div class="tl-content">
           <div class="tl-eyebrow">College · Philippines</div>
           <h3>Bachelor's Degree in Information Systems</h3>
+          <div class="honor-row">
+            <span class="honor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.2 13.7 7 22l5-3 5 3-1.2-8.3"/></svg>Cum Laude · Latin Honors</span>
+            <span class="honor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>Civil Service Eligible</span>
+          </div>
           <p>Studied how data, software, and business processes connect: databases, systems analysis, and project workflows. This is the foundation that lets me understand a client's entire operation, not just the task in front of me.</p>
           <div class="tag-row"><span class="tag">Systems Analysis</span><span class="tag">Databases</span><span class="tag">Process Design</span></div>
         </div>
