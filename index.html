@@ -457,9 +457,13 @@
   }
   .tool-chip img{width:22px;height:22px;object-fit:contain;}
   .tool-chip span{font-size:13.5px;color:var(--ink-dim);}
-  .tools-group + .tools-group{margin-top:28px;}
+  .tools-cats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:44px;}
+  @media(max-width:760px){.tools-cats{grid-template-columns:1fr;}}
+  .tools-cat{padding:22px;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-alt);}
+  .tools-static{display:flex;flex-wrap:wrap;gap:10px;}
+  .tools-static .tool-chip{padding:10px 14px;}
   .tools-label{
-    display:flex;align-items:center;gap:10px;margin-bottom:12px;
+    display:flex;align-items:center;gap:10px;margin-bottom:14px;
     font-family:'Space Grotesk';font-size:12.5px;font-weight:600;letter-spacing:.04em;color:var(--gold);
   }
   .tools-label::after{content:"";flex:1;height:1px;background:var(--line);}
@@ -1014,22 +1018,27 @@
       <p>I leverage cutting-edge tools to simplify processes, enhance campaigns, and achieve outstanding results for your business.</p>
     </div>
   </div>
-  <!-- One scrolling row per category; chips are built by JS from toolGroups -->
-  <div class="tools-group">
-    <div class="wrap"><div class="tools-label">CRM &amp; Funnels</div></div>
-    <div class="tools-marquee"><div class="tools-track" data-group="crm"></div></div>
-  </div>
-  <div class="tools-group">
-    <div class="wrap"><div class="tools-label">Automation &amp; AI</div></div>
-    <div class="tools-marquee"><div class="tools-track" data-group="automation"></div></div>
-  </div>
-  <div class="tools-group">
-    <div class="wrap"><div class="tools-label">Communication &amp; Marketing</div></div>
-    <div class="tools-marquee"><div class="tools-track" data-group="communication"></div></div>
-  </div>
-  <div class="tools-group">
-    <div class="wrap"><div class="tools-label">Graphic &amp; Video Editing</div></div>
-    <div class="tools-marquee"><div class="tools-track" data-group="creative"></div></div>
+  <!-- Top: every tool in one scrolling row. Below: static category cards. Chips are built by JS. -->
+  <div class="tools-marquee"><div class="tools-track" data-group="all"></div></div>
+  <div class="wrap">
+    <div class="tools-cats">
+      <div class="tools-cat reveal">
+        <div class="tools-label">CRM &amp; Funnels</div>
+        <div class="tools-static" data-group="crm"></div>
+      </div>
+      <div class="tools-cat reveal">
+        <div class="tools-label">Automation &amp; AI</div>
+        <div class="tools-static" data-group="automation"></div>
+      </div>
+      <div class="tools-cat reveal">
+        <div class="tools-label">Communication &amp; Marketing</div>
+        <div class="tools-static" data-group="communication"></div>
+      </div>
+      <div class="tools-cat reveal">
+        <div class="tools-label">Graphic &amp; Video Editing</div>
+        <div class="tools-static" data-group="creative"></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1579,13 +1588,12 @@
     d.innerHTML = '<img src="'+src+'" alt="'+name+'" loading="lazy"><span>'+name+'</span>';
     return d;
   }
-  document.querySelectorAll('.tools-track[data-group]').forEach(track=>{
-    const names = toolGroups[track.dataset.group] || [];
-    if(!names.length) return;
-    // Short lists are repeated so each half of the loop is wider than big screens (no gaps mid-scroll)
-    const half = [];
-    while(half.length < 18) half.push(...names);
-    [...half,...half].forEach(n=>track.appendChild(chip(n, toolLogo[n])));
+  // Animated row at the top: every tool, duplicated for a seamless loop
+  const allTrack = document.querySelector('.tools-track[data-group="all"]');
+  if(allTrack) [...tools,...tools].forEach(([n,s])=>allTrack.appendChild(chip(n,s)));
+  // Static category cards below: each tool once, no animation
+  document.querySelectorAll('.tools-static[data-group]').forEach(box=>{
+    (toolGroups[box.dataset.group] || []).forEach(n=>box.appendChild(chip(n, toolLogo[n])));
   });
 
   // ---------- Website carousel (unchanged full-slide format) ----------
