@@ -187,6 +187,43 @@
   }
   .nav-links a:hover,.nav-links a.active{color:var(--ink);}
   .nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+  /* Projects dropdown (desktop): opens on hover, keyboard focus, or click */
+  .nav-dd{position:relative;}
+  .nav-dd-trigger{display:inline-flex;align-items:center;gap:5px;}
+  .nav-dd-trigger svg{width:12px;height:12px;transition:transform .25s var(--ease);}
+  .nav-dd-menu{
+    position:absolute;top:100%;left:50%;min-width:270px;padding:8px;margin-top:10px;
+    background:rgba(16,20,27,.97);backdrop-filter:blur(14px);
+    border:1px solid var(--line-strong);border-radius:14px;box-shadow:0 24px 60px -20px rgba(0,0,0,.75);
+    opacity:0;visibility:hidden;pointer-events:none;transform:translate(-50%,8px);
+    transition:opacity .2s,transform .25s var(--ease),visibility .2s;
+  }
+  .nav-dd-menu::before{content:"";position:absolute;left:0;right:0;top:-12px;height:12px;} /* hover bridge */
+  .nav-dd:hover .nav-dd-menu,.nav-dd:focus-within .nav-dd-menu,.nav-dd.open .nav-dd-menu{
+    opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0);
+  }
+  .nav-dd:hover .nav-dd-trigger svg,.nav-dd.open .nav-dd-trigger svg{transform:rotate(180deg);}
+  .nav-links .nav-dd-menu a{
+    display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;font-size:14px;color:var(--ink);
+    transition:background .2s;
+  }
+  .nav-links .nav-dd-menu a::after{display:none;}
+  .nav-links .nav-dd-menu a:hover,.nav-links .nav-dd-menu a:focus-visible{background:var(--surface-2);}
+  .dd-dot{width:8px;height:8px;border-radius:50%;flex:0 0 8px;}
+  .dd-dot.c-gold{background:var(--gold);box-shadow:0 0 0 4px var(--gold-soft);}
+  .dd-dot.c-blue{background:var(--blue);box-shadow:0 0 0 4px var(--blue-soft);}
+  .dd-dot.c-green{background:var(--green);box-shadow:0 0 0 4px var(--green-soft);}
+  .dd-text small{display:block;font-size:12px;color:var(--ink-faint);margin-top:1px;}
+  .nav-links .nav-dd-menu a.dd-all{margin-top:4px;border-top:1px solid var(--line);border-radius:0 0 10px 10px;color:var(--gold);font-size:13px;}
+  /* Projects sub-list (mobile panel) */
+  .m-dd-toggle{
+    display:flex;align-items:center;justify-content:space-between;width:100%;padding:14px 0;
+    font-size:20px;font-family:'Space Grotesk';text-align:left;border-bottom:1px solid var(--line);
+  }
+  .m-dd-toggle svg{width:18px;height:18px;transition:transform .25s var(--ease);}
+  .m-dd-toggle[aria-expanded="true"] svg{transform:rotate(180deg);}
+  .mobile-panel .m-dd-list a{font-size:16px;padding:12px 0 12px 16px;color:var(--ink-dim);display:flex;align-items:center;gap:12px;}
+  .proj-category{scroll-margin-top:96px;}
   .nav-cta{
     display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;
     background:var(--gold);color:#0b0d10;font-weight:600;font-size:14px;
@@ -787,7 +824,18 @@
       <a href="#journey">Journey</a>
       <a href="#services">Services</a>
       <a href="#tools">Tools</a>
-      <a href="#portfolio-web">Projects</a>
+      <div class="nav-dd" id="projectsDd">
+        <a href="#portfolio-web" class="nav-dd-trigger" aria-haspopup="true" aria-expanded="false">Projects
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </a>
+        <div class="nav-dd-menu" role="menu">
+          <a href="#proj-funnel" role="menuitem"><span class="dd-dot c-gold"></span><span class="dd-text">Website / Funnel<small>GoHighLevel builds &amp; landing pages</small></span></a>
+          <a href="#proj-graphics" role="menuitem"><span class="dd-dot c-gold"></span><span class="dd-text">Graphics &amp; Design<small>Brand visuals &amp; social posts</small></span></a>
+          <a href="#proj-video" role="menuitem"><span class="dd-dot c-blue"></span><span class="dd-text">Video Edits<small>Reels &amp; short-form cuts</small></span></a>
+          <a href="#proj-automation" role="menuitem"><span class="dd-dot c-green"></span><span class="dd-text">Automation<small>Workflows &amp; integrations</small></span></a>
+          <a href="#portfolio-web" class="dd-all" role="menuitem">View all projects →</a>
+        </div>
+      </div>
       <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -803,7 +851,18 @@
   <a href="#journey">Journey</a>
   <a href="#services">Services</a>
   <a href="#tools">Tools</a>
-  <a href="#portfolio-web">Projects</a>
+  <div class="m-dd">
+    <button type="button" class="m-dd-toggle" id="mProjectsToggle" aria-expanded="false" aria-controls="mProjectsList">Projects
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    <div class="m-dd-list" id="mProjectsList" hidden>
+      <a href="#proj-funnel"><span class="dd-dot c-gold"></span>Website / Funnel</a>
+      <a href="#proj-graphics"><span class="dd-dot c-gold"></span>Graphics &amp; Design</a>
+      <a href="#proj-video"><span class="dd-dot c-blue"></span>Video Edits</a>
+      <a href="#proj-automation"><span class="dd-dot c-green"></span>Automation</a>
+      <a href="#portfolio-web" style="color:var(--gold);">View all projects →</a>
+    </div>
+  </div>
   <a href="#faq">FAQ</a>
   <a href="#contact">Contact</a>
   <a href="https://calendar.app.google/K3TY9nAVZfSbxWXv6" style="color:var(--gold);border:none;">Book a Call →</a>
@@ -1095,7 +1154,7 @@
     </div>
 
     <!-- ============ WEBSITE / FUNNEL (unchanged carousel) ============ -->
-    <div class="proj-category">
+    <div class="proj-category" id="proj-funnel">
       <div class="cat-head">
         <div>
           <div class="cat-eyebrow c-gold">01 · Website / Funnel</div>
@@ -1150,7 +1209,7 @@
     </div>
 
     <!-- ============ GRAPHICS: aesthetic bento grid ============ -->
-    <div class="proj-category">
+    <div class="proj-category" id="proj-graphics">
       <div class="cat-head">
         <div>
           <div class="cat-eyebrow c-gold">02 · Graphics &amp; Design</div>
@@ -1173,7 +1232,7 @@
     </div>
 
     <!-- ============ VIDEO: realistic phone-frame reels ============ -->
-    <div class="proj-category">
+    <div class="proj-category" id="proj-video">
       <div class="cat-head">
         <div>
           <div class="cat-eyebrow c-blue">03 · Video Edits</div>
@@ -1280,7 +1339,7 @@
     </div>
 
     <!-- ============ AUTOMATION: same carousel format as Website ============ -->
-    <div class="proj-category">
+    <div class="proj-category" id="proj-automation">
       <div class="cat-head">
         <div>
           <div class="cat-eyebrow c-green">04 · Automation</div>
@@ -1479,6 +1538,33 @@
   panel.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
     panel.classList.remove('open'); burger.classList.remove('open');
   }));
+
+  // ---------- Projects dropdown: hover (CSS) + click/tap toggle, closes on outside click / Esc ----------
+  const projectsDd = document.getElementById('projectsDd');
+  if(projectsDd){
+    const ddTrigger = projectsDd.querySelector('.nav-dd-trigger');
+    const setDd = open=>{
+      projectsDd.classList.toggle('open', open);
+      ddTrigger.setAttribute('aria-expanded', open);
+      if(!open && projectsDd.contains(document.activeElement)) document.activeElement.blur();
+    };
+    ddTrigger.addEventListener('click', e=>{
+      e.preventDefault();
+      setDd(!projectsDd.classList.contains('open'));
+    });
+    projectsDd.querySelectorAll('.nav-dd-menu a').forEach(a=>a.addEventListener('click', ()=>setDd(false)));
+    document.addEventListener('click', e=>{ if(!projectsDd.contains(e.target)) setDd(false); });
+    document.addEventListener('keydown', e=>{ if(e.key === 'Escape') setDd(false); });
+  }
+  const mToggle = document.getElementById('mProjectsToggle');
+  const mList = document.getElementById('mProjectsList');
+  if(mToggle && mList){
+    mToggle.addEventListener('click', ()=>{
+      const open = mToggle.getAttribute('aria-expanded') !== 'true';
+      mToggle.setAttribute('aria-expanded', open);
+      mList.hidden = !open;
+    });
+  }
 
   // ---------- Hero headline word-by-word entrance ----------
   const headline = document.getElementById('heroHeadline');
