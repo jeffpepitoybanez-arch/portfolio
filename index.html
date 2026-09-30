@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GoHighLevel Expert &amp; Automation Virtual Assistant | Jeff Ybanez</title>
-<meta name="description" content="Hire Jeff Ybanez, a Philippines-based Full-Stack Virtual Assistant: GoHighLevel funnels, CRM automation, API integrations, Make, Zapier &amp; Pabbly. Book a call.">
+<meta name="description" content="Hire Jeff Ybanez, a Philippines-based Full-Stack Virtual Assistant: GoHighLevel funnels, CRM automation, API integrations, Make, Zapier &amp; Pabbly. Message me on WhatsApp.">
 <meta name="author" content="Jeff P. Ybanez">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#07090b">
@@ -17,7 +17,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:url" content="https://www.jeffybanez.site/">
 <meta property="og:title" content="Jeff Ybanez | GoHighLevel Expert &amp; Full-Stack Virtual Assistant">
-<meta property="og:description" content="GoHighLevel funnels, CRM automation and API integrations that run your business for you. See my work and book a call.">
+<meta property="og:description" content="GoHighLevel funnels, CRM automation and API integrations that run your business for you. See my work and message me on WhatsApp.">
 <meta property="og:image" content="https://i.imgur.com/LB8Dejt.png">
 <meta property="og:image:alt" content="Jeff P. Ybanez, Full-Stack Virtual Assistant">
 <meta name="twitter:card" content="summary_large_image">
@@ -806,6 +806,32 @@
   .cm-block h4{font-size:12.5px;color:var(--gold);font-family:'Space Grotesk';margin-bottom:8px;font-weight:600;}
   .cm-block a,.cm-block span{display:block;font-size:14.5px;color:var(--ink-dim);margin-bottom:4px;}
   .cm-block a:hover{color:var(--gold);}
+  /* WhatsApp icon inside buttons */
+  .wa-ico{width:17px;height:17px;flex:0 0 17px;}
+  .nav-cta .wa-ico{width:16px;height:16px;flex-basis:16px;}
+  /* Contact form: name, email, message → emailed via FormSubmit */
+  #contactForm{scroll-margin-top:110px;}
+  .cform{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:30px;}
+  .cform .full{grid-column:1 / -1;}
+  @media(max-width:640px){.cform{grid-template-columns:1fr;}}
+  .cfield label{display:block;font-size:12.5px;font-weight:600;color:var(--ink-dim);margin-bottom:7px;font-family:'Space Grotesk';}
+  .cfield input,.cfield textarea{
+    width:100%;padding:13px 15px;border-radius:10px;border:1px solid var(--line-strong);background:var(--bg);
+    color:var(--ink);font:inherit;font-size:15px;transition:border-color .2s,box-shadow .2s;
+  }
+  .cfield textarea{min-height:140px;resize:vertical;}
+  .cfield input::placeholder,.cfield textarea::placeholder{color:var(--ink-faint);}
+  .cfield input:focus,.cfield textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-soft);}
+  .cfield input:user-invalid,.cfield textarea:user-invalid{border-color:#f87171;}
+  .cform-foot{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .cform button[type=submit]{border:none;cursor:pointer;}
+  .cform button[type=submit][disabled]{opacity:.6;cursor:wait;transform:none;box-shadow:none;}
+  .cform-status{font-size:14px;color:var(--ink-dim);}
+  .cform-status.ok{color:var(--green);}
+  .cform-status.err{color:#f87171;}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;} /* spam honeypot */
+  .contact-alt{margin-top:34px;padding-top:26px;border-top:1px solid var(--line);}
+  .contact-alt p{margin:0 0 4px;font-size:14px;}
 
   footer{padding:44px 0;}
   .foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
@@ -851,7 +877,7 @@
       <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a href="https://calendar.app.google/K3TY9nAVZfSbxWXv6" class="nav-cta desktop">Book a Call</a>
+    <a href="https://wa.me/639272303838?text=Hello%2C%20I%20would%20like%20to%20connect%20with%20you!" class="nav-cta desktop" target="_blank" rel="noopener"><svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> WhatsApp</a>
     <button class="burger" id="burgerBtn" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -877,7 +903,7 @@
   </div>
   <a href="#faq">FAQ</a>
   <a href="#contact">Contact</a>
-  <a href="https://calendar.app.google/K3TY9nAVZfSbxWXv6" style="color:var(--gold);border:none;">Book a Call →</a>
+  <a href="https://wa.me/639272303838?text=Hello%2C%20I%20would%20like%20to%20connect%20with%20you!" target="_blank" rel="noopener" style="color:var(--gold);border:none;">Chat on WhatsApp →</a>
 </div>
 
 <!-- HERO -->
@@ -896,7 +922,7 @@
       </div>
 
       <div class="hero-cta-row">
-        <a href="https://calendar.app.google/K3TY9nAVZfSbxWXv6" class="btn btn-gold">Book A Call</a>
+        <a href="https://wa.me/639272303838?text=Hello%2C%20I%20would%20like%20to%20connect%20with%20you!" class="btn btn-gold" target="_blank" rel="noopener"><svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Chat on WhatsApp</a>
         <a href="tel:+639272303838" class="btn btn-ghost">Call Me</a>
       </div>
     </div>
@@ -955,7 +981,7 @@
         <span class="tag">Health &amp; Wellness</span><span class="tag">Chiropractic</span><span class="tag">Aesthetics</span>
         <span class="tag">SaaS</span><span class="tag">Agencies</span>
       </div>
-      <a href="https://calendar.app.google/K3TY9nAVZfSbxWXv6" class="btn btn-gold">Book A Call</a>
+      <a href="https://wa.me/639272303838?text=Hello%2C%20I%20would%20like%20to%20connect%20with%20you!" class="btn btn-gold" target="_blank" rel="noopener"><svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Chat on WhatsApp</a>
     </div>
   </div>
 </section>
@@ -1510,9 +1536,31 @@
       <div class="kicker">Get In Touch</div>
       <h2>Let's Build Something Great Together.</h2>
       <p>Ready to transform your digital presence? Whether you need a full marketing strategy, a GoHighLevel build, or an automation that connects your entire stack, I'm here to help you grow, from the Philippines to wherever your business operates.</p>
-      <div class="contact-cta-row">
-        <a href="tel:+639272303838" class="btn btn-gold">Phone · +63 927 230 3838</a>
-        <a href="https://wa.me/639272303838?text=Hello%2C%20I%20would%20like%20to%20connect%20with%20you!" class="btn btn-ghost" target="_blank" rel="noopener">WhatsApp</a>
+      <form class="cform" id="contactForm" novalidate>
+        <div class="cfield">
+          <label for="cf-name">Name</label>
+          <input id="cf-name" name="name" type="text" autocomplete="name" placeholder="Your name" required maxlength="100">
+        </div>
+        <div class="cfield">
+          <label for="cf-email">Email</label>
+          <input id="cf-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required maxlength="150">
+        </div>
+        <div class="cfield full">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" placeholder="Tell me about your project, what you need built or automated, and your timeline." required maxlength="5000"></textarea>
+        </div>
+        <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="cform-foot full">
+          <button type="submit" class="btn btn-gold">Send Message</button>
+          <span class="cform-status" id="cformStatus" role="status" aria-live="polite"></span>
+        </div>
+      </form>
+      <div class="contact-alt">
+        <p>Prefer a quick chat?</p>
+        <div class="contact-cta-row" style="margin-top:12px;">
+          <a href="https://wa.me/639272303838?text=Hello%2C%20I%20would%20like%20to%20connect%20with%20you!" class="btn btn-gold" target="_blank" rel="noopener"><svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Chat on WhatsApp</a>
+          <a href="tel:+639272303838" class="btn btn-ghost">Call +63 927 230 3838</a>
+        </div>
       </div>
       <div class="contact-meta">
         <div class="cm-block">
@@ -1529,10 +1577,10 @@
 
     <div style="text-align:center;margin-top:64px;" class="reveal">
       <h3 style="font-size:clamp(22px,3.4vw,30px);max-width:20ch;margin:0 auto 16px;">Ready to get started? Let's talk strategy.</h3>
-      <p style="color:var(--ink-dim);max-width:64ch;margin:0 auto 28px;font-size:15px;">Book a free discovery call and let's map out how a full-stack VA with an Information Systems background, GoHighLevel expertise, and automation skills across Make, Zapier, and Pabbly can help you grow. No pressure, just a conversation about your goals and how the right systems can get you there.</p>
+      <p style="color:var(--ink-dim);max-width:64ch;margin:0 auto 28px;font-size:15px;">Send me a message on WhatsApp and let's map out how a full-stack VA with an Information Systems background, GoHighLevel expertise, and automation skills across Make, Zapier, and Pabbly can help you grow. No pressure, just a conversation about your goals and how the right systems can get you there.</p>
       <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-        <a href="https://calendar.app.google/K3TY9nAVZfSbxWXv6" class="btn btn-gold">Book A Free Call</a>
-        <a href="https://wa.me/639272303838?text=Hello%2C%20I%20would%20like%20to%20connect%20with%20you!" class="btn btn-ghost" target="_blank" rel="noopener">Message on WhatsApp</a>
+        <a href="https://wa.me/639272303838?text=Hello%2C%20I%20would%20like%20to%20connect%20with%20you!" class="btn btn-gold" target="_blank" rel="noopener"><svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Message on WhatsApp</a>
+        <a href="#contactForm" class="btn btn-ghost">Send an Email</a>
       </div>
     </div>
   </div>
@@ -1835,6 +1883,48 @@
     });
   },{threshold:.15});
   bentoTiles.forEach(t=>bentoIo.observe(t));
+
+  // ---------- Contact form: send name/email/message to Jeff's inbox via FormSubmit ----------
+  const cform = document.getElementById('contactForm');
+  if(cform){
+    const statusEl = document.getElementById('cformStatus');
+    const submitBtn = cform.querySelector('button[type=submit]');
+    const setStatus = (msg, kind)=>{ statusEl.textContent = msg; statusEl.className = 'cform-status' + (kind ? ' ' + kind : ''); };
+    cform.addEventListener('submit', async e=>{
+      e.preventDefault();
+      if(!cform.checkValidity()){
+        cform.reportValidity();
+        setStatus('Please fill in your name, a valid email, and a message.', 'err');
+        return;
+      }
+      const data = Object.fromEntries(new FormData(cform));
+      if(data._honey) return; // bot filled the hidden field
+      submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; setStatus('');
+      try{
+        const res = await fetch('https://formsubmit.co/ajax/jeffpepitoybanez@gmail.com', {
+          method:'POST',
+          headers:{'Content-Type':'application/json', 'Accept':'application/json'},
+          body: JSON.stringify({
+            name: data.name.trim(), email: data.email.trim(), message: data.message.trim(),
+            _subject: 'New portfolio message from ' + data.name.trim(),
+            _replyto: data.email.trim(),
+            _template: 'table'
+          })
+        });
+        const out = await res.json().catch(()=>({}));
+        if(res.ok && String(out.success) === 'true'){
+          cform.reset();
+          setStatus("Thanks! Your message is on its way. I'll reply by email soon.", 'ok');
+        } else {
+          throw new Error(out.message || 'Send failed');
+        }
+      } catch(err){
+        setStatus("Sorry, that didn't send. Please message me on WhatsApp instead.", 'err');
+      } finally {
+        submitBtn.disabled = false; submitBtn.textContent = 'Send Message';
+      }
+    });
+  }
 
   // ---------- Graphics carousel tile: arrows + swipe (scroll-snap) + slide counter ----------
   document.querySelectorAll('.gfx-carousel').forEach(car=>{
