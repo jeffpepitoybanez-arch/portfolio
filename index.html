@@ -451,6 +451,16 @@
     .tl-dot,.tl-item:last-child .tl-dot{top:30px;}
     .tl-content{padding:22px 20px;}
   }
+  /* Desktop: two columns that stack independently (left = odd stops, right = even stops),
+     right column nudged down so cards sit almost level. Row spans are set by script. */
+  @media(min-width:861px){
+    .timeline{display:grid;grid-template-columns:1fr 1fr;column-gap:96px;grid-auto-rows:4px;align-items:start;--stagger:90px;--tl-gap:40px;}
+    .tl-item,.tl-item:last-child{display:block;grid-column:1;padding:0 0 var(--tl-gap);}
+    .tl-item:nth-child(even){grid-column:2;}
+    .tl-item:nth-child(2){--pt:var(--stagger);padding-top:var(--pt);} /* only the first right-hand card is offset */
+    .tl-dot,.tl-item:last-child .tl-dot{left:calc(100% + 48px);top:calc(50% + (var(--pt,0px) - var(--tl-gap)) / 2);}
+    .tl-item:nth-child(even) .tl-dot{left:-48px;}
+  }
 
   /* ================= WHY (proof) ================= */
   .proof-stats{
@@ -1645,6 +1655,20 @@
     entries.forEach(e=>{ if(e.isIntersecting){ timeline.classList.add('in'); tlWrapIo.disconnect(); } });
   },{threshold:.1});
   tlWrapIo.observe(timeline);
+
+  // Desktop timeline: give each stop a row span equal to its height so both columns stack tightly
+  const tlDesktop = window.matchMedia('(min-width:861px)');
+  const layoutTimeline = ()=>{
+    tlItems.forEach(it=>{ it.style.gridRowEnd = ''; });
+    if(!tlDesktop.matches) return;
+    const unit = 4; // matches grid-auto-rows
+    tlItems.forEach(it=>{ it.style.gridRowEnd = 'span ' + Math.ceil(it.getBoundingClientRect().height / unit); });
+  };
+  let tlResize;
+  window.addEventListener('resize', ()=>{ clearTimeout(tlResize); tlResize = setTimeout(layoutTimeline, 120); });
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(layoutTimeline);
+  window.addEventListener('load', layoutTimeline);
+  layoutTimeline();
 
   // ---------- Count-up stats ----------
   const counters = document.querySelectorAll('.stat-num');
