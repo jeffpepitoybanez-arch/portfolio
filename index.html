@@ -1855,8 +1855,8 @@
   // Desktop timeline: give each stop a row span equal to its height so both columns stack tightly
   const tlDesktop = window.matchMedia('(min-width:861px)');
   const layoutTimeline = ()=>{
-    tlItems.forEach(it=>{ it.style.gridRowEnd = ''; });
-    if(!tlDesktop.matches) return;
+    // Measure without clearing spans first: clearing collapses the section and makes the browser shift the scroll
+    if(!tlDesktop.matches){ tlItems.forEach(it=>{ it.style.gridRowEnd = ''; }); return; }
     const unit = 4; // matches grid-auto-rows
     tlItems.forEach(it=>{ it.style.gridRowEnd = 'span ' + Math.ceil(it.getBoundingClientRect().height / unit); });
   };
@@ -2039,6 +2039,7 @@
     track.addEventListener('dragstart', e=>e.preventDefault());
 
     function resize(){ measure(); update(false); }
+    root._remeasure = resize; // lets other code re-measure this carousel without a page-wide resize
     window.addEventListener('resize', resize);
     resize();
   }
@@ -2050,7 +2051,7 @@
   // Website / Funnel: switch between client work and my templates
   document.querySelectorAll('.web-switch .ws-btn').forEach(btn=>btn.addEventListener('click', ()=>{
     document.querySelectorAll('.web-switch .ws-btn').forEach(b=>{ const on = b === btn; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); const c = document.getElementById(b.dataset.show); if(c){ c.hidden = !on; if(on){ c.classList.remove('ws-in'); void c.offsetWidth; c.classList.add('ws-in'); } } });
-    window.dispatchEvent(new Event('resize')); // let the shown carousel re-measure its width
+    const shown = document.getElementById(btn.dataset.show); if(shown && shown._remeasure) shown._remeasure();
   }));
 
   // ---------- Graphics bento grid: staggered reveal on scroll ----------
