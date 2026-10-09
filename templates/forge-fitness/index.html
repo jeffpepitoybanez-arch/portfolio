@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forge Fitness · Gym &amp; Coaching Website Template by Jeff Ybanez</title>
+<meta name="description" content="Forge Fitness, a bold gym and coaching website template designed by Jeff Ybanez: class schedule with live spots, monthly/yearly pricing toggle, programs and free-trial signup.">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0a0a0b;--bg-2:#131315;--bg-3:#1b1b1e;--volt:#d4ff3a;--volt-2:#b9e61f;--ink:#f4f4f2;--ink-2:#a3a3a8;--line:rgba(255,255,255,.1);--ease:cubic-bezier(.22,1,.36,1);}
+  *{box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{margin:0;font-family:'Archivo',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  h1,h2,h3{font-family:'Anton',Impact,sans-serif;font-weight:400;text-transform:uppercase;line-height:.95;margin:0;letter-spacing:.01em;}
+  .volt{color:var(--volt);}
+  p{margin:0;text-wrap:pretty;} a{color:inherit;text-decoration:none;} img{max-width:100%;display:block;}
+  button,input,select{font:inherit;color:inherit;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 clamp(18px,4vw,32px);}
+  section{padding:clamp(72px,10vw,120px) 0;}
+  .tag{display:inline-block;font-size:12.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--volt);margin-bottom:14px;}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:44px;}
+  .sec-head h2{font-size:clamp(46px,7vw,88px);}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 28px;font-weight:800;font-size:14.5px;letter-spacing:.06em;text-transform:uppercase;border:none;cursor:pointer;clip-path:polygon(0 0,100% 0,100% 70%,92% 100%,0 100%);transition:transform .3s var(--ease),background .3s;}
+  .btn-volt{background:var(--volt);color:#0a0a0b;}
+  .btn-volt:hover{background:#fff;transform:translateY(-3px);}
+  .btn-dark{background:var(--bg-3);color:var(--ink);border:1px solid var(--line);clip-path:none;}
+  .btn-dark:hover{border-color:var(--volt);color:var(--volt);}
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+  .reveal.in{opacity:1;transform:none;}
+
+  .nav{position:fixed;inset:0 0 auto 0;z-index:50;padding:18px 0;transition:background .3s,padding .3s;}
+  .nav.solid{background:rgba(10,10,11,.88);backdrop-filter:blur(12px);padding:12px 0;border-bottom:1px solid var(--line);}
+  .nav-row{display:flex;align-items:center;justify-content:space-between;gap:20px;}
+  .logo{font-family:'Anton';font-size:28px;letter-spacing:.04em;display:flex;align-items:center;gap:8px;}
+  .logo i{width:14px;height:22px;background:var(--volt);transform:skewX(-14deg);display:inline-block;}
+  .nav-links{display:flex;gap:30px;font-size:13.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;}
+  .nav-links a{color:var(--ink-2);transition:color .2s;} .nav-links a:hover{color:var(--volt);}
+  .nav .btn{padding:12px 20px;}
+  .menu-btn{display:none;width:44px;height:44px;border:1px solid var(--line);background:var(--bg-2);cursor:pointer;}
+  @media(max-width:900px){.nav-links,.nav .btn{display:none;}.menu-btn{display:grid;place-items:center;}}
+  .mobile-menu{position:fixed;inset:0;z-index:49;background:var(--bg);padding:110px 28px;display:flex;flex-direction:column;clip-path:circle(0% at 100% 0);transition:clip-path .6s var(--ease);}
+  .mobile-menu.open{clip-path:circle(150% at 100% 0);}
+  .mobile-menu a{font-family:'Anton';font-size:48px;text-transform:uppercase;line-height:1.2;}
+  .mobile-menu a:hover{color:var(--volt);}
+
+  /* Hero */
+  .hero{position:relative;padding:140px 0 70px;overflow:hidden;}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;}}
+  .hero h1{font-size:clamp(64px,11vw,150px);}
+  .hero h1 span{display:block;overflow:hidden;}
+  .hero h1 span b{display:block;font-weight:400;transform:translateY(105%);animation:rise .9s var(--ease) forwards;}
+  .hero h1 span:nth-child(2) b{animation-delay:.12s;} .hero h1 span:nth-child(3) b{animation-delay:.24s;}
+  @keyframes rise{to{transform:none;}}
+  .stroke{color:transparent;-webkit-text-stroke:2px var(--ink);}
+  .hero p.lead{max-width:44ch;color:var(--ink-2);font-size:18px;margin:24px 0 30px;}
+  .hero-cta{display:flex;gap:12px;flex-wrap:wrap;}
+  .hero-img{position:relative;aspect-ratio:4/5;clip-path:polygon(12% 0,100% 0,100% 100%,0 100%,0 14%);overflow:hidden;}
+  .hero-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(.2) contrast(1.1);transition:transform 1.2s var(--ease);}
+  .hero-img:hover img{transform:scale(1.06);}
+  .hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,10,11,.6),transparent 50%);}
+  .live{position:absolute;left:20px;bottom:20px;z-index:2;background:var(--volt);color:#0a0a0b;padding:12px 16px;font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:10px;}
+  .live::before{content:"";width:9px;height:9px;border-radius:50%;background:#0a0a0b;animation:blink 1.2s infinite;}
+  @keyframes blink{50%{opacity:.2;}}
+  .stats{display:flex;gap:36px;margin-top:40px;flex-wrap:wrap;}
+  .stats b{display:block;font-family:'Anton';font-size:48px;line-height:1;color:var(--volt);font-weight:400;}
+  .stats span{font-size:13px;color:var(--ink-2);text-transform:uppercase;letter-spacing:.08em;font-weight:700;}
+
+  /* Ticker */
+  .ticker{background:var(--volt);color:#0a0a0b;overflow:hidden;transform:rotate(-2deg);margin:10px -20px;}
+  .ticker-track{display:flex;gap:40px;width:max-content;padding:16px 0;animation:tick 22s linear infinite;font-family:'Anton';font-size:30px;text-transform:uppercase;white-space:nowrap;}
+  .ticker-track span::after{content:"✦";margin-left:40px;}
+  @keyframes tick{to{transform:translateX(-50%);}}
+
+  /* Programs */
+  .programs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  @media(max-width:1000px){.programs{grid-template-columns:1fr 1fr;}} @media(max-width:560px){.programs{grid-template-columns:1fr;}}
+  .prog{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--bg-2);}
+  .prog img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.7);transition:filter .6s var(--ease),transform .8s var(--ease);}
+  .prog:hover img{filter:grayscale(0) brightness(.75);transform:scale(1.08);}
+  .prog-in{position:absolute;inset:auto 0 0 0;padding:22px;background:linear-gradient(0deg,rgba(10,10,11,.95),transparent);}
+  .prog .num{position:absolute;top:16px;left:18px;font-family:'Anton';font-size:22px;color:var(--volt);}
+  .prog h3{font-size:36px;}
+  .prog p{color:var(--ink-2);font-size:14.5px;max-height:0;opacity:0;overflow:hidden;transition:max-height .5s var(--ease),opacity .4s,margin .4s;}
+  .prog:hover p,.prog:focus-within p{max-height:120px;opacity:1;margin-top:10px;}
+  @media (hover:none){.prog p{max-height:none;opacity:1;margin-top:8px;}}
+
+  /* Schedule */
+  .days{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:18px;}
+  .days::-webkit-scrollbar{display:none;}
+  .day{flex:1 0 auto;min-width:76px;padding:14px 10px;background:var(--bg-2);border:1px solid var(--line);cursor:pointer;text-align:center;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:13px;transition:all .25s;}
+  .day small{display:block;font-weight:500;color:var(--ink-2);letter-spacing:0;text-transform:none;}
+  .day:hover{border-color:var(--volt);}
+  .day.on{background:var(--volt);color:#0a0a0b;border-color:var(--volt);}
+  .day.on small{color:#0a0a0b;}
+  .classes{display:grid;gap:8px;}
+  .cls{display:grid;grid-template-columns:110px 1.3fr 1fr 1.2fr auto;gap:18px;align-items:center;padding:18px 20px;background:var(--bg-2);border:1px solid var(--line);transition:border-color .25s,transform .35s var(--ease);animation:slideIn .45s var(--ease) both;}
+  .cls:hover{border-color:rgba(212,255,58,.5);transform:translateX(6px);}
+  @keyframes slideIn{from{opacity:0;transform:translateY(10px);}}
+  @media(max-width:760px){.cls{grid-template-columns:1fr auto;}.cls .coach,.cls .spots{grid-column:1;}}
+  .cls time{font-family:'Anton';font-size:26px;color:var(--volt);}
+  .cls h3{font-family:'Archivo';font-weight:800;font-size:17px;text-transform:none;}
+  .cls .lvl{font-size:12.5px;color:var(--ink-2);}
+  .cls .coach{color:var(--ink-2);font-size:14px;}
+  .spots{font-size:12.5px;color:var(--ink-2);}
+  .meter{height:6px;background:var(--bg-3);margin-top:6px;overflow:hidden;}
+  .meter i{display:block;height:100%;background:var(--volt);transition:width .8s var(--ease);}
+  .meter.low i{background:#ff6b3d;}
+  .book-btn{padding:10px 16px;border:1px solid var(--volt);background:transparent;color:var(--volt);font-weight:800;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .25s;}
+  .book-btn:hover{background:var(--volt);color:#0a0a0b;}
+  .book-btn.done{background:var(--volt);color:#0a0a0b;}
+
+  /* Pricing */
+  .toggle{display:inline-flex;align-items:center;gap:14px;font-weight:700;font-size:15px;}
+  .switch{position:relative;width:62px;height:34px;border-radius:999px;background:var(--bg-3);border:1px solid var(--line);cursor:pointer;}
+  .switch::after{content:"";position:absolute;top:4px;left:4px;width:24px;height:24px;border-radius:50%;background:var(--volt);transition:transform .35s var(--ease);}
+  .switch[aria-checked="true"]::after{transform:translateX(28px);}
+  .save{background:var(--volt);color:#0a0a0b;padding:3px 9px;font-size:12px;font-weight:800;}
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:stretch;}
+  @media(max-width:900px){.plans{grid-template-columns:1fr;}}
+  .plan{padding:34px 30px;background:var(--bg-2);border:1px solid var(--line);display:flex;flex-direction:column;transition:transform .4s var(--ease),border-color .4s;}
+  .plan:hover{transform:translateY(-8px);border-color:rgba(212,255,58,.4);}
+  .plan.hot{background:var(--volt);color:#0a0a0b;border-color:var(--volt);}
+  .plan.hot .muted{color:#2f3a06;}
+  .plan h3{font-size:34px;}
+  .plan .muted{color:var(--ink-2);font-size:14.5px;margin-top:6px;}
+  .amount{font-family:'Anton';font-size:76px;line-height:1;margin:22px 0 4px;display:flex;align-items:flex-start;gap:4px;}
+  .amount sup{font-size:30px;margin-top:8px;}
+  .amount .v{display:inline-block;transition:transform .35s var(--ease),opacity .35s;}
+  .amount .v.flip{transform:translateY(-30%);opacity:0;}
+  .plan ul{list-style:none;padding:0;margin:22px 0 28px;display:grid;gap:10px;flex:1;}
+  .plan li{display:flex;gap:10px;font-size:15px;}
+  .plan li::before{content:"→";font-weight:800;}
+  .plan.hot .btn{background:#0a0a0b;color:var(--volt);}
+  .ribbon{align-self:flex-start;background:#0a0a0b;color:var(--volt);font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;margin-bottom:16px;}
+
+  /* Coach */
+  .coach-wrap{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;}
+  @media(max-width:900px){.coach-wrap{grid-template-columns:1fr;}}
+  .coach-img{aspect-ratio:5/4;overflow:hidden;clip-path:polygon(0 0,88% 0,100% 12%,100% 100%,0 100%);}
+  .coach-img img{width:100%;height:100%;object-fit:cover;}
+  .coach-wrap blockquote{margin:0;font-family:'Anton';font-size:clamp(34px,4.6vw,56px);text-transform:uppercase;line-height:1.05;}
+  .coach-wrap cite{display:block;margin-top:20px;font-style:normal;color:var(--ink-2);}
+  .wins{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px;}
+  .wins div{padding:16px;background:var(--bg-2);border-left:3px solid var(--volt);}
+  .wins b{font-family:'Anton';font-size:32px;font-weight:400;display:block;line-height:1;}
+  .wins span{font-size:12.5px;color:var(--ink-2);}
+
+  /* Join */
+  .join{position:relative;padding:clamp(34px,5vw,64px);background:var(--bg-2);border:1px solid var(--line);overflow:hidden;}
+  .join::before{content:"FORGE";position:absolute;right:-20px;bottom:-60px;font-family:'Anton';font-size:240px;color:rgba(212,255,58,.05);line-height:1;pointer-events:none;}
+  .join h2{font-size:clamp(46px,7vw,90px);}
+  .join form{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;margin-top:30px;position:relative;}
+  @media(max-width:900px){.join form{grid-template-columns:1fr;}}
+  .join input,.join select{padding:16px 18px;background:var(--bg);border:1px solid var(--line);color:var(--ink);}
+  .join input:focus,.join select:focus{outline:none;border-color:var(--volt);}
+
+  footer{padding:50px 0 30px;border-top:1px solid var(--line);}
+  .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;color:var(--ink-2);font-size:14px;}
+  .credit{margin-top:30px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:#6f6f75;}
+  .credit a{color:var(--volt);}
+  .tpl-pill{position:fixed;right:18px;bottom:18px;z-index:60;display:flex;align-items:center;gap:10px;padding:10px 12px 10px 16px;border-radius:999px;background:#fff;color:#0b0d10;font-size:13px;box-shadow:0 20px 40px -18px rgba(0,0,0,.6);}
+  .tpl-pill b{color:#8a6d3b;} .tpl-pill a{background:#0b0d10;color:#c9a96e;padding:7px 13px;border-radius:999px;font-weight:700;}
+  @media(max-width:560px){.tpl-pill span{display:none;}}
+  .toast{position:fixed;left:50%;bottom:90px;z-index:70;transform:translate(-50%,20px);opacity:0;pointer-events:none;max-width:min(92vw,460px);padding:16px 20px;background:var(--volt);color:#0a0a0b;font-weight:700;font-size:14.5px;transition:opacity .35s,transform .35s var(--ease);}
+  .toast.show{opacity:1;transform:translate(-50%,0);}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important;}.reveal{opacity:1;transform:none;}.hero h1 span b{transform:none;}}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-row">
+    <a href="#top" class="logo"><i></i>FORGE</a>
+    <nav class="nav-links"><a href="#programs">Programs</a><a href="#schedule">Schedule</a><a href="#pricing">Pricing</a><a href="#coach">Coaches</a></nav>
+    <a href="#join" class="btn btn-volt">Free Trial</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu"><a href="#programs">Programs</a><a href="#schedule">Schedule</a><a href="#pricing">Pricing</a><a href="#coach">Coaches</a><a href="#join" class="volt">Free Trial →</a></div>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="tag">Strength · Conditioning · Community</span>
+        <h1><span><b>Forge</b></span><span><b class="stroke">your</b></span><span><b class="volt">strongest.</b></span></h1>
+        <p class="lead reveal">Coach-led classes, real programming and a crew that shows up for you. No egos, no contracts, just results you can measure.</p>
+        <div class="hero-cta reveal"><a href="#join" class="btn btn-volt">Start 7-Day Free Trial</a><a href="#schedule" class="btn btn-dark">View Schedule</a></div>
+        <div class="stats reveal"><div><b data-count="2400" data-suffix="+">0</b><span>Members</span></div><div><b data-count="60" data-suffix="+">0</b><span>Classes / week</span></div><div><b data-count="12">0</b><span>Pro coaches</span></div></div>
+      </div>
+      <div class="hero-img reveal"><img src="img/hero.jpg" alt="Athlete training in a dark gym" width="960" height="640"><span class="live">Class live now · HIIT 45</span></div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true"><div class="ticker-track"><span>Strength</span><span>HIIT</span><span>Boxing</span><span>Yoga</span><span>Cardio</span><span>Mobility</span><span>Strength</span><span>HIIT</span><span>Boxing</span><span>Yoga</span><span>Cardio</span><span>Mobility</span></div></div>
+
+  <section id="programs">
+    <div class="wrap">
+      <div class="sec-head reveal"><div><span class="tag">Programs</span><h2>Pick your <span class="volt">fight</span>.</h2></div><p style="max-width:36ch;color:var(--ink-2)">Four core programs, all scalable from day-one beginner to competition ready.</p></div>
+      <div class="programs">
+        <article class="prog reveal" tabindex="0"><img src="img/strength.jpg" alt="Strength training" width="960" height="640" loading="lazy"><span class="num">01</span><div class="prog-in"><h3>Strength</h3><p>Barbell fundamentals and progressive overload, tracked every session.</p></div></article>
+        <article class="prog reveal" tabindex="0"><img src="img/boxing.jpg" alt="Boxing class" width="960" height="640" loading="lazy"><span class="num">02</span><div class="prog-in"><h3>Boxing</h3><p>Pad work, footwork and conditioning that torches 700+ calories.</p></div></article>
+        <article class="prog reveal" tabindex="0"><img src="img/cardio.jpg" alt="Cardio bikes" width="960" height="640" loading="lazy"><span class="num">03</span><div class="prog-in"><h3>HIIT &amp; Cardio</h3><p>45-minute interval sessions on bikes, rowers and sleds.</p></div></article>
+        <article class="prog reveal" tabindex="0"><img src="img/yoga.jpg" alt="Yoga and mobility class" width="960" height="640" loading="lazy"><span class="num">04</span><div class="prog-in"><h3>Yoga &amp; Mobility</h3><p>Recover harder: flexibility, breathwork and joint health.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="schedule" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head reveal"><div><span class="tag">This week</span><h2>Class <span class="volt">schedule</span></h2></div></div>
+      <div class="days reveal" id="days" role="tablist" aria-label="Choose a day"></div>
+      <div class="classes" id="classes" role="tabpanel"></div>
+    </div>
+  </section>
+
+  <section id="pricing" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head reveal"><div><span class="tag">Membership</span><h2>Simple <span class="volt">pricing</span></h2></div>
+        <div class="toggle">Monthly <button class="switch" id="billing" role="switch" aria-checked="false" aria-label="Bill yearly"></button> Yearly <span class="save">Save 20%</span></div></div>
+      <div class="plans">
+        <article class="plan reveal"><h3>Starter</h3><p class="muted">For building the habit.</p><div class="amount"><sup>$</sup><span class="v" data-m="49" data-y="39">49</span></div><p class="muted per">per month</p><ul><li>8 classes / month</li><li>Open gym access</li><li>Progress app</li></ul><a href="#join" class="btn btn-dark">Choose Starter</a></article>
+        <article class="plan hot reveal"><span class="ribbon">Most popular</span><h3>Unlimited</h3><p class="muted">Train as much as you want.</p><div class="amount"><sup>$</sup><span class="v" data-m="99" data-y="79">99</span></div><p class="muted per">per month</p><ul><li>Unlimited classes</li><li>Open gym 5 AM–11 PM</li><li>Monthly body scan</li><li>Guest passes</li></ul><a href="#join" class="btn">Choose Unlimited</a></article>
+        <article class="plan reveal"><h3>Elite 1:1</h3><p class="muted">Personal coaching plan.</p><div class="amount"><sup>$</sup><span class="v" data-m="249" data-y="199">249</span></div><p class="muted per">per month</p><ul><li>Everything in Unlimited</li><li>8 personal sessions</li><li>Nutrition coaching</li></ul><a href="#join" class="btn btn-dark">Choose Elite</a></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="coach" style="padding-top:0">
+    <div class="wrap coach-wrap">
+      <div class="coach-img reveal"><img src="img/coach.jpg" alt="Head coach stretching before a session" width="960" height="640" loading="lazy"></div>
+      <div class="reveal">
+        <span class="tag">Head coach</span>
+        <blockquote>“We don't sell motivation. We build <span class="volt">discipline</span> you keep.”</blockquote>
+        <cite>Marcus Vale · 14 years coaching, former national boxing team</cite>
+        <div class="wins"><div><b data-count="312">0</b><span>Lbs lost by members last month</span></div><div><b data-count="94" data-suffix="%">0</b><span>Stay past 6 months</span></div><div><b data-count="4.9" data-dec="1">0</b><span>Google rating</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="join" style="padding-top:0">
+    <div class="wrap">
+      <div class="join reveal">
+        <span class="tag">7 days free</span>
+        <h2>Your first week <span class="volt">is on us.</span></h2>
+        <form id="joinForm" novalidate>
+          <input required placeholder="Full name" aria-label="Full name">
+          <input type="email" required placeholder="Email" aria-label="Email">
+          <select aria-label="Main goal"><option>Lose fat</option><option>Build muscle</option><option>Get fit for a sport</option><option>Feel better</option></select>
+          <button class="btn btn-volt" type="submit">Claim Free Trial</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot"><a href="#top" class="logo"><i></i>FORGE</a><span>77 Iron Street · Open 5 AM – 11 PM · (555) 019-7731</span></div>
+    <div class="credit"><span>© Forge Fitness. Demo content for template preview.</span><span>Website template designed by <a href="../../" target="_blank" rel="noopener">Jeff Ybanez</a></span></div>
+  </div>
+</footer>
+
+<div class="tpl-pill"><span>Template by <b>Jeff Ybanez</b></span><a href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20Forge%20Fitness%20gym%20website%20template." target="_blank" rel="noopener">Get this template</a></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  const nav = document.getElementById('nav');
+  const onScroll = ()=> nav.classList.toggle('solid', scrollY > 30);
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  const menuBtn = document.getElementById('menuBtn'), menu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', ()=>{ const o = menu.classList.toggle('open'); menuBtn.setAttribute('aria-expanded', o); });
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>menu.classList.remove('open')));
+  const toast = document.getElementById('toast'); let tt;
+  const say = m=>{ toast.textContent = m; toast.classList.add('show'); clearTimeout(tt); tt = setTimeout(()=>toast.classList.remove('show'), 3800); };
+
+  // Schedule (demo data, generated per day)
+  const pool = [['Strength 101','All levels','Coach Marcus'],['HIIT 45','Intermediate','Coach Dani'],['Boxing Pads','All levels','Coach Leo'],['Yoga Flow','Beginner','Coach Mia'],['Engine Builder','Advanced','Coach Dani'],['Mobility Reset','All levels','Coach Mia'],['Power Lifting','Advanced','Coach Marcus']];
+  const times = ['6:00','7:30','12:15','17:30','18:45'];
+  const daysEl = document.getElementById('days'), clsEl = document.getElementById('classes');
+  const names = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const today = (new Date().getDay()+6)%7;
+  const start = new Date(); start.setDate(start.getDate() - today);
+  const renderDay = d=>{
+    daysEl.querySelectorAll('.day').forEach((b,i)=>{ b.classList.toggle('on', i===d); b.setAttribute('aria-selected', i===d); });
+    clsEl.innerHTML = '';
+    times.slice(0, d>4 ? 3 : 5).forEach((t,i)=>{
+      const c = pool[(d*3+i)%pool.length], cap = 20, taken = (d*7+i*5)%19 + 1, left = cap - taken;
+      const row = document.createElement('div'); row.className = 'cls'; row.style.animationDelay = (i*60)+'ms';
+      row.innerHTML = `<time>${t}</time><div><h3>${c[0]}</h3><span class="lvl">${c[1]} · 45 min</span></div><span class="coach">${c[2]}</span>
+        <div class="spots">${left} of ${cap} spots left<div class="meter ${left<5?'low':''}"><i style="width:0"></i></div></div><button class="book-btn">Book</button>`;
+      row.querySelector('.book-btn').addEventListener('click', e=>{ const b = e.currentTarget; b.classList.toggle('done'); b.textContent = b.classList.contains('done') ? 'Booked ✓' : 'Book'; if(b.classList.contains('done')) say('Spot reserved (demo). Live version syncs to your booking system.'); });
+      clsEl.appendChild(row);
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{ row.querySelector('.meter i').style.width = (taken/cap*100)+'%'; }));
+    });
+  };
+  names.forEach((n,i)=>{ const dt = new Date(start); dt.setDate(start.getDate()+i); const b = document.createElement('button'); b.className='day'; b.setAttribute('role','tab'); b.innerHTML = n + `<small>${dt.getDate()}</small>`; b.addEventListener('click',()=>renderDay(i)); daysEl.appendChild(b); });
+  renderDay(today);
+
+  // Pricing toggle
+  const sw = document.getElementById('billing');
+  sw.addEventListener('click', ()=>{
+    const yearly = sw.getAttribute('aria-checked') !== 'true'; sw.setAttribute('aria-checked', yearly);
+    document.querySelectorAll('.amount .v').forEach(v=>{ v.classList.add('flip'); setTimeout(()=>{ v.textContent = yearly ? v.dataset.y : v.dataset.m; v.classList.remove('flip'); }, 200); });
+    document.querySelectorAll('.per').forEach(p=>p.textContent = yearly ? 'per month, billed yearly' : 'per month');
+  });
+
+  // Reveal + count-up
+  const countUp = el=>{ const end = parseFloat(el.dataset.count), dec = +(el.dataset.dec||0), suf = el.dataset.suffix||'', t0 = performance.now();
+    const step = t=>{ const k = Math.min(1,(t-t0)/1400), v = end*(1-Math.pow(1-k,3)); el.textContent = (dec? v.toFixed(dec) : Math.round(v).toLocaleString()) + suf; if(k<1) requestAnimationFrame(step); }; requestAnimationFrame(step); };
+  const io = new IntersectionObserver(es=>es.forEach(e=>{ if(!e.isIntersecting) return; e.target.classList.add('in'); e.target.querySelectorAll('[data-count]').forEach(countUp); io.unobserve(e.target); }),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{ el.style.transitionDelay = (i%4)*80+'ms'; io.observe(el); });
+
+  document.getElementById('joinForm').addEventListener('submit', e=>{ e.preventDefault(); if(!e.target.checkValidity()){ e.target.reportValidity(); return; } say('Demo form ✓ Live version sends trial signups to your CRM & follow-up texts.'); });
+})();
+</script>
+</body>
+</html>

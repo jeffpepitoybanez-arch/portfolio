@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Haven Realty · Real Estate Website Template by Jeff Ybanez</title>
+<meta name="description" content="Haven Realty, a modern real estate website template designed by Jeff Ybanez: property search with live filters, saved homes, mortgage calculator and viewing requests.">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0e1a2b; --navy-2:#16263d; --sand:#efe9df; --sand-2:#f7f3ec; --copper:#b8763e; --copper-2:#9a6130;
+    --ink:#101820; --ink-2:#55606b; --line:#e3dbcf; --radius:18px; --ease:cubic-bezier(.22,1,.36,1);
+  }
+  *{box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{margin:0;font-family:'Manrope',system-ui,sans-serif;color:var(--ink);background:var(--sand-2);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;line-height:1.02;margin:0;letter-spacing:-.01em;}
+  h1 em,h2 em{font-style:italic;color:var(--copper);font-weight:500;}
+  p{margin:0;text-wrap:pretty;} a{color:inherit;text-decoration:none;} img{max-width:100%;display:block;}
+  button,input,select{font:inherit;color:inherit;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 clamp(18px,4vw,32px);}
+  .eyebrow{font-size:12.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--copper);}
+  section{padding:clamp(72px,10vw,120px) 0;}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:40px;}
+  .sec-head h2{font-size:clamp(40px,5.6vw,64px);margin-top:10px;}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 26px;border-radius:12px;font-weight:700;font-size:15px;border:none;cursor:pointer;transition:transform .3s var(--ease),background .3s,box-shadow .3s;}
+  .btn-copper{background:var(--copper);color:#fff;}
+  .btn-copper:hover{background:var(--copper-2);transform:translateY(-2px);box-shadow:0 16px 30px -14px rgba(184,118,62,.7);}
+  .btn-line{border:1px solid currentColor;background:transparent;}
+  .btn-line:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease);}
+  .reveal.in{opacity:1;transform:none;}
+
+  /* Nav */
+  .nav{position:fixed;inset:0 0 auto 0;z-index:50;padding:20px 0;color:#fff;transition:background .35s,padding .35s,color .35s,box-shadow .35s;}
+  .nav.solid{background:rgba(247,243,236,.92);backdrop-filter:blur(14px);color:var(--ink);padding:12px 0;box-shadow:0 1px 0 var(--line);}
+  .nav-row{display:flex;align-items:center;justify-content:space-between;gap:20px;}
+  .logo{font-family:'Cormorant Garamond';font-size:30px;font-weight:600;letter-spacing:.02em;}
+  .logo span{color:var(--copper);}
+  .nav-links{display:flex;gap:32px;font-size:14.5px;font-weight:600;}
+  .nav-links a{opacity:.85;transition:opacity .2s;} .nav-links a:hover{opacity:1;}
+  .nav .btn{padding:11px 20px;}
+  .menu-btn{display:none;background:none;border:1px solid currentColor;border-radius:10px;width:44px;height:44px;cursor:pointer;}
+  @media(max-width:900px){.nav-links,.nav .btn{display:none;}.menu-btn{display:grid;place-items:center;}}
+  .mobile-menu{position:fixed;inset:0;z-index:49;background:var(--navy);color:#fff;padding:110px 28px;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .45s var(--ease);}
+  .mobile-menu.open{transform:none;}
+  .mobile-menu a{font-family:'Cormorant Garamond';font-size:40px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.12);}
+
+  /* Hero */
+  .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;color:#fff;padding:140px 0 60px;overflow:hidden;}
+  .hero-bg{position:absolute;inset:0;z-index:-2;}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);animation:kenburns 18s ease-out forwards;}
+  @keyframes kenburns{to{transform:scale(1);}}
+  .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(14,26,43,.35) 0%,rgba(14,26,43,.2) 35%,rgba(14,26,43,.85) 100%);}
+  .hero h1{font-size:clamp(54px,9vw,120px);max-width:12ch;}
+  .hero h1 em{color:#e9c39b;}
+  .hero p.lead{max-width:46ch;font-size:18px;color:#dfe5ee;margin-top:18px;}
+  .search{margin-top:40px;background:rgba(255,255,255,.96);color:var(--ink);border-radius:20px;padding:10px;box-shadow:0 40px 80px -30px rgba(0,0,0,.5);max-width:980px;}
+  .search-tabs{display:flex;gap:6px;padding:6px 6px 10px;}
+  .stab{padding:8px 18px;border-radius:999px;border:none;background:transparent;font-weight:700;cursor:pointer;color:var(--ink-2);transition:all .25s;}
+  .stab.on{background:var(--navy);color:#fff;}
+  .search-row{display:grid;grid-template-columns:1.4fr 1fr 1fr auto;gap:8px;}
+  @media(max-width:800px){.search-row{grid-template-columns:1fr 1fr;}.search-row .btn{grid-column:1/-1;}}
+  .sfield{background:var(--sand-2);border-radius:14px;padding:10px 14px;}
+  .sfield label{display:block;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);}
+  .sfield select{width:100%;border:none;background:transparent;font-weight:700;font-size:15px;padding:2px 0;cursor:pointer;}
+  .sfield select:focus{outline:none;}
+  .hero-meta{display:flex;gap:34px;margin-top:34px;flex-wrap:wrap;font-size:14px;color:#dfe5ee;}
+  .hero-meta b{display:block;font-family:'Cormorant Garamond';font-size:38px;color:#fff;line-height:1;}
+
+  /* Listings */
+  .filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+  .chip{padding:10px 18px;border-radius:999px;border:1px solid var(--line);background:#fff;font-weight:700;font-size:14px;cursor:pointer;transition:all .25s;}
+  .chip:hover{border-color:var(--navy);}
+  .chip.on{background:var(--navy);color:#fff;border-color:var(--navy);}
+  .count{font-size:14px;color:var(--ink-2);margin-left:6px;}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  @media(max-width:1000px){.grid{grid-template-columns:1fr 1fr;}} @media(max-width:640px){.grid{grid-template-columns:1fr;}}
+  .home{background:#fff;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);transition:transform .45s var(--ease),box-shadow .45s var(--ease),opacity .35s;}
+  .home:hover{transform:translateY(-6px);box-shadow:0 34px 60px -34px rgba(14,26,43,.45);}
+  .home.hide{display:none;}
+  .home-img{position:relative;aspect-ratio:4/3;overflow:hidden;}
+  .home-img img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease);}
+  .home:hover .home-img img{transform:scale(1.07);}
+  .badge{position:absolute;top:14px;left:14px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.94);font-size:12px;font-weight:800;letter-spacing:.04em;}
+  .badge.rent{background:var(--navy);color:#fff;}
+  .fav{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:none;background:rgba(255,255,255,.94);cursor:pointer;display:grid;place-items:center;transition:transform .25s var(--ease);}
+  .fav:hover{transform:scale(1.1);}
+  .fav svg{width:19px;height:19px;stroke:var(--navy);fill:none;transition:fill .25s,stroke .25s;}
+  .fav.on svg{fill:#e2574c;stroke:#e2574c;}
+  .fav.pop{animation:pop .4s var(--ease);}
+  @keyframes pop{50%{transform:scale(1.3);}}
+  .peek{position:absolute;inset:auto 0 0 0;padding:14px 16px;background:linear-gradient(0deg,rgba(14,26,43,.85),transparent);color:#fff;font-size:13px;font-weight:600;transform:translateY(100%);transition:transform .45s var(--ease);}
+  .home:hover .peek{transform:none;}
+  .home-body{padding:20px 22px 22px;}
+  .price{font-family:'Cormorant Garamond';font-size:32px;font-weight:600;line-height:1;}
+  .price small{font-family:'Manrope';font-size:14px;color:var(--ink-2);font-weight:600;}
+  .home-body h3{font-family:'Manrope';font-size:17px;font-weight:700;margin:10px 0 2px;}
+  .loc{font-size:14px;color:var(--ink-2);}
+  .specs{display:flex;gap:16px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line);font-size:13.5px;font-weight:600;color:var(--ink-2);}
+  .empty{display:none;grid-column:1/-1;text-align:center;padding:60px 20px;border:1px dashed var(--line);border-radius:var(--radius);color:var(--ink-2);}
+
+  /* Mortgage calculator */
+  .calc{display:grid;grid-template-columns:1.1fr .9fr;gap:0;background:var(--navy);color:#fff;border-radius:28px;overflow:hidden;}
+  @media(max-width:900px){.calc{grid-template-columns:1fr;}}
+  .calc-in{padding:clamp(28px,5vw,56px);}
+  .calc-in h2{font-size:clamp(38px,5vw,58px);margin:10px 0 28px;}
+  .range{margin-bottom:24px;}
+  .range-top{display:flex;justify-content:space-between;font-size:14px;margin-bottom:10px;color:#c3cbd6;}
+  .range-top b{color:#fff;font-size:16px;}
+  input[type=range]{width:100%;appearance:none;-webkit-appearance:none;height:6px;border-radius:6px;background:linear-gradient(90deg,var(--copper) var(--fill,50%),rgba(255,255,255,.15) var(--fill,50%));outline:none;}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#fff;border:5px solid var(--copper);cursor:pointer;transition:transform .2s;}
+  input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15);}
+  input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:#fff;border:5px solid var(--copper);cursor:pointer;}
+  .calc-out{background:var(--navy-2);padding:clamp(28px,5vw,56px);display:flex;flex-direction:column;justify-content:center;}
+  .calc-out .lbl{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#c3cbd6;font-weight:700;}
+  .monthly{font-family:'Cormorant Garamond';font-size:clamp(64px,8vw,92px);line-height:1;margin:10px 0 22px;color:#e9c39b;}
+  .bar{display:flex;height:10px;border-radius:10px;overflow:hidden;background:rgba(255,255,255,.1);}
+  .bar i{display:block;height:100%;transition:width .5s var(--ease);}
+  .legend{display:flex;gap:18px;margin-top:14px;font-size:13.5px;color:#c3cbd6;flex-wrap:wrap;}
+  .legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:7px;background:var(--c);}
+
+  /* About */
+  .about{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+  @media(max-width:900px){.about{grid-template-columns:1fr;}}
+  .about-img{border-radius:28px;overflow:hidden;aspect-ratio:5/4;}
+  .about-img img{width:100%;height:100%;object-fit:cover;}
+  .about h2{font-size:clamp(40px,5.4vw,62px);margin:10px 0 18px;}
+  .about p{color:var(--ink-2);font-size:17px;}
+  .about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px;}
+  .about-stats div{padding:18px;border-radius:16px;background:#fff;border:1px solid var(--line);}
+  .about-stats b{display:block;font-family:'Cormorant Garamond';font-size:40px;line-height:1;color:var(--copper);}
+  .about-stats span{font-size:13px;color:var(--ink-2);font-weight:600;}
+
+  /* Reviews */
+  .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  @media(max-width:900px){.reviews{grid-template-columns:1fr;}}
+  .review{padding:30px;border-radius:var(--radius);background:#fff;border:1px solid var(--line);transition:transform .4s var(--ease),border-color .4s;}
+  .review:hover{transform:translateY(-4px);border-color:var(--copper);}
+  .review .stars{color:var(--copper);letter-spacing:3px;}
+  .review p{font-family:'Cormorant Garamond';font-size:24px;line-height:1.3;margin:14px 0 20px;}
+  .review b{font-size:14.5px;} .review small{display:block;color:var(--ink-2);}
+
+  /* Contact */
+  .contact{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:start;}
+  @media(max-width:900px){.contact{grid-template-columns:1fr;}}
+  .contact h2{font-size:clamp(40px,5.4vw,62px);margin:10px 0 16px;}
+  .contact form{background:#fff;border:1px solid var(--line);border-radius:24px;padding:clamp(22px,4vw,36px);display:grid;gap:14px;}
+  .field label{display:block;font-size:12.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin-bottom:6px;}
+  .field input,.field select{width:100%;padding:14px 16px;border-radius:12px;border:1px solid var(--line);background:var(--sand-2);}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--copper);box-shadow:0 0 0 4px rgba(184,118,62,.15);}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;} @media(max-width:520px){.row2{grid-template-columns:1fr;}}
+
+  footer{background:var(--navy);color:#c3cbd6;padding:56px 0 30px;}
+  footer .logo{color:#fff;}
+  .foot{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;font-size:14.5px;}
+  .credit{margin-top:40px;padding-top:22px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:#8693a3;}
+  .credit a{color:#e9c39b;}
+
+  .tpl-pill{position:fixed;right:18px;bottom:18px;z-index:60;display:flex;align-items:center;gap:10px;padding:10px 12px 10px 16px;border-radius:999px;background:#0b0d10;color:#f5f3ee;font-size:13px;box-shadow:0 20px 40px -18px rgba(0,0,0,.6);}
+  .tpl-pill b{color:#c9a96e;} .tpl-pill a{background:#c9a96e;color:#0b0d10;padding:7px 13px;border-radius:999px;font-weight:700;}
+  @media(max-width:560px){.tpl-pill span{display:none;}}
+  .toast{position:fixed;left:50%;bottom:90px;z-index:70;transform:translate(-50%,20px);opacity:0;pointer-events:none;max-width:min(92vw,460px);padding:16px 20px;border-radius:14px;background:var(--navy);color:#fff;font-size:14.5px;box-shadow:0 30px 60px -20px rgba(0,0,0,.5);transition:opacity .35s,transform .35s var(--ease);}
+  .toast.show{opacity:1;transform:translate(-50%,0);}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important;}.reveal{opacity:1;transform:none;}}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-row">
+    <a href="#top" class="logo">Haven<span>.</span></a>
+    <nav class="nav-links"><a href="#homes">Homes</a><a href="#calculator">Mortgage</a><a href="#about">About</a><a href="#reviews">Reviews</a></nav>
+    <a href="#contact" class="btn btn-copper">Book a Viewing</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu"><a href="#homes">Homes</a><a href="#calculator">Mortgage</a><a href="#about">About</a><a href="#reviews">Reviews</a><a href="#contact" style="color:#e9c39b">Book a Viewing →</a></div>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-bg"><img src="img/hero.jpg" alt="Modern home with an infinity pool overlooking the hills" width="960" height="720"></div>
+    <div class="wrap">
+      <span class="eyebrow" style="color:#e9c39b">Boutique real estate</span>
+      <h1 class="reveal">Find the home that <em>feels</em> like you.</h1>
+      <p class="lead reveal">Hand-picked homes, honest advice and a local team that negotiates like it's our own move.</p>
+      <div class="search reveal" role="search">
+        <div class="search-tabs"><button class="stab on" data-type="all">All</button><button class="stab" data-type="sale">Buy</button><button class="stab" data-type="rent">Rent</button></div>
+        <div class="search-row">
+          <div class="sfield"><label for="s-loc">Location</label><select id="s-loc"><option value="all">Any neighborhood</option><option>Hillcrest</option><option>Downtown</option><option>Lakeside</option><option>Oak Park</option></select></div>
+          <div class="sfield"><label for="s-beds">Bedrooms</label><select id="s-beds"><option value="0">Any</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select></div>
+          <div class="sfield"><label for="s-price">Max price</label><select id="s-price"><option value="0">No limit</option><option value="5000">$5,000/mo</option><option value="900000">$900,000</option><option value="1500000">$1.5M</option><option value="3000000">$3M</option></select></div>
+          <button class="btn btn-copper" id="searchBtn">Search Homes</button>
+        </div>
+      </div>
+      <div class="hero-meta reveal"><div><b data-count="320" data-suffix="+">0</b>Homes sold</div><div><b data-count="18">0</b>Days avg. to close</div><div><b data-count="4.9" data-dec="1">0</b>Client rating</div></div>
+    </div>
+  </section>
+
+  <section id="homes">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div><span class="eyebrow">Featured listings</span><h2>Homes worth <em>a visit</em>.</h2></div>
+        <div class="filters" role="group" aria-label="Filter listings"><button class="chip on" data-filter="all">All</button><button class="chip" data-filter="sale">For Sale</button><button class="chip" data-filter="rent">For Rent</button><button class="chip" data-filter="fav">♥ Saved</button><span class="count" id="count"></span></div>
+      </div>
+      <div class="grid" id="grid"><p class="empty" id="empty">No homes match those filters yet. Try widening your search.</p></div>
+    </div>
+  </section>
+
+  <section id="calculator" style="padding-top:0">
+    <div class="wrap">
+      <div class="calc reveal">
+        <div class="calc-in">
+          <span class="eyebrow" style="color:#e9c39b">Mortgage calculator</span>
+          <h2>What could you <em style="color:#e9c39b">afford</em>?</h2>
+          <div class="range"><div class="range-top"><span>Home price</span><b id="v-price"></b></div><input type="range" id="r-price" min="200000" max="3000000" step="10000" value="850000" aria-label="Home price"></div>
+          <div class="range"><div class="range-top"><span>Down payment</span><b id="v-down"></b></div><input type="range" id="r-down" min="5" max="50" step="1" value="20" aria-label="Down payment percent"></div>
+          <div class="range"><div class="range-top"><span>Interest rate</span><b id="v-rate"></b></div><input type="range" id="r-rate" min="2" max="9" step="0.1" value="6.2" aria-label="Interest rate"></div>
+          <div class="range" style="margin:0"><div class="range-top"><span>Loan term</span><b id="v-term"></b></div><input type="range" id="r-term" min="10" max="30" step="5" value="30" aria-label="Loan term in years"></div>
+        </div>
+        <div class="calc-out">
+          <span class="lbl">Estimated monthly payment</span>
+          <div class="monthly" id="monthly">$0</div>
+          <div class="bar"><i id="bar-p" style="background:#e9c39b"></i><i id="bar-i" style="background:var(--copper)"></i><i id="bar-t" style="background:#6b7c93"></i></div>
+          <div class="legend"><span style="--c:#e9c39b" id="l-p">Principal</span><span style="--c:var(--copper)" id="l-i">Interest</span><span style="--c:#6b7c93" id="l-t">Tax &amp; insurance</span></div>
+          <a href="#contact" class="btn btn-copper" style="margin-top:30px;align-self:flex-start">Get Pre-Approved</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" style="padding-top:0">
+    <div class="wrap about">
+      <div class="about-img reveal"><img src="img/about.jpg" alt="Covered patio living space opening to a garden" width="960" height="640" loading="lazy"></div>
+      <div class="reveal">
+        <span class="eyebrow">Why Haven</span>
+        <h2>Local experts, <em>personal</em> service.</h2>
+        <p>We keep our client list small on purpose. Every buyer and seller gets a dedicated agent, weekly market updates and a negotiation strategy built around their goals.</p>
+        <div class="about-stats"><div><b data-count="15">0</b><span>Years local</span></div><div><b data-count="98" data-suffix="%">0</b><span>Asking price achieved</span></div><div><b data-count="24" data-suffix="h">0</b><span>Reply time</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head reveal"><div><span class="eyebrow">Client stories</span><h2>Moves that went <em>right</em>.</h2></div></div>
+      <div class="reviews">
+        <article class="review reveal"><span class="stars">★★★★★</span><p>“They found us a house before it even hit the market and handled every detail.”</p><b>The Mendozas</b><small>Bought in Hillcrest</small></article>
+        <article class="review reveal"><span class="stars">★★★★★</span><p>“Sold 9% over asking in six days. Clear advice, zero pressure.”</p><b>Priya S.</b><small>Sold in Downtown</small></article>
+        <article class="review reveal"><span class="stars">★★★★★</span><p>“As first-time buyers we felt guided at every step, from tours to keys.”</p><b>Tom &amp; Leah</b><small>First home, Oak Park</small></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="padding-top:0">
+    <div class="wrap contact">
+      <div class="reveal">
+        <span class="eyebrow">Schedule a viewing</span>
+        <h2>Let's find your <em>place</em>.</h2>
+        <p style="color:var(--ink-2);font-size:17px;">Tell us what you're looking for and an agent will reach out within 24 hours.</p>
+        <p style="margin-top:24px;font-weight:700;">(555) 014-2290<br><span style="font-weight:500;color:var(--ink-2)">hello@havenrealty.com</span></p>
+      </div>
+      <form class="reveal" id="leadForm" novalidate>
+        <div class="row2"><div class="field"><label for="c-name">Name</label><input id="c-name" required placeholder="Your name"></div><div class="field"><label for="c-email">Email</label><input id="c-email" type="email" required placeholder="you@email.com"></div></div>
+        <div class="row2"><div class="field"><label for="c-int">I want to</label><select id="c-int"><option>Buy a home</option><option>Sell my home</option><option>Rent a home</option></select></div><div class="field"><label for="c-home">Interested in</label><select id="c-home"><option>Any listing</option></select></div></div>
+        <button class="btn btn-copper" type="submit">Request a Viewing</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot"><a href="#top" class="logo">Haven<span>.</span></a><div>48 Harbor Street · Mon–Sat 9 AM–6 PM<br>(555) 014-2290 · hello@havenrealty.com</div></div>
+    <div class="credit"><span>© Haven Realty. Demo listings for template preview.</span><span>Website template designed by <a href="../../" target="_blank" rel="noopener">Jeff Ybanez</a></span></div>
+  </div>
+</footer>
+
+<div class="tpl-pill"><span>Template by <b>Jeff Ybanez</b></span><a href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20Haven%20Realty%20real%20estate%20website%20template." target="_blank" rel="noopener">Get this template</a></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  const nav = document.getElementById('nav');
+  const onScroll = ()=> nav.classList.toggle('solid', scrollY > 60);
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  const menuBtn = document.getElementById('menuBtn'), menu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', ()=>{ const o = menu.classList.toggle('open'); menuBtn.setAttribute('aria-expanded', o); });
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>menu.classList.remove('open')));
+
+  const toast = document.getElementById('toast'); let tt;
+  const say = m=>{ toast.textContent = m; toast.classList.add('show'); clearTimeout(tt); tt = setTimeout(()=>toast.classList.remove('show'), 4000); };
+  const money = n=> '$' + Math.round(n).toLocaleString();
+
+  // Listings data (demo)
+  const homes = [
+    {img:'home-1', title:'Cedar Ridge Modern', loc:'Hillcrest', type:'sale', price:1450000, beds:4, baths:3, sqft:3200, tag:'New'},
+    {img:'home-2', title:'Garden Court Residences', loc:'Oak Park', type:'rent', price:3800, beds:2, baths:2, sqft:1150},
+    {img:'home-3', title:'The Laurel Apartments', loc:'Downtown', type:'rent', price:2650, beds:1, baths:1, sqft:780},
+    {img:'home-4', title:'Brick Loft No. 7', loc:'Downtown', type:'sale', price:685000, beds:2, baths:2, sqft:1400},
+    {img:'home-5', title:'Lakeside Light House', loc:'Lakeside', type:'sale', price:2380000, beds:5, baths:4, sqft:4100, tag:'Open house'},
+    {img:'home-6', title:'Chef\'s Kitchen Family Home', loc:'Hillcrest', type:'sale', price:910000, beds:3, baths:2, sqft:2050}
+  ];
+  const favs = new Set();
+  const grid = document.getElementById('grid'), empty = document.getElementById('empty');
+  homes.forEach((h,i)=>{
+    const a = document.createElement('article'); a.className = 'home reveal'; a.dataset.i = i;
+    a.innerHTML = `<div class="home-img"><img src="img/${h.img}.jpg" alt="${h.title} in ${h.loc}" width="960" height="640" loading="lazy">
+      <span class="badge ${h.type==='rent'?'rent':''}">${h.tag || (h.type==='rent'?'For Rent':'For Sale')}</span>
+      <button class="fav" aria-label="Save ${h.title}" aria-pressed="false"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg></button>
+      <div class="peek">Tap to book a private tour →</div></div>
+      <div class="home-body"><div class="price">${money(h.price)}${h.type==='rent'?' <small>/month</small>':''}</div><h3>${h.title}</h3><div class="loc">${h.loc}</div>
+      <div class="specs"><span>${h.beds} bd</span><span>${h.baths} ba</span><span>${h.sqft.toLocaleString()} sq ft</span></div></div>`;
+    a.querySelector('.fav').addEventListener('click', e=>{
+      e.stopPropagation(); const b = e.currentTarget;
+      favs.has(i) ? favs.delete(i) : favs.add(i);
+      b.classList.toggle('on', favs.has(i)); b.setAttribute('aria-pressed', favs.has(i));
+      b.classList.remove('pop'); void b.offsetWidth; b.classList.add('pop');
+      say(favs.has(i) ? 'Saved to your shortlist ♥' : 'Removed from your shortlist');
+      apply();
+    });
+    a.addEventListener('click', ()=>{ document.getElementById('c-home').value = h.title; window.scrollTo({top:document.getElementById('contact').offsetTop-80, behavior:'smooth'}); });
+    grid.insertBefore(a, empty);
+    const opt = document.createElement('option'); opt.textContent = h.title; document.getElementById('c-home').appendChild(opt);
+  });
+
+  const state = {type:'all', chip:'all', loc:'all', beds:0, max:0};
+  const apply = ()=>{
+    let n = 0;
+    [...grid.querySelectorAll('.home')].forEach(card=>{
+      const h = homes[card.dataset.i], i = +card.dataset.i;
+      const typeOk = state.chip === 'fav' ? favs.has(i) : (state.chip !== 'all' ? h.type === state.chip : (state.type === 'all' || h.type === state.type));
+      const priceOk = !state.max || (state.max <= 5000 ? (h.type==='rent' && h.price <= state.max) : (h.type==='sale' && h.price <= state.max));
+      const ok = typeOk && (state.loc==='all' || h.loc===state.loc) && h.beds >= state.beds && priceOk;
+      card.classList.toggle('hide', !ok); if(ok) n++;
+    });
+    document.getElementById('count').textContent = n + (n===1?' home':' homes');
+    empty.style.display = n ? 'none' : 'block';
+  };
+  document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click', ()=>{
+    document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on', x===c)); state.chip = c.dataset.filter; apply();
+  }));
+  document.querySelectorAll('.stab').forEach(t=>t.addEventListener('click', ()=>{
+    document.querySelectorAll('.stab').forEach(x=>x.classList.toggle('on', x===t)); state.type = t.dataset.type;
+  }));
+  document.getElementById('searchBtn').addEventListener('click', ()=>{
+    state.loc = document.getElementById('s-loc').value; state.beds = +document.getElementById('s-beds').value; state.max = +document.getElementById('s-price').value;
+    state.chip = 'all'; document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on', x.dataset.filter==='all'));
+    apply(); window.scrollTo({top:document.getElementById('homes').offsetTop-70, behavior:'smooth'});
+  });
+  apply();
+
+  // Mortgage calculator
+  const $ = id=>document.getElementById(id);
+  const calc = ()=>{
+    const price = +$('r-price').value, down = +$('r-down').value, rate = +$('r-rate').value, term = +$('r-term').value;
+    const loan = price * (1 - down/100), r = rate/100/12, n = term*12;
+    const pi = r ? loan * r / (1 - Math.pow(1+r, -n)) : loan/n;
+    const firstInterest = loan * r, principal = pi - firstInterest, extras = price * 0.015 / 12;
+    const total = pi + extras;
+    $('v-price').textContent = money(price); $('v-down').textContent = down + '% · ' + money(price*down/100);
+    $('v-rate').textContent = rate.toFixed(1) + '%'; $('v-term').textContent = term + ' years';
+    $('monthly').textContent = money(total);
+    $('bar-p').style.width = (principal/total*100)+'%'; $('bar-i').style.width = (firstInterest/total*100)+'%'; $('bar-t').style.width = (extras/total*100)+'%';
+    $('l-p').textContent = 'Principal ' + money(principal); $('l-i').textContent = 'Interest ' + money(firstInterest); $('l-t').textContent = 'Tax & insurance ' + money(extras);
+    document.querySelectorAll('input[type=range]').forEach(el=>el.style.setProperty('--fill', ((el.value-el.min)/(el.max-el.min)*100)+'%'));
+  };
+  document.querySelectorAll('input[type=range]').forEach(el=>el.addEventListener('input', calc)); calc();
+
+  // Reveal + count-up
+  const countUp = el=>{ const end = parseFloat(el.dataset.count), dec = +(el.dataset.dec||0), suf = el.dataset.suffix||'', t0 = performance.now();
+    const step = t=>{ const k = Math.min(1,(t-t0)/1400), v = end*(1-Math.pow(1-k,3)); el.textContent = (dec? v.toFixed(dec) : Math.round(v).toLocaleString()) + suf; if(k<1) requestAnimationFrame(step); }; requestAnimationFrame(step); };
+  const io = new IntersectionObserver(es=>es.forEach(e=>{ if(!e.isIntersecting) return; e.target.classList.add('in'); e.target.querySelectorAll('[data-count]').forEach(countUp); io.unobserve(e.target); }),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{ el.style.transitionDelay = (i%3)*90+'ms'; io.observe(el); });
+
+  document.getElementById('leadForm').addEventListener('submit', e=>{
+    e.preventDefault(); if(!e.target.checkValidity()){ e.target.reportValidity(); return; }
+    say('Demo form ✓ In the live site this sends the lead straight to your CRM & agent inbox.');
+  });
+})();
+</script>
+</body>
+</html>
