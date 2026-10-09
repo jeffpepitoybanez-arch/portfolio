@@ -691,6 +691,7 @@
 
   /* -------- Graphics: masonry of 4 columns; every design shown whole at its real shape -------- */
   .bento-grid{display:flex;gap:14px;align-items:flex-start;}
+  .bento-grid[hidden],.carousel[hidden]{display:none;}
   .bento-col{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:14px;}
   @media(max-width:820px){
     .bento-grid{flex-wrap:wrap;gap:10px;}
@@ -715,6 +716,12 @@
     .bento-tile .bento-cap{position:static;opacity:1;transform:none;background:none;padding:9px 12px 10px;font-size:12px;border-top:1px solid var(--line);}
     .bento-tile .bento-cap small{font-size:10.5px;}
   }
+  /* My graphic templates: badge + caption with a Get This Template button */
+  .gt-badge{position:absolute;top:10px;left:10px;z-index:2;padding:5px 10px;border-radius:999px;font-size:11.5px;font-weight:700;background:rgba(201,169,110,.94);color:#0b0d10;}
+  .bento-tile.tpl .bento-cap{pointer-events:auto;display:flex;align-items:flex-end;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+  .gt-get{flex:0 0 auto;padding:7px 12px;border-radius:999px;background:var(--gold);color:#0b0d10;font-size:11.5px;font-weight:700;transition:transform .2s var(--ease),background .2s;}
+  .gt-get:hover{background:#e6cf9f;transform:translateY(-2px);}
+  @media(max-width:820px){.gt-badge{top:6px;left:6px;padding:3px 8px;font-size:10px;}}
   /* Carousel tile: swipe or use the arrows to flip through the slides */
   .gfx-carousel .gfx-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;}
   .gfx-carousel .gfx-track::-webkit-scrollbar{display:none;}
@@ -1446,8 +1453,12 @@
           <div class="cat-eyebrow c-gold">02 · Graphics &amp; Design</div>
           <h3>Brand Visuals &amp; Social Creatives</h3>
         </div>
+        <div class="web-switch" role="tablist" aria-label="Show client work or my graphic templates">
+          <button type="button" class="ws-btn on" role="tab" aria-selected="true" data-show="bentoGrid">Client Work</button>
+          <button type="button" class="ws-btn" role="tab" aria-selected="false" data-show="gfxTpl"><span aria-hidden="true">★</span> My Templates</button>
+        </div>
       </div>
-      <div class="bento-grid" id="bentoGrid">
+      <div class="bento-grid" id="bentoGrid" role="tabpanel" aria-label="Client graphic work">
         <div class="bento-col">
           <div class="bento-tile"><img src="assets/graphics/7figure-builder-100k-ad.jpg" width="1080" height="1080" alt="7Figure Builder ad: Wanna make $100K building a house?" loading="lazy"><div class="bento-cap"><small>7Figure Builder</small>Lead Magnet Ad</div></div>
           <div class="bento-tile"><img src="assets/graphics/realty-kings-just-sold-flyer-1.jpg" width="1080" height="1528" alt="Realty Kings Just Sold property flyer with photos, property details, and agent contact" loading="lazy"><div class="bento-cap"><small>Realty Kings</small>Just Sold Property Flyer</div></div>
@@ -1480,6 +1491,27 @@
           <div class="bento-tile"><img src="assets/graphics/7figure-builder-first-house-ad.jpg" width="1080" height="1080" alt="7Figure Builder ad: I built my first house with zero experience, free starter kit" loading="lazy"><div class="bento-cap"><small>7Figure Builder</small>Free Guide Ad</div></div>
         </div>
       </div>
+      <div class="bento-grid" id="gfxTpl" role="tabpanel" aria-label="My graphic templates" hidden>
+        <div class="bento-col">
+          <div class="bento-tile tpl"><span class="gt-badge">★ My Template</span><img src="assets/graphics-templates/realty-open.jpg" width="1080" height="1920" alt="Open house Instagram story template for a real estate listing" loading="lazy"><div class="bento-cap"><span><small>Real Estate · Story</small>Open House Invite</span><a class="gt-get" href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20real%20estate%20open%20house%20graphic%20template." target="_blank" rel="noopener">Get This Template</a></div></div>
+          <div class="bento-tile tpl"><span class="gt-badge">★ My Template</span><img src="assets/graphics-templates/dental-tip.jpg" width="1080" height="1350" alt="Dental tip social post template about kids' first dentist visit" loading="lazy"><div class="bento-cap"><span><small>Dental · Portrait Post</small>Educational Tip Post</span><a class="gt-get" href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20dental%20tip%20post%20graphic%20template." target="_blank" rel="noopener">Get This Template</a></div></div>
+        </div>
+        <div class="bento-col">
+          <div class="bento-tile tpl"><span class="gt-badge">★ My Template</span><img src="assets/graphics-templates/gym-week.jpg" width="1080" height="1920" alt="Gym weekly class schedule Instagram story template" loading="lazy"><div class="bento-cap"><span><small>Fitness · Story</small>Weekly Class Schedule</span><a class="gt-get" href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20gym%20class%20schedule%20story%20graphic%20template." target="_blank" rel="noopener">Get This Template</a></div></div>
+          <div class="bento-tile tpl"><span class="gt-badge">★ My Template</span><img src="assets/graphics-templates/food-special.jpg" width="1080" height="1350" alt="Restaurant weekend special promo post template with steak" loading="lazy"><div class="bento-cap"><span><small>Restaurant · Portrait Post</small>Weekend Special Promo</span><a class="gt-get" href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20restaurant%20weekend%20special%20graphic%20template." target="_blank" rel="noopener">Get This Template</a></div></div>
+        </div>
+        <div class="bento-col">
+          <div class="bento-tile tpl"><span class="gt-badge">★ My Template</span><img src="assets/graphics-templates/food-menu.jpg" width="1080" height="1350" alt="Restaurant new pasta menu announcement post template" loading="lazy"><div class="bento-cap"><span><small>Restaurant · Portrait Post</small>New Menu Announcement</span><a class="gt-get" href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20restaurant%20menu%20announcement%20graphic%20template." target="_blank" rel="noopener">Get This Template</a></div></div>
+          <div class="bento-tile tpl"><span class="gt-badge">★ My Template</span><img src="assets/graphics-templates/dental-offer.jpg" width="1080" height="1080" alt="Dental clinic teeth whitening 30 percent off ad template" loading="lazy"><div class="bento-cap"><span><small>Dental · Square Post</small>Whitening Offer Ad</span><a class="gt-get" href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20dental%20whitening%20offer%20graphic%20template." target="_blank" rel="noopener">Get This Template</a></div></div>
+          <div class="bento-tile tpl"><span class="gt-badge">★ My Template</span><img src="assets/graphics-templates/roof-storm.jpg" width="1080" height="1080" alt="Roofing storm damage free inspection ad template" loading="lazy"><div class="bento-cap"><span><small>Roofing · Square Ad</small>Storm Damage Lead Ad</span><a class="gt-get" href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20roofing%20storm%20damage%20ad%20graphic%20template." target="_blank" rel="noopener">Get This Template</a></div></div>
+        </div>
+        <div class="bento-col">
+          <div class="bento-tile tpl"><span class="gt-badge">★ My Template</span><img src="assets/graphics-templates/realty-listed.jpg" width="1080" height="1080" alt="Just listed real estate post template with price and specs" loading="lazy"><div class="bento-cap"><span><small>Real Estate · Square Post</small>Just Listed Post</span><a class="gt-get" href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20real%20estate%20just%20listed%20graphic%20template." target="_blank" rel="noopener">Get This Template</a></div></div>
+          <div class="bento-tile tpl"><span class="gt-badge">★ My Template</span><img src="assets/graphics-templates/gym-trial.jpg" width="1080" height="1080" alt="Gym seven day free trial ad template" loading="lazy"><div class="bento-cap"><span><small>Fitness · Square Ad</small>Free Trial Ad</span><a class="gt-get" href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20gym%20free%20trial%20ad%20graphic%20template." target="_blank" rel="noopener">Get This Template</a></div></div>
+          <div class="bento-tile tpl"><span class="gt-badge">★ My Template</span><img src="assets/graphics-templates/roof-review.jpg" width="1080" height="1080" alt="Five-star customer review post template for a roofing company" loading="lazy"><div class="bento-cap"><span><small>Roofing · Square Post</small>Customer Review Post</span><a class="gt-get" href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20roofing%20review%20post%20graphic%20template." target="_blank" rel="noopener">Get This Template</a></div></div>
+        </div>
+      </div>
+
       <a href="https://drive.google.com/drive/folders/1Q4OaoAWIT73MiYj_AhUabgIgQklyeinA?usp=drive_link" class="more-link" target="_blank" rel="noopener noreferrer">View More Graphics Projects</a>
     </div>
 
@@ -2050,7 +2082,7 @@
 
   // Website / Funnel: switch between client work and my templates
   document.querySelectorAll('.web-switch .ws-btn').forEach(btn=>btn.addEventListener('click', ()=>{
-    document.querySelectorAll('.web-switch .ws-btn').forEach(b=>{ const on = b === btn; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); const c = document.getElementById(b.dataset.show); if(c){ c.hidden = !on; if(on){ c.classList.remove('ws-in'); void c.offsetWidth; c.classList.add('ws-in'); } } });
+    btn.closest('.web-switch').querySelectorAll('.ws-btn').forEach(b=>{ const on = b === btn; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); const c = document.getElementById(b.dataset.show); if(c){ c.hidden = !on; if(on){ c.classList.remove('ws-in'); void c.offsetWidth; c.classList.add('ws-in'); } } });
     const shown = document.getElementById(btn.dataset.show); if(shown && shown._remeasure) shown._remeasure();
   }));
 
