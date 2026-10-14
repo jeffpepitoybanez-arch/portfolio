@@ -972,8 +972,154 @@
     .value-card::after,.service::after,.proj-card::after,.tl-content::after,.tools-cat::after{display:none;}
   }
 
+  /* =====================================================================
+     REDESIGN LAYER (refined dark + gold): cleaner type, glass cards,
+     bento project grids, preview modal. Overrides the rules above.
+     ===================================================================== */
+  :root{
+    --glass:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));
+    --glass-line:rgba(245,243,238,.08);
+    --glass-line-hi:rgba(201,169,110,.45);
+    --radius:20px;
+    --shadow-lg:0 40px 80px -40px rgba(0,0,0,.85);
+  }
+  body{letter-spacing:-.005em;}
+  p{text-wrap:pretty;}
+  section{padding:clamp(80px,11vw,140px) 0;border-bottom:none;}
+  section + section{position:relative;}
+  section + section::before{content:"";position:absolute;top:0;left:50%;width:min(1180px,90%);height:1px;transform:translateX(-50%);
+    background:linear-gradient(90deg,transparent,var(--glass-line) 20%,var(--glass-line) 80%,transparent);}
+
+  /* Section labels become pills, headings get bigger and tighter */
+  .kicker{padding:7px 14px 7px 12px;border-radius:999px;border:1px solid rgba(201,169,110,.28);background:rgba(201,169,110,.08);
+    font-size:12.5px;font-weight:600;letter-spacing:.04em;margin-bottom:20px;}
+  .kicker::before{width:6px;height:6px;border-radius:50%;box-shadow:0 0 0 4px rgba(201,169,110,.18);}
+  .reveal .kicker::before{transform:none;}
+  .sec-head{max-width:760px;margin-bottom:clamp(40px,6vw,64px);}
+  .sec-head h2,.contact-panel h2{font-size:clamp(34px,5.4vw,60px);line-height:1.04;letter-spacing:-.035em;
+    background:linear-gradient(180deg,#fff 30%,rgba(245,243,238,.62));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .sec-head p{font-size:17px;line-height:1.65;max-width:58ch;}
+  .hero h1{letter-spacing:-.04em;line-height:1.02;}
+
+  /* Smoother reveal: lift + soft blur */
+  .reveal{transform:translateY(28px);filter:blur(6px);transition:opacity .9s var(--ease),transform .9s var(--ease),filter .9s var(--ease);}
+  .reveal.in{filter:none;}
+
+  /* Buttons: pills with a subtle inner highlight */
+  .btn{border-radius:999px;padding:15px 28px;}
+  .btn-gold{background:linear-gradient(180deg,#d8bb84,#c09a5c);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 10px 30px -12px rgba(201,169,110,.6);}
+  .btn-ghost{background:rgba(255,255,255,.03);backdrop-filter:blur(8px);}
+
+  /* Glass cards everywhere */
+  .value-card,.tl-content,.tools-cat,.contact-panel,.proj-card,.service{
+    background:var(--glass),var(--bg-alt);border:1px solid var(--glass-line);border-radius:var(--radius);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+  }
+  .value-card{padding:32px;}
+  .value-card:hover,.tools-cat:hover,.tl-content:hover{border-color:var(--glass-line-hi);}
+  .proof-stats{border-radius:var(--radius);border-color:var(--glass-line);background:var(--glass-line);}
+  .proof-stat{background:var(--bg-alt);padding:32px 24px;}
+  .proof-stat .stat-num{font-size:clamp(30px,4.6vw,46px);letter-spacing:-.03em;}
+
+  /* Services: separate cards with a number badge instead of a ruled table */
+  .services-grid{gap:16px;background:none;border:none;overflow:visible;}
+  .service{padding:34px;transition:transform .45s var(--ease),border-color .3s,background .3s;}
+  .service:hover{transform:translateY(-6px);border-color:var(--glass-line-hi);background:var(--glass),var(--surface);}
+  .service-index{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--glass-line);font-size:13px;}
+  .service:hover .service-index{background:var(--gold);color:#0b0d10;border-color:var(--gold);transform:none;}
+
+  /* Tools chips */
+  .tool-chip{border-radius:999px;border-color:var(--glass-line);background:rgba(255,255,255,.03);}
+
+  /* FAQ as soft cards */
+  .faq-list{display:grid;gap:12px;}
+  details.faq-item{border:1px solid var(--glass-line);border-radius:16px;padding:20px 24px;background:var(--glass);transition:border-color .3s,background .3s;}
+  details.faq-item:hover{border-color:rgba(201,169,110,.3);}
+  details.faq-item[open]{border-color:var(--glass-line-hi);background:linear-gradient(180deg,rgba(201,169,110,.07),rgba(255,255,255,.01));}
+  details.faq-item[open] .faq-a{animation:faqIn .45s var(--ease);}
+  @keyframes faqIn{from{opacity:0;transform:translateY(-6px);}}
+
+  /* Contact */
+  .contact-panel{background:radial-gradient(700px 300px at 10% 0%,rgba(201,169,110,.16),transparent 60%),var(--glass),var(--bg-alt);}
+
+  /* ---------- Samples: category headers ---------- */
+  .proj-category{margin-bottom:clamp(90px,12vw,140px);}
+  .cat-head{margin-bottom:28px;align-items:center;}
+  .cat-head h3{font-size:clamp(26px,3.4vw,38px);letter-spacing:-.03em;}
+  .cat-eyebrow{display:inline-flex;align-items:center;gap:8px;}
+  .cat-eyebrow::before{content:"";width:22px;height:1px;background:currentColor;opacity:.6;}
+
+  /* ---------- Samples: bento project grid ---------- */
+  .work-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px;}
+  .work-grid[hidden]{display:none;}
+  .work-grid.ws-in{animation:wsIn .5s var(--ease);}
+  .work-grid .proj-card{grid-column:span 3;display:flex;flex-direction:column;min-height:0;overflow:hidden;cursor:pointer;
+    transition:transform .5s var(--ease),border-color .35s,box-shadow .5s var(--ease),opacity .7s var(--ease),filter .7s var(--ease);}
+  .work-grid .proj-card:first-child,.work-grid .proj-card:last-child:nth-child(even){grid-column:span 6;display:grid;grid-template-columns:1.25fr 1fr;}
+  .work-grid .proj-card:hover{transform:translateY(-8px);border-color:var(--glass-line-hi);box-shadow:var(--shadow-lg);}
+  .work-grid .proj-media{aspect-ratio:16/10;border-radius:0;}
+  .work-grid .proj-card:first-child .proj-media,.work-grid .proj-card:last-child:nth-child(even) .proj-media{aspect-ratio:auto;min-height:360px;}
+  .work-grid .proj-media img{height:100%;min-height:0;transition:transform 1.1s var(--ease);}
+  .work-grid .proj-card:hover .proj-media img{transform:scale(1.06);}
+  .work-grid .proj-body{padding:28px 30px 30px;}
+  .work-grid .proj-body h3{font-size:clamp(20px,2vw,24px);letter-spacing:-.02em;}
+  .work-grid .proj-card:not(:first-child):not(:last-child:nth-child(even)) .proj-body p{
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+  /* "Preview" chip that slides in on hover */
+  .work-grid .proj-media::after{content:"⤢  Quick preview";position:absolute;right:16px;bottom:16px;padding:9px 14px;border-radius:999px;
+    font-size:12.5px;font-weight:600;color:#0b0d10;background:rgba(245,243,238,.92);backdrop-filter:blur(6px);
+    opacity:0;transform:translateY(10px);transition:opacity .35s var(--ease),transform .35s var(--ease);}
+  .work-grid .proj-card:hover .proj-media::after{opacity:1;transform:none;}
+  /* Staggered entrance */
+  .work-grid .proj-card.pc-wait{opacity:0;transform:translateY(40px) scale(.98);filter:blur(8px);}
+  @media(max-width:860px){
+    .work-grid{grid-template-columns:1fr;gap:16px;}
+    .work-grid .proj-card,.work-grid .proj-card:first-child,.work-grid .proj-card:last-child:nth-child(even){grid-column:auto;display:flex;flex-direction:column;}
+    .work-grid .proj-card:first-child .proj-media,.work-grid .proj-card:last-child:nth-child(even) .proj-media{aspect-ratio:16/10;min-height:0;}
+    .work-grid .proj-body{padding:22px;}
+    .work-grid .proj-media::after{opacity:1;transform:none;font-size:11.5px;padding:7px 11px;}
+  }
+
+  /* Graphics tiles: lift + zoom cue */
+  .bento-tile{cursor:zoom-in;transition:opacity .6s var(--ease),transform .6s var(--ease),border-color .3s,box-shadow .5s var(--ease);}
+  .bento-tile:hover{border-color:var(--glass-line-hi);box-shadow:var(--shadow-lg);}
+  .bento-tile.gfx-carousel{cursor:default;}
+
+  /* Pill toggles get a sliding highlight feel */
+  .web-switch{backdrop-filter:blur(10px);background:rgba(255,255,255,.04);border-color:var(--glass-line);}
+  .ws-btn{transition:background .35s var(--ease),color .25s,box-shadow .35s;}
+  .ws-btn.on{box-shadow:0 8px 24px -10px rgba(201,169,110,.7);}
+
+  /* ---------- Preview modal ---------- */
+  .pv{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:clamp(12px,3vw,40px);
+    background:rgba(5,6,8,.72);backdrop-filter:blur(14px);opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s;}
+  .pv.open{opacity:1;visibility:visible;}
+  .pv-box{position:relative;width:min(1180px,100%);max-height:100%;overflow:auto;border-radius:24px;border:1px solid var(--glass-line);
+    background:var(--bg-alt);box-shadow:0 60px 120px -40px rgba(0,0,0,.9);display:grid;grid-template-columns:1.35fr 1fr;
+    transform:translateY(24px) scale(.97);transition:transform .45s var(--ease);}
+  .pv.open .pv-box{transform:none;}
+  .pv-media{background:#000;display:grid;place-items:center;min-height:300px;}
+  .pv-media img{width:100%;height:100%;max-height:82vh;object-fit:contain;}
+  .pv-body{padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:14px;}
+  .pv-body .proj-cat{margin:0;}
+  .pv-body h3{font-size:clamp(24px,2.6vw,32px);letter-spacing:-.025em;}
+  .pv-body p{color:var(--ink-dim);font-size:15.5px;line-height:1.7;}
+  .pv-body .proj-tags{margin:6px 0;}
+  .pv-body .tpl-actions,.pv-body .proj-link{margin-top:auto;}
+  .pv-close{position:absolute;top:14px;right:14px;z-index:2;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
+    background:rgba(7,9,11,.7);border:1px solid var(--glass-line);color:var(--ink);font-size:20px;backdrop-filter:blur(8px);transition:transform .25s,border-color .25s;}
+  .pv-close:hover{transform:rotate(90deg);border-color:var(--gold);}
+  .pv.img-only .pv-box{grid-template-columns:1fr;width:auto;max-width:min(92vw,900px);}
+  .pv.img-only .pv-body{padding:18px 24px;flex-direction:row;align-items:center;justify-content:space-between;flex-wrap:wrap;}
+  .pv.img-only .pv-body > span{display:flex;flex-direction:column;gap:2px;font-size:17px;font-weight:600;color:var(--ink);}
+  .pv.img-only .pv-body small{display:block;font-size:12.5px;font-weight:500;color:var(--gold);letter-spacing:.02em;}
+  .pv.img-only .gt-get{padding:11px 18px;font-size:13.5px;}
+  @media(max-width:860px){.pv-box{grid-template-columns:1fr;}.pv-media img{max-height:50vh;}}
+  body.pv-lock{overflow:hidden;}
+
   @media (prefers-reduced-motion: reduce){
     .bg-cursor,.btn-gold::after,.nav-cta::after{display:none;}
+    .reveal,.work-grid .proj-card.pc-wait{filter:none;opacity:1;transform:none;}
     .hs-tile,.hero-portrait,.btn-gold,.nav-cta{translate:none !important;}
     *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important;}
   }
@@ -1345,8 +1491,7 @@
           <button type="button" class="ws-btn" role="tab" aria-selected="false" data-show="carTpl"><span aria-hidden="true">★</span> My Templates</button>
         </div>
       </div>
-      <div class="carousel" id="carWeb" role="tabpanel" aria-label="Client work">
-        <div class="carousel-track-wrap"><div class="carousel-track">
+      <div class="work-grid" id="carWeb" role="tabpanel" aria-label="Client work">
           <div class="proj-card" style="--accent:var(--gold)">
             <div class="proj-media"><span class="proj-tag">Website / Funnel</span><img src="assets/projects/buildup-community.jpg" alt="BuildUp real estate development website shown on desktop and mobile"></div>
             <div class="proj-body">
@@ -1387,20 +1532,8 @@
               <a href="https://thendta.org" target="_blank" rel="noopener" class="proj-link">View Live</a>
             </div>
           </div>
-        </div></div>
-        <div class="carousel-nav">
-          <div class="car-dots"></div>
-          <div style="display:flex;align-items:center;gap:16px;">
-            <span class="car-count">1 / 3</span>
-            <div class="car-arrows">
-              <button class="car-btn" data-dir="-1" aria-label="Previous project">‹</button>
-              <button class="car-btn" data-dir="1" aria-label="Next project">›</button>
-            </div>
-          </div>
-        </div>
       </div>
-      <div class="carousel" id="carTpl" role="tabpanel" aria-label="My website templates" hidden>
-        <div class="carousel-track-wrap"><div class="carousel-track">
+      <div class="work-grid" id="carTpl" role="tabpanel" aria-label="My website templates" hidden>
           <div class="proj-card" style="--accent:var(--gold)">
             <div class="proj-media"><span class="proj-tag tpl-tag">★ My Template</span><img src="assets/templates/smile-studio.jpg" alt="Smile Studio Dental Clinic website template shown on desktop and mobile" loading="lazy"></div>
             <div class="proj-body">
@@ -1466,17 +1599,6 @@
               </div>
             </div>
           </div>
-        </div></div>
-        <div class="carousel-nav">
-          <div class="car-dots"></div>
-          <div style="display:flex;align-items:center;gap:16px;">
-            <span class="car-count">1 / 5</span>
-            <div class="car-arrows">
-              <button class="car-btn" data-dir="-1" aria-label="Previous template">‹</button>
-              <button class="car-btn" data-dir="1" aria-label="Next template">›</button>
-            </div>
-          </div>
-        </div>
       </div>
       <a href="web-projects/" class="more-link">View More Web &amp; Funnel Projects</a>
     </div>
@@ -1665,8 +1787,7 @@
           <h3>Workflows Running Behind the Scenes</h3>
         </div>
       </div>
-      <div class="carousel" id="carAutomation">
-        <div class="carousel-track-wrap"><div class="carousel-track">
+      <div class="work-grid" id="carAutomation">
           <div class="proj-card" style="--accent:var(--green)">
             <div class="proj-media"><span class="proj-tag">Automation</span><img src="https://i.imgur.com/SMPPu1S.png" alt="Automation sample 1"></div>
             <div class="proj-body">
@@ -1707,17 +1828,6 @@
               <a href="https://drive.google.com/file/d/1E4fyA5y9L3h1ATyID9WknwhjbJbAYtCH/view?usp=sharing" class="proj-link" style="color:var(--green)" target="_blank" rel="noopener noreferrer">Watch Video</a>
             </div>
           </div>
-        </div></div>
-        <div class="carousel-nav">
-          <div class="car-dots"></div>
-          <div style="display:flex;align-items:center;gap:16px;">
-            <span class="car-count">1 / 4</span>
-            <div class="car-arrows">
-              <button class="car-btn" data-dir="-1" aria-label="Previous automation">‹</button>
-              <button class="car-btn" data-dir="1" aria-label="Next automation">›</button>
-            </div>
-          </div>
-        </div>
       </div>
       <a href="https://drive.google.com/drive/folders/1CNyQc1l64iKctbwsMGAH9vM4QT0HDV5i?usp=drive_link" class="more-link" target="_blank" rel="noopener noreferrer">View More Automation Projects</a>
     </div>
@@ -2030,6 +2140,7 @@
 
   // ---------- Website carousel (unchanged full-slide format) ----------
   function initCarousel(root){
+    if(!root.querySelector('.carousel-track')) return; // carousels were replaced by grids
     const wrap = root.querySelector('.carousel-track-wrap');
     const track = root.querySelector('.carousel-track');
     const cards = [...track.children];
@@ -2284,6 +2395,49 @@
     if(setupImg && !setupImg.complete) setupImg.addEventListener('load', drawSetup);
     drawSetup();
   }
+
+  // ---------- Project grids: staggered entrance as each grid scrolls into view ----------
+  const gridIo = new IntersectionObserver(entries=>entries.forEach(e=>{
+    if(!e.isIntersecting) return;
+    e.target.querySelectorAll('.proj-card.pc-wait').forEach((c,i)=>setTimeout(()=>c.classList.remove('pc-wait'), i*110));
+    gridIo.unobserve(e.target);
+  }),{threshold:.08});
+  document.querySelectorAll('.work-grid').forEach(g=>{
+    g.querySelectorAll('.proj-card').forEach(c=>c.classList.add('pc-wait'));
+    gridIo.observe(g);
+  });
+
+  // ---------- Preview modal: project cards + graphic tiles ----------
+  const pv = document.createElement('div');
+  pv.className = 'pv'; pv.setAttribute('role','dialog'); pv.setAttribute('aria-modal','true'); pv.setAttribute('aria-label','Project preview');
+  pv.innerHTML = '<div class="pv-box"><button class="pv-close" type="button" aria-label="Close preview">✕</button><div class="pv-media"></div><div class="pv-body"></div></div>';
+  document.body.appendChild(pv);
+  let pvReturn = null;
+  const openPv = (imgSrc, imgAlt, bodyHtml, imgOnly)=>{
+    pv.querySelector('.pv-media').innerHTML = '<img src="'+imgSrc+'" alt="'+(imgAlt||'').replace(/"/g,'&quot;')+'">';
+    pv.querySelector('.pv-body').innerHTML = bodyHtml;
+    pv.classList.toggle('img-only', !!imgOnly);
+    pvReturn = document.activeElement;
+    pv.classList.add('open'); document.body.classList.add('pv-lock');
+    pv.querySelector('.pv-close').focus();
+  };
+  const closePv = ()=>{ pv.classList.remove('open'); document.body.classList.remove('pv-lock'); if(pvReturn) pvReturn.focus(); };
+  pv.addEventListener('click', e=>{ if(e.target === pv || e.target.closest('.pv-close')) closePv(); });
+  document.addEventListener('keydown', e=>{ if(e.key === 'Escape' && pv.classList.contains('open')) closePv(); });
+  document.querySelectorAll('.work-grid .proj-card').forEach(card=>{
+    card.setAttribute('tabindex','0');
+    const open = ()=>{ const img = card.querySelector('.proj-media img'); openPv(img.currentSrc || img.src, img.alt, card.querySelector('.proj-body').innerHTML, false); };
+    card.addEventListener('click', e=>{ if(e.target.closest('a,button')) return; open(); });
+    card.addEventListener('keydown', e=>{ if((e.key === 'Enter' || e.key === ' ') && e.target === card){ e.preventDefault(); open(); } });
+  });
+  document.querySelectorAll('.bento-tile:not(.gfx-carousel)').forEach(tile=>{
+    tile.addEventListener('click', e=>{
+      if(e.target.closest('a,button')) return;
+      const img = tile.querySelector(':scope > img'); if(!img) return;
+      const cap = tile.querySelector('.bento-cap');
+      openPv(img.currentSrc || img.src, img.alt, cap ? cap.innerHTML : '', true);
+    });
+  });
 
   // ---------- Interaction layer: progress line, cursor glow, card spotlight/tilt, magnetic buttons, hero depth ----------
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
