@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* Hero intro: play once per visit, skip for reduced-motion. Fallback reveals the page if the intro never starts. */
+(function(){try{var r=document.documentElement;if(!sessionStorage.getItem('hxIntroSeen')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){r.classList.add('intro');setTimeout(function(){if(r.classList.contains('intro')&&!document.querySelector('.hxi'))r.classList.remove('intro');},3000);}}catch(e){}})();
+</script>
 <title>GoHighLevel Expert &amp; Automation Virtual Assistant | Jeff Ybanez</title>
 <meta name="description" content="Hire Jeff Ybanez, a Philippines-based GoHighLevel expert and full-stack VA for funnels, websites, CRM automation and Make or Zapier integrations.">
 <meta name="author" content="Jeff P. Ybanez">
@@ -1179,6 +1183,27 @@
   @media (prefers-reduced-motion:reduce){
     .hx-spot,.hx-img,.hx-word span,.hx-bar{animation:none;opacity:1;transform:none;}
   }
+
+  /* ---------- Hero intro sequence (dot drops, bar falls, YBANEZ builds, flips to PORTFOLIO) ---------- */
+  html.intro .site-nav,html.intro .hx-bar,html.intro .hx-word,html.intro .hx-spot,html.intro .scroll-progress,
+  html.intro-move .hx-word{opacity:0 !important;pointer-events:none;}
+  html.intro .hx-bar,html.intro .hx-spot{animation:none;}
+  html.intro .hx-word span,html.intro-played .hx-word span{animation:none;transform:none;}
+  html.hx-reveal .site-nav{transition:opacity .9s var(--ease),background .35s var(--ease),padding .35s var(--ease),border-color .35s var(--ease);}
+  html.hx-reveal .hx-bar{animation-delay:.15s;} html.hx-reveal .hx-spot{animation-delay:0s;}
+  .hxi{position:absolute;inset:0;z-index:6;pointer-events:none;}
+  .hxi-word{position:absolute;left:50%;top:46%;translate:-50% -50%;display:inline-flex;perspective:900px;
+    font-family:'Inter',system-ui,sans-serif;font-weight:900;font-size:clamp(64px,14.6vw,232px);line-height:.82;letter-spacing:-.055em;white-space:nowrap;padding-bottom:.04em;}
+  .hxi-word span{display:inline-block;background:linear-gradient(180deg,#fbfaf6 18%,#d9d4c8 55%,#8f8676 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;transform-origin:50% 60%;backface-visibility:hidden;}
+  .hxi-dot,.hxi-bar{position:absolute;left:50%;opacity:0;background:linear-gradient(180deg,#fbfaf6,#a39a89);box-shadow:0 10px 40px rgba(0,0,0,.45);}
+  .hxi-dot{top:calc(46% + clamp(40px,5vw,70px));width:clamp(30px,3.2vw,46px);aspect-ratio:1;border-radius:50%;margin-left:calc(clamp(30px,3.2vw,46px) / -2);}
+  .hxi-bar{top:calc(46% - clamp(110px,12vw,170px));width:clamp(26px,2.8vw,40px);height:clamp(120px,12.5vw,180px);border-radius:6px;margin-left:calc(clamp(26px,2.8vw,40px) / -2);transform-origin:50% 100%;}
+  .hxi-skip{position:absolute;left:50%;bottom:28px;translate:-50% 0;pointer-events:auto;padding:9px 18px;border-radius:999px;
+    border:1px solid rgba(245,243,238,.2);background:rgba(10,12,14,.5);backdrop-filter:blur(8px);color:var(--ink-dim);font-size:13px;letter-spacing:.04em;
+    opacity:0;animation:hxFade .6s ease 1.2s forwards;transition:color .2s,border-color .2s;}
+  .hxi-skip:hover{color:var(--ink);border-color:var(--gold);}
+  @media(max-width:820px){.hxi-word{top:42%;font-size:clamp(54px,17.5vw,150px);}}
 
   @media (prefers-reduced-motion: reduce){
     .bg-cursor,.btn-gold::after,.nav-cta::after{display:none;}
@@ -2447,6 +2472,89 @@
       });
       hx.addEventListener('pointerleave', ()=>{ ['--px','--wx','--mx','--my'].forEach(p=>hx.style.setProperty(p,'0px')); });
     }
+  }
+
+  // ---------- Hero intro sequence (once per visit; skip with button, scroll or any key) ----------
+  const docEl = document.documentElement;
+  if(hx && docEl.classList.contains('intro')){
+    const finalWord = hx.querySelector('.hx-word');
+    const lay = document.createElement('div');
+    lay.className = 'hxi'; lay.setAttribute('aria-hidden','true');
+    lay.innerHTML = '<div class="hxi-word"></div><span class="hxi-dot"></span><span class="hxi-bar"></span><button class="hxi-skip" type="button" tabindex="-1">Skip intro</button>';
+    hx.appendChild(lay);
+    const wordEl = lay.querySelector('.hxi-word'), dot = lay.querySelector('.hxi-dot'), bar = lay.querySelector('.hxi-bar');
+    let skipped = false, done = false;
+    const sleep = ms => new Promise(r => setTimeout(r, ms));
+    const anim = (el, kf, o) => skipped ? Promise.resolve() : el.animate(kf, Object.assign({fill:'forwards'}, o)).finished.catch(()=>{});
+    const finish = ()=>{
+      if(done) return; done = true;
+      lay.remove();
+      docEl.classList.add('intro-played','hx-reveal');
+      docEl.classList.remove('intro','intro-move');
+      try{ sessionStorage.setItem('hxIntroSeen','1'); }catch(e){}
+    };
+    const skip = ()=>{ skipped = true; finish(); };
+    lay.querySelector('.hxi-skip').addEventListener('click', skip);
+    ['wheel','touchmove','keydown'].forEach(ev => addEventListener(ev, skip, {once:true, passive:true}));
+    const letter = ch => { const s = document.createElement('span'); s.textContent = ch; return s; };
+    const spring = 'cubic-bezier(.34,1.56,.64,1)', smooth = 'cubic-bezier(.22,1,.36,1)';
+    (async ()=>{
+      await sleep(650); if(skipped) return;
+      // 1) dot drops and bounces
+      dot.style.opacity = 1;
+      await anim(dot, [
+        {transform:'translateY(-70vh)', easing:'cubic-bezier(.55,0,1,.45)'},
+        {transform:'translateY(0)', offset:.55, easing:'cubic-bezier(0,.55,.45,1)'},
+        {transform:'translateY(-48px)', offset:.72, easing:'cubic-bezier(.55,0,1,.45)'},
+        {transform:'translateY(0)', offset:.86, easing:'cubic-bezier(0,.55,.45,1)'},
+        {transform:'translateY(-12px)', offset:.93},
+        {transform:'translateY(0)'}], {duration:1000});
+      if(skipped) return;
+      // 2) bar falls onto it and squashes
+      bar.style.opacity = 1;
+      await anim(bar, [{transform:'translateY(-90vh)'},{transform:'translateY(0)'}], {duration:430, easing:'cubic-bezier(.55,0,1,.45)'});
+      if(skipped) return;
+      await anim(bar, [{transform:'scaleY(1)'},{transform:'scaleY(.8)', offset:.4},{transform:'scaleY(1)'}], {duration:260});
+      if(skipped) return;
+      // 3) they tumble away while the name builds letter by letter
+      anim(dot, [{transform:'none', opacity:1},{transform:'translate(140px,-30px) rotate(240deg) scale(.2)', opacity:0}], {duration:750, easing:smooth});
+      anim(bar, [{transform:'none', opacity:1},{transform:'translate(-150px,-70px) rotate(-280deg) scale(.2)', opacity:0}], {duration:750, easing:smooth});
+      const NAME = 'YBANEZ', slots = [];
+      for(let i = 0; i < NAME.length; i++){
+        if(skipped) return;
+        const s = letter(NAME[i]); wordEl.appendChild(s); slots.push(s);
+        const rot = Math.round(Math.random()*160 - 80);
+        anim(s, [{transform:`translateY(-90%) rotate(${rot}deg) scale(.4)`, opacity:0},{transform:'none', opacity:1}], {duration:720, easing:spring});
+        await sleep(115);
+      }
+      await sleep(950); if(skipped) return;
+      // 4) letters flip one by one into PORTFOLIO
+      const T = 'PORTFOLIO';
+      for(let i = 0; i < T.length; i++){
+        if(skipped) return;
+        let s = slots[i];
+        if(s){
+          const el = s, ch = T[i];
+          anim(el, [{transform:'rotateX(0)'},{transform:'rotateX(90deg)'}], {duration:170, easing:'ease-in'})
+            .then(()=>{ if(skipped) return; el.textContent = ch; anim(el, [{transform:'rotateX(-90deg)'},{transform:'none'}], {duration:280, easing:'ease-out'}); });
+        } else {
+          s = letter(T[i]); wordEl.appendChild(s); slots.push(s);
+          anim(s, [{transform:'translateY(-80%) scale(.5)', opacity:0},{transform:'none', opacity:1}], {duration:520, easing:spring});
+        }
+        await sleep(125);
+      }
+      await sleep(1000); if(skipped) return;
+      // 5) glide to the final position while the menu and buttons fade in
+      const spans = finalWord.querySelectorAll('span');
+      const f0 = spans[0].getBoundingClientRect(), f1 = spans[spans.length-1].getBoundingClientRect();
+      const a = wordEl.getBoundingClientRect();
+      const fw = f1.right - f0.left, fcx = f0.left + fw/2, fcy = (f0.top + f0.bottom)/2;
+      const dx = fcx - (a.left + a.width/2), dy = fcy - (a.top + a.height/2), sc = fw / a.width;
+      docEl.classList.add('intro-move','hx-reveal'); docEl.classList.remove('intro');
+      lay.querySelector('.hxi-skip').style.display = 'none';
+      await anim(wordEl, [{transform:'none'},{transform:`translate(${dx}px,${dy}px) scale(${sc})`}], {duration:1050, easing:'cubic-bezier(.65,0,.35,1)'});
+      finish();
+    })();
   }
 
   // ---------- Project grids: staggered entrance as each grid scrolls into view ----------
