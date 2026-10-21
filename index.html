@@ -1264,6 +1264,50 @@
   html.intro .hx-photo,html.intro .hx-samples{opacity:0 !important;}
   html.intro .hx-img,html.intro .hs-tile{animation:none;}
 
+  /* ================= VIDEO: pinned hand + phone over a scrolling wall of reels ================= */
+  .vh{position:relative;height:330vh;width:100vw;margin-left:calc(50% - 50vw);margin-top:10px;}
+  .vh-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#050607;}
+  .vh-wall{position:absolute;inset:0 -2vw;display:grid;grid-template-columns:repeat(5,1fr);gap:18px;padding:0 18px;}
+  .vh-col{display:flex;flex-direction:column;gap:18px;will-change:transform;}
+  .vh-col:nth-child(even){margin-top:-22vh;}
+  .vh-card{margin:0;position:relative;border-radius:22px;overflow:hidden;aspect-ratio:9/16;background:#111;border:1px solid rgba(255,255,255,.08);
+    transition:filter .4s,opacity .4s;filter:saturate(.75) brightness(.55);}
+  .vh-card img{width:100%;height:100%;object-fit:cover;display:block;}
+  .vh-card figcaption{position:absolute;left:12px;bottom:10px;font-size:12px;font-weight:600;color:rgba(255,255,255,.8);letter-spacing:.04em;}
+  .vh-card.is-on{filter:none;}
+  .vh-shade{position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(ellipse 40% 55% at 50% 55%,transparent 30%,rgba(5,6,7,.55) 100%),
+      linear-gradient(180deg,#050607 0%,transparent 16%,transparent 80%,#050607 100%);}
+  .vh-device{position:absolute;left:50%;bottom:0;height:min(84vh,780px);height:min(84svh,780px);aspect-ratio:960/1449;
+    transform:translateX(calc(-50% + var(--dx,0px)));transition:transform .5s cubic-bezier(.22,1,.36,1);z-index:2;
+    filter:drop-shadow(0 40px 60px rgba(0,0,0,.6));}
+  .vh-stage{position:absolute;left:0;top:0;width:960px;height:1449px;transform-origin:0 0;transform:scale(var(--k,.5));}
+  .vh-hand,.vh-thumb{position:absolute;left:0;top:0;width:960px;height:1449px;display:block;pointer-events:none;}
+  .vh-thumb{z-index:3;clip-path:polygon(386px 1021px,414px 958px,525px 868px,594px 819px,636px 788px,694px 788px,725px 813px,722px 854px,678px 896px,594px 954px,525px 1007px,483px 1076px,386px 1076px);}
+  .vh-screen{position:absolute;left:0;top:0;width:450px;height:700px;transform-origin:0 0;z-index:2;overflow:hidden;background:#000;display:block;border-radius:6px;}
+  .vh-screen img,.vh-screen iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0;}
+  .vh-screen iframe{width:140%;height:100%;left:-20%;pointer-events:none;opacity:0;transition:opacity .5s;}
+  .vh-screen iframe.ready{opacity:1;}
+  .vh-shot{transition:opacity .25s;}
+  .vh-frame{position:absolute;inset:0;box-shadow:inset 0 0 0 2px rgba(0,0,0,.6),inset 0 0 40px rgba(0,0,0,.25);pointer-events:none;z-index:2;}
+  .vh-caption{position:absolute;left:clamp(18px,5vw,64px);bottom:clamp(28px,7vh,64px);z-index:4;display:flex;flex-direction:column;gap:6px;max-width:300px;}
+  .vh-count{font-family:'Space Grotesk';font-size:13px;color:var(--gold);letter-spacing:.12em;}
+  .vh-title{font-family:'Inter';font-weight:800;font-size:clamp(24px,2.6vw,36px);letter-spacing:-.02em;color:var(--ink);}
+  .vh-caption small{color:var(--ink-dim);font-size:13.5px;}
+  .vh-hint{position:absolute;right:clamp(18px,5vw,64px);bottom:clamp(28px,7vh,64px);z-index:4;display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-dim);}
+  .vh-mouse{width:18px;height:28px;border:1.5px solid rgba(245,243,238,.5);border-radius:10px;position:relative;}
+  .vh-mouse::after{content:"";position:absolute;left:50%;top:5px;width:3px;height:6px;margin-left:-1.5px;border-radius:2px;background:var(--gold);animation:vhWheel 1.6s infinite;}
+  @keyframes vhWheel{to{transform:translateY(8px);opacity:0;}}
+  @media(max-width:820px){
+    .vh{height:260vh;}
+    .vh-wall{grid-template-columns:repeat(3,1fr);gap:12px;padding:0 12px;inset:0 -8vw;}
+    .vh-col{gap:12px;} .vh-col:nth-child(n+4){display:none;}
+    .vh-device{height:min(66vh,560px);height:min(66svh,560px);}
+    .vh-caption{left:18px;right:18px;top:84px;bottom:auto;max-width:none;}
+    .vh-hint{display:none;}
+  }
+  @media (prefers-reduced-motion:reduce){.vh-device{transition:none;}.vh-mouse::after{animation:none;}}
+
   @media (prefers-reduced-motion: reduce){
     .bg-cursor,.btn-gold::after,.nav-cta::after{display:none;}
     .reveal,.work-grid .proj-card.pc-wait{filter:none;opacity:1;transform:none;}
@@ -1807,101 +1851,56 @@
           <h3>Reels &amp; Short-Form Cuts</h3>
         </div>
       </div>
-      <div class="phone-row-wrap">
-        <div class="phone-row-fade left"></div>
-        <div class="phone-row-fade right"></div>
-        <div class="phone-row" id="phoneRow">
-          <!-- 6 phone mockups -->
-          <div class="phone-mock">
-            <div class="phone-shell"><div class="phone-screen">
-              <div class="phone-video-bg"><iframe src="https://player.vimeo.com/video/1223823674?h=51b0474761&background=1&autoplay=1&loop=1&muted=1&controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Reel preview"></iframe></div>
-              <div class="phone-fade-top"></div><div class="phone-fade-bottom"></div>
-              <div class="phone-notch"></div>
-              <div class="phone-status"><span>9:41</span><span class="batt"></span></div>
-              <div class="phone-reel-ui">
-                <div><div class="ric">♥</div><div class="rin">2.4k</div></div>
-                <div><div class="ric">💬</div><div class="rin">86</div></div>
-                <div><div class="ric">↗</div><div class="rin">Share</div></div>
-              </div>
-              <div class="phone-caption"><div class="pc-title">Reel Edit 01</div><div class="pc-sub">CapCut · Short-form</div></div>
-            </div></div>
+      <div class="vh" id="vh">
+        <div class="vh-sticky">
+          <div class="vh-wall" aria-hidden="true">
+            <div class="vh-col">
+              <figure class="vh-card" data-reel="1"><img src="assets/reels/reel-1.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 01</figcaption></figure>
+              <figure class="vh-card" data-reel="2"><img src="assets/reels/reel-2.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 02</figcaption></figure>
+              <figure class="vh-card" data-reel="3"><img src="assets/reels/reel-3.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 03</figcaption></figure>
+              <figure class="vh-card" data-reel="4"><img src="assets/reels/reel-4.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 04</figcaption></figure>
+              <figure class="vh-card" data-reel="5"><img src="assets/reels/reel-5.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 05</figcaption></figure>
+            </div>
+            <div class="vh-col">
+              <figure class="vh-card" data-reel="3"><img src="assets/reels/reel-3.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 03</figcaption></figure>
+              <figure class="vh-card" data-reel="4"><img src="assets/reels/reel-4.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 04</figcaption></figure>
+              <figure class="vh-card" data-reel="5"><img src="assets/reels/reel-5.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 05</figcaption></figure>
+              <figure class="vh-card" data-reel="6"><img src="assets/reels/reel-6.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 06</figcaption></figure>
+              <figure class="vh-card" data-reel="1"><img src="assets/reels/reel-1.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 01</figcaption></figure>
+            </div>
+            <div class="vh-col">
+              <figure class="vh-card" data-reel="5"><img src="assets/reels/reel-5.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 05</figcaption></figure>
+              <figure class="vh-card" data-reel="6"><img src="assets/reels/reel-6.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 06</figcaption></figure>
+              <figure class="vh-card" data-reel="1"><img src="assets/reels/reel-1.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 01</figcaption></figure>
+              <figure class="vh-card" data-reel="2"><img src="assets/reels/reel-2.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 02</figcaption></figure>
+              <figure class="vh-card" data-reel="3"><img src="assets/reels/reel-3.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 03</figcaption></figure>
+            </div>
+            <div class="vh-col">
+              <figure class="vh-card" data-reel="1"><img src="assets/reels/reel-1.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 01</figcaption></figure>
+              <figure class="vh-card" data-reel="2"><img src="assets/reels/reel-2.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 02</figcaption></figure>
+              <figure class="vh-card" data-reel="3"><img src="assets/reels/reel-3.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 03</figcaption></figure>
+              <figure class="vh-card" data-reel="4"><img src="assets/reels/reel-4.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 04</figcaption></figure>
+              <figure class="vh-card" data-reel="5"><img src="assets/reels/reel-5.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 05</figcaption></figure>
+            </div>
+            <div class="vh-col">
+              <figure class="vh-card" data-reel="3"><img src="assets/reels/reel-3.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 03</figcaption></figure>
+              <figure class="vh-card" data-reel="4"><img src="assets/reels/reel-4.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 04</figcaption></figure>
+              <figure class="vh-card" data-reel="5"><img src="assets/reels/reel-5.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 05</figcaption></figure>
+              <figure class="vh-card" data-reel="6"><img src="assets/reels/reel-6.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 06</figcaption></figure>
+              <figure class="vh-card" data-reel="1"><img src="assets/reels/reel-1.jpg" width="360" height="640" alt="" loading="lazy"><figcaption>Reel 01</figcaption></figure>
+            </div>
           </div>
-          <div class="phone-mock">
-            <div class="phone-shell"><div class="phone-screen">
-              <div class="phone-video-bg"><iframe src="https://player.vimeo.com/video/1224385753?h=51b0474761&background=1&autoplay=1&loop=1&muted=1&controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Reel preview"></iframe></div>
-              <div class="phone-fade-top"></div><div class="phone-fade-bottom"></div>
-              <div class="phone-notch"></div>
-              <div class="phone-status"><span>9:41</span><span class="batt"></span></div>
-              <div class="phone-reel-ui">
-                <div><div class="ric">♥</div><div class="rin">1.8k</div></div>
-                <div><div class="ric">💬</div><div class="rin">54</div></div>
-                <div><div class="ric">↗</div><div class="rin">Share</div></div>
-              </div>
-              <div class="phone-caption"><div class="pc-title">Reel Edit 02</div><div class="pc-sub">CapCut · Short-form</div></div>
-            </div></div>
+          <div class="vh-shade" aria-hidden="true"></div>
+          <div class="vh-device" id="vhDevice">
+            <div class="vh-stage">
+              <img class="vh-hand" src="assets/reels/hand-phone.png" width="720" height="1087" alt="Hand holding a phone playing a short-form video edit" loading="lazy">
+              <a class="vh-screen" href="#" target="_blank" rel="noopener" aria-label="Watch this reel on Vimeo"><img class="vh-shot" src="assets/reels/reel-1.jpg" alt=""><span class="vh-frame"></span></a>
+              <img class="vh-thumb" src="assets/reels/hand-phone.png" width="720" height="1087" alt="" aria-hidden="true" loading="lazy">
+            </div>
           </div>
-          <div class="phone-mock">
-            <div class="phone-shell"><div class="phone-screen">
-              <div class="phone-video-bg"><iframe src="https://player.vimeo.com/video/1224387181?h=51b0474761&background=1&autoplay=1&loop=1&muted=1&controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Reel preview"></iframe></div>
-              <div class="phone-fade-top"></div><div class="phone-fade-bottom"></div>
-              <div class="phone-notch"></div>
-              <div class="phone-status"><span>9:41</span><span class="batt"></span></div>
-              <div class="phone-reel-ui">
-                <div><div class="ric">♥</div><div class="rin">3.1k</div></div>
-                <div><div class="ric">💬</div><div class="rin">120</div></div>
-                <div><div class="ric">↗</div><div class="rin">Share</div></div>
-              </div>
-              <div class="phone-caption"><div class="pc-title">Reel Edit 03</div><div class="pc-sub">CapCut · Short-form</div></div>
-            </div></div>
-          </div>
-          <div class="phone-mock">
-            <div class="phone-shell"><div class="phone-screen">
-              <div class="phone-video-bg"><iframe src="https://player.vimeo.com/video/1224387775?h=51b0474761&background=1&autoplay=1&loop=1&muted=1&controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Reel preview"></iframe></div>
-              <div class="phone-fade-top"></div><div class="phone-fade-bottom"></div>
-              <div class="phone-notch"></div>
-              <div class="phone-status"><span>9:41</span><span class="batt"></span></div>
-              <div class="phone-reel-ui">
-                <div><div class="ric">♥</div><div class="rin">960</div></div>
-                <div><div class="ric">💬</div><div class="rin">31</div></div>
-                <div><div class="ric">↗</div><div class="rin">Share</div></div>
-              </div>
-              <div class="phone-caption"><div class="pc-title">Reel Edit 04</div><div class="pc-sub">CapCut · Short-form</div></div>
-            </div></div>
-          </div>
-          <div class="phone-mock">
-            <div class="phone-shell"><div class="phone-screen">
-              <div class="phone-video-bg"><iframe src="https://player.vimeo.com/video/1224387182?h=51b0474761&background=1&autoplay=1&loop=1&muted=1&controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Reel preview"></iframe></div>
-              <div class="phone-fade-top"></div><div class="phone-fade-bottom"></div>
-              <div class="phone-notch"></div>
-              <div class="phone-status"><span>9:41</span><span class="batt"></span></div>
-              <div class="phone-reel-ui">
-                <div><div class="ric">♥</div><div class="rin">4.6k</div></div>
-                <div><div class="ric">💬</div><div class="rin">210</div></div>
-                <div><div class="ric">↗</div><div class="rin">Share</div></div>
-              </div>
-              <div class="phone-caption"><div class="pc-title">Reel Edit 05</div><div class="pc-sub">CapCut · Short-form</div></div>
-            </div></div>
-          </div>
-          <div class="phone-mock">
-            <div class="phone-shell"><div class="phone-screen">
-              <div class="phone-video-bg"><iframe src="https://player.vimeo.com/video/1224387776?h=51b0474761&background=1&autoplay=1&loop=1&muted=1&controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Reel preview"></iframe></div>
-              <div class="phone-fade-top"></div><div class="phone-fade-bottom"></div>
-              <div class="phone-notch"></div>
-              <div class="phone-status"><span>9:41</span><span class="batt"></span></div>
-              <div class="phone-reel-ui">
-                <div><div class="ric">♥</div><div class="rin">1.2k</div></div>
-                <div><div class="ric">💬</div><div class="rin">47</div></div>
-                <div><div class="ric">↗</div><div class="rin">Share</div></div>
-              </div>
-              <div class="phone-caption"><div class="pc-title">Reel Edit 06</div><div class="pc-sub">CapCut · Short-form</div></div>
-            </div></div>
-          </div>
+          <div class="vh-caption"><span class="vh-count">01 / 06</span><b class="vh-title">Reel Edit 01</b><small>CapCut · Short-form · tap the phone to watch</small></div>
+          <div class="vh-hint" aria-hidden="true"><span class="vh-mouse"></span>Scroll · move to pick a reel</div>
         </div>
-        <div class="phone-row-nav">
-          <button class="car-btn" data-scroll="-1" aria-label="Scroll left">‹</button>
-          <button class="car-btn" data-scroll="1" aria-label="Scroll right">›</button>
-        </div>
-        <div class="phone-dots car-dots" id="phoneDots"></div>
       </div>
       <a href="https://drive.google.com/drive/folders/1xklKeDh_cO0jP0lSY4unqvAiB4Xw3xF8?usp=drive_link" class="more-link" target="_blank" rel="noopener noreferrer">View More Video Samples</a>
     </div>
@@ -2630,6 +2629,80 @@
       await anim(wordEl, [{transform:'none'},{transform:`translate(${dx}px,${dy}px) scale(${sc})`}], {duration:1050, easing:'cubic-bezier(.65,0,.35,1)'});
       finish();
     })();
+  }
+
+  // ---------- Video: pinned hand + phone, wall of reels scrolls behind, phone shows the reel underneath ----------
+  const vh = document.getElementById('vh');
+  if(vh){
+    const REELS = ['1223823674','1224385753','1224387181','1224387182','1224387775','1224387776'];
+    const sticky = vh.querySelector('.vh-sticky'), device = vh.querySelector('.vh-device');
+    const stage = vh.querySelector('.vh-stage'), screen = vh.querySelector('.vh-screen'), shot = vh.querySelector('.vh-shot');
+    const cols = [...vh.querySelectorAll('.vh-col')], cards = [...vh.querySelectorAll('.vh-card')];
+    const countEl = vh.querySelector('.vh-count'), titleEl = vh.querySelector('.vh-title');
+    // Map the 450x700 screen box onto the phone's screen corners in the photo (projective transform)
+    const quad = [[250,299],[703,282],[758,986],[333,1004]], SW = 450, SH = 700;
+    const homography = ()=>{
+      const [[x0,y0],[x1,y1],[x2,y2],[x3,y3]] = quad;
+      const dx1 = x1-x2, dx2 = x3-x2, dy1 = y1-y2, dy2 = y3-y2, sx = x0-x1+x2-x3, sy = y0-y1+y2-y3;
+      const det = dx1*dy2 - dx2*dy1, g = (sx*dy2 - dx2*sy)/det, h = (dx1*sy - sx*dy1)/det;
+      const a = x1-x0+g*x1, b = x3-x0+h*x3, d = y1-y0+g*y1, e = y3-y0+h*y3;
+      // unit square -> quad, then scale by 1/SW, 1/SH
+      const m = [a/SW, d/SW, 0, g/SW,  b/SH, e/SH, 0, h/SH,  0, 0, 1, 0,  x0, y0, 0, 1];
+      return 'matrix3d(' + m.map(v=>+v.toFixed(10)).join(',') + ')';
+    };
+    screen.style.transform = homography();
+    const fit = ()=>{ stage.style.setProperty('--k', (device.getBoundingClientRect().height / 1449).toFixed(5)); };
+    new ResizeObserver(fit).observe(device); fit();
+
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let active = -1, iframeTimer = 0, raf = 0, dx = 0;
+    const setReel = n=>{
+      if(n === active) return; active = n;
+      shot.src = 'assets/reels/reel-' + n + '.jpg';
+      countEl.textContent = String(n).padStart(2,'0') + ' / 06';
+      titleEl.textContent = 'Reel Edit ' + String(n).padStart(2,'0');
+      screen.href = 'https://vimeo.com/' + REELS[n-1];
+      const old = screen.querySelector('iframe'); if(old) old.remove();
+      clearTimeout(iframeTimer);
+      if(reduce) return;
+      iframeTimer = setTimeout(()=>{ // play the reel once the visitor pauses on it
+        const f = document.createElement('iframe');
+        f.src = 'https://player.vimeo.com/video/' + REELS[n-1] + '?h=51b0474761&background=1&autoplay=1&loop=1&muted=1&controls=0';
+        f.allow = 'autoplay; fullscreen; picture-in-picture'; f.title = 'Reel preview'; f.loading = 'eager';
+        f.addEventListener('load', ()=>setTimeout(()=>f.classList.add('ready'), 600));
+        screen.appendChild(f);
+      }, 650);
+    };
+    const pick = ()=>{
+      const s = screen.getBoundingClientRect();
+      const x = s.left + s.width/2, y = s.top + s.height/2;
+      const hit = document.elementsFromPoint(x, y).find(el=>el.classList && el.classList.contains('vh-card'));
+      cards.forEach(c=>c.classList.toggle('is-on', c === hit));
+      if(hit) setReel(+hit.dataset.reel);
+    };
+    const update = ()=>{
+      raf = 0;
+      const r = vh.getBoundingClientRect(), total = vh.offsetHeight - innerHeight;
+      const p = Math.min(1, Math.max(0, -r.top / total));
+      if(r.bottom < 0 || r.top > innerHeight) return;
+      cols.forEach((c,i)=>{
+        const range = c.scrollHeight - innerHeight * (i % 2 ? .6 : .8);
+        c.style.transform = 'translate3d(0,' + (-p * range * (i % 2 ? 1.1 : .9)).toFixed(1) + 'px,0)';
+      });
+      pick();
+    };
+    const queue = ()=>{ if(!raf) raf = requestAnimationFrame(update); };
+    addEventListener('scroll', queue, {passive:true}); addEventListener('resize', queue);
+    if(matchMedia('(hover:hover) and (pointer:fine)').matches && !reduce){
+      sticky.addEventListener('pointermove', e=>{
+        const w = sticky.clientWidth; dx = (e.clientX / w - .5) * w * .62;
+        device.style.setProperty('--dx', dx.toFixed(0) + 'px');
+      });
+      sticky.addEventListener('pointerleave', ()=>device.style.setProperty('--dx','0px'));
+      device.addEventListener('transitionend', queue);
+      setInterval(()=>{ if(vh.getBoundingClientRect().top < innerHeight && vh.getBoundingClientRect().bottom > 0) pick(); }, 250);
+    }
+    update();
   }
 
   // ---------- Project grids: staggered entrance as each grid scrolls into view ----------
