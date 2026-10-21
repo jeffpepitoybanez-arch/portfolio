@@ -1271,25 +1271,43 @@
   .vh-col{display:flex;flex-direction:column;gap:18px;will-change:transform;}
   .vh-col:nth-child(even){margin-top:-22vh;}
   .vh-card{margin:0;position:relative;border-radius:22px;overflow:hidden;aspect-ratio:9/16;background:#111;border:1px solid rgba(255,255,255,.08);
-    transition:filter .4s,opacity .4s;filter:saturate(.75) brightness(.55);}
+    transition:filter .4s,opacity .4s;filter:saturate(.95) brightness(.9);}
   .vh-card img{width:100%;height:100%;object-fit:cover;display:block;}
   .vh-card figcaption{position:absolute;left:12px;bottom:10px;font-size:12px;font-weight:600;color:rgba(255,255,255,.8);letter-spacing:.04em;}
+  .vh-card{border-radius:28px;}
   .vh-card.is-on{filter:none;}
   .vh-shade{position:absolute;inset:0;pointer-events:none;
-    background:radial-gradient(ellipse 40% 55% at 50% 55%,transparent 30%,rgba(5,6,7,.55) 100%),
-      linear-gradient(180deg,#050607 0%,transparent 16%,transparent 80%,#050607 100%);}
-  .vh-device{position:absolute;left:50%;bottom:0;height:min(84vh,780px);height:min(84svh,780px);aspect-ratio:960/1449;
+    background:linear-gradient(180deg,#050607 0%,transparent 16%,transparent 80%,#050607 100%);}
+  .vh-device{position:absolute;left:50%;bottom:-12vh;height:104vh;height:104svh;aspect-ratio:960/1449;
     transform:translateX(calc(-50% + var(--dx,0px)));transition:transform .5s cubic-bezier(.22,1,.36,1);z-index:2;
     filter:drop-shadow(0 40px 60px rgba(0,0,0,.6));}
   .vh-stage{position:absolute;left:0;top:0;width:960px;height:1449px;transform-origin:0 0;transform:scale(var(--k,.5));}
   .vh-hand,.vh-thumb{position:absolute;left:0;top:0;width:960px;height:1449px;display:block;pointer-events:none;}
-  .vh-thumb{z-index:3;clip-path:polygon(386px 1021px,414px 958px,525px 868px,594px 819px,636px 788px,694px 788px,725px 813px,722px 854px,678px 896px,594px 954px,525px 1007px,483px 1076px,386px 1076px);}
+  .vh-thumb{z-index:3;clip-path:polygon(574px 1021px,546px 958px,435px 868px,366px 819px,324px 788px,266px 788px,235px 813px,238px 854px,282px 896px,366px 954px,435px 1007px,470px 1110px,520px 1215px,660px 1215px,610px 1040px);}
   .vh-screen{position:absolute;left:0;top:0;width:450px;height:700px;transform-origin:0 0;z-index:2;overflow:hidden;background:#000;display:block;border-radius:6px;}
   .vh-screen img,.vh-screen iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0;}
   .vh-screen iframe{width:140%;height:100%;left:-20%;pointer-events:none;opacity:0;transition:opacity .5s;}
   .vh-screen iframe.ready{opacity:1;}
   .vh-shot{transition:opacity .25s;}
   .vh-frame{position:absolute;inset:0;box-shadow:inset 0 0 0 2px rgba(0,0,0,.6),inset 0 0 40px rgba(0,0,0,.25);pointer-events:none;z-index:2;}
+  .vh-iphone{position:absolute;left:0;top:0;width:500px;height:1000px;transform-origin:0 0;z-index:2;display:block;border-radius:80px;padding:7px;
+    background:linear-gradient(135deg,#f1dcb2 0%,#a8834c 30%,#e8cc96 55%,#8a6a3a 80%,#d9bc86 100%);
+    box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35),0 0 0 1px rgba(0,0,0,.4);}
+  .vh-btn{position:absolute;width:7px;border-radius:3px;background:linear-gradient(90deg,#8a6a3a,#e8cc96);}
+  .vh-btn-a{left:-5px;top:190px;height:60px;} .vh-btn-b{left:-5px;top:280px;height:110px;} .vh-btn-c{right:-5px;left:auto;top:300px;height:150px;}
+  .vh-glass{position:absolute;inset:7px;border-radius:73px;background:#050505;}
+  .vh-scr{position:absolute;inset:16px;border-radius:58px;overflow:hidden;background:#000;}
+  .vh-scr img,.vh-scr iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0;}
+  .vh-scr iframe{width:160%;left:-30%;pointer-events:none;opacity:0;transition:opacity .5s;}
+  .vh-scr iframe.ready{opacity:1;}
+  .vh-status{position:absolute;left:0;right:0;top:0;height:86px;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:0 54px;
+    background:linear-gradient(180deg,rgba(0,0,0,.45),transparent);color:#fff;font:600 30px/1 'Inter',system-ui,sans-serif;}
+  .vh-status i{width:118px;height:26px;background:
+    linear-gradient(#fff,#fff) 0 16px/8px 10px no-repeat,linear-gradient(#fff,#fff) 12px 11px/8px 15px no-repeat,
+    linear-gradient(#fff,#fff) 24px 6px/8px 20px no-repeat,linear-gradient(#fff,#fff) 36px 1px/8px 25px no-repeat,
+    linear-gradient(#fff,#fff) 66px 3px/44px 22px no-repeat;border-radius:4px;}
+  .vh-island{position:absolute;left:50%;top:22px;width:150px;height:44px;margin-left:-75px;border-radius:24px;background:#000;z-index:3;}
+  .vh-home{position:absolute;left:50%;bottom:16px;width:150px;height:8px;margin-left:-75px;border-radius:6px;background:rgba(255,255,255,.85);z-index:2;}
   .vh-caption{position:absolute;left:clamp(18px,5vw,64px);bottom:clamp(28px,7vh,64px);z-index:4;display:flex;flex-direction:column;gap:6px;max-width:300px;}
   .vh-count{font-family:'Space Grotesk';font-size:13px;color:var(--gold);letter-spacing:.12em;}
   .vh-title{font-family:'Inter';font-weight:800;font-size:clamp(24px,2.6vw,36px);letter-spacing:-.02em;color:var(--ink);}
@@ -1894,7 +1912,7 @@
           <div class="vh-device" id="vhDevice">
             <div class="vh-stage">
               <img class="vh-hand" src="assets/reels/hand-phone.png" width="720" height="1087" alt="Hand holding a phone playing a short-form video edit" loading="lazy">
-              <a class="vh-screen" href="#" target="_blank" rel="noopener" aria-label="Watch this reel on Vimeo"><img class="vh-shot" src="assets/reels/reel-1.jpg" alt=""><span class="vh-frame"></span></a>
+              <a class="vh-iphone" href="#" target="_blank" rel="noopener" aria-label="Watch this reel on Vimeo"><span class="vh-btn vh-btn-a"></span><span class="vh-btn vh-btn-b"></span><span class="vh-btn vh-btn-c"></span><span class="vh-glass"><span class="vh-scr"><img class="vh-shot" src="assets/reels/reel-1.jpg" alt=""><span class="vh-status"><b>9:41</b><i></i></span><span class="vh-island"></span><span class="vh-home"></span></span></span></a>
               <img class="vh-thumb" src="assets/reels/hand-phone.png" width="720" height="1087" alt="" aria-hidden="true" loading="lazy">
             </div>
           </div>
@@ -2636,11 +2654,11 @@
   if(vh){
     const REELS = ['1223823674','1224385753','1224387181','1224387182','1224387775','1224387776'];
     const sticky = vh.querySelector('.vh-sticky'), device = vh.querySelector('.vh-device');
-    const stage = vh.querySelector('.vh-stage'), screen = vh.querySelector('.vh-screen'), shot = vh.querySelector('.vh-shot');
+    const stage = vh.querySelector('.vh-stage'), screen = vh.querySelector('.vh-iphone'), scr = vh.querySelector('.vh-scr'), shot = vh.querySelector('.vh-shot');
     const cols = [...vh.querySelectorAll('.vh-col')], cards = [...vh.querySelectorAll('.vh-card')];
     const countEl = vh.querySelector('.vh-count'), titleEl = vh.querySelector('.vh-title');
     // Map the 450x700 screen box onto the phone's screen corners in the photo (projective transform)
-    const quad = [[250,299],[703,282],[758,986],[333,1004]], SW = 450, SH = 700;
+    const quad = [[232,126],[784,146],[702,1166],[140,1144]], SW = 500, SH = 1000;
     const homography = ()=>{
       const [[x0,y0],[x1,y1],[x2,y2],[x3,y3]] = quad;
       const dx1 = x1-x2, dx2 = x3-x2, dy1 = y1-y2, dy2 = y3-y2, sx = x0-x1+x2-x3, sy = y0-y1+y2-y3;
@@ -2662,7 +2680,7 @@
       countEl.textContent = String(n).padStart(2,'0') + ' / 06';
       titleEl.textContent = 'Reel Edit ' + String(n).padStart(2,'0');
       screen.href = 'https://vimeo.com/' + REELS[n-1];
-      const old = screen.querySelector('iframe'); if(old) old.remove();
+      const old = scr.querySelector('iframe'); if(old) old.remove();
       clearTimeout(iframeTimer);
       if(reduce) return;
       iframeTimer = setTimeout(()=>{ // play the reel once the visitor pauses on it
@@ -2670,7 +2688,7 @@
         f.src = 'https://player.vimeo.com/video/' + REELS[n-1] + '?h=51b0474761&background=1&autoplay=1&loop=1&muted=1&controls=0';
         f.allow = 'autoplay; fullscreen; picture-in-picture'; f.title = 'Reel preview'; f.loading = 'eager';
         f.addEventListener('load', ()=>setTimeout(()=>f.classList.add('ready'), 600));
-        screen.appendChild(f);
+        scr.appendChild(f);
       }, 650);
     };
     const pick = ()=>{
