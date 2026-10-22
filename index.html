@@ -1278,8 +1278,8 @@
   .vh-card.is-on{filter:none;}
   .vh-shade{position:absolute;inset:0;pointer-events:none;
     background:linear-gradient(180deg,#050607 0%,transparent 16%,transparent 80%,#050607 100%);}
-  .vh-device{position:absolute;left:50%;bottom:-12vh;height:104vh;height:104svh;aspect-ratio:960/1449;
-    transform:translateX(calc(-50% + var(--dx,0px)));transition:transform .5s cubic-bezier(.22,1,.36,1);z-index:2;
+  .vh-device{position:absolute;left:50%;bottom:-12vh;height:98vh;height:98svh;aspect-ratio:729/698;
+    transform:translateX(calc(-29% + var(--dx,0px)));transition:transform .5s cubic-bezier(.22,1,.36,1);z-index:2;
     filter:drop-shadow(0 40px 60px rgba(0,0,0,.6));}
   .vh-stage{position:absolute;left:0;top:0;width:960px;height:1449px;transform-origin:0 0;transform:scale(var(--k,.5)) translate(-53.5px,42.1px) rotate(-4.9deg); /* rotate around the phone centre so it stands upright */}
   .vh-hand,.vh-thumb{position:absolute;left:0;top:0;width:960px;height:1449px;display:block;pointer-events:none;}
@@ -1308,6 +1308,9 @@
     linear-gradient(#fff,#fff) 66px 3px/44px 22px no-repeat;border-radius:4px;}
   .vh-island{position:absolute;left:50%;top:22px;width:150px;height:44px;margin-left:-75px;border-radius:24px;background:#000;z-index:3;}
   .vh-home{position:absolute;left:50%;bottom:16px;width:150px;height:8px;margin-left:-75px;border-radius:6px;background:rgba(255,255,255,.85);z-index:2;}
+  .vh-handimg{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none;z-index:2;}
+  .vh-hole{position:absolute;left:9.88%;top:1.72%;width:38.55%;height:83.52%;z-index:1;display:block;background:#000;border-radius:9% / 4.5%;overflow:hidden;}
+  .vh-hole .vh-scr{position:absolute;inset:0;border-radius:0;}
   .vh-caption{position:absolute;left:clamp(18px,5vw,64px);bottom:clamp(28px,7vh,64px);z-index:4;display:flex;flex-direction:column;gap:6px;max-width:300px;}
   .vh-count{font-family:'Space Grotesk';font-size:13px;color:var(--gold);letter-spacing:.12em;}
   .vh-title{font-family:'Inter';font-weight:800;font-size:clamp(24px,2.6vw,36px);letter-spacing:-.02em;color:var(--ink);}
@@ -1320,7 +1323,7 @@
     .vh{height:260vh;}
     .vh-wall{grid-template-columns:repeat(3,1fr);gap:12px;padding:0 12px;inset:0 -8vw;}
     .vh-col{gap:12px;} .vh-col:nth-child(n+4){display:none;}
-    .vh-device{height:min(66vh,560px);height:min(66svh,560px);}
+    .vh-device{height:min(60vh,520px);height:min(60svh,520px);bottom:-2vh;}
     .vh-caption{left:18px;right:18px;top:84px;bottom:auto;max-width:none;}
     .vh-hint{display:none;}
   }
@@ -1910,11 +1913,8 @@
           </div>
           <div class="vh-shade" aria-hidden="true"></div>
           <div class="vh-device" id="vhDevice">
-            <div class="vh-stage">
-              <img class="vh-hand" src="assets/reels/hand-phone.png" width="720" height="1087" alt="Hand holding a phone playing a short-form video edit" loading="lazy">
-              <a class="vh-iphone" href="#" target="_blank" rel="noopener" aria-label="Watch this reel on Vimeo"><span class="vh-btn vh-btn-a"></span><span class="vh-btn vh-btn-b"></span><span class="vh-btn vh-btn-c"></span><span class="vh-glass"><span class="vh-scr"><img class="vh-shot" src="assets/reels/reel-1.jpg" alt=""><span class="vh-status"><b>9:41</b><i></i></span><span class="vh-island"></span><span class="vh-home"></span></span></span></a>
-              <img class="vh-thumb" src="assets/reels/hand-phone.png" width="720" height="1087" alt="" aria-hidden="true" loading="lazy">
-            </div>
+            <a class="vh-hole" href="#" target="_blank" rel="noopener" aria-label="Watch this reel on Vimeo"><span class="vh-scr"><img class="vh-shot" src="assets/reels/reel-1.jpg" alt=""></span></a>
+            <img class="vh-handimg" src="assets/reels/hand-iphone.png" width="729" height="698" alt="Man's hand holding an iPhone playing a short-form video edit" loading="lazy">
           </div>
           <div class="vh-caption"><span class="vh-count">01 / 06</span><b class="vh-title">Reel Edit 01</b><small>CapCut · Short-form · tap the phone to watch</small></div>
           <div class="vh-hint" aria-hidden="true"><span class="vh-mouse"></span>Scroll · move to pick a reel</div>
@@ -2654,23 +2654,9 @@
   if(vh){
     const REELS = ['1223823674','1224385753','1224387181','1224387182','1224387775','1224387776'];
     const sticky = vh.querySelector('.vh-sticky'), device = vh.querySelector('.vh-device');
-    const stage = vh.querySelector('.vh-stage'), screen = vh.querySelector('.vh-iphone'), scr = vh.querySelector('.vh-scr'), shot = vh.querySelector('.vh-shot');
+    const screen = vh.querySelector('.vh-hole'), scr = vh.querySelector('.vh-scr'), shot = vh.querySelector('.vh-shot');
     const cols = [...vh.querySelectorAll('.vh-col')], cards = [...vh.querySelectorAll('.vh-card')];
     const countEl = vh.querySelector('.vh-count'), titleEl = vh.querySelector('.vh-title');
-    // Map the 450x700 screen box onto the phone's screen corners in the photo (projective transform)
-    const quad = [[232,126],[784,146],[702,1166],[140,1144]], SW = 500, SH = 1000;
-    const homography = ()=>{
-      const [[x0,y0],[x1,y1],[x2,y2],[x3,y3]] = quad;
-      const dx1 = x1-x2, dx2 = x3-x2, dy1 = y1-y2, dy2 = y3-y2, sx = x0-x1+x2-x3, sy = y0-y1+y2-y3;
-      const det = dx1*dy2 - dx2*dy1, g = (sx*dy2 - dx2*sy)/det, h = (dx1*sy - sx*dy1)/det;
-      const a = x1-x0+g*x1, b = x3-x0+h*x3, d = y1-y0+g*y1, e = y3-y0+h*y3;
-      // unit square -> quad, then scale by 1/SW, 1/SH
-      const m = [a/SW, d/SW, 0, g/SW,  b/SH, e/SH, 0, h/SH,  0, 0, 1, 0,  x0, y0, 0, 1];
-      return 'matrix3d(' + m.map(v=>+v.toFixed(10)).join(',') + ')';
-    };
-    screen.style.transform = homography();
-    const fit = ()=>{ stage.style.setProperty('--k', (device.getBoundingClientRect().height / 1449).toFixed(5)); };
-    new ResizeObserver(fit).observe(device); fit();
 
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     let active = -1, iframeTimer = 0, raf = 0, dx = 0;
