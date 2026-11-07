@@ -1266,6 +1266,56 @@
   html.intro .hx-photo,html.intro .hx-samples{opacity:0 !important;}
   html.intro .hx-img,html.intro .hs-tile{animation:none;}
 
+  /* ================= GRAPHICS: 3D cover-flow showcase (filters, drag, tilt) ================= */
+  .cf[hidden]{display:none;}
+  .cf{--H:clamp(320px,50vh,470px);position:relative;}
+  .cf-filters{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:6px;}
+  .cf-chip{padding:8px 15px;border-radius:999px;font-size:13px;font-weight:600;color:var(--ink-dim);background:rgba(255,255,255,.03);border:1px solid var(--glass-line);
+    cursor:pointer;transition:background .3s,color .3s,border-color .3s;}
+  .cf-chip i{font-style:normal;margin-left:6px;font-size:11.5px;opacity:.6;}
+  .cf-chip:hover{color:var(--ink);border-color:var(--line-strong);}
+  .cf-chip.on{background:var(--gold);border-color:var(--gold);color:#16120a;}
+  .cf-stage{position:relative;width:100vw;margin-left:calc(50% - 50vw);height:calc(var(--H) + 120px);overflow:hidden;perspective:1500px;perspective-origin:50% 40%;
+    touch-action:pan-y;user-select:none;-webkit-user-select:none;outline:none;}
+  .cf-stage:focus-visible{box-shadow:inset 0 0 0 2px var(--gold);}
+  .cf .bento-tile{position:absolute;left:50%;top:45%;height:var(--H);width:auto;border-radius:18px;border:1px solid rgba(255,255,255,.1);background:#0b0e13;cursor:pointer;
+    transition:transform .8s var(--ease),opacity .5s,filter .5s,box-shadow .5s;box-shadow:0 40px 70px -30px rgba(0,0,0,.9);
+    -webkit-box-reflect:below 14px linear-gradient(transparent 72%,rgba(255,255,255,.14));}
+  .cf .bento-tile.live{transition:transform .15s linear,opacity .5s,filter .5s,box-shadow .5s;}
+  .cf .bento-tile img{width:100%;height:100%;object-fit:cover;-webkit-user-drag:none;}
+  .cf .bento-tile:hover>img{transform:none;}
+  .cf .bento-tile:hover{border-color:rgba(255,255,255,.1);}
+  .cf .bento-tile.is-on{cursor:zoom-in;border-color:rgba(201,169,110,.7);box-shadow:0 0 80px -12px rgba(201,169,110,.5),0 50px 90px -30px rgba(0,0,0,.95);}
+  .cf .bento-tile.gfx-carousel.is-on{cursor:default;}
+  .cf .bento-cap{display:none;}
+  .cf .bento-tile:not(.is-on) .gfx-nav,.cf .bento-tile:not(.is-on) .gfx-count,.cf .bento-tile:not(.is-on) .gt-badge{opacity:0;pointer-events:none;}
+  .cf-glare{position:absolute;inset:0;z-index:3;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .4s;
+    background:radial-gradient(circle at var(--gx,50%) var(--gy,20%),rgba(255,240,210,.22),transparent 50%);}
+  .cf .bento-tile.live .cf-glare{opacity:1;}
+  .cf-bar{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:64px;}
+  .cf-info{display:flex;align-items:center;gap:18px;min-width:0;}
+  .cf-count{flex-shrink:0;font-family:'Space Grotesk';font-size:13px;letter-spacing:.12em;color:var(--gold);}
+  .cf-cap{display:flex;align-items:center;flex-wrap:wrap;gap:10px 16px;font-family:'Space Grotesk';font-weight:600;font-size:clamp(18px,2vw,24px);line-height:1.2;color:var(--ink);
+    animation:cfIn .5s var(--ease);}
+  .cf-cap small{display:block;margin-bottom:3px;font-family:'Inter';font-size:12.5px;font-weight:500;letter-spacing:.02em;color:var(--gold);}
+  .cf-cap .gt-get{font-family:'Inter';font-size:13px;padding:10px 16px;}
+  @keyframes cfIn{from{opacity:0;transform:translateY(6px);}}
+  .cf-ctrl{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+  .cf-hint{font-size:13px;color:var(--ink-dim);margin-right:6px;}
+  .cf-btn{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:var(--ink);background:rgba(255,255,255,.04);border:1px solid var(--line-strong);
+    transition:background .3s,color .3s,border-color .3s,opacity .3s;}
+  .cf-btn:hover:not(:disabled){background:var(--gold);border-color:var(--gold);color:#16120a;}
+  .cf-btn:disabled{opacity:.35;cursor:default;}
+  .cf-btn svg{width:20px;height:20px;}
+  @media(max-width:640px){
+    .cf{--H:min(44vh,310px);--H:min(44svh,310px);}
+    .cf-filters{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;margin:0 -20px 6px;padding:0 20px;scrollbar-width:none;}
+    .cf-filters::-webkit-scrollbar{display:none;}
+    .cf-chip{flex-shrink:0;}
+    .cf-stage{height:calc(var(--H) + 90px);}
+    .cf-bar{flex-direction:column;align-items:flex-start;gap:14px;}
+    .cf-hint{display:none;}
+  }
   /* ================= VIDEO: 3D ring of reels, spun by scroll / drag / arrows ================= */
   .vr{position:relative;height:240vh;width:100vw;margin-left:calc(50% - 50vw);margin-top:10px;}
   .vr-sticky{--h:min(56vh,480px);--h:min(56svh,480px);--w:calc(var(--h) * 9 / 16);position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;
@@ -2118,12 +2168,11 @@
           <button type="button" class="ws-btn" role="tab" aria-selected="false" data-show="gfxTpl"><span aria-hidden="true">★</span> My Templates</button>
         </div>
       </div>
-      <div class="bento-grid" id="bentoGrid" role="tabpanel" aria-label="Client graphic work">
-        <div class="bento-col">
+      <div class="cf" id="bentoGrid" role="tabpanel" aria-label="Client graphic work">
+        <div class="cf-filters" role="group" aria-label="Filter designs"></div>
+        <div class="cf-stage" tabindex="0" aria-label="3D gallery: use the arrow keys, drag, or click a design to bring it to the front">
           <div class="bento-tile"><img src="assets/graphics/7figure-builder-100k-ad.jpg" width="1080" height="1080" alt="7Figure Builder ad: Wanna make $100K building a house?" loading="lazy"><div class="bento-cap"><small>7Figure Builder</small>Lead Magnet Ad</div></div>
           <div class="bento-tile"><img src="assets/graphics/realty-kings-just-sold-flyer-1.jpg" width="1080" height="1528" alt="Realty Kings Just Sold property flyer with photos, property details, and agent contact" loading="lazy"><div class="bento-cap"><small>Realty Kings</small>Just Sold Property Flyer</div></div>
-        </div>
-        <div class="bento-col">
           <div class="bento-tile gfx-carousel" aria-roledescription="carousel" aria-label="Tourmaline watch band product carousel, 8 slides">
             <div class="gfx-track" tabindex="0">
               <img src="assets/graphics/tourmaline-band-carousel-1.jpg" width="1080" height="1079" alt="Tourmaline watch band carousel slide 1 of 8" loading="lazy">
@@ -2141,35 +2190,28 @@
             <div class="bento-cap"><small>Product Brand</small>Instagram Carousel · 8 slides</div>
           </div>
           <div class="bento-tile"><img src="assets/graphics/credit-brigade-quote-post.jpg" width="1080" height="1080" alt="Credit Brigade quote post: Every financial decision should be driven by what you value, David Bach" loading="lazy"><div class="bento-cap"><small>Credit Brigade</small>Quote Post</div></div>
-        </div>
-        <div class="bento-col">
           <div class="bento-tile"><img src="assets/graphics/7figure-builder-build-real-ad.jpg" width="1080" height="1080" alt="7Figure Builder ad: You're wasting time scrolling, build something real" loading="lazy"><div class="bento-cap"><small>7Figure Builder</small>Social Ad Creative</div></div>
           <div class="bento-tile"><img src="assets/graphics/realty-kings-just-sold-flyer-2.jpg" width="1080" height="1528" alt="Realty Kings Just Sold flyer for a 3 bedroom home with interior photos and agent details" loading="lazy"><div class="bento-cap"><small>Realty Kings</small>Just Sold Property Flyer</div></div>
-        </div>
-        <div class="bento-col">
           <div class="bento-tile"><img src="assets/graphics/credit-brigade-credit-repair.jpg" width="1080" height="1080" alt="Credit Brigade promo: The true value of credit repair, with service benefits and contact details" loading="lazy"><div class="bento-cap"><small>Credit Brigade</small>Service Promo Post</div></div>
           <div class="bento-tile"><img src="assets/graphics/7figure-builder-first-house-ad.jpg" width="1080" height="1080" alt="7Figure Builder ad: I built my first house with zero experience, free starter kit" loading="lazy"><div class="bento-cap"><small>7Figure Builder</small>Free Guide Ad</div></div>
         </div>
+        <div class="cf-bar"><div class="cf-info"><span class="cf-count">01 / 01</span><div class="cf-cap"></div></div><div class="cf-ctrl"><span class="cf-hint">Drag or click to browse</span><button type="button" class="cf-btn" aria-label="Previous design"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><button type="button" class="cf-btn" aria-label="Next design"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div></div>
       </div>
-      <div class="bento-grid" id="gfxTpl" role="tabpanel" aria-label="My graphic templates" hidden>
-        <div class="bento-col">
+      <div class="cf" id="gfxTpl" role="tabpanel" aria-label="My graphic templates" hidden>
+        <div class="cf-filters" role="group" aria-label="Filter designs"></div>
+        <div class="cf-stage" tabindex="0" aria-label="3D gallery: use the arrow keys, drag, or click a design to bring it to the front">
           <div class="bento-tile tpl"><span class="gt-badge">★ My Template</span><img src="assets/graphics-templates/realty-open.jpg" width="1080" height="1920" alt="Open house Instagram story template for a real estate listing" loading="lazy"><div class="bento-cap"><span><small>Real Estate · Story</small>Open House Invite</span><a class="gt-get" href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20real%20estate%20open%20house%20graphic%20template." target="_blank" rel="noopener">Get This Template</a></div></div>
           <div class="bento-tile tpl"><span class="gt-badge">★ My Template</span><img src="assets/graphics-templates/dental-tip.jpg" width="1080" height="1350" alt="Dental tip social post template about kids' first dentist visit" loading="lazy"><div class="bento-cap"><span><small>Dental · Portrait Post</small>Educational Tip Post</span><a class="gt-get" href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20dental%20tip%20post%20graphic%20template." target="_blank" rel="noopener">Get This Template</a></div></div>
-        </div>
-        <div class="bento-col">
           <div class="bento-tile tpl"><span class="gt-badge">★ My Template</span><img src="assets/graphics-templates/gym-week.jpg" width="1080" height="1920" alt="Gym weekly class schedule Instagram story template" loading="lazy"><div class="bento-cap"><span><small>Fitness · Story</small>Weekly Class Schedule</span><a class="gt-get" href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20gym%20class%20schedule%20story%20graphic%20template." target="_blank" rel="noopener">Get This Template</a></div></div>
           <div class="bento-tile tpl"><span class="gt-badge">★ My Template</span><img src="assets/graphics-templates/food-special.jpg" width="1080" height="1350" alt="Restaurant weekend special promo post template with steak" loading="lazy"><div class="bento-cap"><span><small>Restaurant · Portrait Post</small>Weekend Special Promo</span><a class="gt-get" href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20restaurant%20weekend%20special%20graphic%20template." target="_blank" rel="noopener">Get This Template</a></div></div>
-        </div>
-        <div class="bento-col">
           <div class="bento-tile tpl"><span class="gt-badge">★ My Template</span><img src="assets/graphics-templates/food-menu.jpg" width="1080" height="1350" alt="Restaurant new pasta menu announcement post template" loading="lazy"><div class="bento-cap"><span><small>Restaurant · Portrait Post</small>New Menu Announcement</span><a class="gt-get" href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20restaurant%20menu%20announcement%20graphic%20template." target="_blank" rel="noopener">Get This Template</a></div></div>
           <div class="bento-tile tpl"><span class="gt-badge">★ My Template</span><img src="assets/graphics-templates/dental-offer.jpg" width="1080" height="1080" alt="Dental clinic teeth whitening 30 percent off ad template" loading="lazy"><div class="bento-cap"><span><small>Dental · Square Post</small>Whitening Offer Ad</span><a class="gt-get" href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20dental%20whitening%20offer%20graphic%20template." target="_blank" rel="noopener">Get This Template</a></div></div>
           <div class="bento-tile tpl"><span class="gt-badge">★ My Template</span><img src="assets/graphics-templates/roof-storm.jpg" width="1080" height="1080" alt="Roofing storm damage free inspection ad template" loading="lazy"><div class="bento-cap"><span><small>Roofing · Square Ad</small>Storm Damage Lead Ad</span><a class="gt-get" href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20roofing%20storm%20damage%20ad%20graphic%20template." target="_blank" rel="noopener">Get This Template</a></div></div>
-        </div>
-        <div class="bento-col">
           <div class="bento-tile tpl"><span class="gt-badge">★ My Template</span><img src="assets/graphics-templates/realty-listed.jpg" width="1080" height="1080" alt="Just listed real estate post template with price and specs" loading="lazy"><div class="bento-cap"><span><small>Real Estate · Square Post</small>Just Listed Post</span><a class="gt-get" href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20real%20estate%20just%20listed%20graphic%20template." target="_blank" rel="noopener">Get This Template</a></div></div>
           <div class="bento-tile tpl"><span class="gt-badge">★ My Template</span><img src="assets/graphics-templates/gym-trial.jpg" width="1080" height="1080" alt="Gym seven day free trial ad template" loading="lazy"><div class="bento-cap"><span><small>Fitness · Square Ad</small>Free Trial Ad</span><a class="gt-get" href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20gym%20free%20trial%20ad%20graphic%20template." target="_blank" rel="noopener">Get This Template</a></div></div>
           <div class="bento-tile tpl"><span class="gt-badge">★ My Template</span><img src="assets/graphics-templates/roof-review.jpg" width="1080" height="1080" alt="Five-star customer review post template for a roofing company" loading="lazy"><div class="bento-cap"><span><small>Roofing · Square Post</small>Customer Review Post</span><a class="gt-get" href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20roofing%20review%20post%20graphic%20template." target="_blank" rel="noopener">Get This Template</a></div></div>
         </div>
+        <div class="cf-bar"><div class="cf-info"><span class="cf-count">01 / 01</span><div class="cf-cap"></div></div><div class="cf-ctrl"><span class="cf-hint">Drag or click to browse</span><button type="button" class="cf-btn" aria-label="Previous design"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><button type="button" class="cf-btn" aria-label="Next design"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div></div>
       </div>
 
       <a href="https://drive.google.com/drive/folders/1Q4OaoAWIT73MiYj_AhUabgIgQklyeinA?usp=drive_link" class="more-link" target="_blank" rel="noopener noreferrer">View More Graphics Projects</a>
@@ -2694,19 +2736,106 @@
     const shown = document.getElementById(btn.dataset.show); if(shown && shown._remeasure) shown._remeasure();
   }));
 
-  // ---------- Graphics bento grid: staggered reveal on scroll ----------
-  const bentoTiles = document.querySelectorAll('.bento-tile');
-  const bentoIo = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        const i = [...bentoTiles].indexOf(e.target);
-        e.target.style.transitionDelay = (Math.min(i,9)*0.06)+'s';
-        e.target.classList.add('in');
-        bentoIo.unobserve(e.target);
-      }
+  // ---------- Graphics: 3D cover-flow (click, drag/swipe, arrow keys, filters, autoplay; tilt + glare on the front design) ----------
+  document.querySelectorAll('.cf').forEach(cf=>{
+    const stage = cf.querySelector('.cf-stage'), all = [...stage.querySelectorAll('.bento-tile')];
+    const countEl = cf.querySelector('.cf-count'), capEl = cf.querySelector('.cf-cap'), chipsEl = cf.querySelector('.cf-filters');
+    const [prevBtn, nextBtn] = cf.querySelectorAll('.cf-btn');
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const fine = matchMedia('(hover:hover) and (pointer:fine)').matches && !reduce;
+    const groupOf = t=>{ const s = t.querySelector('.bento-cap small'); return s ? s.textContent.split('·')[0].trim() : 'Other'; };
+    const esc = s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+    all.forEach(t=>{
+      const img = t.querySelector('img'), w = +img.getAttribute('width'), h = +img.getAttribute('height');
+      t.style.aspectRatio = t.classList.contains('gfx-carousel') || !w || !h ? '1' : w + ' / ' + h;
+      t.querySelectorAll('img').forEach(i=>i.draggable = false);
+      t.insertAdjacentHTML('beforeend', '<span class="cf-glare" aria-hidden="true"></span>');
     });
-  },{threshold:.15});
-  bentoTiles.forEach(t=>bentoIo.observe(t));
+    const groups = ['All', ...new Set(all.map(groupOf))];
+    chipsEl.innerHTML = groups.map(g=>{
+      const n = g === 'All' ? all.length : all.filter(t=>groupOf(t) === g).length;
+      return '<button type="button" class="cf-chip' + (g === 'All' ? ' on' : '') + '" data-g="' + esc(g) + '" aria-pressed="' + (g === 'All') + '">' + esc(g) + '<i>' + n + '</i></button>';
+    }).join('');
+    let list = all, active = Math.floor((all.length - 1) / 2), userDid = false, hover = false, seen = false;
+    const layout = ()=>{
+      const H = all[0].offsetHeight || 400, small = innerWidth < 640;
+      const base = H * (small ? .62 : .64), step = H * (small ? .17 : .3);
+      all.forEach(t=>{
+        const i = list.indexOf(t);
+        if(i < 0){
+          Object.assign(t.style, {transform:'translate(-50%,-50%) translateZ(-700px) scale(.6)', opacity:'0', pointerEvents:'none', zIndex:'0', filter:''});
+          t.classList.remove('is-on','live'); return;
+        }
+        const d = i - active, a = Math.abs(d), s = Math.sign(d);
+        const x = a ? s * (base + (a - 1) * step) : 0;
+        t.style.transform = 'translate(-50%,-50%) translateX(' + x.toFixed(1) + 'px) translateZ(' + (a ? -150 - a * 70 : 40) + 'px) rotateY(' + (-s * (small ? 50 : 42)) + 'deg)'
+          + (a ? '' : ' rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))');
+        t.style.opacity = a > 4 ? '0' : '1';
+        t.style.pointerEvents = a > 4 ? 'none' : '';
+        t.style.zIndex = String(50 - a);
+        t.style.filter = a ? 'brightness(' + (1 - Math.min(a, 4) * .15).toFixed(2) + ')' : '';
+        t.classList.toggle('is-on', !a);
+        if(a) t.classList.remove('live');
+      });
+      countEl.textContent = String(active + 1).padStart(2,'0') + ' / ' + String(list.length).padStart(2,'0');
+      const cap = list[active].querySelector('.bento-cap');
+      capEl.innerHTML = !cap ? '' : cap.querySelector(':scope > span') ? cap.innerHTML : '<span>' + cap.innerHTML + '</span>';
+      capEl.style.animation = 'none'; void capEl.offsetWidth; capEl.style.animation = '';
+      prevBtn.disabled = active === 0; nextBtn.disabled = active === list.length - 1;
+    };
+    const go = i=>{ active = Math.max(0, Math.min(list.length - 1, i)); layout(); };
+    const user = ()=>{ userDid = true; };
+    cf._remeasure = layout;
+    chipsEl.addEventListener('click', e=>{
+      const b = e.target.closest('.cf-chip'); if(!b) return;
+      user();
+      chipsEl.querySelectorAll('.cf-chip').forEach(c=>{ const on = c === b; c.classList.toggle('on', on); c.setAttribute('aria-pressed', on); });
+      list = b.dataset.g === 'All' ? all : all.filter(t=>groupOf(t) === b.dataset.g);
+      go(Math.floor((list.length - 1) / 2));
+    });
+    prevBtn.addEventListener('click', ()=>{ user(); go(active - 1); });
+    nextBtn.addEventListener('click', ()=>{ user(); go(active + 1); });
+    stage.addEventListener('keydown', e=>{
+      if(e.target.closest('.gfx-track')) return;
+      if(e.key === 'ArrowRight'){ e.preventDefault(); user(); go(active + 1); }
+      if(e.key === 'ArrowLeft'){ e.preventDefault(); user(); go(active - 1); }
+    });
+    // drag / swipe to browse
+    let downX = null, dragged = false;
+    stage.addEventListener('pointerdown', e=>{ dragged = false; downX = e.target.closest('button,a,.gfx-track') ? null : e.clientX; });
+    stage.addEventListener('pointermove', e=>{
+      if(downX === null) return;
+      const dx = e.clientX - downX;
+      if(Math.abs(dx) > 50){ dragged = true; user(); go(active + (dx < 0 ? 1 : -1)); downX = e.clientX; }
+    });
+    addEventListener('pointerup', ()=>{ downX = null; });
+    // a side design comes to the front on click (capture phase, before the preview opens)
+    stage.addEventListener('click', e=>{
+      const t = e.target.closest('.bento-tile');
+      if(dragged){ e.stopPropagation(); e.preventDefault(); dragged = false; return; }
+      if(!t || t.classList.contains('is-on')) return;
+      e.stopPropagation(); e.preventDefault(); user(); go(list.indexOf(t));
+    }, true);
+    // tilt + glare on the front design
+    if(fine){
+      stage.addEventListener('pointermove', e=>{
+        if(downX !== null) return;
+        const t = list[active], b = t.getBoundingClientRect(), x = (e.clientX - b.left) / b.width, y = (e.clientY - b.top) / b.height;
+        const inside = x >= 0 && x <= 1 && y >= 0 && y <= 1;
+        t.classList.toggle('live', inside);
+        t.style.setProperty('--ry', inside ? ((x - .5) * 16).toFixed(2) + 'deg' : '0deg');
+        t.style.setProperty('--rx', inside ? ((.5 - y) * 14).toFixed(2) + 'deg' : '0deg');
+        t.style.setProperty('--gx', (x * 100).toFixed(1) + '%'); t.style.setProperty('--gy', (y * 100).toFixed(1) + '%');
+      });
+      stage.addEventListener('pointerleave', ()=>{ const t = list[active]; t.classList.remove('live'); t.style.setProperty('--rx','0deg'); t.style.setProperty('--ry','0deg'); });
+    }
+    // gentle autoplay until the visitor takes over
+    stage.addEventListener('pointerenter', ()=>{ hover = true; }); stage.addEventListener('pointerleave', ()=>{ hover = false; });
+    new IntersectionObserver(([e])=>{ seen = e.isIntersecting; }).observe(stage);
+    if(!reduce) setInterval(()=>{ if(!userDid && !hover && seen && !cf.hidden && !document.hidden) go(active < list.length - 1 ? active + 1 : 0); }, 3800);
+    addEventListener('resize', layout);
+    layout();
+  });
 
   // ---------- Graphics carousel tile: arrows + swipe (scroll-snap) + slide counter ----------
   document.querySelectorAll('.gfx-carousel').forEach(car=>{
