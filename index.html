@@ -1266,6 +1266,78 @@
   html.intro .hx-photo,html.intro .hx-samples{opacity:0 !important;}
   html.intro .hx-img,html.intro .hs-tile{animation:none;}
 
+  /* ================= AUTOMATION: live workflow canvas (n8n / Zapier style) ================= */
+  .af{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.38fr);gap:clamp(18px,2.4vw,32px);padding:clamp(18px,2.4vw,30px);border-radius:28px;
+    border:1px solid var(--glass-line);background:radial-gradient(70% 80% at 0% 0%,rgba(74,222,128,.08),transparent 60%),linear-gradient(180deg,#10141b,#0a0d12);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 40px 80px -40px rgba(0,0,0,.9);}
+  .af-side{display:flex;flex-direction:column;min-width:0;padding:6px 4px;}
+  .af-list{display:flex;flex-direction:column;gap:6px;margin-bottom:22px;}
+  .af-item{display:grid;grid-template-columns:30px minmax(0,1fr) 18px;align-items:center;gap:10px;padding:13px 14px;border-radius:14px;border:1px solid transparent;background:none;
+    text-align:left;color:var(--ink-dim);font:600 14.5px/1.3 'Space Grotesk',system-ui,sans-serif;cursor:pointer;transition:background .3s,border-color .3s,color .3s;}
+  .af-item:hover{background:rgba(255,255,255,.03);color:var(--ink);}
+  .af-item.on{background:rgba(74,222,128,.07);border-color:rgba(74,222,128,.35);color:var(--ink);}
+  .af-n{font-size:12px;letter-spacing:.08em;color:var(--ink-faint);transition:color .3s;}
+  .af-item.on .af-n{color:var(--green);}
+  .af-item svg{width:16px;height:16px;opacity:.4;transition:transform .4s var(--ease),opacity .3s;}
+  .af-item.on svg{opacity:1;color:var(--green);transform:rotate(-45deg);}
+  .af-info[hidden]{display:none;}
+  .af-info{animation:cfIn .5s var(--ease);}
+  .af-info p{margin:0 0 14px;font-size:14.5px;line-height:1.6;color:var(--ink-dim);}
+  .af-info .proj-tags{margin-bottom:18px;}
+  .af-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px;}
+  .af-actions .proj-link,.af-shot{padding:11px 18px;border-radius:999px;border:1px solid rgba(74,222,128,.5);font-size:13.5px;font-weight:600;transition:background .3s,color .3s;}
+  .af-actions .proj-link:hover{background:var(--green);color:#06210f !important;}
+  .af-shot{background:none;color:var(--ink-dim);border-color:var(--line-strong);cursor:zoom-in;}
+  .af-shot:hover{color:var(--ink);border-color:var(--ink-faint);}
+  .af-canvas{position:relative;min-height:470px;border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.07);
+    background:radial-gradient(rgba(255,255,255,.09) 1px,transparent 1.3px) 0 0/22px 22px,#080a0e;}
+  .af-toolbar{position:absolute;top:12px;left:12px;right:12px;z-index:4;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .af-status,.af-tool{display:inline-flex;align-items:center;gap:7px;padding:6px 11px;border-radius:999px;font-size:12px;font-weight:600;}
+  .af-status{color:var(--green);background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.25);}
+  .af-status i{width:7px;height:7px;border-radius:50%;background:currentColor;animation:btPulse 2s infinite;}
+  .af-status.running{color:var(--gold);background:rgba(201,169,110,.1);border-color:rgba(201,169,110,.3);}
+  .af-tool{color:var(--ink-dim);background:rgba(255,255,255,.04);border:1px solid var(--glass-line);}
+  .af-run{margin-left:auto;display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border:0;border-radius:999px;background:var(--green);color:#06210f;
+    font:700 13px/1 'Inter',system-ui,sans-serif;cursor:pointer;box-shadow:0 8px 24px -10px rgba(74,222,128,.75);transition:transform .2s var(--ease),opacity .3s;}
+  .af-run:hover:not(:disabled){transform:translateY(-2px);}
+  .af-run:disabled{opacity:.55;cursor:progress;}
+  .af-run svg{width:13px;height:13px;}
+  .af-wires{position:absolute;inset:0;z-index:1;width:100%;height:100%;overflow:visible;pointer-events:none;}
+  .af-wires .w{fill:none;stroke:rgba(245,243,238,.16);stroke-width:2;}
+  .af-wires .f{fill:none;stroke:rgba(74,222,128,.5);stroke-width:2;stroke-dasharray:3 11;stroke-linecap:round;animation:afDash 1.1s linear infinite;}
+  .af-wires .w.hot{stroke:rgba(74,222,128,.75);}
+  @keyframes afDash{to{stroke-dashoffset:-28;}}
+  .af-pk{position:absolute;left:0;top:0;z-index:2;width:11px;height:11px;border-radius:50%;background:#8dffbd;box-shadow:0 0 14px 4px rgba(74,222,128,.7);
+    offset-anchor:50% 50%;offset-rotate:0deg;opacity:0;pointer-events:none;}
+  .af-node{position:absolute;left:0;top:0;z-index:3;width:124px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;transform:translate(-50%,-28px);
+    cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;}
+  .af-node.dragging{cursor:grabbing;z-index:6;}
+  .af-tile{position:relative;width:56px;height:56px;border-radius:16px;display:grid;place-items:center;color:var(--c);
+    background:linear-gradient(145deg,color-mix(in srgb,var(--c) 24%,#151a22),#0d1117);border:1px solid color-mix(in srgb,var(--c) 50%,transparent);
+    box-shadow:0 12px 24px -10px rgba(0,0,0,.85);transition:transform .3s var(--ease),box-shadow .3s;}
+  .af-tile svg{width:26px;height:26px;}
+  .af-node:hover .af-tile,.af-node.dragging .af-tile{transform:translateY(-3px);box-shadow:0 16px 30px -10px rgba(0,0,0,.9),0 0 26px -6px var(--c);}
+  .af-node.running .af-tile{animation:afPulse .55s ease-in-out infinite alternate;}
+  @keyframes afPulse{from{box-shadow:0 0 0 2px rgba(201,169,110,.35),0 0 18px rgba(201,169,110,.3);}to{box-shadow:0 0 0 4px rgba(201,169,110,.6),0 0 34px rgba(201,169,110,.55);}}
+  .af-node.done .af-tile::after{content:"✓";position:absolute;top:-7px;right:-7px;width:19px;height:19px;border-radius:50%;background:var(--green);color:#06210f;
+    font:800 11px/19px 'Inter',sans-serif;text-align:center;box-shadow:0 0 0 3px #080a0e;animation:afPop .35s var(--ease);}
+  @keyframes afPop{from{transform:scale(0);}}
+  .af-lbl b{display:block;font:600 12.5px/1.25 'Space Grotesk',system-ui,sans-serif;color:var(--ink);}
+  .af-lbl small{display:block;margin-top:2px;font-size:11px;line-height:1.3;color:var(--ink-faint);}
+  .af-log{position:absolute;left:12px;bottom:12px;z-index:4;width:min(310px,calc(100% - 24px));min-height:30px;margin:0;padding:9px 12px;list-style:none;border-radius:12px;
+    background:rgba(5,7,10,.85);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(6px);font:500 11.5px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink-dim);}
+  .af-log li{display:flex;gap:8px;white-space:nowrap;overflow:hidden;animation:cfIn .3s var(--ease);}
+  .af-log li b{color:var(--green);font-weight:700;}
+  .af-log li span{overflow:hidden;text-overflow:ellipsis;}
+  .af-log li em{margin-left:auto;font-style:normal;color:var(--ink-faint);}
+  .af-hint{position:absolute;right:14px;bottom:14px;z-index:4;font-size:11.5px;color:var(--ink-faint);}
+  @media(max-width:900px){
+    .af{grid-template-columns:1fr;padding:16px;border-radius:22px;}
+    .af-canvas{min-height:0;}
+    .af-hint{display:none;}
+    .af-node{cursor:default;width:150px;}
+  }
+  @media (prefers-reduced-motion:reduce){.af-wires .f{animation:none;}}
   /* ================= WEBSITES: 3D stacking showcase cards ================= */
   .st[hidden]{display:none;}
   .st{position:relative;display:flex;flex-direction:column;gap:30px;}
@@ -2332,47 +2404,42 @@
           <h3>Workflows Running Behind the Scenes</h3>
         </div>
       </div>
-      <div class="work-grid" id="carAutomation">
-          <div class="proj-card" style="--accent:var(--green)">
-            <div class="proj-media"><span class="proj-tag">Automation</span><img src="https://i.imgur.com/SMPPu1S.png" alt="Automation sample 1"></div>
-            <div class="proj-body">
-              <div class="proj-cat">Automation</div>
-              <h3>Client Onboarding & Contract System</h3>
-              <p>A fully automated client onboarding system that handles contract signing, document generation, and tracking eliminating manual work and ensuring a seamless client experience.</p>
-              <div class="proj-tags"><span>GoHighLevel Automation</span><span>Tracking Sheet</span><span>Team Notification</span><span>PDF Creation</span><span>Zapier Automation</span><span>Contract Signing</span></div>
-              <a href="https://www.loom.com/share/0dc9efacfcae4013878e87a4cbd2585c" class="proj-link" style="color:var(--green)" target="_blank" rel="noopener noreferrer">Watch Video</a>
-            </div>
-          </div>
-          <div class="proj-card" style="--accent:var(--green)">
-            <div class="proj-media"><span class="proj-tag">Automation</span><img src="https://i.imgur.com/hutpvA5.png" alt="Automation sample 2"></div>
-            <div class="proj-body">
-              <div class="proj-cat">Automation</div>
-              <h3>Payment Tracking & Sales Dashboard System</h3>
-              <p>An integrated automation that captures transactions from GoHighLevel and Whop, logs them into a centralized spreadsheet, calculates real-time sales metrics (daily, weekly, and monthly), and instantly notifies the business owner for accurate tracking and decision-making.</p>
-              <div class="proj-tags"><span>GoHighLevel Automation</span><span>Tracking Sheet</span><span>Team Notification</span><span>Zapier Automation</span></div>
-              <a href="https://www.loom.com/share/f41202c350654530932e60d9750a9047" class="proj-link" style="color:var(--green)" target="_blank" rel="noopener noreferrer">Watch Video</a>
-            </div>
-          </div>
-          <div class="proj-card" style="--accent:var(--green)">
-            <div class="proj-media"><span class="proj-tag">Automation</span><img src="https://i.imgur.com/hutpvA5.png" alt="Automation sample 3"></div>
-            <div class="proj-body">
-              <div class="proj-cat">Automation</div>
-              <h3>Deal Tracking & Notification System</h3>
-              <p>An automated workflow that records deals from Whop & GoHighLevel, logs them into a centralized spreadsheet, calculates pipeline metrics (open deals, won/lost deals, and total value), and sends real-time notifications to the owner streamlining deal management and ensuring accurate performance tracking.</p>
-              <div class="proj-tags"><span>GoHighLevel Automation</span><span>Tracking Sheet</span><span>Team Notification</span><span>Zapier Automation</span></div>
-              <a href="https://www.loom.com/share/16d18369eb164b23bec4ccd0401dbc20" class="proj-link" style="color:var(--green)" target="_blank" rel="noopener noreferrer">Watch Video</a>
-            </div>
-          </div>
-          <div class="proj-card" style="--accent:var(--green)">
-            <div class="proj-media"><span class="proj-tag">Automation</span><img src="assets/projects/n8n-carousel-reels-automation.jpg" alt="n8n Carousel and Reels Automation workflow"></div>
-            <div class="proj-body">
-              <div class="proj-cat">Automation</div>
-              <h3>Carousel &amp; Reels Automation</h3>
-              <p>An n8n workflow that turns a single book or Amazon link into ready-to-post social content. It scrapes the product details, uses AI to generate carousel ideas, scripts, and image prompts, renders the carousel and reel with Blotato, logs every asset to Google Sheets, and publishes straight to Instagram.</p>
-              <div class="proj-tags"><span>n8n</span><span>OpenAI</span><span>Apify</span><span>Blotato</span><span>Google Sheets</span><span>Instagram</span></div>
-              <a href="https://drive.google.com/file/d/1E4fyA5y9L3h1ATyID9WknwhjbJbAYtCH/view?usp=sharing" class="proj-link" style="color:var(--green)" target="_blank" rel="noopener noreferrer">Watch Video</a>
-            </div>
-          </div>
+      <div class="af" id="carAutomation">
+      <div class="af-side">
+        <div class="af-list" role="tablist" aria-label="Automation projects">
+          <button type="button" class="af-item on" role="tab" aria-selected="true"><span class="af-n">01</span><span>Client Onboarding &amp; Contract System</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <button type="button" class="af-item" role="tab" aria-selected="false"><span class="af-n">02</span><span>Payment Tracking &amp; Sales Dashboard System</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <button type="button" class="af-item" role="tab" aria-selected="false"><span class="af-n">03</span><span>Deal Tracking &amp; Notification System</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <button type="button" class="af-item" role="tab" aria-selected="false"><span class="af-n">04</span><span>Carousel &amp; Reels Automation</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+        <div class="af-info">
+          <p>A fully automated client onboarding system that handles contract signing, document generation, and tracking eliminating manual work and ensuring a seamless client experience.</p>
+          <div class="proj-tags"><span>GoHighLevel Automation</span><span>Tracking Sheet</span><span>Team Notification</span><span>PDF Creation</span><span>Zapier Automation</span><span>Contract Signing</span></div>
+          <div class="af-actions"><a href="https://www.loom.com/share/0dc9efacfcae4013878e87a4cbd2585c" class="proj-link" style="color:var(--green)" target="_blank" rel="noopener noreferrer">Watch Video</a><button type="button" class="af-shot" data-img="https://i.imgur.com/SMPPu1S.png" data-alt="Client Onboarding &amp; Contract System workflow screenshot" data-title="Client Onboarding &amp; Contract System">See screenshot</button></div>
+        </div>
+        <div class="af-info" hidden>
+          <p>An integrated automation that captures transactions from GoHighLevel and Whop, logs them into a centralized spreadsheet, calculates real-time sales metrics (daily, weekly, and monthly), and instantly notifies the business owner for accurate tracking and decision-making.</p>
+          <div class="proj-tags"><span>GoHighLevel Automation</span><span>Tracking Sheet</span><span>Team Notification</span><span>Zapier Automation</span></div>
+          <div class="af-actions"><a href="https://www.loom.com/share/f41202c350654530932e60d9750a9047" class="proj-link" style="color:var(--green)" target="_blank" rel="noopener noreferrer">Watch Video</a><button type="button" class="af-shot" data-img="https://i.imgur.com/hutpvA5.png" data-alt="Payment Tracking &amp; Sales Dashboard System workflow screenshot" data-title="Payment Tracking &amp; Sales Dashboard System">See screenshot</button></div>
+        </div>
+        <div class="af-info" hidden>
+          <p>An automated workflow that records deals from Whop & GoHighLevel, logs them into a centralized spreadsheet, calculates pipeline metrics (open deals, won/lost deals, and total value), and sends real-time notifications to the owner streamlining deal management and ensuring accurate performance tracking.</p>
+          <div class="proj-tags"><span>GoHighLevel Automation</span><span>Tracking Sheet</span><span>Team Notification</span><span>Zapier Automation</span></div>
+          <div class="af-actions"><a href="https://www.loom.com/share/16d18369eb164b23bec4ccd0401dbc20" class="proj-link" style="color:var(--green)" target="_blank" rel="noopener noreferrer">Watch Video</a><button type="button" class="af-shot" data-img="https://i.imgur.com/hutpvA5.png" data-alt="Deal Tracking &amp; Notification System workflow screenshot" data-title="Deal Tracking &amp; Notification System">See screenshot</button></div>
+        </div>
+        <div class="af-info" hidden>
+          <p>An n8n workflow that turns a single book or Amazon link into ready-to-post social content. It scrapes the product details, uses AI to generate carousel ideas, scripts, and image prompts, renders the carousel and reel with Blotato, logs every asset to Google Sheets, and publishes straight to Instagram.</p>
+          <div class="proj-tags"><span>n8n</span><span>OpenAI</span><span>Apify</span><span>Blotato</span><span>Google Sheets</span><span>Instagram</span></div>
+          <div class="af-actions"><a href="https://drive.google.com/file/d/1E4fyA5y9L3h1ATyID9WknwhjbJbAYtCH/view?usp=sharing" class="proj-link" style="color:var(--green)" target="_blank" rel="noopener noreferrer">Watch Video</a><button type="button" class="af-shot" data-img="assets/projects/n8n-carousel-reels-automation.jpg" data-alt="n8n Carousel and Reels Automation workflow" data-title="Carousel &amp; Reels Automation">See screenshot</button></div>
+        </div>
+      </div>
+      <div class="af-canvas" aria-label="Interactive workflow diagram: run it to watch the data move through each step">
+        <div class="af-toolbar"><span class="af-status"><i></i>Workflow active</span><span class="af-tool"></span><button type="button" class="af-run"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg> Run workflow</button></div>
+        <svg class="af-wires" aria-hidden="true"></svg>
+        <div class="af-nodes"></div>
+        <ul class="af-log" aria-live="polite"></ul>
+        <span class="af-hint">Drag the nodes · Run to watch the data flow</span>
+      </div>
       </div>
       <a href="https://drive.google.com/drive/folders/1CNyQc1l64iKctbwsMGAH9vM4QT0HDV5i?usp=drive_link" class="more-link" target="_blank" rel="noopener noreferrer">View More Automation Projects</a>
     </div>
@@ -3441,6 +3508,154 @@
       media.addEventListener('pointerleave', ()=>{ media.classList.remove('live'); ['--ry','--rx','--s'].forEach(p=>panel.style.removeProperty(p)); });
     });
   });
+
+  // ---------- Automation: live workflow canvas (pick a workflow, run it, drag the nodes) ----------
+  const af = document.querySelector('.af');
+  if(af){
+    const ICON = {
+      bolt:'<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>',
+      doc:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>',
+      pen:'<path d="M3 21c3-1 5-3 6-5l9.5-9.5a2.1 2.1 0 0 0-3-3L6 13c-2 1-4 3-5 6"/><path d="M14 5l3 3"/>',
+      sheet:'<rect x="3" y="3" width="18" height="18" rx="2.5"/><path d="M3 9h18M3 15h18M9 3v18"/>',
+      bell:'<path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/>',
+      card:'<rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6.5 15h4"/>',
+      chart:'<path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/>',
+      deal:'<path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/>',
+      link:'<path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/>',
+      globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+      spark:'<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/>',
+      image:'<rect x="3" y="3" width="18" height="18" rx="2.5"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/>',
+      camera:'<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>'
+    };
+    const FLOWS = [
+      {tool:'Zapier · GoHighLevel', nodes:[
+        {id:'a', l:0, t:'New client', s:'GoHighLevel', ic:'bolt', c:'#5b9bff'},
+        {id:'b', l:1, t:'Create contract', s:'PDF document', ic:'doc', c:'#e8b04a'},
+        {id:'c', l:2, t:'Send to sign', s:'Contract signing', ic:'pen', c:'#d8bb84'},
+        {id:'d', l:3, t:'Log client', s:'Tracking sheet', ic:'sheet', c:'#34c46a'},
+        {id:'e', l:3, t:'Notify team', s:'Team alert', ic:'bell', c:'#ff7a45'}],
+       edges:[['a','b'],['b','c'],['c','d'],['c','e']]},
+      {tool:'Zapier · GoHighLevel · Whop', nodes:[
+        {id:'a', l:0, t:'GHL payment', s:'GoHighLevel', ic:'card', c:'#5b9bff'},
+        {id:'b', l:0, t:'Whop payment', s:'Whop', ic:'card', c:'#ff7a45'},
+        {id:'c', l:1, t:'Log transaction', s:'Tracking sheet', ic:'sheet', c:'#34c46a'},
+        {id:'d', l:2, t:'Sales metrics', s:'Daily · weekly · monthly', ic:'chart', c:'#d8bb84'},
+        {id:'e', l:3, t:'Notify owner', s:'Instant alert', ic:'bell', c:'#ff7a45'}],
+       edges:[['a','c'],['b','c'],['c','d'],['d','e']]},
+      {tool:'Zapier · GoHighLevel · Whop', nodes:[
+        {id:'a', l:0, t:'Whop deal', s:'Whop', ic:'deal', c:'#ff7a45'},
+        {id:'b', l:0, t:'GHL deal', s:'GoHighLevel', ic:'deal', c:'#5b9bff'},
+        {id:'c', l:1, t:'Log deal', s:'Tracking sheet', ic:'sheet', c:'#34c46a'},
+        {id:'d', l:2, t:'Pipeline metrics', s:'Open · won · lost · value', ic:'chart', c:'#d8bb84'},
+        {id:'e', l:3, t:'Notify owner', s:'Real-time alert', ic:'bell', c:'#ff7a45'}],
+       edges:[['a','c'],['b','c'],['c','d'],['d','e']]},
+      {tool:'n8n · OpenAI · Blotato', nodes:[
+        {id:'a', l:0, t:'Book link', s:'Amazon URL', ic:'link', c:'#ea4b71'},
+        {id:'b', l:1, t:'Scrape details', s:'Apify', ic:'globe', c:'#5bb8ff'},
+        {id:'c', l:2, t:'Write content', s:'OpenAI', ic:'spark', c:'#e8e2d4'},
+        {id:'d', l:3, t:'Render carousel + reel', s:'Blotato', ic:'image', c:'#d8bb84'},
+        {id:'e', l:4, t:'Log assets', s:'Google Sheets', ic:'sheet', c:'#34c46a'},
+        {id:'f', l:4, t:'Publish', s:'Instagram', ic:'camera', c:'#e1306c'}],
+       edges:[['a','b'],['b','c'],['c','d'],['d','e'],['d','f']]}
+    ];
+    const canvas = af.querySelector('.af-canvas'), svg = af.querySelector('.af-wires'), nodesEl = af.querySelector('.af-nodes');
+    const logEl = af.querySelector('.af-log'), runBtn = af.querySelector('.af-run'), statusEl = af.querySelector('.af-status'), toolEl = af.querySelector('.af-tool');
+    const items = [...af.querySelectorAll('.af-item')], infos = [...af.querySelectorAll('.af-info')];
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const canDrag = matchMedia('(hover:hover) and (pointer:fine)').matches;
+    const wait = ms=>new Promise(r=>setTimeout(r, reduce ? 0 : ms));
+    let flow = null, pos = {}, drag = {}, els = {}, vert = false, runId = 0, seen = false;
+    const layout = ()=>{
+      const W = canvas.clientWidth; vert = W < 560;
+      const L = Math.max(...flow.nodes.map(n=>n.l)) + 1;
+      const H = vert ? L * 128 + 230 : 470;
+      canvas.style.height = H + 'px';
+      svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+      for(let l = 0; l < L; l++){
+        const lane = flow.nodes.filter(n=>n.l === l);
+        lane.forEach((n,j)=>{
+          const off = j - (lane.length - 1) / 2;
+          pos[n.id] = vert
+            ? {x: W / 2 + off * Math.min(170, W * .46), y: 150 + l * 128}
+            : {x: 74 + l * (W - 148) / Math.max(1, L - 1), y: H * .44 + off * 136};
+        });
+      }
+      draw();
+    };
+    const at = id=>({x: pos[id].x + (drag[id] ? drag[id].x : 0), y: pos[id].y + (drag[id] ? drag[id].y : 0)});
+    const wire = (a,b)=>{
+      const p = at(a), q = at(b);
+      if(vert){ const y1 = p.y + 66, y2 = q.y - 36, m = (y2 - y1) / 2; return 'M' + p.x + ' ' + y1 + ' C' + p.x + ' ' + (y1 + m) + ' ' + q.x + ' ' + (y2 - m) + ' ' + q.x + ' ' + y2; }
+      const x1 = p.x + 34, x2 = q.x - 34, m = (x2 - x1) / 2;
+      return 'M' + x1 + ' ' + p.y + ' C' + (x1 + m) + ' ' + p.y + ' ' + (x2 - m) + ' ' + q.y + ' ' + x2 + ' ' + q.y;
+    };
+    const draw = ()=>{
+      flow.nodes.forEach(n=>{ const p = at(n.id); els[n.id].style.left = p.x + 'px'; els[n.id].style.top = p.y + 'px'; });
+      flow.edges.forEach((e,i)=>{
+        const d = wire(e[0], e[1]);
+        svg.querySelector('.w' + i).setAttribute('d', d); svg.querySelector('.f' + i).setAttribute('d', d);
+        canvas.querySelector('.af-pk.p' + i).style.offsetPath = 'path("' + d + '")';
+      });
+    };
+    const log = (txt, sub, ms)=>{
+      logEl.insertAdjacentHTML('beforeend', '<li><b>' + (ms === undefined ? '▶' : '✓') + '</b><span>' + txt + (sub ? ' · ' + sub : '') + '</span>' + (ms === undefined ? '' : '<em>' + ms + 'ms</em>') + '</li>');
+      while(logEl.children.length > 5) logEl.firstElementChild.remove();
+    };
+    const run = async ()=>{
+      const id = ++runId, L = Math.max(...flow.nodes.map(n=>n.l)) + 1;
+      flow.nodes.forEach(n=>els[n.id].classList.remove('running','done'));
+      svg.querySelectorAll('.w').forEach(w=>w.classList.remove('hot'));
+      logEl.innerHTML = ''; runBtn.disabled = true;
+      statusEl.classList.add('running'); statusEl.lastChild.textContent = 'Running…';
+      log('Execution started'); const t0 = performance.now();
+      for(let l = 0; l < L; l++){
+        const lane = flow.nodes.filter(n=>n.l === l);
+        lane.forEach(n=>els[n.id].classList.add('running'));
+        await wait(560); if(id !== runId) return;
+        lane.forEach(n=>{ els[n.id].classList.replace('running','done'); log(n.t, n.s, 180 + Math.round(Math.random() * 420)); });
+        const out = flow.edges.map((e,i)=>[e,i]).filter(([e])=>lane.some(n=>n.id === e[0]));
+        out.forEach(([,i])=>{
+          svg.querySelector('.w' + i).classList.add('hot');
+          if(reduce) return;
+          canvas.querySelector('.af-pk.p' + i).animate([{offsetDistance:'0%', opacity:0},{opacity:1, offset:.12},{opacity:1, offset:.88},{offsetDistance:'100%', opacity:0}], {duration:650, easing:'cubic-bezier(.45,0,.55,1)'});
+        });
+        if(out.length) await wait(650); if(id !== runId) return;
+      }
+      log('Finished in ' + ((performance.now() - t0) / 1000).toFixed(1) + 's');
+      runBtn.disabled = false; statusEl.classList.remove('running'); statusEl.lastChild.textContent = 'Workflow active';
+    };
+    const pick = i=>{
+      runId++; flow = FLOWS[i]; drag = {}; pos = {}; els = {};
+      items.forEach((b,k)=>{ b.classList.toggle('on', k === i); b.setAttribute('aria-selected', k === i); });
+      infos.forEach((p,k)=>{ p.hidden = k !== i; });
+      toolEl.textContent = flow.tool;
+      nodesEl.innerHTML = flow.nodes.map(n=>'<div class="af-node" data-id="' + n.id + '" style="--c:' + n.c + '"><span class="af-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICON[n.ic] + '</svg></span><span class="af-lbl"><b>' + n.t + '</b><small>' + n.s + '</small></span></div>').join('');
+      svg.innerHTML = flow.edges.map((e,k)=>'<path class="w w' + k + '"/><path class="f f' + k + '"/>').join('');
+      canvas.querySelectorAll('.af-pk').forEach(p=>p.remove());
+      flow.edges.forEach((e,k)=>canvas.insertAdjacentHTML('beforeend', '<span class="af-pk p' + k + '" aria-hidden="true"></span>'));
+      nodesEl.querySelectorAll('.af-node').forEach(el=>{ els[el.dataset.id] = el; });
+      layout();
+      if(canDrag) nodesEl.querySelectorAll('.af-node').forEach(el=>{
+        el.addEventListener('pointerdown', e=>{
+          const id = el.dataset.id, sx = e.clientX, sy = e.clientY, base = drag[id] || {x:0, y:0};
+          el.setPointerCapture(e.pointerId); el.classList.add('dragging');
+          const mv = ev=>{ drag[id] = {x: base.x + ev.clientX - sx, y: base.y + ev.clientY - sy}; draw(); };
+          const up = ()=>{ el.classList.remove('dragging'); el.removeEventListener('pointermove', mv); el.removeEventListener('pointerup', up); };
+          el.addEventListener('pointermove', mv); el.addEventListener('pointerup', up);
+        });
+      });
+      if(seen) run(); else { logEl.innerHTML = ''; log('Ready · press Run'); runBtn.disabled = false; }
+    };
+    items.forEach((b,i)=>b.addEventListener('click', ()=>pick(i)));
+    runBtn.addEventListener('click', run);
+    af.querySelectorAll('.af-shot').forEach(b=>b.addEventListener('click', ()=>{
+      const info = b.closest('.af-info').cloneNode(true); info.querySelector('.af-actions').remove();
+      openPv(b.dataset.img, b.dataset.alt, '<h3>' + b.dataset.title + '</h3>' + info.innerHTML, false);
+    }));
+    addEventListener('resize', ()=>{ drag = {}; layout(); });
+    new IntersectionObserver(([e], o)=>{ if(e.isIntersecting){ seen = true; run(); o.disconnect(); } }, {threshold:.35}).observe(canvas);
+    pick(0);
+  }
 
   // ---------- Interaction layer: progress line, cursor glow, card spotlight/tilt, magnetic buttons, hero depth ----------
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
