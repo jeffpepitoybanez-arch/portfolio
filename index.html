@@ -1329,6 +1329,126 @@
   }
   @media (prefers-reduced-motion:reduce){.vh-device{transition:none;}.vh-mouse::after{animation:none;}}
 
+  /* ===== Dribbble-style upgrades: text band, bento proof grid, editorial services list ===== */
+  /* Headings: one accent phrase in gold italic */
+  .sec-head h2 em,.contact-panel h2 em{font-family:'Inter',system-ui,sans-serif;font-style:italic;font-weight:300;letter-spacing:-.04em;padding-right:.08em;
+    background:linear-gradient(180deg,#ecd39f,#b98f4f);-webkit-background-clip:text;background-clip:text;color:transparent;}
+
+  /* Big tilted text band under the hero */
+  .band{position:relative;padding:clamp(48px,7vw,96px) 0;overflow:hidden;}
+  .band-row{display:flex;overflow:hidden;white-space:nowrap;width:110%;margin-left:-5%;}
+  .band-a{position:relative;z-index:2;transform:rotate(-3deg);background:linear-gradient(90deg,#d8bb84,#c09a5c);color:#14100a;box-shadow:0 20px 50px -20px rgba(201,169,110,.55);}
+  .band-b{transform:rotate(2deg);margin-top:-10px;background:var(--bg-alt);border-block:1px solid var(--glass-line);color:var(--ink);}
+  .band-track{display:flex;align-items:center;flex-shrink:0;padding:14px 0;animation:bandMove 46s linear infinite;}
+  .band-b .band-track{animation-direction:reverse;animation-duration:58s;}
+  .band-track>*{margin-right:clamp(18px,2.4vw,32px);}
+  .band-track span{font-family:'Space Grotesk';font-weight:700;font-size:clamp(26px,4.4vw,56px);line-height:1.1;letter-spacing:-.03em;text-transform:uppercase;}
+  .band-track span.o{color:transparent;-webkit-text-stroke:1.5px currentColor;}
+  .band-b span.o{-webkit-text-stroke-color:var(--gold);}
+  .band-track i{font-style:normal;font-size:clamp(16px,2.2vw,28px);opacity:.7;}
+  .band-b i{color:var(--gold);}
+  @keyframes bandMove{to{transform:translateX(-50%);}}
+  .band + section{padding-top:clamp(36px,5vw,64px);}
+
+  /* Why: bento grid */
+  .bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(160px,auto);gap:16px;
+    grid-template-areas:"big big hon s1" "big big hon s2" "v1 v2 v3 s3" "cta cta cta cta";}
+  .bt{position:relative;overflow:hidden;display:flex;flex-direction:column;min-width:0;padding:28px;border-radius:var(--radius);color:inherit;text-decoration:none;
+    background:var(--glass),var(--bg-alt);border:1px solid var(--glass-line);box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+    transition:opacity .9s var(--ease),filter .9s var(--ease),transform .5s var(--ease),border-color .3s;}
+  .bt:hover{border-color:var(--glass-line-hi);transform:translateY(-4px);}
+  .bt-big{grid-area:big;min-height:440px;background:radial-gradient(110% 80% at 0% 0%,rgba(201,169,110,.22),transparent 60%),var(--bg-alt);}
+  .bt-hon{grid-area:hon;} .bt-s1{grid-area:s1;} .bt-s2{grid-area:s2;} .bt-s3{grid-area:s3;}
+  .bt-v1{grid-area:v1;} .bt-v2{grid-area:v2;} .bt-v3{grid-area:v3;} .bt-cta{grid-area:cta;}
+  .bt-tag{font-family:'Space Grotesk';font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);}
+  .bt-num{font-family:'Space Grotesk';font-weight:700;line-height:1;letter-spacing:-.045em;}
+  .bt .stat-num{font-size:inherit;letter-spacing:inherit;}
+  .bt-label{margin-top:10px;color:var(--ink-dim);font-size:14px;line-height:1.4;}
+  .bt-s .bt-num{margin-top:auto;font-size:clamp(44px,4.8vw,64px);color:var(--gold);}
+  .bt-big .bt-num{margin-top:18px;font-size:clamp(88px,11vw,156px);background:linear-gradient(180deg,#f6e3ba,#b98f4f);-webkit-background-clip:text;background-clip:text;}
+  .bt-big .stat-num{color:transparent;}
+  .bt-big .bt-label{font-size:17px;color:var(--ink);}
+  .bt-big>*:not(.bt-fan){position:relative;z-index:1;}
+  .bt-fan{position:absolute;right:-5%;bottom:-7%;width:56%;aspect-ratio:16/11;}
+  .bt-fan img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;border-radius:12px;border:1px solid rgba(255,255,255,.12);
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.9);transition:transform .7s var(--ease);}
+  .bt-fan img:nth-child(1){transform:rotate(-14deg) translate(-20%,-4%);}
+  .bt-fan img:nth-child(2){transform:rotate(-6deg) translate(-9%,-1%);}
+  .bt-fan img:nth-child(3){transform:rotate(3deg);}
+  .bt-big:hover .bt-fan img:nth-child(1){transform:rotate(-20deg) translate(-38%,-12%);}
+  .bt-big:hover .bt-fan img:nth-child(2){transform:rotate(-9deg) translate(-18%,-6%);}
+  .bt-big:hover .bt-fan img:nth-child(3){transform:rotate(4deg) translate(3%,-4%);}
+  .bt-go{margin-top:auto;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--gold);}
+  .bt-go svg,.bt-cta-btn svg{width:16px;height:16px;transition:transform .4s var(--ease);}
+  .bt-big:hover .bt-go svg,.bt-cta:hover .bt-cta-btn svg{transform:rotate(45deg);}
+  .bt-hon{background:linear-gradient(160deg,#e6cb94,#b88d4e);border-color:transparent;color:#16120a;}
+  .bt-hon:hover{border-color:transparent;}
+  .bt-medal svg{width:58px;height:58px;}
+  .bt-hon-t{margin-top:auto;font-family:'Space Grotesk';font-weight:700;font-size:clamp(28px,3vw,38px);line-height:1;letter-spacing:-.035em;}
+  .bt-hon p{margin:8px 0 0;font-size:14.5px;color:rgba(22,18,10,.72);}
+  .bt-pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;}
+  .bt-pills span{font-size:12px;padding:5px 11px;border-radius:999px;border:1px solid var(--glass-line);background:rgba(255,255,255,.03);color:var(--ink-dim);}
+  .bt-hon .bt-pills span{border-color:rgba(22,18,10,.22);background:rgba(22,18,10,.06);color:#16120a;}
+  .bt-s3 .bt-pills{margin-top:12px;}
+  .bt-ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--gold-soft);color:var(--gold);}
+  .bt-ico svg{width:22px;height:22px;}
+  .bt-v h3{margin:22px 0 8px;font-size:17px;color:var(--ink);}
+  .bt-v p{margin:0;font-size:14px;color:var(--ink-dim);}
+  .bt-cta{flex-direction:row;flex-wrap:wrap;align-items:center;gap:18px 28px;padding:30px 34px;
+    background:radial-gradient(60% 140% at 0% 50%,rgba(74,222,128,.1),transparent 70%),var(--bg-alt);}
+  .bt-live{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:var(--green-soft);color:var(--green);font-size:13px;font-weight:500;}
+  .bt-live .dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:btPulse 2s infinite;}
+  @keyframes btPulse{0%{box-shadow:0 0 0 0 rgba(74,222,128,.6);}100%{box-shadow:0 0 0 9px rgba(74,222,128,0);}}
+  .bt-cta-t{flex:1;min-width:240px;font-family:'Space Grotesk';font-weight:600;font-size:clamp(20px,2.4vw,28px);line-height:1.2;letter-spacing:-.025em;}
+  .bt-cta-t em{font-family:'Inter';font-style:italic;font-weight:300;color:var(--gold);}
+  .bt-cta-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:999px;font-weight:600;font-size:14.5px;color:#16120a;
+    background:linear-gradient(180deg,#d8bb84,#c09a5c);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 10px 30px -12px rgba(201,169,110,.6);}
+  @media(max-width:1024px){
+    .bento{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"big big" "hon s1" "hon s2" "v1 v2" "v3 s3" "cta cta";}
+    .bt-big{min-height:400px;}
+  }
+  @media(max-width:640px){
+    .bento{gap:12px;grid-template-areas:"big big" "hon hon" "s1 s2" "v1 v1" "v2 v2" "v3 v3" "s3 s3" "cta cta";grid-auto-rows:auto;}
+    .bt{padding:22px;}
+    .bt-big{min-height:380px;}
+    .bt-fan{width:72%;}
+    .bt-hon-t{margin-top:18px;}
+    .bt-s .bt-num{margin-top:0;}
+    .bt-cta{padding:24px 22px;}
+  }
+
+  /* Services: editorial numbered list, preview image follows the cursor */
+  .svc-list{position:relative;border-top:1px solid var(--line-strong);}
+  .svc-row{position:relative;isolation:isolate;display:grid;grid-template-columns:64px minmax(0,1.15fr) minmax(0,1fr) 56px;align-items:center;gap:28px;
+    padding:30px 12px;border-bottom:1px solid var(--line-strong);color:inherit;text-decoration:none;}
+  .svc-row::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(201,169,110,.16),rgba(201,169,110,.03));
+    transform:scaleY(0);transform-origin:bottom;transition:transform .5s var(--ease);}
+  .svc-row:hover::before,.svc-row:focus-visible::before{transform:scaleY(1);}
+  .svc-num{font-family:'Space Grotesk';font-size:14px;color:var(--ink-faint);transition:color .3s;}
+  .svc-title{font-family:'Space Grotesk';font-weight:600;font-size:clamp(22px,2.7vw,36px);line-height:1.1;letter-spacing:-.03em;color:var(--ink);transition:transform .5s var(--ease);}
+  .svc-desc{font-size:14.5px;line-height:1.6;color:var(--ink-dim);}
+  .svc-arrow{justify-self:end;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line-strong);color:var(--ink);
+    transition:background .3s,color .3s,border-color .3s,transform .5s var(--ease);}
+  .svc-arrow svg{width:20px;height:20px;}
+  .svc-row:hover .svc-num{color:var(--gold);}
+  .svc-row:hover .svc-title{transform:translateX(12px);}
+  .svc-row:hover .svc-arrow{background:var(--gold);border-color:var(--gold);color:#16120a;transform:rotate(45deg);}
+  .svc-peek{position:fixed;left:0;top:0;z-index:60;width:280px;aspect-ratio:4/3;border-radius:14px;overflow:hidden;pointer-events:none;opacity:0;
+    border:1px solid rgba(255,255,255,.14);box-shadow:0 30px 70px -20px rgba(0,0,0,.9);
+    transform:translate(28px,-50%) scale(.6) rotate(-6deg);transition:opacity .3s,transform .45s var(--ease);}
+  .svc-peek.on{opacity:1;transform:translate(28px,-50%) scale(1) rotate(-3deg);}
+  .svc-peek.flip{transform:translate(calc(-100% - 28px),-50%) scale(.6) rotate(6deg);}
+  .svc-peek.flip.on{transform:translate(calc(-100% - 28px),-50%) scale(1) rotate(3deg);}
+  .svc-peek img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;}
+  @media(max-width:820px){
+    .svc-row{grid-template-columns:40px minmax(0,1fr) 44px;align-items:start;gap:10px 14px;padding:24px 4px;}
+    .svc-num{padding-top:6px;}
+    .svc-desc{grid-column:2;grid-row:2;}
+    .svc-arrow{grid-column:3;grid-row:1;width:44px;height:44px;}
+    .svc-row:hover .svc-title{transform:none;}
+  }
+  @media (prefers-reduced-motion:reduce){.band-track{animation:none;}.svc-peek{display:none;}}
+
   @media (prefers-reduced-motion: reduce){
     .bg-cursor,.btn-gold::after,.nav-cta::after{display:none;}
     .reveal,.work-grid .proj-card.pc-wait{filter:none;opacity:1;transform:none;}
@@ -1436,6 +1556,11 @@
   </div>
 </section>
 
+<div class="band" aria-hidden="true">
+  <div class="band-row band-a"><div class="band-track"><span>GoHighLevel</span><i>&#10022;</i><span class="o">Automation</span><i>&#10022;</i><span>Websites</span><i>&#10022;</i><span class="o">Funnels</span><i>&#10022;</i><span>CRM</span><i>&#10022;</i><span class="o">API Integrations</span><i>&#10022;</i><span>Content</span><i>&#10022;</i><span class="o">Ads</span><i>&#10022;</i><span>GoHighLevel</span><i>&#10022;</i><span class="o">Automation</span><i>&#10022;</i><span>Websites</span><i>&#10022;</i><span class="o">Funnels</span><i>&#10022;</i><span>CRM</span><i>&#10022;</i><span class="o">API Integrations</span><i>&#10022;</i><span>Content</span><i>&#10022;</i><span class="o">Ads</span><i>&#10022;</i></div></div>
+  <div class="band-row band-b"><div class="band-track"><span class="o">GoHighLevel</span><i>&#10022;</i><span>Automation</span><i>&#10022;</i><span class="o">Websites</span><i>&#10022;</i><span>Funnels</span><i>&#10022;</i><span class="o">CRM</span><i>&#10022;</i><span>API Integrations</span><i>&#10022;</i><span class="o">Content</span><i>&#10022;</i><span>Ads</span><i>&#10022;</i><span class="o">GoHighLevel</span><i>&#10022;</i><span>Automation</span><i>&#10022;</i><span class="o">Websites</span><i>&#10022;</i><span>Funnels</span><i>&#10022;</i><span class="o">CRM</span><i>&#10022;</i><span>API Integrations</span><i>&#10022;</i><span class="o">Content</span><i>&#10022;</i><span>Ads</span><i>&#10022;</i></div></div>
+</div>
+
 <!-- ABOUT -->
 <section id="about">
   <div class="wrap about-grid">
@@ -1471,7 +1596,7 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="kicker">My Journey</div>
-      <h2>From Information Systems to Full-Stack VA</h2>
+      <h2>From Information Systems to <em>Full-Stack VA</em></h2>
       <p>Every stop on this path built a skill I use for clients today. It's why I think in systems, not just tasks.</p>
     </div>
     <div class="timeline" id="timeline">
@@ -1524,28 +1649,34 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="kicker">Proof, Not Promises</div>
-      <h2>Why Businesses Choose Me</h2>
+      <h2>Why Businesses <em>Choose Me</em></h2>
       <p>A snapshot of my track record, and the value I bring that a typical task-based VA can't.</p>
     </div>
-    <div class="proof-stats reveal">
-      <div class="proof-stat"><div class="stat-num" data-count="40" data-suffix="+">0</div><div class="stat-label">Funnels &amp; Sites Delivered</div></div>
-      <div class="proof-stat"><div class="stat-num" data-count="10" data-suffix="+">0</div><div class="stat-label">Long-Term Clients</div></div>
-      <div class="proof-stat"><div class="stat-num" data-count="4" data-suffix="+">0</div><div class="stat-label">Years in GHL &amp; Automation</div></div>
-      <div class="proof-stat"><div class="stat-num" data-count="3" data-suffix="">0</div><div class="stat-label">Automation Platforms Mastered</div></div>
-    </div>
-    <div class="value-grid">
-      <div class="value-card">
-        <h3>Full-Stack, Not Task-Based</h3>
-        <p>A BS in Information Systems plus hands-on GoHighLevel and web development means I can design, build, and maintain systems, not just check off tasks on a list.</p>
+    <div class="bento">
+      <a class="bt bt-big reveal" href="#proj-funnel">
+        <span class="bt-tag">Track record</span>
+        <div class="bt-num"><span class="stat-num" data-count="40" data-suffix="+">0</span></div>
+        <div class="bt-label">Funnels &amp; Sites Delivered</div>
+        <div class="bt-fan" aria-hidden="true"><img src="assets/projects/burn-bright-lead-funnel.jpg" alt="" loading="lazy"><img src="assets/projects/buc-partnership-funnel.jpg" alt="" loading="lazy"><img src="assets/projects/buildup-community.jpg" alt="" loading="lazy"></div>
+        <span class="bt-go">See the work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </a>
+      <div class="bt bt-hon reveal">
+        <span class="bt-medal" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.2 13.7 7 22l5-3 5 3-1.2-8.3"/></svg></span>
+        <div class="bt-hon-t">Cum Laude</div>
+        <p>BS in Information Systems</p>
+        <div class="bt-pills"><span>Civil Service Eligible</span><span>Systems thinker</span></div>
       </div>
-      <div class="value-card">
-        <h3>Automation-First Mindset</h3>
-        <p>Every recurring task is a candidate for automation. I connect GoHighLevel to your entire stack via Make, Zapier, and Pabbly Connect so leads, data, and follow-ups move without manual work.</p>
-      </div>
-      <div class="value-card">
-        <h3>I See the Whole Business</h3>
-        <p>My systems background means I map how leads, sales, fulfillment, and reporting connect, so the automation I build actually fits how your business runs, not just one isolated task.</p>
-      </div>
+      <div class="bt bt-s bt-s1 reveal"><div class="bt-num"><span class="stat-num" data-count="10" data-suffix="+">0</span></div><div class="bt-label">Long-Term Clients</div></div>
+      <div class="bt bt-s bt-s2 reveal"><div class="bt-num"><span class="stat-num" data-count="4" data-suffix="+">0</span></div><div class="bt-label">Years in GHL &amp; Automation</div></div>
+      <div class="bt bt-v bt-v1 reveal"><span class="bt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h7"/><path d="m15 16 2 2 4-4"/></svg></span><h3>Full-Stack, Not Task-Based</h3><p>A BS in Information Systems plus hands-on GoHighLevel and web development means I can design, build, and maintain systems, not just check off tasks on a list.</p></div>
+      <div class="bt bt-v bt-v2 reveal"><span class="bt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span><h3>Automation-First Mindset</h3><p>Every recurring task is a candidate for automation. I connect GoHighLevel to your entire stack via Make, Zapier, and Pabbly Connect so leads, data, and follow-ups move without manual work.</p></div>
+      <div class="bt bt-v bt-v3 reveal"><span class="bt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/></svg></span><h3>I See the Whole Business</h3><p>My systems background means I map how leads, sales, fulfillment, and reporting connect, so the automation I build actually fits how your business runs, not just one isolated task.</p></div>
+      <div class="bt bt-s bt-s3 reveal"><div class="bt-num"><span class="stat-num" data-count="3" data-suffix="">0</span></div><div class="bt-label">Automation Platforms Mastered</div><div class="bt-pills"><span>Make</span><span>Zapier</span><span>Pabbly</span></div></div>
+      <a class="bt bt-cta reveal" href="https://wa.me/639272303838?text=Hello%2C%20I%20would%20like%20to%20connect%20with%20you!" target="_blank" rel="noopener">
+        <span class="bt-live"><span class="dot"></span>Open to new projects</span>
+        <span class="bt-cta-t">Got a process eating your week? <em>Let's automate it.</em></span>
+        <span class="bt-cta-btn">Chat on WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </a>
     </div>
   </div>
 </section>
@@ -1555,18 +1686,19 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="kicker">My Services</div>
-      <h2>What I Can Do For You</h2>
+      <h2>What I Can <em>Do For You</em></h2>
       <p>A comprehensive range of digital marketing, development, and automation services designed to help businesses grow and run themselves.</p>
     </div>
-    <div class="services-grid">
-      <div class="service"><div class="service-top"><h3>GoHighLevel Setup &amp; Automation</h3><span class="service-index">01</span></div><p>Building high-converting funnels and automating workflows. I set up and manage GoHighLevel systems that streamline your sales and marketing processes end-to-end.</p></div>
-      <div class="service"><div class="service-top"><h3>CRM Management &amp; Lead Nurturing</h3><span class="service-index">02</span></div><p>Setting up and optimizing CRM systems to track leads, manage client relationships, and automate follow-ups to increase sales opportunities and retention.</p></div>
-      <div class="service"><div class="service-top"><h3>Website &amp; Funnel Design</h3><span class="service-index">03</span></div><p>Custom, responsive websites and high-converting funnels that drive conversions and enhance user experience, ensuring your brand stands out from the competition.</p></div>
-      <div class="service"><div class="service-top"><h3>Content Creation &amp; Scheduling</h3><span class="service-index">04</span></div><p>Designing engaging graphics using Canva and creating videos using CapCut for social media, alongside scheduling posts to maintain a consistent and impactful online presence.</p></div>
-      <div class="service"><div class="service-top"><h3>Facebook, Google &amp; LinkedIn Ads</h3><span class="service-index">05</span></div><p>Designing and managing targeted ads to maximize reach and conversions. I optimize campaigns across all major platforms for the best possible ROI for your budget.</p></div>
-      <div class="service"><div class="service-top"><h3>SEO for Websites</h3><span class="service-index">06</span></div><p>Improving your website's search engine ranking through on-page SEO, keyword optimization, and content strategies designed to drive sustained organic traffic growth.</p></div>
-      <div class="service"><div class="service-top"><h3>API Integrations &amp; Custom Automation</h3><span class="service-index">07</span></div><p>Connecting GoHighLevel and third-party platforms via REST APIs, webhooks, and custom code so your data flows automatically between every tool in your stack.</p></div>
-      <div class="service"><div class="service-top"><h3>Workflow Automation (Make, Zapier, Pabbly)</h3><span class="service-index">08</span></div><p>Designing multi-step automations that trigger across your CRM, forms, email, and apps, eliminating manual data entry and reducing errors so nothing falls through the cracks.</p></div>
+    <div class="svc-list">
+      <a class="svc-row reveal" href="#proj-funnel" data-img="assets/projects/burn-bright-lead-funnel.jpg"><span class="svc-num">01</span><span class="svc-title">GoHighLevel Setup &amp; Automation</span><span class="svc-desc">Building high-converting funnels and automating workflows. I set up and manage GoHighLevel systems that streamline your sales and marketing processes end-to-end.</span><span class="svc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+      <a class="svc-row reveal" href="#proj-automation" data-img="assets/hero/sample-automation.jpg"><span class="svc-num">02</span><span class="svc-title">CRM Management &amp; Lead Nurturing</span><span class="svc-desc">Setting up and optimizing CRM systems to track leads, manage client relationships, and automate follow-ups to increase sales opportunities and retention.</span><span class="svc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+      <a class="svc-row reveal" href="#proj-funnel" data-img="assets/projects/buildup-community.jpg"><span class="svc-num">03</span><span class="svc-title">Website &amp; Funnel Design</span><span class="svc-desc">Custom, responsive websites and high-converting funnels that drive conversions and enhance user experience, ensuring your brand stands out from the competition.</span><span class="svc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+      <a class="svc-row reveal" href="#proj-graphics" data-img="assets/graphics/tourmaline-band-carousel-1.jpg"><span class="svc-num">04</span><span class="svc-title">Content Creation &amp; Scheduling</span><span class="svc-desc">Designing engaging graphics using Canva and creating videos using CapCut for social media, alongside scheduling posts to maintain a consistent and impactful online presence.</span><span class="svc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+      <a class="svc-row reveal" href="#proj-graphics" data-img="assets/graphics/7figure-builder-100k-ad.jpg"><span class="svc-num">05</span><span class="svc-title">Facebook, Google &amp; LinkedIn Ads</span><span class="svc-desc">Designing and managing targeted ads to maximize reach and conversions. I optimize campaigns across all major platforms for the best possible ROI for your budget.</span><span class="svc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+      <a class="svc-row reveal" href="#proj-funnel" data-img="assets/projects/ndta-platform.jpg"><span class="svc-num">06</span><span class="svc-title">SEO for Websites</span><span class="svc-desc">Improving your website's search engine ranking through on-page SEO, keyword optimization, and content strategies designed to drive sustained organic traffic growth.</span><span class="svc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+      <a class="svc-row reveal" href="#proj-automation" data-img="assets/projects/n8n-carousel-reels-automation.jpg"><span class="svc-num">07</span><span class="svc-title">API Integrations &amp; Custom Automation</span><span class="svc-desc">Connecting GoHighLevel and third-party platforms via REST APIs, webhooks, and custom code so your data flows automatically between every tool in your stack.</span><span class="svc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+      <a class="svc-row reveal" href="#proj-automation" data-img="assets/hero/sample-automation.jpg"><span class="svc-num">08</span><span class="svc-title">Workflow Automation (Make, Zapier, Pabbly)</span><span class="svc-desc">Designing multi-step automations that trigger across your CRM, forms, email, and apps, eliminating manual data entry and reducing errors so nothing falls through the cracks.</span><span class="svc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+      <div class="svc-peek" aria-hidden="true"><img alt=""></div>
     </div>
   </div>
 </section>
@@ -1576,7 +1708,7 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="kicker">Digital Tools</div>
-      <h2>My Tech Stack</h2>
+      <h2>My Tech <em>Stack</em></h2>
       <p>I leverage cutting-edge tools to simplify processes, enhance campaigns, and achieve outstanding results for your business.</p>
     </div>
   </div>
@@ -1667,7 +1799,7 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="kicker">Portfolio</div>
-      <h2>Work Across Web, Design, Video &amp; Automation</h2>
+      <h2>Work Across Web, Design, Video &amp; <em>Automation</em></h2>
       <p>Four categories, four different ways to browse them: high-converting builds, brand visuals, reels, and the automations running quietly behind them.</p>
     </div>
 
@@ -1985,7 +2117,7 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="kicker">FAQ</div>
-      <h2>Common Questions</h2>
+      <h2>Common <em>Questions</em></h2>
       <p>Everything you need to know before we start working together.</p>
     </div>
     <div class="faq-list">
@@ -2038,7 +2170,7 @@
   <div class="wrap">
     <div class="contact-panel reveal">
       <div class="kicker">Get In Touch</div>
-      <h2>Let's Build Something Great Together.</h2>
+      <h2>Let's Build Something <em>Great Together.</em></h2>
       <p>Ready to transform your digital presence? Whether you need a full marketing strategy, a GoHighLevel build, or an automation that connects your entire stack, I'm here to help you grow, from the Philippines to wherever your business operates.</p>
       <div class="contact-cta-row">
         <a href="https://wa.me/639272303838?text=Hello%2C%20I%20would%20like%20to%20connect%20with%20you!" class="btn btn-gold" target="_blank" rel="noopener"><svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Chat on WhatsApp</a>
@@ -2210,6 +2342,29 @@
     });
   },{threshold:.6});
   counters.forEach(c=>cIo.observe(c));
+
+  // ---------- Services: preview image follows the cursor ----------
+  const svcList = document.querySelector('.svc-list'), peek = document.querySelector('.svc-peek');
+  if(svcList && peek && matchMedia('(hover:hover) and (pointer:fine)').matches){
+    document.body.appendChild(peek);
+    const peekImg = peek.querySelector('img');
+    let px = 0, py = 0, tx = 0, ty = 0, peekRaf = 0;
+    const follow = ()=>{
+      px += (tx-px)*.18; py += (ty-py)*.18;
+      peek.style.left = px + 'px'; peek.style.top = py + 'px';
+      peek.classList.toggle('flip', px > innerWidth - 340);
+      peekRaf = (Math.abs(tx-px) + Math.abs(ty-py) > .5) ? requestAnimationFrame(follow) : 0;
+    };
+    svcList.querySelectorAll('.svc-row').forEach(row=>{
+      row.addEventListener('mouseenter', e=>{
+        peekImg.src = row.dataset.img;
+        if(!peek.classList.contains('on')){ px = tx = e.clientX; py = ty = e.clientY; follow(); }
+        peek.classList.add('on');
+      });
+    });
+    svcList.addEventListener('mousemove', e=>{ tx = e.clientX; ty = e.clientY; if(!peekRaf) peekRaf = requestAnimationFrame(follow); });
+    svcList.addEventListener('mouseleave', ()=> peek.classList.remove('on'));
+  }
 
   // ---------- Tools marquee: build chips from tech list + duplicate ----------
   const tools = [
