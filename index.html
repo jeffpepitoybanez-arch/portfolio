@@ -1187,29 +1187,21 @@
   }
 
   /* ---------- Hero intro sequence (dot drops, bar falls, YBANEZ builds, flips to PORTFOLIO) ---------- */
-  html.intro .site-nav,html.intro .hx-bar,html.intro .hx-word,html.intro .hx-spot,html.intro .hx-3d,html.intro .scroll-progress,
+  html.intro .site-nav,html.intro .hx-bar,html.intro .hx-word,html.intro .hx-spot,html.intro .scroll-progress,
   html.intro-move .hx-word{opacity:0 !important;pointer-events:none;}
-  html.intro .hx-bar,html.intro .hx-spot,html.intro .hx-3d{animation:none;}
+  html.intro .hx-bar,html.intro .hx-spot{animation:none;}
   html.intro .hx-word span,html.intro-played .hx-word span{animation:none;transform:none;}
   html.hx-reveal .site-nav{transition:opacity .9s var(--ease),background .35s var(--ease),padding .35s var(--ease),border-color .35s var(--ease);}
   html.hx-reveal .hx-bar{animation-delay:.15s;} html.hx-reveal .hx-spot,html.hx-reveal .hx-3d{animation-delay:0s;}
   .hxi{position:absolute;inset:0;z-index:6;pointer-events:none;}
-  .hxi-scene{position:absolute;inset:0;perspective:1100px;perspective-origin:50% 46%;}
-  .hxi-word{position:absolute;left:50%;top:46%;translate:-50% -50%;display:inline-flex;transform-style:preserve-3d;
+  .hxi-dots{position:absolute;inset:0;width:100%;height:100%;display:block;}
+  .hxi-word{position:absolute;left:50%;top:46%;translate:-50% -50%;display:inline-flex;opacity:0;
     font-family:'Inter',system-ui,sans-serif;font-weight:900;font-size:clamp(64px,14.6vw,232px);line-height:.82;letter-spacing:-.055em;white-space:nowrap;padding-bottom:.04em;}
-  /* each letter is a real 3D block: a stack of layers behind the bright front face */
-  .hxi-word .l3{position:relative;display:inline-block;transform-style:preserve-3d;transform-origin:50% 55%;}
-  .hxi-word .l3 b,.hxi-word .l3 i{display:block;font-style:normal;font-weight:inherit;}
-  .hxi-word .l3 i{position:absolute;left:0;top:0;transition:opacity .4s ease;}
-  .hxi-word.flat .l3 i{opacity:0;}
-  .hxi-word .l3 b{position:relative;-webkit-background-clip:text;background-clip:text;color:transparent;
+  .hxi-word span{display:inline-block;-webkit-background-clip:text;background-clip:text;color:transparent;
     background:linear-gradient(105deg,transparent 42%,rgba(255,238,196,.95) 50%,transparent 58%) 200% 0/250% 100% no-repeat,
       linear-gradient(180deg,#fbfaf6 18%,#d9d4c8 55%,#8f8676 100%);-webkit-background-clip:text;background-clip:text;}
-  .hxi-word.sweep .l3 b{animation:hxiSweep 1.2s cubic-bezier(.4,0,.2,1) forwards;}
+  .hxi-word.sweep span{animation:hxiSweep 1.1s cubic-bezier(.4,0,.2,1) forwards;}
   @keyframes hxiSweep{from{background-position:200% 0,0 0;}to{background-position:-110% 0,0 0;}}
-  .hxi-ring{position:absolute;left:50%;top:46%;width:min(74vw,780px);aspect-ratio:1;margin:calc(min(74vw,780px) / -2) 0 0 calc(min(74vw,780px) / -2);border-radius:50%;opacity:0;
-    border:2px solid rgba(214,182,122,.85);box-shadow:0 0 50px rgba(201,169,110,.45),inset 0 0 50px rgba(201,169,110,.3);}
-  .hxi-ring.r2{border-color:rgba(245,228,190,.5);border-width:1px;}
   .hxi-skip{position:absolute;left:50%;bottom:28px;translate:-50% 0;pointer-events:auto;padding:9px 18px;border-radius:999px;
     border:1px solid rgba(245,243,238,.2);background:rgba(10,12,14,.5);backdrop-filter:blur(8px);color:var(--ink-dim);font-size:13px;letter-spacing:.04em;
     opacity:0;animation:hxFade .6s ease 1.2s forwards;transition:color .2s,border-color .2s;}
@@ -3284,9 +3276,9 @@
     const finalWord = hx.querySelector('.hx-word');
     const lay = document.createElement('div');
     lay.className = 'hxi'; lay.setAttribute('aria-hidden','true');
-    lay.innerHTML = '<div class="hxi-scene"><span class="hxi-ring"></span><span class="hxi-ring r2"></span><div class="hxi-word"></div></div><button class="hxi-skip" type="button" tabindex="-1">Skip intro</button>';
+    lay.innerHTML = '<canvas class="hxi-dots"></canvas><div class="hxi-word"></div><button class="hxi-skip" type="button" tabindex="-1">Skip intro</button>';
     hx.appendChild(lay);
-    const wordEl = lay.querySelector('.hxi-word'), rings = lay.querySelectorAll('.hxi-ring');
+    const wordEl = lay.querySelector('.hxi-word'), dots = lay.querySelector('.hxi-dots'), dctx = dots.getContext('2d');
     let skipped = false, done = false;
     const sleep = ms => new Promise(r => setTimeout(r, ms));
     const anim = (el, kf, o) => skipped ? Promise.resolve() : el.animate(kf, Object.assign({fill:'forwards'}, o)).finished.catch(()=>{});
@@ -3300,42 +3292,55 @@
     const skip = ()=>{ skipped = true; finish(); };
     lay.querySelector('.hxi-skip').addEventListener('click', skip);
     ['wheel','touchmove','keydown'].forEach(ev => addEventListener(ev, skip, {once:true, passive:true}));
-    const DEPTH = 20;
-    const block = (ch, i) => { // a letter with real thickness: layers stepped back in Z, darkening toward the back
-      const s = document.createElement('span'); s.className = 'l3'; let h = '';
-      for(let k = DEPTH; k >= 1; k--){
-        const t = k / DEPTH, c = 'rgb(' + Math.round(176 - 120 * t) + ',' + Math.round(138 - 100 * t) + ',' + Math.round(84 - 64 * t) + ')';
-        h += '<i style="transform:translateZ(' + (-k * .013).toFixed(3) + 'em);color:' + c + '">' + ch + '</i>';
-      }
-      s.innerHTML = h + '<b style="animation-delay:' + (i * 45) + 'ms">' + ch + '</b>';
-      return s;
-    };
-    const smooth = 'cubic-bezier(.22,1,.36,1)';
     (async ()=>{
-      await sleep(450); if(skipped) return;
-      // 1) a gold portal ring opens in 3D space
-      anim(rings[0], [{transform:'rotateX(74deg) rotateZ(0) scale(.05)', opacity:0},{opacity:1, offset:.25},{transform:'rotateX(74deg) rotateZ(200deg) scale(1)', opacity:.9, offset:.7},{transform:'rotateX(74deg) rotateZ(260deg) scale(1.5)', opacity:0}], {duration:2200, easing:smooth});
-      anim(rings[1], [{transform:'rotateY(70deg) rotateX(20deg) scale(.05)', opacity:0},{opacity:.8, offset:.3},{transform:'rotateY(70deg) rotateX(20deg) rotateZ(-220deg) scale(.85)', opacity:.6, offset:.7},{transform:'rotateY(70deg) rotateX(20deg) rotateZ(-280deg) scale(1.3)', opacity:0}], {duration:2200, delay:120, easing:smooth});
-      await sleep(380); if(skipped) return;
-      // 2) PORTFOLIO flies out of the depth, block by block, seen from an angle
-      wordEl.style.transform = 'rotateX(16deg) rotateY(-32deg)';
-      const T = 'PORTFOLIO';
-      for(let i = 0; i < T.length; i++){
-        if(skipped) return;
-        const s = block(T[i], i); wordEl.appendChild(s);
-        const rx = Math.round(Math.random() * 300 - 150), ry = Math.round(Math.random() * 200 - 100);
-        const ax = Math.round(Math.random() * 240 - 120), ay = Math.round(Math.random() * 240 - 120);
-        anim(s, [{transform:`translate3d(${(i - 4) * 90 + rx}px,${ry}px,-1900px) rotateX(${ax}deg) rotateY(${ay}deg)`},{transform:'none'}], {duration:1150, easing:smooth});
-        await sleep(80);
-      }
-      await sleep(650); if(skipped) return;
-      // 3) the camera swings round the word; a beam of light sweeps across it
-      setTimeout(()=>{ if(!skipped) wordEl.classList.add('sweep'); }, 650);
-      await anim(wordEl, [{transform:'rotateX(16deg) rotateY(-32deg)'},{transform:'rotateX(-7deg) rotateY(24deg)', offset:.55},{transform:'none'}], {duration:1800, easing:'cubic-bezier(.45,0,.2,1)'});
-      if(skipped) return;
-      // 4) the depth melts away so it matches the hero word
-      wordEl.classList.add('flat');
-      await sleep(450); if(skipped) return;
+      // lay the real word out (hidden) so the particles land exactly where its letters are
+      wordEl.innerHTML = [...'PORTFOLIO'].map(c=>'<span>' + c + '</span>').join('');
+      try{ await document.fonts.ready; }catch(e){}
+      await sleep(250); if(skipped) return;
+      const W = lay.clientWidth, H = lay.clientHeight, dpr = Math.min(devicePixelRatio || 1, 2), box = lay.getBoundingClientRect();
+      dots.width = Math.round(W * dpr); dots.height = Math.round(H * dpr); dctx.setTransform(dpr,0,0,dpr,0,0);
+      // 1) sample the letters into target points
+      const fs = parseFloat(getComputedStyle(wordEl).fontSize), off = document.createElement('canvas'), octx = off.getContext('2d');
+      off.width = W; off.height = H;
+      octx.font = '900 ' + fs + 'px Inter, system-ui, sans-serif'; octx.textBaseline = 'middle'; octx.fillStyle = '#fff';
+      wordEl.querySelectorAll('span').forEach(s=>{ const r = s.getBoundingClientRect(); octx.fillText(s.textContent, r.left - box.left, r.top - box.top + r.height * .5); });
+      const img = octx.getImageData(0, 0, W, H).data, gap = Math.max(3, Math.round(fs / 30)), pts = [];
+      for(let y = 0; y < H; y += gap) for(let x = 0; x < W; x += gap) if(img[(y * W + x) * 4 + 3] > 140) pts.push([x, y]);
+      const MAX = W < 760 ? 900 : 2200;
+      while(pts.length > MAX) pts.splice(Math.floor(Math.random() * pts.length), 1);
+      const xs = pts.map(p=>p[0]), minX = Math.min(...xs), spanX = Math.max(...xs) - minX || 1;
+      // 2) each dot rises out of the gold wave below and arcs into its place in the word
+      const P = pts.map(([tx, ty])=>({
+        sx: Math.random() * W, sy: H * (.62 + Math.random() * .5), tx, ty,
+        d: (tx - minX) / spanX * .7 + Math.random() * .45, lift: 40 + Math.random() * 140,
+        r: Math.max(1, gap * .27) + Math.random() * .8, c: Math.random(), tw: Math.random() * 6.3
+      }));
+      const DUR = 1.45, ease = t=>1 - Math.pow(1 - t, 3);
+      let t0 = performance.now(), fade = 1, running = true;
+      const frame = now=>{
+        if(!running || skipped) return;
+        const t = (now - t0) / 1000;
+        dctx.clearRect(0, 0, W, H);
+        for(const p of P){
+          const k = Math.min(1, Math.max(0, (t - p.d) / DUR)), e = ease(k);
+          const x = p.sx + (p.tx - p.sx) * e, y = p.sy + (p.ty - p.sy) * e - Math.sin(k * Math.PI) * p.lift;
+          const a = (k > 0 ? .45 + .55 * k : .18) * fade * (k >= 1 ? .85 + .15 * Math.sin(t * 6 + p.tw) : 1);
+          const g = Math.round(169 + 66 * p.c), b = Math.round(110 + 110 * p.c);
+          if(k > 0 && k < 1){ dctx.fillStyle = 'rgba(232,206,150,' + (a * .22).toFixed(3) + ')'; dctx.beginPath(); dctx.arc(x, y, p.r * 3, 0, 6.2832); dctx.fill(); }
+          dctx.fillStyle = 'rgba(' + Math.round(201 + 44 * p.c) + ',' + g + ',' + b + ',' + a.toFixed(3) + ')';
+          dctx.beginPath(); dctx.arc(x, y, p.r, 0, 6.2832); dctx.fill();
+        }
+        requestAnimationFrame(frame);
+      };
+      requestAnimationFrame(frame);
+      await sleep((1.15 + DUR) * 1000 + 450); if(skipped) return;
+      // 3) the dots melt into the solid word, and light sweeps across it
+      anim(wordEl, [{opacity:0, filter:'blur(8px)'},{opacity:1, filter:'blur(0)'}], {duration:650, easing:'ease-out'});
+      const fadeStart = performance.now();
+      await new Promise(r=>{ const step = now=>{ fade = Math.max(0, 1 - (now - fadeStart) / 650); if(fade > 0 && !skipped) requestAnimationFrame(step); else r(); }; requestAnimationFrame(step); });
+      running = false; dots.remove(); if(skipped) return;
+      wordEl.classList.add('sweep');
+      await sleep(900); if(skipped) return;
       // 5) glide to the final position while the menu and buttons fade in
       const spans = finalWord.querySelectorAll('span');
       const f0 = spans[0].getBoundingClientRect(), f1 = spans[spans.length-1].getBoundingClientRect();
