@@ -1194,13 +1194,22 @@
   html.hx-reveal .site-nav{transition:opacity .9s var(--ease),background .35s var(--ease),padding .35s var(--ease),border-color .35s var(--ease);}
   html.hx-reveal .hx-bar{animation-delay:.15s;} html.hx-reveal .hx-spot,html.hx-reveal .hx-3d{animation-delay:0s;}
   .hxi{position:absolute;inset:0;z-index:6;pointer-events:none;}
-  .hxi-word{position:absolute;left:50%;top:46%;translate:-50% -50%;display:inline-flex;perspective:900px;
+  .hxi-scene{position:absolute;inset:0;perspective:1100px;perspective-origin:50% 46%;}
+  .hxi-word{position:absolute;left:50%;top:46%;translate:-50% -50%;display:inline-flex;transform-style:preserve-3d;
     font-family:'Inter',system-ui,sans-serif;font-weight:900;font-size:clamp(64px,14.6vw,232px);line-height:.82;letter-spacing:-.055em;white-space:nowrap;padding-bottom:.04em;}
-  .hxi-word span{display:inline-block;background:linear-gradient(180deg,#fbfaf6 18%,#d9d4c8 55%,#8f8676 100%);
-    -webkit-background-clip:text;background-clip:text;color:transparent;transform-origin:50% 60%;backface-visibility:hidden;}
-  .hxi-dot,.hxi-bar{position:absolute;left:50%;opacity:0;background:linear-gradient(180deg,#fbfaf6,#a39a89);box-shadow:0 10px 40px rgba(0,0,0,.45);}
-  .hxi-dot{top:calc(46% + clamp(40px,5vw,70px));width:clamp(30px,3.2vw,46px);aspect-ratio:1;border-radius:50%;margin-left:calc(clamp(30px,3.2vw,46px) / -2);}
-  .hxi-bar{top:calc(46% - clamp(110px,12vw,170px));width:clamp(26px,2.8vw,40px);height:clamp(120px,12.5vw,180px);border-radius:6px;margin-left:calc(clamp(26px,2.8vw,40px) / -2);transform-origin:50% 100%;}
+  /* each letter is a real 3D block: a stack of layers behind the bright front face */
+  .hxi-word .l3{position:relative;display:inline-block;transform-style:preserve-3d;transform-origin:50% 55%;}
+  .hxi-word .l3 b,.hxi-word .l3 i{display:block;font-style:normal;font-weight:inherit;}
+  .hxi-word .l3 i{position:absolute;left:0;top:0;transition:opacity .4s ease;}
+  .hxi-word.flat .l3 i{opacity:0;}
+  .hxi-word .l3 b{position:relative;-webkit-background-clip:text;background-clip:text;color:transparent;
+    background:linear-gradient(105deg,transparent 42%,rgba(255,238,196,.95) 50%,transparent 58%) 200% 0/250% 100% no-repeat,
+      linear-gradient(180deg,#fbfaf6 18%,#d9d4c8 55%,#8f8676 100%);-webkit-background-clip:text;background-clip:text;}
+  .hxi-word.sweep .l3 b{animation:hxiSweep 1.2s cubic-bezier(.4,0,.2,1) forwards;}
+  @keyframes hxiSweep{from{background-position:200% 0,0 0;}to{background-position:-110% 0,0 0;}}
+  .hxi-ring{position:absolute;left:50%;top:46%;width:min(74vw,780px);aspect-ratio:1;margin:calc(min(74vw,780px) / -2) 0 0 calc(min(74vw,780px) / -2);border-radius:50%;opacity:0;
+    border:2px solid rgba(214,182,122,.85);box-shadow:0 0 50px rgba(201,169,110,.45),inset 0 0 50px rgba(201,169,110,.3);}
+  .hxi-ring.r2{border-color:rgba(245,228,190,.5);border-width:1px;}
   .hxi-skip{position:absolute;left:50%;bottom:28px;translate:-50% 0;pointer-events:auto;padding:9px 18px;border-radius:999px;
     border:1px solid rgba(245,243,238,.2);background:rgba(10,12,14,.5);backdrop-filter:blur(8px);color:var(--ink-dim);font-size:13px;letter-spacing:.04em;
     opacity:0;animation:hxFade .6s ease 1.2s forwards;transition:color .2s,border-color .2s;}
@@ -3275,9 +3284,9 @@
     const finalWord = hx.querySelector('.hx-word');
     const lay = document.createElement('div');
     lay.className = 'hxi'; lay.setAttribute('aria-hidden','true');
-    lay.innerHTML = '<div class="hxi-word"></div><span class="hxi-dot"></span><span class="hxi-bar"></span><button class="hxi-skip" type="button" tabindex="-1">Skip intro</button>';
+    lay.innerHTML = '<div class="hxi-scene"><span class="hxi-ring"></span><span class="hxi-ring r2"></span><div class="hxi-word"></div></div><button class="hxi-skip" type="button" tabindex="-1">Skip intro</button>';
     hx.appendChild(lay);
-    const wordEl = lay.querySelector('.hxi-word'), dot = lay.querySelector('.hxi-dot'), bar = lay.querySelector('.hxi-bar');
+    const wordEl = lay.querySelector('.hxi-word'), rings = lay.querySelectorAll('.hxi-ring');
     let skipped = false, done = false;
     const sleep = ms => new Promise(r => setTimeout(r, ms));
     const anim = (el, kf, o) => skipped ? Promise.resolve() : el.animate(kf, Object.assign({fill:'forwards'}, o)).finished.catch(()=>{});
@@ -3291,54 +3300,42 @@
     const skip = ()=>{ skipped = true; finish(); };
     lay.querySelector('.hxi-skip').addEventListener('click', skip);
     ['wheel','touchmove','keydown'].forEach(ev => addEventListener(ev, skip, {once:true, passive:true}));
-    const letter = ch => { const s = document.createElement('span'); s.textContent = ch; return s; };
-    const spring = 'cubic-bezier(.34,1.56,.64,1)', smooth = 'cubic-bezier(.22,1,.36,1)';
-    (async ()=>{
-      await sleep(650); if(skipped) return;
-      // 1) dot drops and bounces
-      dot.style.opacity = 1;
-      await anim(dot, [
-        {transform:'translateY(-70vh)', easing:'cubic-bezier(.55,0,1,.45)'},
-        {transform:'translateY(0)', offset:.55, easing:'cubic-bezier(0,.55,.45,1)'},
-        {transform:'translateY(-48px)', offset:.72, easing:'cubic-bezier(.55,0,1,.45)'},
-        {transform:'translateY(0)', offset:.86, easing:'cubic-bezier(0,.55,.45,1)'},
-        {transform:'translateY(-12px)', offset:.93},
-        {transform:'translateY(0)'}], {duration:1000});
-      if(skipped) return;
-      // 2) bar falls onto it and squashes
-      bar.style.opacity = 1;
-      await anim(bar, [{transform:'translateY(-90vh)'},{transform:'translateY(0)'}], {duration:430, easing:'cubic-bezier(.55,0,1,.45)'});
-      if(skipped) return;
-      await anim(bar, [{transform:'scaleY(1)'},{transform:'scaleY(.8)', offset:.4},{transform:'scaleY(1)'}], {duration:260});
-      if(skipped) return;
-      // 3) they tumble away while the name builds letter by letter
-      anim(dot, [{transform:'none', opacity:1},{transform:'translate(140px,-30px) rotate(240deg) scale(.2)', opacity:0}], {duration:750, easing:smooth});
-      anim(bar, [{transform:'none', opacity:1},{transform:'translate(-150px,-70px) rotate(-280deg) scale(.2)', opacity:0}], {duration:750, easing:smooth});
-      const NAME = 'YBANEZ', slots = [];
-      for(let i = 0; i < NAME.length; i++){
-        if(skipped) return;
-        const s = letter(NAME[i]); wordEl.appendChild(s); slots.push(s);
-        const rot = Math.round(Math.random()*160 - 80);
-        anim(s, [{transform:`translateY(-90%) rotate(${rot}deg) scale(.4)`, opacity:0},{transform:'none', opacity:1}], {duration:720, easing:spring});
-        await sleep(115);
+    const DEPTH = 20;
+    const block = (ch, i) => { // a letter with real thickness: layers stepped back in Z, darkening toward the back
+      const s = document.createElement('span'); s.className = 'l3'; let h = '';
+      for(let k = DEPTH; k >= 1; k--){
+        const t = k / DEPTH, c = 'rgb(' + Math.round(176 - 120 * t) + ',' + Math.round(138 - 100 * t) + ',' + Math.round(84 - 64 * t) + ')';
+        h += '<i style="transform:translateZ(' + (-k * .013).toFixed(3) + 'em);color:' + c + '">' + ch + '</i>';
       }
-      await sleep(950); if(skipped) return;
-      // 4) letters flip one by one into PORTFOLIO
+      s.innerHTML = h + '<b style="animation-delay:' + (i * 45) + 'ms">' + ch + '</b>';
+      return s;
+    };
+    const smooth = 'cubic-bezier(.22,1,.36,1)';
+    (async ()=>{
+      await sleep(450); if(skipped) return;
+      // 1) a gold portal ring opens in 3D space
+      anim(rings[0], [{transform:'rotateX(74deg) rotateZ(0) scale(.05)', opacity:0},{opacity:1, offset:.25},{transform:'rotateX(74deg) rotateZ(200deg) scale(1)', opacity:.9, offset:.7},{transform:'rotateX(74deg) rotateZ(260deg) scale(1.5)', opacity:0}], {duration:2200, easing:smooth});
+      anim(rings[1], [{transform:'rotateY(70deg) rotateX(20deg) scale(.05)', opacity:0},{opacity:.8, offset:.3},{transform:'rotateY(70deg) rotateX(20deg) rotateZ(-220deg) scale(.85)', opacity:.6, offset:.7},{transform:'rotateY(70deg) rotateX(20deg) rotateZ(-280deg) scale(1.3)', opacity:0}], {duration:2200, delay:120, easing:smooth});
+      await sleep(380); if(skipped) return;
+      // 2) PORTFOLIO flies out of the depth, block by block, seen from an angle
+      wordEl.style.transform = 'rotateX(16deg) rotateY(-32deg)';
       const T = 'PORTFOLIO';
       for(let i = 0; i < T.length; i++){
         if(skipped) return;
-        let s = slots[i];
-        if(s){
-          const el = s, ch = T[i];
-          anim(el, [{transform:'rotateX(0)'},{transform:'rotateX(90deg)'}], {duration:170, easing:'ease-in'})
-            .then(()=>{ if(skipped) return; el.textContent = ch; anim(el, [{transform:'rotateX(-90deg)'},{transform:'none'}], {duration:280, easing:'ease-out'}); });
-        } else {
-          s = letter(T[i]); wordEl.appendChild(s); slots.push(s);
-          anim(s, [{transform:'translateY(-80%) scale(.5)', opacity:0},{transform:'none', opacity:1}], {duration:520, easing:spring});
-        }
-        await sleep(125);
+        const s = block(T[i], i); wordEl.appendChild(s);
+        const rx = Math.round(Math.random() * 300 - 150), ry = Math.round(Math.random() * 200 - 100);
+        const ax = Math.round(Math.random() * 240 - 120), ay = Math.round(Math.random() * 240 - 120);
+        anim(s, [{transform:`translate3d(${(i - 4) * 90 + rx}px,${ry}px,-1900px) rotateX(${ax}deg) rotateY(${ay}deg)`},{transform:'none'}], {duration:1150, easing:smooth});
+        await sleep(80);
       }
-      await sleep(1000); if(skipped) return;
+      await sleep(650); if(skipped) return;
+      // 3) the camera swings round the word; a beam of light sweeps across it
+      setTimeout(()=>{ if(!skipped) wordEl.classList.add('sweep'); }, 650);
+      await anim(wordEl, [{transform:'rotateX(16deg) rotateY(-32deg)'},{transform:'rotateX(-7deg) rotateY(24deg)', offset:.55},{transform:'none'}], {duration:1800, easing:'cubic-bezier(.45,0,.2,1)'});
+      if(skipped) return;
+      // 4) the depth melts away so it matches the hero word
+      wordEl.classList.add('flat');
+      await sleep(450); if(skipped) return;
       // 5) glide to the final position while the menu and buttons fade in
       const spans = finalWord.querySelectorAll('span');
       const f0 = spans[0].getBoundingClientRect(), f1 = spans[spans.length-1].getBoundingClientRect();
