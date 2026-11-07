@@ -1266,6 +1266,50 @@
   html.intro .hx-photo,html.intro .hx-samples{opacity:0 !important;}
   html.intro .hx-img,html.intro .hs-tile{animation:none;}
 
+  /* ================= WEBSITES: 3D stacking showcase cards ================= */
+  .st[hidden]{display:none;}
+  .st{position:relative;display:flex;flex-direction:column;gap:30px;}
+  .st.ws-in{animation:wsIn .5s var(--ease);}
+  .st-card{position:sticky;top:calc(92px + var(--i) * 16px);height:min(560px,calc(100vh - 150px));height:min(560px,calc(100svh - 150px));}
+  .st-inner{position:relative;height:100%;display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.25fr);align-items:center;gap:clamp(20px,3.4vw,52px);
+    padding:clamp(26px,3.4vw,48px);border-radius:28px;border:1px solid var(--glass-line);transform-origin:50% 0;will-change:transform,filter;
+    background:radial-gradient(80% 90% at 100% 0%,rgba(201,169,110,.13),transparent 60%),linear-gradient(180deg,#10141b,#0a0d12);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 -24px 60px -34px rgba(0,0,0,.95);}
+  .st-num{display:block;margin-bottom:14px;font-family:'Inter';font-weight:900;font-size:clamp(56px,6.6vw,92px);line-height:.9;letter-spacing:-.05em;
+    color:transparent;-webkit-text-stroke:1.2px rgba(201,169,110,.6);}
+  .st-cat{margin-bottom:10px;font-family:'Space Grotesk';font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);}
+  .st-info h3{margin:0 0 14px;font-size:clamp(24px,2.6vw,34px);line-height:1.1;letter-spacing:-.03em;color:var(--ink);}
+  .st-info p{margin:0 0 18px;font-size:15px;line-height:1.6;color:var(--ink-dim);display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;}
+  .st-info .proj-tags{margin-bottom:24px;}
+  .st-actions{display:flex;align-items:center;flex-wrap:wrap;gap:16px;}
+  .st-actions>.proj-link,.st-actions .tpl-actions>.proj-link{padding:12px 20px;border:1px solid rgba(201,169,110,.5);border-radius:999px;transition:background .3s,color .3s;}
+  .st-actions>.proj-link:hover,.st-actions .tpl-actions>.proj-link:hover{background:var(--gold);color:#16120a;}
+  .st-media{position:relative;display:grid;place-items:center;height:100%;padding:0;border:0;background:none;cursor:zoom-in;perspective:1200px;color:inherit;font:inherit;}
+  .st-panel{position:relative;display:block;width:100%;aspect-ratio:16/10;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.1);
+    transform:rotateY(var(--ry,-14deg)) rotateX(var(--rx,6deg)) scale(var(--s,1));transition:transform .7s var(--ease),box-shadow .5s;
+    box-shadow:-30px 40px 70px -30px rgba(0,0,0,.95),0 0 70px -24px rgba(201,169,110,.3);}
+  .st-media.live .st-panel{transition:transform .15s linear,box-shadow .5s;box-shadow:0 40px 80px -30px rgba(0,0,0,.95),0 0 90px -20px rgba(201,169,110,.45);}
+  .st-panel img{width:100%;height:100%;object-fit:cover;display:block;}
+  .st-glare{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .4s;
+    background:radial-gradient(circle at var(--gx,50%) var(--gy,20%),rgba(255,240,210,.2),transparent 50%);}
+  .st-media.live .st-glare{opacity:1;}
+  .st-badge{position:absolute;top:14px;left:14px;z-index:2;display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:600;
+    background:rgba(7,9,11,.72);border:1px solid rgba(255,255,255,.14);color:var(--ink);backdrop-filter:blur(8px);}
+  .st-badge i{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(74,222,128,.2);}
+  .st-badge.tpl{background:rgba(201,169,110,.94);color:#16120a;border-color:transparent;}
+  .st-zoom{position:absolute;right:14px;bottom:14px;z-index:2;padding:8px 13px;border-radius:999px;font-size:12px;font-weight:600;background:rgba(7,9,11,.78);color:var(--ink);
+    opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s var(--ease);}
+  .st-media.live .st-zoom,.st-media:focus-visible .st-zoom{opacity:1;transform:none;}
+  @media(max-width:900px){
+    .st{gap:18px;}
+    .st-card{position:relative;top:auto;height:auto;}
+    .st-inner{grid-template-columns:1fr;gap:22px;padding:18px 18px 24px;border-radius:22px;}
+    .st-media{order:-1;}
+    .st-panel{--ry:-7deg;--rx:4deg;}
+    .st-num{font-size:48px;margin-bottom:8px;}
+    .st-info p{-webkit-line-clamp:5;}
+    .st-zoom{opacity:1;transform:none;}
+  }
   /* ================= GRAPHICS: 3D cover-flow showcase (filters, drag, tilt) ================= */
   .cf[hidden]{display:none;}
   .cf{--H:clamp(320px,50vh,470px);position:relative;}
@@ -2044,114 +2088,141 @@
           <button type="button" class="ws-btn" role="tab" aria-selected="false" data-show="carTpl"><span aria-hidden="true">★</span> My Templates</button>
         </div>
       </div>
-      <div class="work-grid" id="carWeb" role="tabpanel" aria-label="Client work">
-          <div class="proj-card" style="--accent:var(--gold)">
-            <div class="proj-media"><span class="proj-tag">Website / Funnel</span><img src="assets/projects/buildup-community.jpg" alt="BuildUp real estate development website shown on desktop and mobile"></div>
-            <div class="proj-body">
-              <div class="proj-cat">Website / Funnel</div>
+      <div class="st" id="carWeb" role="tabpanel" aria-label="Client work">
+        <article class="st-card" style="--i:-1">
+          <div class="st-inner">
+            <div class="st-info">
+              <span class="st-num" aria-hidden="true">01</span>
+              <div class="st-cat">Website / Funnel</div>
               <h3>BuildUp Real Estate Development Website</h3>
               <p>A fast, fully responsive website for BuildUp, a real estate development firm and community. It presents their track record, consulting services, and portfolio, and turns investor visits into consultation requests.</p>
               <div class="proj-tags"><span>Next.js</span><span>Supabase</span><span>Vercel</span><span>Responsive Design</span><span>SEO</span></div>
-              <a href="https://buildupcommunity.com/" target="_blank" rel="noopener" class="proj-link">View Live</a>
+              <div class="st-actions"><a href="https://buildupcommunity.com/" target="_blank" rel="noopener" class="proj-link">View Live</a></div>
             </div>
+            <button type="button" class="st-media" aria-label="Preview BuildUp Real Estate Development Website"><span class="st-panel"><img loading="lazy" src="assets/projects/buildup-community.jpg" alt="BuildUp real estate development website shown on desktop and mobile"><span class="st-glare" aria-hidden="true"></span><span class="st-badge"><i></i>Live project</span><span class="st-zoom" aria-hidden="true">⤢ Preview</span></span></button>
           </div>
-          <div class="proj-card" style="--accent:var(--gold)">
-            <div class="proj-media"><span class="proj-tag">Website / Funnel</span><img src="assets/projects/buc-partnership-funnel.jpg" alt="Strategic Partnership Funnel System shown on desktop and mobile"></div>
-            <div class="proj-body">
-              <div class="proj-cat">Website / Funnel</div>
+        </article>
+        <article class="st-card" style="--i:0">
+          <div class="st-inner">
+            <div class="st-info">
+              <span class="st-num" aria-hidden="true">02</span>
+              <div class="st-cat">Website / Funnel</div>
               <h3>Strategic Partnership Funnel System</h3>
               <p>A GoHighLevel-powered website and automation system designed to connect businesses with the right partners. Built to streamline collaboration, lead capture, and relationship management in one centralized platform.</p>
               <div class="proj-tags"><span>GoHighLevel</span><span>Funnel</span><span>CRM</span><span>SEO</span><span>Automation</span></div>
-              <a href="https://app.gohighlevel.com/v2/preview/T7r63z5lkenUyB7ZqSSq?notrack=true#section-wnLxWS8ZyI" target="_blank" rel="noopener" class="proj-link">View Live</a>
+              <div class="st-actions"><a href="https://app.gohighlevel.com/v2/preview/T7r63z5lkenUyB7ZqSSq?notrack=true#section-wnLxWS8ZyI" target="_blank" rel="noopener" class="proj-link">View Live</a></div>
             </div>
+            <button type="button" class="st-media" aria-label="Preview Strategic Partnership Funnel System"><span class="st-panel"><img loading="lazy" src="assets/projects/buc-partnership-funnel.jpg" alt="Strategic Partnership Funnel System shown on desktop and mobile"><span class="st-glare" aria-hidden="true"></span><span class="st-badge"><i></i>Live project</span><span class="st-zoom" aria-hidden="true">⤢ Preview</span></span></button>
           </div>
-          <div class="proj-card" style="--accent:var(--gold)">
-            <div class="proj-media"><span class="proj-tag">Website / Funnel</span><img src="assets/projects/burn-bright-lead-funnel.jpg" alt="Automated Lead Generation Funnel shown on desktop and mobile"></div>
-            <div class="proj-body">
-              <div class="proj-cat">Website / Funnel</div>
+        </article>
+        <article class="st-card" style="--i:1">
+          <div class="st-inner">
+            <div class="st-info">
+              <span class="st-num" aria-hidden="true">03</span>
+              <div class="st-cat">Website / Funnel</div>
               <h3>Automated Lead Generation Funnel</h3>
               <p>A high-converting GoHighLevel funnel built to capture, qualify, and nurture leads through automated workflows, streamlining the entire customer journey from inquiry to conversion.</p>
               <div class="proj-tags"><span>Go High Level</span><span>Landing Page</span><span>Automation</span><span>Pipeline</span><span>SEO</span></div>
-              <a href="https://app.gohighlevel.com/v2/preview/4Kldl6gfh04SWEOXoLm8?notrack=true" target="_blank" rel="noopener" class="proj-link">View Live</a>
+              <div class="st-actions"><a href="https://app.gohighlevel.com/v2/preview/4Kldl6gfh04SWEOXoLm8?notrack=true" target="_blank" rel="noopener" class="proj-link">View Live</a></div>
             </div>
+            <button type="button" class="st-media" aria-label="Preview Automated Lead Generation Funnel"><span class="st-panel"><img loading="lazy" src="assets/projects/burn-bright-lead-funnel.jpg" alt="Automated Lead Generation Funnel shown on desktop and mobile"><span class="st-glare" aria-hidden="true"></span><span class="st-badge"><i></i>Live project</span><span class="st-zoom" aria-hidden="true">⤢ Preview</span></span></button>
           </div>
-          <div class="proj-card" style="--accent:var(--gold)">
-            <div class="proj-media"><span class="proj-tag">Website / Funnel</span><img src="assets/projects/ndta-platform.jpg" alt="Dump Trucking Industry Network & Growth Platform shown on desktop and mobile"></div>
-            <div class="proj-body">
-              <div class="proj-cat">Website / Funnel</div>
+        </article>
+        <article class="st-card" style="--i:2">
+          <div class="st-inner">
+            <div class="st-info">
+              <span class="st-num" aria-hidden="true">04</span>
+              <div class="st-cat">Website / Funnel</div>
               <h3>Dump Trucking Industry Network &amp; Growth Platform</h3>
               <p>A comprehensive digital platform for the dump trucking industry, designed to provide training, job opportunities, business resources, and networking all in one ecosystem to support operators and companies in scaling their operations.</p>
               <div class="proj-tags"><span>Go High Level</span><span>Google Ads</span><span>Automation</span><span>Pipeline</span><span>SEO</span></div>
-              <a href="https://thendta.org" target="_blank" rel="noopener" class="proj-link">View Live</a>
+              <div class="st-actions"><a href="https://thendta.org" target="_blank" rel="noopener" class="proj-link">View Live</a></div>
             </div>
+            <button type="button" class="st-media" aria-label="Preview Dump Trucking Industry Network &amp; Growth Platform"><span class="st-panel"><img loading="lazy" src="assets/projects/ndta-platform.jpg" alt="Dump Trucking Industry Network & Growth Platform shown on desktop and mobile"><span class="st-glare" aria-hidden="true"></span><span class="st-badge"><i></i>Live project</span><span class="st-zoom" aria-hidden="true">⤢ Preview</span></span></button>
           </div>
+        </article>
       </div>
-      <div class="work-grid" id="carTpl" role="tabpanel" aria-label="My website templates" hidden>
-          <div class="proj-card" style="--accent:var(--gold)">
-            <div class="proj-media"><span class="proj-tag tpl-tag">★ My Template</span><img src="assets/templates/smile-studio.jpg" alt="Smile Studio Dental Clinic website template shown on desktop and mobile" loading="lazy"></div>
-            <div class="proj-body">
-              <div class="proj-cat">Original Template · Dental Clinic</div>
+      <div class="st" id="carTpl" role="tabpanel" aria-label="My website templates" hidden>
+        <article class="st-card" style="--i:-1">
+          <div class="st-inner">
+            <div class="st-info">
+              <span class="st-num" aria-hidden="true">01</span>
+              <div class="st-cat">Original Template · Dental Clinic</div>
               <h3>Smile Studio</h3>
               <p>A calm, trust-building website for dental and medical clinics. Patients can drag a before/after smile slider, browse services with prices, and book an appointment by picking an open time slot.</p>
               <div class="proj-tags"><span>Online Booking</span><span>Before/After Slider</span><span>Reviews Carousel</span><span>FAQ</span><span>Mobile-Ready</span></div>
-              <div class="tpl-actions">
+              <div class="st-actions"><div class="tpl-actions">
                 <a href="templates/smile-studio/" target="_blank" rel="noopener" class="proj-link">Live Demo</a>
                 <a href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20Smile%20Studio%20dental%20website%20template." target="_blank" rel="noopener" class="btn btn-gold tpl-get"><svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Get This Template</a>
-              </div>
+              </div></div>
             </div>
+            <button type="button" class="st-media" aria-label="Preview Smile Studio"><span class="st-panel"><img loading="lazy" src="assets/templates/smile-studio.jpg" alt="Smile Studio Dental Clinic website template shown on desktop and mobile"><span class="st-glare" aria-hidden="true"></span><span class="st-badge tpl">★ My Template</span><span class="st-zoom" aria-hidden="true">⤢ Preview</span></span></button>
           </div>
-          <div class="proj-card" style="--accent:var(--gold)">
-            <div class="proj-media"><span class="proj-tag tpl-tag">★ My Template</span><img src="assets/templates/haven-realty.jpg" alt="Haven Realty Real Estate website template shown on desktop and mobile" loading="lazy"></div>
-            <div class="proj-body">
-              <div class="proj-cat">Original Template · Real Estate</div>
+        </article>
+        <article class="st-card" style="--i:0">
+          <div class="st-inner">
+            <div class="st-info">
+              <span class="st-num" aria-hidden="true">02</span>
+              <div class="st-cat">Original Template · Real Estate</div>
               <h3>Haven Realty</h3>
               <p>An elegant real estate website with property search, live listing filters (buy, rent, bedrooms, price), a save-to-shortlist heart, and a mortgage calculator that updates as you slide.</p>
               <div class="proj-tags"><span>Live Listing Filters</span><span>Mortgage Calculator</span><span>Saved Homes</span><span>Lead Form</span><span>Mobile-Ready</span></div>
-              <div class="tpl-actions">
+              <div class="st-actions"><div class="tpl-actions">
                 <a href="templates/haven-realty/" target="_blank" rel="noopener" class="proj-link">Live Demo</a>
                 <a href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20Haven%20Realty%20real%20estate%20website%20template." target="_blank" rel="noopener" class="btn btn-gold tpl-get"><svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Get This Template</a>
-              </div>
+              </div></div>
             </div>
+            <button type="button" class="st-media" aria-label="Preview Haven Realty"><span class="st-panel"><img loading="lazy" src="assets/templates/haven-realty.jpg" alt="Haven Realty Real Estate website template shown on desktop and mobile"><span class="st-glare" aria-hidden="true"></span><span class="st-badge tpl">★ My Template</span><span class="st-zoom" aria-hidden="true">⤢ Preview</span></span></button>
           </div>
-          <div class="proj-card" style="--accent:var(--gold)">
-            <div class="proj-media"><span class="proj-tag tpl-tag">★ My Template</span><img src="assets/templates/forge-fitness.jpg" alt="Forge Fitness Gym &amp; Coaching website template shown on desktop and mobile" loading="lazy"></div>
-            <div class="proj-body">
-              <div class="proj-cat">Original Template · Gym &amp; Coaching</div>
+        </article>
+        <article class="st-card" style="--i:1">
+          <div class="st-inner">
+            <div class="st-info">
+              <span class="st-num" aria-hidden="true">03</span>
+              <div class="st-cat">Original Template · Gym &amp; Coaching</div>
               <h3>Forge Fitness</h3>
               <p>A bold, high-energy website for gyms and coaches. Visitors browse programs, check this week's class schedule with live spots left, and flip pricing between monthly and yearly.</p>
               <div class="proj-tags"><span>Class Schedule</span><span>Pricing Toggle</span><span>Program Cards</span><span>Free-Trial Signup</span><span>Mobile-Ready</span></div>
-              <div class="tpl-actions">
+              <div class="st-actions"><div class="tpl-actions">
                 <a href="templates/forge-fitness/" target="_blank" rel="noopener" class="proj-link">Live Demo</a>
                 <a href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20Forge%20Fitness%20gym%20website%20template." target="_blank" rel="noopener" class="btn btn-gold tpl-get"><svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Get This Template</a>
-              </div>
+              </div></div>
             </div>
+            <button type="button" class="st-media" aria-label="Preview Forge Fitness"><span class="st-panel"><img loading="lazy" src="assets/templates/forge-fitness.jpg" alt="Forge Fitness Gym &amp; Coaching website template shown on desktop and mobile"><span class="st-glare" aria-hidden="true"></span><span class="st-badge tpl">★ My Template</span><span class="st-zoom" aria-hidden="true">⤢ Preview</span></span></button>
           </div>
-          <div class="proj-card" style="--accent:var(--gold)">
-            <div class="proj-media"><span class="proj-tag tpl-tag">★ My Template</span><img src="assets/templates/ember-oak.jpg" alt="Ember &amp; Oak Restaurant &amp; Café website template shown on desktop and mobile" loading="lazy"></div>
-            <div class="proj-body">
-              <div class="proj-cat">Original Template · Restaurant &amp; Café</div>
+        </article>
+        <article class="st-card" style="--i:2">
+          <div class="st-inner">
+            <div class="st-info">
+              <span class="st-num" aria-hidden="true">04</span>
+              <div class="st-cat">Original Template · Restaurant &amp; Café</div>
               <h3>Ember &amp; Oak</h3>
               <p>A warm, moody restaurant website that shows if you're open right now, a tabbed menu with dish photos, a gallery, and a table booking form with guest counter and time picker.</p>
               <div class="proj-tags"><span>Live Open/Closed Status</span><span>Tabbed Menu</span><span>Table Reservations</span><span>Parallax Hero</span><span>Mobile-Ready</span></div>
-              <div class="tpl-actions">
+              <div class="st-actions"><div class="tpl-actions">
                 <a href="templates/ember-oak/" target="_blank" rel="noopener" class="proj-link">Live Demo</a>
                 <a href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20Ember%20%26%20Oak%20restaurant%20website%20template." target="_blank" rel="noopener" class="btn btn-gold tpl-get"><svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Get This Template</a>
-              </div>
+              </div></div>
             </div>
+            <button type="button" class="st-media" aria-label="Preview Ember &amp; Oak"><span class="st-panel"><img loading="lazy" src="assets/templates/ember-oak.jpg" alt="Ember &amp; Oak Restaurant &amp; Café website template shown on desktop and mobile"><span class="st-glare" aria-hidden="true"></span><span class="st-badge tpl">★ My Template</span><span class="st-zoom" aria-hidden="true">⤢ Preview</span></span></button>
           </div>
-          <div class="proj-card" style="--accent:var(--gold)">
-            <div class="proj-media"><span class="proj-tag tpl-tag">★ My Template</span><img src="assets/templates/apex-roofing.jpg" alt="Apex Roofing Roofing &amp; Home Services website template shown on desktop and mobile" loading="lazy"></div>
-            <div class="proj-body">
-              <div class="proj-cat">Original Template · Roofing &amp; Home Services</div>
+        </article>
+        <article class="st-card" style="--i:3">
+          <div class="st-inner">
+            <div class="st-info">
+              <span class="st-num" aria-hidden="true">05</span>
+              <div class="st-cat">Original Template · Roofing &amp; Home Services</div>
               <h3>Apex Roofing</h3>
               <p>A lead-generating website for roofers and contractors, with an instant cost estimator (size, material, stories) and a 3-step quote form built to turn visitors into booked inspections.</p>
               <div class="proj-tags"><span>Instant Estimator</span><span>Multi-Step Quote Form</span><span>Process Timeline</span><span>Trust Badges</span><span>Mobile-Ready</span></div>
-              <div class="tpl-actions">
+              <div class="st-actions"><div class="tpl-actions">
                 <a href="templates/apex-roofing/" target="_blank" rel="noopener" class="proj-link">Live Demo</a>
                 <a href="https://wa.me/639272303838?text=Hi%20Jeff%2C%20I%27m%20interested%20in%20your%20Apex%20Roofing%20home%20services%20website%20template." target="_blank" rel="noopener" class="btn btn-gold tpl-get"><svg class="wa-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Get This Template</a>
-              </div>
+              </div></div>
             </div>
+            <button type="button" class="st-media" aria-label="Preview Apex Roofing"><span class="st-panel"><img loading="lazy" src="assets/templates/apex-roofing.jpg" alt="Apex Roofing Roofing &amp; Home Services website template shown on desktop and mobile"><span class="st-glare" aria-hidden="true"></span><span class="st-badge tpl">★ My Template</span><span class="st-zoom" aria-hidden="true">⤢ Preview</span></span></button>
           </div>
+        </article>
       </div>
       <a href="web-projects/" class="more-link">View More Web &amp; Funnel Projects</a>
     </div>
@@ -3329,6 +3400,45 @@
       const img = tile.querySelector(':scope > img'); if(!img) return;
       const cap = tile.querySelector('.bento-cap');
       openPv(img.currentSrc || img.src, img.alt, cap ? cap.innerHTML : '', true);
+    });
+  });
+
+  // ---------- Websites: cards pin and stack (covered cards tilt back, shrink, dim); mockups tilt toward the cursor ----------
+  document.querySelectorAll('.st').forEach(stack=>{
+    const cards = [...stack.querySelectorAll('.st-card')], inners = cards.map(c=>c.querySelector('.st-inner'));
+    const fine = matchMedia('(hover:hover) and (pointer:fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let raf = 0;
+    const update = ()=>{
+      raf = 0;
+      const flat = innerWidth <= 900 || stack.hidden;
+      cards.forEach((c,i)=>{
+        const next = cards[i + 1];
+        if(flat || !next){ inners[i].style.transform = ''; inners[i].style.filter = ''; return; }
+        const r = c.getBoundingClientRect(), k = Math.min(1, Math.max(0, (r.bottom - next.getBoundingClientRect().top) / r.height));
+        inners[i].style.transform = 'perspective(1400px) rotateX(' + (k * 8).toFixed(2) + 'deg) scale(' + (1 - k * .07).toFixed(4) + ')';
+        inners[i].style.filter = k ? 'brightness(' + (1 - k * .5).toFixed(3) + ')' : '';
+      });
+    };
+    const queue = ()=>{ if(!raf) raf = requestAnimationFrame(update); };
+    addEventListener('scroll', queue, {passive:true}); addEventListener('resize', queue);
+    stack._remeasure = queue;
+    update();
+    stack.querySelectorAll('.st-media').forEach(media=>{
+      media.addEventListener('click', ()=>{
+        const img = media.querySelector('img'), info = media.parentElement.querySelector('.st-info').cloneNode(true);
+        info.querySelector('.st-num').remove();
+        openPv(img.currentSrc || img.src, img.alt, info.innerHTML, false);
+      });
+      if(!fine) return;
+      const panel = media.querySelector('.st-panel');
+      media.addEventListener('pointermove', e=>{
+        const b = media.getBoundingClientRect(), x = (e.clientX - b.left) / b.width, y = (e.clientY - b.top) / b.height;
+        media.classList.add('live');
+        panel.style.setProperty('--ry', ((x - .5) * 12).toFixed(2) + 'deg'); panel.style.setProperty('--rx', ((.5 - y) * 10).toFixed(2) + 'deg');
+        panel.style.setProperty('--s', '1.03');
+        panel.style.setProperty('--gx', (x * 100).toFixed(1) + '%'); panel.style.setProperty('--gy', (y * 100).toFixed(1) + '%');
+      });
+      media.addEventListener('pointerleave', ()=>{ media.classList.remove('live'); ['--ry','--rx','--s'].forEach(p=>panel.style.removeProperty(p)); });
     });
   });
 
